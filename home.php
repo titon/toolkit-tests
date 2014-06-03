@@ -7,7 +7,7 @@
         View Website
     </a>
 
-    Titon Toolkit
+    Titon Toolkit v1.5.0
 </div>
 
 <div class="grid">

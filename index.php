@@ -602,7 +602,7 @@ $time = time(); ?>
         </script>
 
     <?php } else if ($vendor === 'jquery2') { ?>
-        <script src="js/jquery-2.0.3.js"></script>
+        <script src="js/jquery-2.1.1.js"></script>
         <!--<script src="js/jquery-ui-1.10.4.js"></script>-->
         <script src="js/toolkit-jquery.min.js?<?= $time; ?>"></script>
         <script>
@@ -613,7 +613,7 @@ $time = time(); ?>
         </script>
 
     <?php } else if ($vendor === 'jquery1') { ?>
-        <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/jquery-1.11.1.js"></script>
         <!--<script src="js/jquery-ui-1.10.4.js"></script>-->
         <script src="js/toolkit-jquery.min.js?<?= $time; ?>"></script>
         <script>
@@ -664,9 +664,9 @@ $time = time(); ?>
                 <li>
                     <label for="vendor">Vendor</label>
                     <select name="vendor" id="vendor">
-                        <option value="jquery1"<?php if ($vendor === 'jquery1') echo ' selected'; ?>>jQuery 1.10</option>
-                        <option value="jquery2"<?php if ($vendor === 'jquery2') echo ' selected'; ?>>jQuery 2</option>
-                        <option value="mootools"<?php if ($vendor === 'mootools') echo ' selected'; ?>>MooTools</option>
+                        <option value="jquery1"<?php if ($vendor === 'jquery1') echo ' selected'; ?>>jQuery 1.11</option>
+                        <option value="jquery2"<?php if ($vendor === 'jquery2') echo ' selected'; ?>>jQuery 2.1</option>
+                        <option value="mootools"<?php if ($vendor === 'mootools') echo ' selected'; ?>>MooTools 1.4</option>
                     </select>
                 </li>
                 <li class="resolution">
@@ -711,7 +711,7 @@ $time = time(); ?>
                     <li>
                         <input type="hidden" name="component" value="<?php echo value('component'); ?>">
                         <input type="hidden" name="theme" value="<?php echo value('theme', 'titon'); ?>">
-                        <input type="hidden" name="vendor" value="<?php echo value('vendor', 'mootools'); ?>">
+                        <input type="hidden" name="vendor" value="<?php echo value('vendor', 'jquery'); ?>">
                         <button type="submit">Filter</button>
                     </li>
                 </ul>
