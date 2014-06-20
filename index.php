@@ -566,13 +566,7 @@ $themeKey = value('theme', 'titon');
 $component = isset($components[$componentKey]) ? $components[$componentKey] : $components['home'];
 $theme = isset($themes[$themeKey]) ? $themes[$themeKey] : array();
 $vendor = value('vendor', 'jquery1');
-
-if ($vendor === 'mootools') {
-    $vendorFolder = 'mootools';
-} else {
-    $vendorFolder = 'jquery';
-}
-
+$vendorFolder = 'jquery';
 $time = time(); ?>
 
 <!DOCTYPE html>
@@ -582,29 +576,17 @@ $time = time(); ?>
     <title>Titon - Toolkit - <?php echo $component['title']; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="css/toolkit.min.css?<?= $time; ?>" rel="stylesheet" type="text/css">
+    <link href="css/toolkit.css?<?= $time; ?>" rel="stylesheet" type="text/css">
     <link href="css/example.css?<?= $time; ?>" rel="stylesheet" type="text/css">
 
     <?php if (!empty($theme)) { ?>
         <link href="css/<?php echo $theme['css']; ?>?<?= $time; ?>" rel="stylesheet" type="text/css">
     <?php } ?>
 
-    <?php if ($vendor === 'mootools') { ?>
-        <script src="js/mootools-core-1.4.5.js"></script>
-        <script src="js/mootools-more-1.4.0.1.js"></script>
-        <script src="js/mootools-touch.js"></script>
-        <script src="js/toolkit-mootools.min.js?<?= $time; ?>"></script>
-        <script>
-            Toolkit.messages = Object.merge(Toolkit.messages, {
-                loading: '[CUSTOM] Loading...',
-                error: '[CUSTOM] Error!'
-            });
-        </script>
-
-    <?php } else if ($vendor === 'jquery2') { ?>
+    <?php if ($vendor === 'jquery2') { ?>
         <script src="js/jquery-2.1.1.js"></script>
         <!--<script src="js/jquery-ui-1.10.4.js"></script>-->
-        <script src="js/toolkit-jquery.min.js?<?= $time; ?>"></script>
+        <script src="js/toolkit.js?<?= $time; ?>"></script>
         <script>
             $.extend(Toolkit.messages, {
                 loading: '[CUSTOM] Loading...',
@@ -615,23 +597,14 @@ $time = time(); ?>
     <?php } else if ($vendor === 'jquery1') { ?>
         <script src="js/jquery-1.11.1.js"></script>
         <!--<script src="js/jquery-ui-1.10.4.js"></script>-->
-        <script src="js/toolkit-jquery.min.js?<?= $time; ?>"></script>
+        <script src="js/toolkit.js?<?= $time; ?>"></script>
         <script>
             $.extend(Toolkit.messages, {
                 loading: '[CUSTOM] Loading...',
                 error: '[CUSTOM] Error!'
             });
         </script>
-
-    <?php } else if ($vendor === 'zepto') { ?>
-        <script src="js/zepto-1.0.1.js"></script>
-        <script src="js/toolkit-jquery.min.js?<?= $time; ?>"></script>
     <?php } ?>
-
-    <!--[if lte IE 8]>
-        <script src="js/modernizr-2.6.2.js"></script>
-        <script src="js/respond-1.3.0.js"></script>
-    <![endif]-->
 </head>
 <body class="<?php echo $themeKey; ?>">
     <div id="skeleton" class="skeleton">
@@ -666,7 +639,6 @@ $time = time(); ?>
                     <select name="vendor" id="vendor">
                         <option value="jquery1"<?php if ($vendor === 'jquery1') echo ' selected'; ?>>jQuery 1.11</option>
                         <option value="jquery2"<?php if ($vendor === 'jquery2') echo ' selected'; ?>>jQuery 2.1</option>
-                        <option value="mootools"<?php if ($vendor === 'mootools') echo ' selected'; ?>>MooTools 1.4</option>
                     </select>
                 </li>
                 <li class="resolution">

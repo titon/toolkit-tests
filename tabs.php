@@ -1,6 +1,6 @@
 
-<div class="tabs" id="tabs-1">
-    <nav class="tabs-nav">
+<div class="tabs" id="tab-1">
+    <nav class="tab-nav">
         <ul>
             <li><a href="#section-1" class="button"><span>Tab 1 via DOM</span></a></li>
             <li><a href="#section-2" class="button">Tab 2 via DOM</a></li>
@@ -8,16 +8,16 @@
         </ul>
     </nav>
 
-    <section class="tabs-section" id="section-1">
+    <section class="tab-section" id="section-1">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam. Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis, convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum. Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum. Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor quam nec libero condimentum eget imperdiet nibh elementum.</p>
     </section>
 
-    <section class="tabs-section" id="section-2">
+    <section class="tab-section" id="section-2">
         <p>Suspendisse interdum malesuada mi non dictum. Quisque cursus imperdiet lorem, in posuere quam eleifend non. Integer eros libero, lacinia nec fringilla non, vulputate vitae felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis ligula sapien, tristique sit amet tempor id, iaculis vel nisl.</p>
         <p>Maecenas rhoncus facilisis lacus non blandit. Nam quis erat arcu. Suspendisse facilisis venenatis elit, et posuere leo dictum a. Integer at tellus leo, sit amet malesuada orci. Proin placerat nulla vitae diam mattis at volutpat risus pellentesque.</p>
     </section>
 
-    <section class="tabs-section">
+    <section class="tab-section">
         <ul>
             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
             <li>Aliquam dapibus tempor risus, a ultricies libero posuere ut.</li>
@@ -31,8 +31,8 @@
 
 <div class="example-title">Horizontal</div>
 
-<div class="tabs--horizontal grid" id="tabs-2">
-    <nav class="tabs-nav col span-2">
+<div class="tabs--horizontal grid" id="tab-2">
+    <nav class="tab-nav col span-2">
         <ul>
             <li><a href="#tab-1" class="button">Tab 1 via DOM</a></li>
             <li><a href="#tab-2" class="button">Tab 2 via DOM</a></li>
@@ -41,16 +41,16 @@
     </nav>
 
     <div class="col span-9 push-1">
-        <section class="tabs-section">
+        <section class="tab-section">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam. Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis, convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum. Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum. Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor quam nec libero condimentum eget imperdiet nibh elementum.</p>
         </section>
 
-        <section class="tabs-section">
+        <section class="tab-section">
             <p>Suspendisse interdum malesuada mi non dictum. Quisque cursus imperdiet lorem, in posuere quam eleifend non. Integer eros libero, lacinia nec fringilla non, vulputate vitae felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis ligula sapien, tristique sit amet tempor id, iaculis vel nisl.</p>
             <p>Maecenas rhoncus facilisis lacus non blandit. Nam quis erat arcu. Suspendisse facilisis venenatis elit, et posuere leo dictum a. Integer at tellus leo, sit amet malesuada orci. Proin placerat nulla vitae diam mattis at volutpat risus pellentesque.</p>
         </section>
 
-        <section class="tabs-section">
+        <section class="tab-section">
             <ul>
                 <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
                 <li>Aliquam dapibus tempor risus, a ultricies libero posuere ut.</li>
@@ -66,7 +66,7 @@
 <script>
     <?php if ($vendor === 'mootools') { ?>
         window.addEvent('domready', function() {
-            $('tabs-1').tabs({
+            $('tab-1').tab({
                 mode: <?php string('mode', 'click'); ?>,
                 ajax: <?php bool('ajax', true); ?>,
                 collapsible: <?php bool('collapsible', false); ?>,
@@ -78,7 +78,7 @@
                 cookieDuration: <?php number('defaultIndex', 30); ?>
             });
 
-            $('tabs-2').tabs({
+            $('tab-2').tab({
                 mode: <?php string('mode', 'click'); ?>,
                 ajax: <?php bool('ajax', true); ?>,
                 collapsible: <?php bool('collapsible', false); ?>,
@@ -92,7 +92,7 @@
         });
     <?php } else { ?>
         $(function() {
-            $('#tabs-1').tabs({
+            $('#tab-1').tab({
                 mode: <?php string('mode', 'click'); ?>,
                 ajax: <?php bool('ajax', true); ?>,
                 collapsible: <?php bool('collapsible', false); ?>,
@@ -104,7 +104,7 @@
                 cookieDuration: <?php number('cookieDuration', 30); ?>
             });
 
-            $('#tabs-2').tabs({
+            $('#tab-2').tab({
                 mode: <?php string('mode', 'click'); ?>,
                 ajax: <?php bool('ajax', true); ?>,
                 collapsible: <?php bool('collapsible', false); ?>,

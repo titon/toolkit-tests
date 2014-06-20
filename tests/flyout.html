@@ -1,0 +1,28 @@
+<div class="test-demo">
+    <a href="/" class="button js-flyout-1">Display Root</a>
+    <a href="/3/1" class="button js-flyout-1">Display 3 > 1</a>
+    <a href="/1/2/3" class="button js-flyout-1">Display 1 > 2 > 3</a>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Click activated. Multiple columns (5 item limit).</h2>
+
+    <a href="/" class="button js-flyout-2">Display Root</a>
+    <a href="/3/1" class="button js-flyout-2">Display 3 > 1</a>
+    <a href="/1/2/3" class="button js-flyout-2">Display 1 > 2 > 3</a>
+</div>
+
+<script>
+    $(function() {
+        $(document).on('click', '.button, .flyout a', function(e) {
+            e.preventDefault();
+        });
+
+        $('.js-flyout-1').flyout('ajax/flyout.json');
+
+        $('.js-flyout-2').flyout('ajax/flyout.json', {
+            mode: 'click',
+            itemLimit: 5
+        });
+    });
+</script>

@@ -1,0 +1,155 @@
+<div class="test-demo">
+    <div class="button-group">
+        <button type="button" class="button js-drop-1" data-drop="#drop-1a" aria-controls="drop-1a" aria-haspopup="true">
+            Open Dropdown
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--down" id="drop-1a" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-1" data-drop="#drop-1b" aria-controls="drop-1b" aria-haspopup="true">
+            Open Dropdown
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--down reverse-align" id="drop-1b" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Drop lefts. Nested drops.</h2>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-2" data-drop="#drop-2a" aria-controls="drop-2a" aria-haspopup="true">
+            Open Dropleft
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--left" id="drop-2a" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="has-children" aria-haspopup="true">
+                <a href="" role="menuitem">
+                    <span class="caret-right"></span>
+                    Items
+                </a>
+                <ul class="drop drop--down" role="menu">
+                    <li><a href="" role="menuitem">Item</a></li>
+                    <li><a href="" role="menuitem">Item</a></li>
+                    <li><a href="" role="menuitem">Item</a></li>
+                </ul>
+            </li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-2" data-drop="#drop-2b" aria-controls="drop-2b" aria-haspopup="true">
+            Open Dropleft
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--left reverse-align" id="drop-2b" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="has-children" aria-haspopup="true">
+                <a href="" role="menuitem">
+                    <span class="caret-right"></span>
+                    Items
+                </a>
+                <ul class="drop drop--down" role="menu">
+                    <li><a href="" role="menuitem">Item</a></li>
+                    <li><a href="" role="menuitem">Item</a></li>
+                    <li><a href="" role="menuitem">Item</a></li>
+                </ul>
+            </li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Drop rights. Item headings. Doesn't hide other drops.</h2>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-3" data-drop="#drop-3a" aria-controls="drop-3a" aria-haspopup="true">
+            Open Dropright
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--right" id="drop-3a" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="drop-heading">Heading</li>
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-3" data-drop="#drop-3b" aria-controls="drop-3b" aria-haspopup="true">
+            Open Dropright
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--right reverse-align" id="drop-3b" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="drop-heading">Heading</li>
+            <li><a href="" role="menuitem">Item</a></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Drop ups. Item dividers. Hover activated.</h2>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-4" data-drop="#drop-4a" aria-controls="drop-4a" aria-haspopup="true">
+            Open Dropup
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--up" id="drop-4a" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="drop-divider" role="separator"></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+
+    <div class="button-group">
+        <button type="button" class="button js-drop-4" data-drop="#drop-4b" aria-controls="drop-4b" aria-haspopup="true">
+            Open Dropup
+            <span class="caret-down"></span>
+        </button>
+
+        <ul class="drop drop--up reverse-align" id="drop-4b" role="menu">
+            <li><a href="" role="menuitem">Item</a></li>
+            <li class="drop-divider" role="separator"></li>
+            <li><a href="" role="menuitem">Item</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('.js-drop-1').drop();
+
+        $('.js-drop-2').drop();
+
+        $('.js-drop-3').drop({
+            hideOpened: false
+        });
+
+        $('.js-drop-4').drop({
+            mode: 'hover'
+        });
+    });
+</script>

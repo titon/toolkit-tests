@@ -41,13 +41,13 @@ a:hover { color: #b84374; }
 /*-------- Components --------*/
 
 [class*="icon-16"] { background: url("../img/icons-16@2x.png") no-repeat; background-size: 80px 16px; }
-.icon-16-1 { background-position: 0 0; }
-.icon-16-2 { background-position: -16px 0; }
-.icon-16-3 { background-position: -32px 0; }
-.icon-16-4 { background-position: -48px 0; }
-.icon-16-5 { background-position: -64px 0; }
+.icon-16-home { background-position: 0 0; }
+.icon-16-view { background-position: -16px 0; }
+.icon-16-edit { background-position: -32px 0; }
+.icon-16-user { background-position: -48px 0; }
+.icon-16-comment { background-position: -64px 0; }
 
-.example-grid .col { background: #f8f8f8; border: 1px solid #e5e5e5; color: #000; padding: 5px; }
+.test-grid .col { background: #f8f8f8; border: 1px solid #e5e5e5; color: #000; padding: 5px; }
 
 .example-lazy-load { width: 200px; height: 200px; margin: 10px auto; }
 
