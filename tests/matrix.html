@@ -1,0 +1,113 @@
+<div class="test-demo">
+    <p>
+        <button type="button" onclick="appendItem('#matrix-1');" class="button">Append Item</button>
+        <button type="button" onclick="prependItem('#matrix-1');" class="button">Prepend Item</button>
+        <button type="button" onclick="removeItem('#matrix-1');" class="button">Remove Item</button>
+    </p>
+
+    <ul id="matrix-1" class="matrix">
+        <li><img src="http://placehold.it/200x200/4c6278/ffffff&text=1" class="fluid"></li>
+        <li><img src="http://placehold.it/200x400/42586e/ffffff&text=2" class="fluid"></li>
+        <li><img src="http://placehold.it/200x250/344a5f/ffffff&text=3" class="fluid"></li>
+        <li><img src="http://placehold.it/200x325/293f54/ffffff&text=4" class="fluid"></li>
+        <li><img src="http://placehold.it/200x150/283442/ffffff&text=5" class="fluid"></li>
+        <li><img src="http://placehold.it/200x500/4c6278/ffffff&text=6" class="fluid"></li>
+        <li><img src="http://placehold.it/200x225/42586e/ffffff&text=7" class="fluid"></li>
+        <li><img src="http://placehold.it/200x200/344a5f/ffffff&text=8" class="fluid"></li>
+        <li><img src="http://placehold.it/200x380/293f54/ffffff&text=9" class="fluid"></li>
+        <li><img src="http://placehold.it/200x415/283442/ffffff&text=10" class="fluid"></li>
+    </ul>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Right-to-left loading. 250px column width.</h2>
+
+    <p>
+        <button type="button" onclick="appendItem('#matrix-2');" class="button">Append Item</button>
+        <button type="button" onclick="prependItem('#matrix-2');" class="button">Prepend Item</button>
+        <button type="button" onclick="removeItem('#matrix-2');" class="button">Remove Item</button>
+    </p>
+
+    <ul id="matrix-2" class="matrix">
+        <li><img src="http://placehold.it/250x200/4c6278/ffffff&text=1" class="fluid"></li>
+        <li><img src="http://placehold.it/230x400/42586e/ffffff&text=2" class="fluid"></li>
+        <li><img src="http://placehold.it/240x250/344a5f/ffffff&text=3" class="fluid"></li>
+        <li><img src="http://placehold.it/250x325/293f54/ffffff&text=4" class="fluid"></li>
+        <li><img src="http://placehold.it/225x150/283442/ffffff&text=5" class="fluid"></li>
+        <li><img src="http://placehold.it/200x500/4c6278/ffffff&text=6" class="fluid"></li>
+        <li><img src="http://placehold.it/215x225/42586e/ffffff&text=7" class="fluid"></li>
+        <li><img src="http://placehold.it/220x200/344a5f/ffffff&text=8" class="fluid"></li>
+        <li><img src="http://placehold.it/230x380/293f54/ffffff&text=9" class="fluid"></li>
+        <li><img src="http://placehold.it/250x415/283442/ffffff&text=10" class="fluid"></li>
+    </ul>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Multiple column spanning. 5px gutter.</h2>
+    <p>
+        <button type="button" onclick="appendItem('#matrix-3');" class="button">Append Item</button>
+        <button type="button" onclick="prependItem('#matrix-3');" class="button">Prepend Item</button>
+        <button type="button" onclick="removeItem('#matrix-3');" class="button">Remove Item</button>
+    </p>
+
+    <ul id="matrix-3" class="matrix">
+        <li><img src="http://placehold.it/250x200/4c6278/ffffff&text=1" class="fluid"></li>
+        <li><img src="http://placehold.it/400x400/42586e/ffffff&text=2" class="fluid"></li>
+        <li><img src="http://placehold.it/200x250/344a5f/ffffff&text=3" class="fluid"></li>
+        <li><img src="http://placehold.it/215x325/293f54/ffffff&text=4" class="fluid"></li>
+        <li><img src="http://placehold.it/230x350/283442/ffffff&text=5" class="fluid"></li>
+        <li><img src="http://placehold.it/350x200/4c6278/ffffff&text=6" class="fluid"></li>
+        <li><img src="http://placehold.it/315x225/42586e/ffffff&text=7" class="fluid"></li>
+        <li><img src="http://placehold.it/550x200/344a5f/ffffff&text=8" class="fluid"></li>
+        <li><img src="http://placehold.it/200x380/293f54/ffffff&text=9" class="fluid"></li>
+        <li><img src="http://placehold.it/215x415/283442/ffffff&text=10" class="fluid"></li>
+    </ul>
+</div>
+
+<script>
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function appendItem(id) {
+        newItem(id, 'append');
+    }
+
+    function prependItem(id) {
+        newItem(id, 'prepend');
+    }
+
+    function removeItem(id) {
+        $(id).toolkit('matrix').remove($(id).find('li')[0]);
+    }
+
+    function newItem(id, where) {
+        var w = 200,
+            h = random(200, 600),
+            i = new Image(),
+            matrix = $(id).toolkit('matrix');
+
+        if (id === '#matrix-3') {
+            w = random(200, 600);
+        }
+
+        i.src = 'http://placehold.it/' + w + 'x' + h + '/000000/ffffff&text=' + (matrix.items.length + 1);
+        i.className = 'fluid';
+        i.onload = function() {
+            matrix[where]($('<li/>').html(i));
+        };
+    }
+
+    $(function() {
+        $('#matrix-1').matrix();
+
+        $('#matrix-2').matrix({
+            width: 250,
+            rtl: true
+        });
+
+        $('#matrix-3').matrix({
+            gutter: 5
+        });
+    });
+</script>

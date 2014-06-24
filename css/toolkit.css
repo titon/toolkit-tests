@@ -1645,8 +1645,9 @@ label,
     border: 1px solid #e5e5e5;
     box-shadow: none;
 }
-.input.is-disabled, .input[disabled] {
-    cursor: not-allowed;
+.input.is-disabled, .input[disabled],
+.input option[disabled],
+.input optgroup[disabled] {
     color: #c2c2c2;
     border-color: whitesmoke;
 }
@@ -1660,7 +1661,8 @@ label,
 
 .input-radio,
 .input-checkbox {
-    padding: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     border: 0;
 }
 .input-radio input[type="checkbox"],
@@ -1672,13 +1674,16 @@ label,
     top: -2px;
     margin-right: 5px;
 }
+.input-radio.is-disabled,
+.input-checkbox.is-disabled {
+    color: #c2c2c2;
+}
 
 select.input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
-
 select.input[multiple] {
     max-height: 500px;
 }
@@ -1772,22 +1777,25 @@ textarea.input {
 .form--inline .field,
 .form--inline .fields li,
 .form--inline .field-label,
-.form--inline .form-actions {
+.form--inline .form-actions,
+.form--inline fieldset {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
     margin-right: 1.25rem;
     margin-bottom: 0.625rem;
 }
+.form--inline fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
 .form--inline .field-label {
     margin: 0 0.625rem 0 0;
 }
+.form--inline legend,
 .form--inline .field-help {
     display: none;
-}
-.form--inline .input-radio,
-.form--inline .input-checkbox {
-    padding: 0.75rem 0;
 }
 
 /**
