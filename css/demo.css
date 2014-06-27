@@ -487,8 +487,8 @@ a.step:hover,
 a.step:hover:after {
   background: #fbfbfb; }
 
-.steps li.is-complete a.step,
-.steps li.is-complete a.step:after {
+.steps li.is-complete .step,
+.steps li.is-complete .step:after {
   background: #45c5eb;
   color: #fff; }
 
