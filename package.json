@@ -1,0 +1,41 @@
+{
+    "version": "1.5.0",
+    "name": "titon-toolkit",
+    "description": "A collection of extensible front-end UI components for the responsive and mobile web.",
+    "keywords": [
+        "titon", "toolkit", "css", "sass", "scss", "jquery", "javascript", "ui", "interface",
+        "framework", "bootstrap", "modular", "component", "responsive", "fluid", "mobile"
+    ],
+    "copyright": "Copyright 2010-2014, The Titon Project",
+    "homepage": "http://titon.io",
+    "licenses": [
+        {
+            "type": "BSD-3",
+            "url": "https://github.com/titon/toolkit/blob/master/license.md"
+        }
+    ],
+    "author": {
+        "name": "Miles Johnson",
+        "url": "http://milesj.me"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/titon/toolkit"
+    },
+    "devDependencies": {
+        "compartment": "*",
+        "requirejs": "*",
+        "through": "*",
+        "gulp": "*",
+        "gulp-util": "*",
+        "gulp-rename": "*",
+        "gulp-concat": "*",
+        "gulp-clean": "*",
+        "gulp-ruby-sass": "*",
+        "gulp-minify-css": "*",
+        "gulp-autoprefixer": "*",
+        "gulp-jshint": "*",
+        "gulp-uglify": "*",
+        "gulp-header": "*"
+    }
+}

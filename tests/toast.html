@@ -1,0 +1,51 @@
+<div class="test-demo">
+    <button type="button" class="button" role="button" id="toast-text">Create Text Toast</button>
+    <button type="button" class="button" role="button" id="toast-html">Create HTML Toast</button>
+    <button type="button" class="button" role="button" id="toast-dismiss">Create Dismissable Toast</button>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Animations.</h2>
+
+    <button type="button" class="button js-toast" role="button" data-toast-animation="slide-up">Slide Up</button>
+    <button type="button" class="button js-toast" role="button" data-toast-animation="slide-down">Slide Down</button>
+    <button type="button" class="button js-toast" role="button" data-toast-animation="slide-left">Slide Left</button>
+    <button type="button" class="button js-toast" role="button" data-toast-animation="slide-right">Slide Right</button>
+</div>
+
+<script>
+    $(function() {
+        var body = $('body');
+
+        body.toast();
+
+        $('.js-toast').on('click', function() {
+            var animation = $(this).data('toast-animation');
+
+            body.toolkit('toast', 'create', [
+                'This toast will show off the ' + animation + ' animation.',
+                { animation: animation }
+            ]);
+        });
+
+        $('#toast-text').on('click', function() {
+            body.toolkit('toast', 'create', 'This toast contains only text.');
+        });
+
+        $('#toast-html').on('click', function() {
+            body.toolkit('toast', 'create', $('<a/>').html('This toast contains HTML.'));
+        });
+
+        $('#toast-dismiss').on('click', function() {
+            var toast = body.toolkit('toast'),
+                link = $('<a/>')
+                    .attr('href', 'javascript:;')
+                    .html('This toast will persist until dismissed.')
+                    .click(function() {
+                        toast.hide(this.parentNode);
+                    });
+
+            toast.create(link, { duration: 0 });
+        });
+    });
+</script>
