@@ -1,0 +1,72 @@
+html {
+  font: normal 14px/1.5rem "Droid Sans", sans-serif;
+}
+
+body {
+  background: #f0f1f2;
+  color: #000;
+  padding-bottom: 250px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.test-demo {
+  padding: 2rem 4rem 4rem 4rem;
+  text-align: center;
+}
+.test-demo:first-child {
+  padding-top: 4rem;
+}
+.test-demo:nth-child(even) {
+  background: #344a5f;
+  color: #fff;
+}
+.test-demo:nth-child(even) .test-header {
+  color: #cfd4d9;
+}
+
+.test-header {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #344a5f;
+}
+
+form,
+.accordion {
+  text-align: left;
+}
+
+.test-grid .col {
+  color: #000;
+  background: #fbfbfb;
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
+}
+
+[class*="icon-16"] {
+  background: url("../img/icons-16@2x.png") no-repeat;
+  background-size: 80px 16px;
+}
+
+.icon-16-home {
+  background-position: 0 0;
+}
+
+.icon-16-view {
+  background-position: -16px 0;
+}
+
+.icon-16-edit {
+  background-position: -32px 0;
+}
+
+.icon-16-user {
+  background-position: -48px 0;
+}
+
+.icon-16-comment {
+  background-position: -64px 0;
+}

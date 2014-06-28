@@ -12,10 +12,10 @@
 <div class="test-demo">
     <h2 class="test-header">Animations.</h2>
 
-    <a href="ajax/popover.html" class="button js-popover-fade">Fade</a>
-    <a href="ajax/popover.html" class="button js-popover-from-above">From Above</a>
-    <a href="ajax/popover.html" class="button js-popover-from-below">From Below</a>
-    <a href="ajax/popover.html" class="button js-popover-flip-rotate">Flip Rotate</a>
+    <a href="javascript:;" class="button js-popover-fade" data-popover="Will fade in.">Fade</a>
+    <a href="javascript:;" class="button js-popover-from-above" data-popover="Will drop in from above.">From Above</a>
+    <a href="javascript:;" class="button js-popover-from-below" data-popover="Will drop in from below.">From Below</a>
+    <a href="javascript:;" class="button js-popover-flip-rotate" data-popover="Will flip rotate into place.">Flip Rotate</a>
 </div>
 
 <div class="test-demo">
@@ -37,19 +37,34 @@
     <h2 class="test-header">Additional features.</h2>
 
     <a href="ajax/popover.html" class="button js-popover" title="Popover Title">With Title</a>
-    <a href="ajax/popover.html" class="button js-popover" data-popover-xoffset="10">With X Offset</a>
-    <a href="ajax/popover.html" class="button js-popover" data-popover-yoffset="10">With Y Offset</a>
-    <a href="ajax/popover.html" class="button js-popover" data-popover-delay="200">With A Delay</a>
+    <a href="javascript:;" class="button js-popover-delay" data-popover="Will appear after 200 milliseconds.">With A Delay</a>
+    <a href="javascript:;" class="button js-popover-xoffset" data-popover="Will be shifted on the X axis.">X Offset</a>
+    <a href="javascript:;" class="button js-popover-yoffset" data-popover="Will be shifted on the Y axis.">Y Offset</a>
 </div>
 
 <script>
     $(function() {
-        $.each(['', 'fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
-            $('.js-popover' + (value ? '-' + value : '')).popover({
-                ajax: true,
-                getContent: 'href',
+        $('.js-popover').popover({
+            ajax: true,
+            getContent: 'href'
+        });
+
+        $.each(['fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
+            $('.js-popover-' + value).popover({
                 animation: value
             });
+        });
+
+        $('.js-popover-xoffset').popover({
+            xOffset: 15
+        });
+
+        $('.js-popover-yoffset').popover({
+            yOffset: 15
+        });
+
+        $('.js-popover-delay').popover({
+            delay: 200
         });
     });
 </script>

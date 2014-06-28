@@ -1,0 +1,306 @@
+// Colors based on Flat UI
+// http://flatuicolors.com/
+
+$teal-light: #1ABC9C;
+$teal-dark: #16A085;
+$green-light: #2ECC71;
+$green-dark: #27AE60;
+$blue-light: #3498DB;
+$blue-dark: #2980B9;
+$purple-light: #9B59B6;
+$purple-dark: #8E44AD;
+$black: #000;
+$black-light: #34495E;
+$black-dark: #2C3E50;
+$yellow-light: #F1C40F;
+$yellow-dark: #F39C12;
+$orange-light: #E67E22;
+$orange-dark: #D35400;
+$red-light: #E74C3C;
+$red-dark: #C0392B;
+$white: #fff;
+$white-light: #ECF0F1;
+$white-dark: #BDC3C7;
+$gray-light: #95A5A6;
+$gray-dark: #7F8C8D;
+
+//-------------------- Accordion --------------------//
+
+.accordion li {
+    margin-bottom: 1px;
+}
+
+.accordion-header {
+    background: $blue-dark;
+    color: $white-light;
+
+    &:hover,
+    .is-active & {
+        background: $blue-light;
+    }
+}
+
+.accordion-section {
+    background: $white-light;
+}
+
+.accordion-body {
+    ul {
+        margin-top: 1.25rem;
+    }
+
+    ul:first-child, p:first-child {
+        margin-top: 0;
+    }
+}
+
+//-------------------- Breadcrumb --------------------//
+
+.breadcrumb {
+    background: $white-light;
+
+    a {
+        color: $red-light;
+
+        &:hover { color: $red-dark; }
+
+        .caret { color: $gray-light; }
+    }
+
+    li:last-child a {
+        color: $gray-light;
+    }
+}
+
+//-------------------- Button --------------------//
+
+.button {
+    background: $gray-dark;
+    color: #fff;
+
+    &:hover {
+        background: $gray-light;
+    }
+
+    &.is-active {
+        color: $white;
+        background: $gray-light;
+    }
+
+    &.is-info {
+        background: $blue-dark;
+
+        &:hover { background: $blue-light; }
+    }
+
+    &.is-success {
+        background: $green-dark;
+
+        &:hover { background: $green-light; }
+    }
+
+    &.is-warning {
+        background: $yellow-dark;
+
+        &:hover { background: $yellow-light; }
+    }
+
+    &.is-error {
+        background: $red-dark;
+
+        &:hover { background: $red-light; }
+    }
+
+    &.is-disabled {
+        background: $gray-dark;
+        opacity: .5;
+    }
+}
+
+//-------------------- Button Group --------------------//
+
+.button-group {
+    > li,
+    > .button {
+        border-left: 1px solid rgba(0, 0, 0, .2);
+
+        &:first-child { border-left: 0; }
+    }
+}
+
+//-------------------- Carousel --------------------//
+
+.carousel-next,
+.carousel-prev {
+    color: #fff;
+    opacity: .5;
+
+    &:hover { opacity: 1; }
+}
+
+//-------------------- Code --------------------//
+
+pre {
+    color: black;
+}
+
+//-------------------- Drop --------------------//
+
+.drop {
+    background: $teal-dark;
+
+    li > a {
+        color: $white;
+    }
+
+    li > a:hover,
+    li.is-active > a {background: $teal-light; }
+}
+
+.drop-heading {
+    background: $black-dark;
+    color: $white-light;
+    font-weight: bold;
+}
+
+.drop-divider {
+    border-top-color: $teal-light;
+}
+
+.drop-desc {
+    display: block;
+}
+
+//-------------------- Flyout --------------------//
+
+.flyout {
+    background: $orange-dark;
+
+    li > a {
+        color: $white;
+    }
+
+    li > a:hover,
+    li.is-open > a { background: $orange-light; }
+}
+
+.flyout-heading {
+    background: $black-dark;
+    color: $white-light;
+    font-weight: bold;
+}
+
+//-------------------- Form --------------------//
+
+.input {
+    color: #000;
+
+    &:focus {
+        border-color: $blue-dark;
+        box-shadow: 0 0 5px $blue-light;
+    }
+}
+
+.field,
+.fields li {
+    &:not(.is-disabled) {
+        &.is-error {
+            .input {
+                border-color: $red-dark;
+
+                &:focus { box-shadow: 0 0 5px $red-light; }
+            }
+
+            .input-radio,
+            .input-checkbox {
+                color: $red-light;
+            }
+        }
+
+        &.is-success {
+            .input {
+                border-color: $green-dark;
+
+                &:focus { box-shadow: 0 0 5px $green-light; }
+            }
+
+            .input-radio,
+            .input-checkbox {
+                color: $green-light;
+            }
+        }
+    }
+}
+
+.field-help {
+    color: $white-dark;
+}
+
+fieldset {
+    border-top-color: $white-dark;
+}
+
+//-------------------- Input --------------------//
+
+.select {
+    color: #000;
+}
+
+.select-options {
+    .drop-desc {
+        font-size: .8em;
+        opacity: .8;
+    }
+
+    li.is-disabled {
+        background: rgba(0, 0, 0, .1);
+    }
+}
+
+//-------------------- Input Group --------------------//
+
+.input-addon {
+    background: $teal-dark;
+    border: 1px solid $teal-dark; // Matches input height
+    color: $white-light;
+}
+
+//-------------------- Label --------------------//
+
+.label {
+    background: $gray-dark;
+    color: #fff;
+
+    &.is-info {
+        background: $blue-dark;
+    }
+
+    &.is-success {
+        background: $green-dark;
+    }
+
+    &.is-warning {
+        background: $yellow-dark;
+    }
+
+    &.is-error {
+        background: $red-dark;
+    }
+}
+
+.label--arrow-left::after {
+    border-right-color: $gray-dark;
+}
+
+.label--arrow-right::after {
+    border-left-color: $gray-dark;
+}
+
+.label--ribbon-left::after {
+    border-right-color: $gray-light;
+}
+
+.label--ribbon-right::after {
+    border-left-color: $gray-light;
+}
+

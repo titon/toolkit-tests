@@ -1,0 +1,239 @@
+.accordion li {
+  margin-bottom: 1px;
+}
+
+.accordion-header {
+  background: #2980b9;
+  color: #ecf0f1;
+}
+.accordion-header:hover, .is-active .accordion-header {
+  background: #3498db;
+}
+
+.accordion-section {
+  background: #ecf0f1;
+}
+
+.accordion-body ul {
+  margin-top: 1.25rem;
+}
+.accordion-body ul:first-child, .accordion-body p:first-child {
+  margin-top: 0;
+}
+
+.breadcrumb {
+  background: #ecf0f1;
+}
+.breadcrumb a {
+  color: #e74c3c;
+}
+.breadcrumb a:hover {
+  color: #c0392b;
+}
+.breadcrumb a .caret {
+  color: #95a5a6;
+}
+.breadcrumb li:last-child a {
+  color: #95a5a6;
+}
+
+.button {
+  background: #7f8c8d;
+  color: #fff;
+}
+.button:hover {
+  background: #95a5a6;
+}
+.button.is-active {
+  color: white;
+  background: #95a5a6;
+}
+.button.is-info {
+  background: #2980b9;
+}
+.button.is-info:hover {
+  background: #3498db;
+}
+.button.is-success {
+  background: #27ae60;
+}
+.button.is-success:hover {
+  background: #2ecc71;
+}
+.button.is-warning {
+  background: #f39c12;
+}
+.button.is-warning:hover {
+  background: #f1c40f;
+}
+.button.is-error {
+  background: #c0392b;
+}
+.button.is-error:hover {
+  background: #e74c3c;
+}
+.button.is-disabled {
+  background: #7f8c8d;
+  opacity: .5;
+}
+
+.button-group > li,
+.button-group > .button {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.button-group > li:first-child,
+.button-group > .button:first-child {
+  border-left: 0;
+}
+
+.carousel-next,
+.carousel-prev {
+  color: #fff;
+  opacity: .5;
+}
+.carousel-next:hover,
+.carousel-prev:hover {
+  opacity: 1;
+}
+
+pre {
+  color: black;
+}
+
+.drop {
+  background: #16a085;
+}
+.drop li > a {
+  color: white;
+}
+.drop li > a:hover,
+.drop li.is-active > a {
+  background: #1abc9c;
+}
+
+.drop-heading {
+  background: #2c3e50;
+  color: #ecf0f1;
+  font-weight: bold;
+}
+
+.drop-divider {
+  border-top-color: #1abc9c;
+}
+
+.drop-desc {
+  display: block;
+}
+
+.flyout {
+  background: #d35400;
+}
+.flyout li > a {
+  color: white;
+}
+.flyout li > a:hover,
+.flyout li.is-open > a {
+  background: #e67e22;
+}
+
+.flyout-heading {
+  background: #2c3e50;
+  color: #ecf0f1;
+  font-weight: bold;
+}
+
+.input {
+  color: #000;
+}
+.input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 5px #3498db;
+}
+
+.field:not(.is-disabled).is-error .input,
+.fields li:not(.is-disabled).is-error .input {
+  border-color: #c0392b;
+}
+.field:not(.is-disabled).is-error .input:focus,
+.fields li:not(.is-disabled).is-error .input:focus {
+  box-shadow: 0 0 5px #e74c3c;
+}
+.field:not(.is-disabled).is-error .input-radio,
+.field:not(.is-disabled).is-error .input-checkbox,
+.fields li:not(.is-disabled).is-error .input-radio,
+.fields li:not(.is-disabled).is-error .input-checkbox {
+  color: #e74c3c;
+}
+.field:not(.is-disabled).is-success .input,
+.fields li:not(.is-disabled).is-success .input {
+  border-color: #27ae60;
+}
+.field:not(.is-disabled).is-success .input:focus,
+.fields li:not(.is-disabled).is-success .input:focus {
+  box-shadow: 0 0 5px #2ecc71;
+}
+.field:not(.is-disabled).is-success .input-radio,
+.field:not(.is-disabled).is-success .input-checkbox,
+.fields li:not(.is-disabled).is-success .input-radio,
+.fields li:not(.is-disabled).is-success .input-checkbox {
+  color: #2ecc71;
+}
+
+.field-help {
+  color: #bdc3c7;
+}
+
+fieldset {
+  border-top-color: #bdc3c7;
+}
+
+.select {
+  color: #000;
+}
+
+.select-options .drop-desc {
+  font-size: .8em;
+  opacity: .8;
+}
+.select-options li.is-disabled {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.input-addon {
+  background: #16a085;
+  border: 1px solid #16a085;
+  color: #ecf0f1;
+}
+
+.label {
+  background: #7f8c8d;
+  color: #fff;
+}
+.label.is-info {
+  background: #2980b9;
+}
+.label.is-success {
+  background: #27ae60;
+}
+.label.is-warning {
+  background: #f39c12;
+}
+.label.is-error {
+  background: #c0392b;
+}
+
+.label--arrow-left::after {
+  border-right-color: #7f8c8d;
+}
+
+.label--arrow-right::after {
+  border-left-color: #7f8c8d;
+}
+
+.label--ribbon-left::after {
+  border-right-color: #95a5a6;
+}
+
+.label--ribbon-right::after {
+  border-left-color: #95a5a6;
+}
