@@ -30,6 +30,8 @@ a {
 
         .test-header { color: #cfd4d9; }
     }
+
+    > p:first-child { margin-top: 0; }
 }
 
 .test-header {
@@ -41,7 +43,12 @@ a {
 
 // Fix align center issues
 form,
-.accordion {
+.accordion,
+.mask-target,
+.pin-container,
+.switch,
+.table,
+.tabs {
     text-align: left;
 }
 
@@ -68,3 +75,34 @@ form,
 .icon-16-edit { background-position: -32px 0; }
 .icon-16-user { background-position: -48px 0; }
 .icon-16-comment { background-position: -64px 0; }
+
+//-------------------- Lazy Load --------------------//
+
+.lazy-overflow {
+    height: 350px;
+    overflow: auto;
+}
+
+.lazy-item {
+    display: block;
+    width: 200px;
+    height: 200px;
+    background-size: 200px 200px;
+    margin: 0 auto;
+
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+//-------------------- Pin --------------------//
+
+.pin-container {
+    position: relative;
+
+    .col p:first-child { margin-top: 0; }
+}
+
+#pin-3 { top: 50px; }
+#pin-4 { height: 350px; }

@@ -21,6 +21,10 @@
   margin-top: 0;
 }
 
+.blackout .loader.bar-wave > span {
+  background: #1abc9c;
+}
+
 .breadcrumb {
   background: #ecf0f1;
 }
@@ -236,4 +240,257 @@ fieldset {
 
 .label--ribbon-right::after {
   border-left-color: #95a5a6;
+}
+
+.mask-target {
+  margin-top: 1rem;
+}
+
+.mask .loader.bar-wave > span {
+  background: #9b59b6;
+}
+
+.matrix {
+  margin-top: 1rem;
+}
+
+.notice {
+  background: #95a5a6;
+}
+.notice.is-info {
+  background: #3498db;
+}
+.notice.is-success {
+  background: #2ecc71;
+}
+.notice.is-warning {
+  background: #f1c40f;
+}
+.notice.is-error {
+  background: #e74c3c;
+}
+
+.pagination {
+  text-align: center;
+}
+.pagination ul {
+  display: inline-block;
+}
+
+.pagination--grouped li {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.pagination--grouped li:first-child {
+  border-left: 0;
+}
+
+.pin {
+  background: #e74c3c;
+  padding: 1rem;
+  color: #fff;
+}
+
+.popover {
+  background: #9b59b6;
+  color: #fff;
+}
+.popover.center-left .popover-arrow {
+  border-left-color: #9b59b6;
+}
+.popover.center-right .popover-arrow {
+  border-right-color: #9b59b6;
+}
+.popover.top-center .popover-arrow {
+  border-top-color: #9b59b6;
+}
+.popover.bottom-center .popover-arrow {
+  border-bottom-color: #9b59b6;
+}
+
+.popover-head {
+  padding: .5rem;
+  background: #8e44ad;
+  font-weight: bold;
+}
+
+.popover-body {
+  padding: .5rem;
+}
+
+.progress {
+  background: #bdc3c7;
+  color: #fff;
+}
+
+.progress-bar {
+  background: #95a5a6;
+}
+.progress-bar.is-info {
+  background: #3498db;
+}
+.progress-bar.is-success {
+  background: #2ecc71;
+}
+.progress-bar.is-warning {
+  background: #f1c40f;
+}
+.progress-bar.is-error {
+  background: #e74c3c;
+}
+
+.responsive-table {
+  width: 100%;
+  border-spacing: 5px;
+  border-collapse: separate;
+}
+.responsive-table td {
+  padding: 5px;
+  background: #95a5a6;
+  color: #fff;
+}
+.responsive-table td[class*="show-"] {
+  background: #2ecc71;
+}
+.responsive-table td[class*="hide-"] {
+  background: #e74c3c;
+}
+
+.showcase-next,
+.showcase-prev,
+.showcase-close {
+  color: #fff;
+  opacity: .5;
+}
+.showcase-next:hover,
+.showcase-prev:hover,
+.showcase-close:hover {
+  opacity: 1;
+}
+
+.showcase-caption {
+  color: #fff;
+}
+
+.showcase-inner {
+  background: #bdc3c7;
+  padding: 5px;
+}
+
+.steps ol {
+  background: #f39c12;
+  color: #000;
+}
+.steps ol .step,
+.steps ol .step::after {
+  background: #f39c12;
+}
+.steps ol .step::after {
+  border-right: 1px solid #f1c40f;
+  border-bottom: 1px solid #f1c40f;
+}
+.steps ol a.step {
+  color: #000;
+}
+.steps ol a.step:hover, .steps ol a.step:hover::after {
+  background: #f7dc6f;
+}
+.steps ol li.is-complete .step,
+.steps ol li.is-complete .step::after {
+  background: #f1c40f;
+}
+.steps ol li.is-complete .step::after {
+  border-right-color: #f39c12;
+  border-bottom-color: #f39c12;
+}
+
+.switch input:checked + .switch-bar {
+  background: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.switch-bar {
+  background: #c0392b;
+  border: 2px solid #c0392b;
+}
+
+.switch-toggle {
+  background: #ecf0f1;
+}
+
+.table {
+  color: #000;
+}
+.table.is-sortable thead th > a {
+  background: #d35400;
+  color: #fff;
+}
+.table.is-sortable thead th > a:hover {
+  background: #e67e22;
+}
+.table:first-child {
+  margin-top: 0;
+}
+
+.toast {
+  background: #9b59b6;
+  color: #fff;
+  padding: .5rem;
+}
+.toast a {
+  color: #f1c40f;
+}
+
+.tooltip {
+  background: #2ecc71;
+  color: #fff;
+  padding: 0;
+}
+.tooltip.center-left .tooltip-arrow {
+  border-left-color: #2ecc71;
+}
+.tooltip.center-right .tooltip-arrow {
+  border-right-color: #2ecc71;
+}
+.tooltip.top-center .tooltip-arrow {
+  border-top-color: #2ecc71;
+}
+.tooltip.bottom-center .tooltip-arrow {
+  border-bottom-color: #2ecc71;
+}
+
+.tooltip-head {
+  padding: .5rem;
+  background: #27ae60;
+  font-weight: bold;
+}
+
+.tooltip-body {
+  padding: .5rem;
+}
+
+.type-ahead {
+  background: #c0392b;
+}
+.type-ahead li > a {
+  color: white;
+}
+.type-ahead li > a:hover,
+.type-ahead li.is-active > a {
+  background: #e74c3c;
+}
+
+.type-ahead-heading {
+  background: #2c3e50;
+  color: #ecf0f1;
+  font-weight: bold;
+}
+
+.type-ahead-highlight {
+  background: #f1c40f;
+}
+
+.type-ahead-shadow {
+  width: 172px;
+  margin: 0 auto;
+  text-align: left;
 }

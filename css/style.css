@@ -26,6 +26,9 @@ a {
 .test-demo:nth-child(even) .test-header {
   color: #cfd4d9;
 }
+.test-demo > p:first-child {
+  margin-top: 0;
+}
 
 .test-header {
   margin-bottom: 2rem;
@@ -35,8 +38,25 @@ a {
 }
 
 form,
-.accordion {
+.accordion,
+.mask-target,
+.pin-container,
+.switch,
+.table,
+.tabs {
   text-align: left;
+}
+
+#carousel-1 {
+  width: 400px;
+}
+
+#carousel-2, #carousel-4, #carousel-5 {
+  width: 800px;
+}
+
+#carousel-3, #carousel-6 {
+  width: 500px;
 }
 
 .test-grid .col {
@@ -69,4 +89,36 @@ form,
 
 .icon-16-comment {
   background-position: -64px 0;
+}
+
+.lazy-overflow {
+  height: 350px;
+  overflow: auto;
+}
+
+.lazy-item {
+  display: block;
+  width: 200px;
+  height: 200px;
+  background-size: 200px 200px;
+  margin: 0 auto;
+}
+.lazy-item img {
+  width: 200px;
+  height: 200px;
+}
+
+.pin-container {
+  position: relative;
+}
+.pin-container .col p:first-child {
+  margin-top: 0;
+}
+
+#pin-3 {
+  top: 50px;
+}
+
+#pin-4 {
+  height: 350px;
 }

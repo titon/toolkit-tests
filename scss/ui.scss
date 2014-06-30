@@ -54,6 +54,12 @@ $gray-dark: #7F8C8D;
     }
 }
 
+//-------------------- Blackout --------------------//
+
+.blackout .loader.bar-wave > span {
+    background: $teal-light;
+}
+
 //-------------------- Breadcrumb --------------------//
 
 .breadcrumb {
@@ -304,3 +310,302 @@ fieldset {
     border-left-color: $gray-light;
 }
 
+//-------------------- Mask --------------------//
+
+.mask-target { margin-top: 1rem; }
+
+.mask .loader.bar-wave > span {
+    background: $purple-light;
+}
+
+//-------------------- Matrix --------------------//
+
+.matrix { margin-top: 1rem; }
+
+//-------------------- Notice --------------------//
+
+.notice {
+    background: $gray-light;
+
+    &.is-info {
+        background: $blue-light;
+    }
+
+    &.is-success {
+        background: $green-light;
+    }
+
+    &.is-warning {
+        background: $yellow-light;
+    }
+
+    &.is-error {
+        background: $red-light;
+    }
+}
+
+//-------------------- Pagination --------------------//
+
+.pagination {
+    text-align: center;
+
+    ul { display: inline-block; }
+}
+
+.pagination--grouped li {
+    border-left: 1px solid rgba(0, 0, 0, .2);
+
+    &:first-child { border-left: 0; }
+}
+
+//-------------------- Pin --------------------//
+
+.pin {
+    background: $red-light;
+    padding: 1rem;
+    color: #fff;
+}
+
+//-------------------- Popover --------------------//
+
+.popover {
+    background: $purple-light;
+    color: #fff;
+
+    &.center-left .popover-arrow {
+        border-left-color: $purple-light;
+    }
+
+    &.center-right .popover-arrow {
+        border-right-color: $purple-light;
+    }
+
+    &.top-center .popover-arrow {
+        border-top-color: $purple-light;
+    }
+
+    &.bottom-center .popover-arrow {
+        border-bottom-color: $purple-light;
+    }
+}
+
+.popover-head {
+    padding: .5rem;
+    background: $purple-dark;
+    font-weight: bold;
+}
+
+.popover-body {
+    padding: .5rem;
+}
+
+//-------------------- Progress --------------------//
+
+.progress {
+    background: $white-dark;
+    color: #fff;
+}
+
+.progress-bar {
+    background: $gray-light;
+
+    &.is-info {
+        background: $blue-light;
+    }
+
+    &.is-success {
+        background: $green-light;
+    }
+
+    &.is-warning {
+        background: $yellow-light;
+    }
+
+    &.is-error {
+        background: $red-light;
+    }
+}
+
+//-------------------- Responsive --------------------//
+
+.responsive-table {
+    width: 100%;
+    border-spacing: 5px;
+    border-collapse: separate;
+
+    td {
+        padding: 5px;
+        background: $gray-light;
+        color: #fff;
+
+        &[class*="show-"] {
+            background: $green-light;
+        }
+
+        &[class*="hide-"] {
+            background: $red-light;
+        }
+    }
+}
+
+//-------------------- Showcase --------------------//
+
+.showcase-next,
+.showcase-prev,
+.showcase-close {
+    color: #fff;
+    opacity: .5;
+
+    &:hover { opacity: 1; }
+}
+
+.showcase-caption {
+    color: #fff;
+}
+
+.showcase-inner {
+    background: $white-dark;
+    padding: 5px;
+}
+
+//-------------------- Step --------------------//
+
+.steps ol {
+    background: $yellow-dark;
+    color: #000;
+
+    .step,
+    .step::after {
+        background: $yellow-dark;
+    }
+
+    .step::after {
+        border-right: 1px solid $yellow-light;
+        border-bottom: 1px solid $yellow-light;
+    }
+
+    a.step {
+        color: #000;
+
+        &:hover,
+        &:hover::after { background: lighten($yellow-light, 20%); }
+    }
+
+    li.is-complete {
+        .step,
+        .step::after {
+            background: $yellow-light;
+        }
+
+        .step::after {
+            border-right-color: $yellow-dark;
+            border-bottom-color: $yellow-dark;
+        }
+    }
+}
+
+//-------------------- Switch --------------------//
+
+.switch {
+    input:checked + .switch-bar {
+        background: $red-light;
+        border-color: $red-light;
+    }
+}
+
+.switch-bar {
+    background: $red-dark;
+    border: 2px solid $red-dark;
+}
+
+.switch-toggle {
+    background: $white-light;
+}
+
+//-------------------- Table --------------------//
+
+.table {
+    color: #000;
+
+    &.is-sortable thead th > a {
+        background: $orange-dark;
+        color: #fff;
+
+        &:hover { background: $orange-light; }
+    }
+
+    &:first-child { margin-top: 0; }
+}
+
+//-------------------- Toast --------------------//
+
+.toast {
+    background: $purple-light;
+    color: #fff;
+    padding: .5rem;
+
+    a { color: $yellow-light; }
+}
+
+//-------------------- Tooltip --------------------//
+
+.tooltip {
+    background: $green-light;
+    color: #fff;
+    padding: 0;
+
+    &.center-left .tooltip-arrow {
+        border-left-color: $green-light;
+    }
+
+    &.center-right .tooltip-arrow {
+        border-right-color: $green-light;
+    }
+
+    &.top-center .tooltip-arrow {
+        border-top-color: $green-light;
+    }
+
+    &.bottom-center .tooltip-arrow {
+        border-bottom-color: $green-light;
+    }
+}
+
+.tooltip-head {
+    padding: .5rem;
+    background: $green-dark;
+    font-weight: bold;
+}
+
+.tooltip-body {
+    padding: .5rem;
+}
+
+//-------------------- Type Ahead --------------------//
+
+.type-ahead {
+    background: $red-dark;
+
+    li > a {
+        color: $white;
+    }
+
+    li > a:hover,
+    li.is-active > a { background: $red-light; }
+}
+
+.type-ahead-heading {
+    background: $black-dark;
+    color: $white-light;
+    font-weight: bold;
+}
+
+.type-ahead-highlight {
+    background: $yellow-light;
+}
+
+.type-ahead-shadow {
+    width: 172px;
+    margin: 0 auto;
+    text-align: left;
+}
