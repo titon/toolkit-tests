@@ -47,6 +47,19 @@ form,
   text-align: left;
 }
 
+.vertical-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+  background: #fff;
+}
+.vertical-container .vertical-center {
+  background: #2980B9;
+  color: #fff;
+  padding: 5px;
+}
+
 #carousel-1 {
   width: 400px;
 }

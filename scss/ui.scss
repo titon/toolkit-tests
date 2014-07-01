@@ -322,6 +322,38 @@ fieldset {
 
 .matrix { margin-top: 1rem; }
 
+//-------------------- Modal --------------------//
+
+.modal-outer {
+    position: relative;
+    background: $blue-light;
+    color: #fff;
+}
+
+.modal-head,
+.modal-foot {
+    background: $blue-dark;
+}
+
+.modal-body {
+    p:first-child { margin-top: 0; }
+}
+
+.modal-foot {
+    text-align: center;
+}
+
+.modal-close {
+    background: none;
+    border: 0;
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    opacity: .5;
+
+    &:hover { opacity: 1; }
+}
+
 //-------------------- Notice --------------------//
 
 .notice {

@@ -1,0 +1,19 @@
+<form action="ajax/modal-form.html" method="post">
+    <div class="modal-head">
+        <h4>Form Posting</h4>
+    </div>
+
+    <div class="modal-body">
+        <p>By adding the class ".modal-submit" to a submit button within a modal form,
+            the form can be submitted via AJAX. The response of the AJAX call will replace
+            the current modal. Open up console and give it a try!</p>
+
+        <p><label for="name">Name:</label> <input type="text" name="name" id="name" class="input"></p>
+        <p><label for="file">File:</label> <input type="file" name="file" id="file" class="input"></p>
+    </div>
+
+    <div class="modal-foot">
+        <button type="button" class="button is-success modal-submit">Submit</button>
+        <button type="button" class="button modal-hide">Close</button>
+    </div>
+</form>

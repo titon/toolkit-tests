@@ -254,6 +254,37 @@ fieldset {
   margin-top: 1rem;
 }
 
+.modal-outer {
+  position: relative;
+  background: #3498db;
+  color: #fff;
+}
+
+.modal-head,
+.modal-foot {
+  background: #2980b9;
+}
+
+.modal-body p:first-child {
+  margin-top: 0;
+}
+
+.modal-foot {
+  text-align: center;
+}
+
+.modal-close {
+  background: none;
+  border: 0;
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  opacity: .5;
+}
+.modal-close:hover {
+  opacity: 1;
+}
+
 .notice {
   background: #95a5a6;
 }
