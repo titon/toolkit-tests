@@ -1,3 +1,6 @@
+.accordion {
+  color: #000;
+}
 .accordion li {
   margin-bottom: 1px;
 }
@@ -45,11 +48,11 @@
   background: #7f8c8d;
   color: #fff;
 }
-.button:hover {
-  background: #95a5a6;
-}
-.button.is-active {
+.button.is-active, .is-active .button {
   color: white;
+  background: #8c9899;
+}
+.button:hover {
   background: #95a5a6;
 }
 .button.is-info {
@@ -299,6 +302,19 @@ fieldset {
 }
 .notice.is-error {
   background: #e74c3c;
+}
+
+.off-canvas {
+  background: #8e44ad;
+  color: #fff;
+  padding: 1rem;
+}
+
+.on-canvas .test-demo {
+  text-align: left;
+}
+.on-canvas p:first-child {
+  margin: 0 0 2rem 0;
 }
 
 .pagination {

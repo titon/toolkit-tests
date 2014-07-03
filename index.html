@@ -18,18 +18,140 @@
     </script>
 </head>
 <body>
-    <div id="skeleton">
+    <div id="head" class="test-bar">
+        <span class="viewport">
+            <span id="res-width"></span>x<span id="res-height"></span>
+        </span>
+
+        <button id="prev" class="button plugin-goto is-disabled" role="button" disabled>
+            <span class="caret-left"></span>
+            <span class="title">Typography</span>
+        </button>
+
+        <select id="plugin-switcher" class="input">
+            <option value="">-- Select a plugin --</option>
+            <optgroup label="Components">
+                <option value="accordion">Accordion</option>
+                <option value="base">Base</option>
+                <option value="breadcrumb">Breadcrumb</option>
+                <option value="button">Button</option>
+                <option value="button-group">Button Group</option>
+                <option value="carousel">Carousel</option>
+                <option value="code">Code</option>
+                <option value="divider">Divider</option>
+                <option value="drop">Drop</option>
+                <option value="flyout">Flyout</option>
+                <option value="form">Form</option>
+                <option value="grid">Grid</option>
+                <option value="icon">Icon</option>
+                <option value="input">Input</option>
+                <option value="input-group">Input Group</option>
+                <option value="label">Label</option>
+                <option value="lazy-load">Lazy Load</option>
+                <option value="loader">Loader</option>
+                <option value="mask">Mask</option>
+                <option value="matrix">Matrix</option>
+                <option value="modal">Modal</option>
+                <option value="notice">Notice</option>
+                <option value="off-canvas">Off Canvas</option>
+                <option value="off-canvas-2">Off Canvas - Alternate</option>
+                <option value="pagination">Pagination</option>
+                <option value="pin">Pin</option>
+                <option value="popover">Popover</option>
+                <option value="progress">Progress</option>
+                <option value="responsive">Responsive</option>
+                <option value="showcase">Showcase</option>
+                <option value="stalker">Stalker</option>
+                <option value="step">Step</option>
+                <option value="switch">Switch</option>
+                <option value="tab">Tab</option>
+                <option value="table">Table</option>
+                <option value="toast">Toast</option>
+                <option value="tooltip">Tooltip</option>
+                <option value="type-ahead">Type Ahead</option>
+                <option value="typography">Typography</option>
+            </optgroup>
+        </select>
+
+        <button id="next" class="button plugin-goto is-disabled" role="button" disabled>
+            <span class="title">Accordion</span>
+            <span class="caret-right"></span>
+        </button>
+    </div>
+
+    <div id="skeleton" class="body">
 
     </div>
 
     <script>
+        var skeleton = $('#skeleton'),
+            switcher = $('#plugin-switcher'),
+            win = $(window);
+
+        // Functions
         function resize() {
-            $('#res-width').html($(window).width());
-            $('#res-height').html($(window).height());
+            $('#res-width').html(win.width());
+            $('#res-height').html(win.height());
         }
 
-        $(document).ready(resize);
-        $(window).on('resize', resize);
+        function loadPlugin(key) {
+            if (!key) {
+                return;
+            }
+
+            $.get('tests/' + key + '.html', function(response) {
+                skeleton.html(response);
+            });
+
+            switcher.val(key);
+
+            var current = switcher.find('option[value="' + key + '"]'),
+                prev = current.prev(),
+                next = current.next();
+
+            if (!prev.length) {
+                prev = switcher.find('option:last');
+            }
+
+            if (!next.length) {
+                next = switcher.find('option:first');
+            }
+
+            $('#prev')
+                .removeClass('is-disabled')
+                .prop('disabled', false)
+                .data('plugin', prev.attr('value'))
+                .find('.title')
+                    .html(prev.text());
+
+            $('#next')
+                .removeClass('is-disabled')
+                .prop('disabled', false)
+                .data('plugin', next.attr('value'))
+                .find('.title')
+                    .html(next.text());
+
+            location.hash = key;
+        }
+
+        // Events
+        win.on('resize', resize);
+
+        switcher.change(function() {
+            loadPlugin($(this).val());
+        });
+
+        $('.plugin-goto').click(function() {
+            loadPlugin($(this).data('plugin'));
+        });
+
+        $(function() {
+            resize();
+
+            if (location.hash) {
+                loadPlugin(location.hash.substr(1));
+            }
+        });
     </script>
 </body>
 </html>

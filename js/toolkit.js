@@ -5525,6 +5525,8 @@
             });
 
             this.offsets = offsets;
+
+            console.log(this);
         },
 
         /**

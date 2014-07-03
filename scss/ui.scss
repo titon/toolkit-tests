@@ -26,8 +26,12 @@ $gray-dark: #7F8C8D;
 
 //-------------------- Accordion --------------------//
 
-.accordion li {
-    margin-bottom: 1px;
+.accordion {
+    color: #000;
+
+    li {
+        margin-bottom: 1px;
+    }
 }
 
 .accordion-header {
@@ -84,12 +88,13 @@ $gray-dark: #7F8C8D;
     background: $gray-dark;
     color: #fff;
 
-    &:hover {
-        background: $gray-light;
+    &.is-active,
+    .is-active & {
+        color: $white;
+        background: lighten($gray-dark, 5%);
     }
 
-    &.is-active {
-        color: $white;
+    &:hover {
         background: $gray-light;
     }
 
@@ -374,6 +379,20 @@ fieldset {
     &.is-error {
         background: $red-light;
     }
+}
+
+//-------------------- Off Canvas --------------------//
+
+.off-canvas {
+    background: $purple-dark;
+    color: #fff;
+    padding: 1rem;
+}
+
+.on-canvas {
+    .test-demo { text-align: left; }
+
+    p:first-child { margin: 0 0 2rem 0; }
 }
 
 //-------------------- Pagination --------------------//

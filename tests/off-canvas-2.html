@@ -1,0 +1,82 @@
+<div class="canvas">
+    <main class="on-canvas">
+        <div class="test-demo">
+            <p class="align-center">
+                <button type="button" class="button js-canvas-left">Open Left Sidebar</button>
+                <button type="button" class="button js-canvas-right">Open Right Sidebar</button>
+            </p>
+
+            <h2 class="test-header">Animations.</h2>
+
+            <p class="align-center">
+                <a href="#push" class="button js-canvas-animation">Push</a>
+                <a href="#push-reveal" class="button js-canvas-animation">Push Reveal</a>
+                <a href="#push-down" class="button js-canvas-animation">Push Down</a>
+                <a href="#reverse-push" class="button js-canvas-animation">Reverse Push</a>
+                <a href="#reveal" class="button js-canvas-animation">Reveal</a>
+                <a href="#on-top" class="button js-canvas-animation">On Top</a>
+                <a href="#squish" class="button js-canvas-animation">Squish</a>
+            </p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
+                Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
+                convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum.
+                Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum.
+                Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor
+                quam nec libero condimentum eget imperdiet nibh elementum.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
+                Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
+                convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum.
+                Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum.
+                Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor
+                quam nec libero condimentum eget imperdiet nibh elementum.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
+                Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
+                convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum.
+                Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum.
+                Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor
+                quam nec libero condimentum eget imperdiet nibh elementum.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
+                Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
+                convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum.
+                Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum.
+                Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor
+                quam nec libero condimentum eget imperdiet nibh elementum.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
+                Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
+                convallis sed ligula. Nullam lobortis sapien et dolor gravida ac convallis erat fermentum.
+                Mauris nec justo lacus. Sed varius varius ligula, sit amet egestas mi blandit dictum.
+                Phasellus sapien tortor, bibendum vitae vehicula a, molestie in odio. Fusce porttitor
+                quam nec libero condimentum eget imperdiet nibh elementum.</p>
+        </div>
+    </main>
+
+    <aside class="off-canvas off-canvas--left" data-offcanvas-selector=".js-canvas-left">
+        This sidebar is positioned outside the left viewport.
+    </aside>
+
+    <aside class="off-canvas off-canvas--right" data-offcanvas-selector=".js-canvas-right">
+        This sidebar is positioned outside the right viewport.
+    </aside>
+</div>
+
+<script>
+    $(function() {
+        $('.off-canvas').offCanvas({
+            animation: (location.hash || '#push').substr(1),
+            openOnLoad: true,
+            hideOthers: false,
+            stopScroll: false
+        });
+
+        $('.js-canvas-animation').click(function() {
+            setTimeout(function() {
+                location.reload();
+            }, 10);
+        });
+    });
+</script>

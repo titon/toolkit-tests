@@ -12,6 +12,15 @@ a {
   text-decoration: none;
 }
 
+.test-bar {
+  background: #283442;
+  padding: 1rem;
+  color: #fff;
+}
+.test-bar .viewport {
+  float: right;
+}
+
 .test-demo {
   padding: 2rem 4rem 4rem 4rem;
   text-align: center;
@@ -43,7 +52,8 @@ form,
 .pin-container,
 .switch,
 .table,
-.tabs {
+.tabs,
+.stalker {
   text-align: left;
 }
 
@@ -134,4 +144,33 @@ form,
 
 #pin-4 {
   height: 350px;
+}
+
+.stalker-overflow {
+  height: 250px;
+  overflow: auto;
+  position: relative;
+}
+
+.stalker .button-group {
+  width: 100%;
+}
+.stalker .button-group > li,
+.stalker .button-group > .button {
+  border-left: 0;
+}
+
+#stalker-overflow-markers h6,
+#stalker-markers h6 {
+  margin: 2rem 0 1rem 0;
+}
+#stalker-overflow-markers div:first-child h6,
+#stalker-markers div:first-child h6 {
+  margin-top: 0;
+}
+
+#stalker-targets {
+  position: fixed;
+  top: 4rem;
+  right: 4rem;
 }

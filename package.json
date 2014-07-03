@@ -1,7 +1,6 @@
 {
     "name": "titon-toolkit-tests",
-    "description": "",
-    "keywords": [],
+    "description": "Full HTML, CSS, and JS test cases for Titon Toolkit.",
     "copyright": "Copyright 2010-2014, The Titon Project",
     "homepage": "http://titon.io",
     "licenses": [
