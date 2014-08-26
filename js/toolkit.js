@@ -1,4 +1,4 @@
-/*! Titon Toolkit v1.5.0 | BSD-3 License | titon.io */
+/*! Titon Toolkit v1.5.2 | BSD-3 License | titon.io */
 (function($) {
     'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -22,6 +22,16 @@
         }
 
         return false;
+    })();
+
+// Store the event name in a variable
+    var transitionEnd = (function() {
+        var eventMap = {
+            WebkitTransition: 'webkitTransitionEnd',
+            OTransition: 'oTransitionEnd otransitionend'
+        };
+
+        return eventMap[hasTransition] || 'transitionend';
     })();
 
     /**
@@ -49,19 +59,19 @@
 
     var Toolkit = {
 
-        /** Current version */
-        version: '1.5.0',
+        /** Current version. */
+        version: '1.5.2',
 
-        /** Build date hash */
-        build: 'hwv00o6t',
+        /** Build date hash. */
+        build: 'hzbr6b7d',
 
-        /** Vendor namespace */
-        vendor: '',
-
-        /** ARIA support */
+        /** ARIA support. */
         aria: true,
 
-        /** Localization messages */
+        /** Global debugging. */
+        debug: false,
+
+        /** Localization messages. */
         messages: {
             loading: 'Loading...',
             error: 'An error has occurred!'
@@ -70,13 +80,16 @@
         /** Does the browser support transitions? */
         hasTransition: hasTransition,
 
-        /** Detect touch devices */
+        /** Detect touch devices. */
         isTouch: isTouch,
 
-        /** Detect retina displays */
+        /** Detect retina displays. */
         isRetina: isRetina,
 
-        /** Plugin instances indexed by the selector that activated it */
+        /** Name of the `transitionend` event. */
+        transitionEnd: transitionEnd,
+
+        /** Plugin instances indexed by the selector that activated it. */
         cache: {},
 
         /**
@@ -100,7 +113,7 @@
 
                 // Apply the instance to a collection of elements
                 function() {
-                    var instance = Toolkit.cache[plugin + '.' + this.selector] = callback.apply(this, arguments);
+                    var instance = Toolkit.cache[plugin + ':' + this.selector] = callback.apply(this, arguments);
 
                     return this.each(function() {
                         $(this).cache('toolkit.' + plugin, instance);
@@ -161,8 +174,8 @@
                 } else if (type === 'object') {
                     this[key] = $.extend(true, {}, value); // Clone object
 
-                } else if (type === 'function') {
-                    //this[key] = value.bind(this);
+                    //} else if (type === 'function') {
+                    //    this[key] = value.bind(this);
                 }
             }
 
@@ -275,7 +288,7 @@
                 keys = key.split(' ');
                 event = keys.shift();
                 context = keys.shift();
-                selector = keys.join(' ').replace('@', Toolkit.vendor);
+                selector = keys.join(' ');
 
                 // Determine the correct context
                 if (self[context]) {
@@ -311,7 +324,7 @@
          * Destroy the plugin by disabling events, removing elements, and deleting the instance.
          */
         destroy: function() {
-            this.fireEvent('destroy');
+            this.fireEvent('destroying');
 
             // Hide and remove active state
             if (this.hide) {
@@ -325,6 +338,8 @@
 
             // Remove events
             this.disable();
+
+            this.fireEvent('destroyed');
         },
 
         /**
@@ -356,6 +371,16 @@
          * @param {Array} [args]
          */
         fireEvent: function(type, args) {
+            var debug = this.options.debug || Toolkit.debug;
+
+            if (debug) {
+                console.log(this.name + '#' + this.uid, new Date().getMilliseconds(), type, args || []);
+
+                if (debug === 'verbose') {
+                    console.dir(this);
+                }
+            }
+
             var hooks = this.__hooks[type];
 
             if (hooks) {
@@ -430,6 +455,9 @@
             return opts;
         }
 
+    }, {
+        cache: true,
+        debug: false
     });
 
     /**
@@ -490,22 +518,22 @@
     };
 
     /**
-     * Fetch the component instance from the jQuery collection.
+     * Fetch the plugin instance from the jQuery collection.
      * If a method and arguments are defined, trigger a method on the instance.
      *
-     * @param {String} component
+     * @param {String} plugin
      * @param {String} [method]
      * @param {Array} [args]
      * @returns {Function}
      */
-    $.fn.toolkit = function(component, method, args) {
+    $.fn.toolkit = function(plugin, method, args) {
         var selector = this.selector,
-            instance = this.data('toolkit.' + component);
+            instance = this.data('toolkit.' + plugin) || Toolkit.cache[plugin + ':' + selector] || null;
 
         // Check for the instance within the cache
-        if (!instance && Toolkit.cache[component + '.' + selector]) {
-            instance = Toolkit.cache[component + '.' + selector];
-        }
+        //if (!instance && Toolkit.cache[plugin + ':' + selector]) {
+        ///    instance = Toolkit.cache[plugin + ':' + selector];
+        //}
 
         if (!instance) {
             return null;
@@ -537,6 +565,17 @@
 
         /** Collection of nodes. */
         nodes: [],
+
+        /**
+         * A basic constructor that sets an element and its options.
+         *
+         * @param {Element} element
+         * @param {Object} [options]
+         */
+        constructor: function(element, options) {
+            this.element = element = $(element);
+            this.options = this.setOptions(options, element);
+        },
 
         /**
          * Create an element from the `template` or `templateFrom` option.
@@ -591,7 +630,7 @@
                 this.element.remove();
             }
 
-            // Remove instances last or else the previous commands will fail
+            // Remove instances or else the previous commands will fail
             var key = this.keyName;
 
             if (this.nodes) {
@@ -606,12 +645,38 @@
         },
 
         /**
+         * Trigger all hooks and any DOM events attached to the `element` or `node`.
+         *
+         * @param {String} type
+         * @param {Array} [args]
+         */
+        fireEvent: function(type, args) {
+            Toolkit.Base.prototype.fireEvent.call(this, type, args);
+
+            var element = this.element,
+                node = this.node,
+                event = $.Event(type + '.toolkit.' + this.keyName);
+            event.context = this;
+
+            // Trigger event on the element and the node
+            if (element && element.length) {
+                element.trigger(event, args || []);
+            }
+
+            if (node && node.length) {
+                node.trigger(event, args || []);
+            }
+        },
+
+        /**
          * Hide the primary element.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.element.conceal();
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -649,6 +714,15 @@
             }
 
             return $.extend(true, {}, options, obj);
+        },
+
+        /**
+         * Handle and process HTML responses.
+         *
+         * @param {*} content
+         */
+        position: function(content) {
+            this.fireEvent('load', [content]);
         },
 
         /**
@@ -815,9 +889,11 @@
                 this.node = $(node);
             }
 
+            this.fireEvent('showing');
+
             this.element.reveal();
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -873,7 +949,6 @@
         }
 
     }, {
-        cache: true,
         context: null,
         className: '',
         template: '',
@@ -935,7 +1010,7 @@
             this.options = options = this.setOptions(options, element);
 
             // Find headers and cache the index of each header and set ARIA attributes
-            this.headers = element.find('.' + Toolkit.vendor + 'accordion-header').each(function(index) {
+            this.headers = element.find('[data-accordion-header]').each(function(index) {
                 $(this)
                     .data('accordion-index', index)
                     .attr({
@@ -950,7 +1025,7 @@
             });
 
             // Find sections and cache the height so we can use for sliding and set ARIA attributes
-            this.sections = element.find('.' + Toolkit.vendor + 'accordion-section').each(function(index) {
+            this.sections = element.find('[data-accordion-section]').each(function(index) {
                 $(this)
                     .data('height', $(this).height())
                     .attr({
@@ -963,7 +1038,7 @@
 
             // Set events
             this.events = {
-                '{mode} element .@accordion-header': 'onShow'
+                '{mode} element [data-accordion-header]': 'onShow'
             };
 
             // Initialize
@@ -991,8 +1066,6 @@
         jump: function(index) {
             index = $.bound(index, this.headers.length);
 
-            this.fireEvent('jump', [index]);
-
             this.show(this.headers[index]);
         },
 
@@ -1011,6 +1084,8 @@
                 index = header.data('accordion-index'),
                 height = parseInt(section.data('height'), 10),
                 isNode = (this.node && this.node.is(header));
+
+            this.fireEvent('showing', [section, header, this.index]);
 
             // Allow simultaneous open and closed sections
             // Or allow the same section to collapse
@@ -1047,7 +1122,7 @@
             this.index = index;
             this.node = header;
 
-            this.fireEvent('show', [section, header, index]);
+            this.fireEvent('shown', [section, header, index]);
         }
 
     }, {
@@ -1083,35 +1158,13 @@
             this.options = options = this.setOptions(options);
             this.element = this.createElement();
 
-            // Build the loader
-            var count = (options.loader === 'bubble-spinner') ? 8 : options.waveCount,
-                loader = $('<div/>')
-                    .addClass(Toolkit.vendor + 'loader')
-                    .addClass(options.loader)
-                    .appendTo(this.element);
+            // Generate loader elements
+            this.loader = $(options.loaderTemplate);
+            this.message = this.loader.find('[data-loader-message]');
 
-            var spans = '', i;
-
-            for (i = 0; i < count; i++) {
-                spans += '<span></span>';
+            if (options.showLoading) {
+                this.message.html(Toolkit.messages.loading);
             }
-
-            if (options.loader === 'bubble-spinner') {
-                $('<div/>')
-                    .addClass(Toolkit.vendor + 'loader-spinner')
-                    .html(spans)
-                    .appendTo(loader);
-            } else {
-                loader.html(spans);
-            }
-
-            this.loader = loader;
-
-            // Build the message
-            this.message = $('<div/>')
-                .addClass(Toolkit.vendor + 'loader-message')
-                .html(Toolkit.messages.loading)
-                .appendTo(loader);
 
             // Initialize
             this.initialize();
@@ -1121,6 +1174,8 @@
          * Hide the blackout if count reaches 0.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             var count = this.count - 1;
 
             if (count <= 0) {
@@ -1131,7 +1186,7 @@
                 this.count = count;
             }
 
-            this.fireEvent('hide', [(count <= 0)]);
+            this.fireEvent('hidden', [(count <= 0)]);
         },
 
         /**
@@ -1139,13 +1194,14 @@
          */
         hideLoader: function() {
             this.loader.conceal();
-            this.fireEvent('hideLoader');
         },
 
         /**
          * Show the blackout and increase open count.
          */
         show: function() {
+            this.fireEvent('showing');
+
             var show = false;
 
             this.count++;
@@ -1156,7 +1212,8 @@
             }
 
             this.showLoader();
-            this.fireEvent('show', [show]);
+
+            this.fireEvent('shown', [show]);
         },
 
         /**
@@ -1164,14 +1221,16 @@
          */
         showLoader: function() {
             this.loader.reveal();
-            this.fireEvent('showLoader');
         }
 
     }, {
-        loader: 'bar-wave',
-        waveCount: 5,
-        template: '<div class="' + Toolkit.vendor + 'blackout"></div>',
-        templateFrom: '#toolkit-blackout-1'
+        showLoading: true,
+        template: '<div class="blackout"></div>',
+        templateFrom: '#toolkit-blackout-1',
+        loaderTemplate: '<div class="loader bar-wave">' +
+            '<span></span><span></span><span></span><span></span><span></span>' +
+            '<div class="loader-message" data-loader-message></div>' +
+            '</div>'
     });
 
     /** Has the blackout been created already? */
@@ -1350,16 +1409,6 @@
         }
     });
 
-// Store the event name in a variable
-    var transitionEnd = (function() {
-        var eventMap = {
-            WebkitTransition: 'webkitTransitionEnd',
-            OTransition: 'oTransitionEnd otransitionend'
-        };
-
-        return eventMap[hasTransition] || 'transitionend';
-    })();
-
     /**
      * Set a `transitionend` event. If the element has no transition set, trigger the callback immediately.
      *
@@ -1467,7 +1516,7 @@
                 .addClass(options.animation);
 
             // Find the item container and disable transitions for initial load
-            this.container = element.find('.' + Toolkit.vendor + 'carousel-items ul')
+            this.container = element.find('[data-carousel-items]')
                 .addClass('no-transition');
 
             // Find all the items and set ARIA attributes
@@ -1482,7 +1531,7 @@
             });
 
             // Find all tabs and set ARIA attributes
-            this.tabs = element.find('.' + Toolkit.vendor + 'carousel-tabs')
+            this.tabs = element.find('[data-carousel-tabs]')
                 .attr('role', 'tablist')
                 .find('a').each(function(index) {
                     $(this)
@@ -1506,11 +1555,11 @@
                 'swipeup element': 'next',
                 'swiperight element': 'prev',
                 'swipedown element': 'prev',
-                'click element .@carousel-tabs a': 'onJump',
-                'click element .@carousel-next': 'next',
-                'click element .@carousel-prev': 'prev',
-                'click element .@carousel-start': 'start',
-                'click element .@carousel-stop': 'stop'
+                'click element [data-carousel-tabs] a': 'onJump',
+                'click element [data-carousel-next]': 'next',
+                'click element [data-carousel-prev]': 'prev',
+                'click element [data-carousel-start]': 'start',
+                'click element [data-carousel-stop]': 'stop'
             };
 
             if (options.stopOnHover) {
@@ -1589,6 +1638,8 @@
                 return;
             }
 
+            this.fireEvent('jumping', [this.index]);
+
             // Update tabs and items state
             this._updateTabs(visualIndex);
             this._updateItems(cloneIndex);
@@ -1613,7 +1664,7 @@
             this.index = visualIndex;
 
             this.reset();
-            this.fireEvent('jump', [visualIndex]);
+            this.fireEvent('jumped', [visualIndex]);
         },
 
         /**
@@ -1689,7 +1740,8 @@
             // Set in a timeout or transition will still occur
             setTimeout(function() {
                 container.removeClass('no-transition');
-            }, 15); // IE needs a minimum of 15
+                this.fireEvent('cycled');
+            }.bind(this), 15); // IE needs a minimum of 15
         },
 
         /**
@@ -1700,6 +1752,7 @@
          */
         _beforeCycle: function() {
             this.animating = true;
+            this.fireEvent('cycling');
         },
 
         /**
@@ -1917,8 +1970,6 @@
          */
         onCycle: function() {
             if (!this.stopped) {
-                this.fireEvent('cycle', [this.index]);
-
                 if (this.options.reverse) {
                     this.prev();
                 } else {
@@ -2062,7 +2113,7 @@
             this.nodes = $(nodes);
             this.options = this.setOptions(options);
             this.events = {
-                'clickout document .@drop': 'hide',
+                'clickout document [data-drop-menu]': 'hide',
                 'clickout document {selector}': 'hide',
                 '{mode} document {selector}': 'onShow'
             };
@@ -2078,13 +2129,15 @@
             var element = this.element;
 
             if (element && element.is(':shown')) {
+                this.fireEvent('hiding');
+
                 element.conceal();
 
                 this.node
                     .aria('toggled', false)
                     .removeClass('is-active');
 
-                this.fireEvent('hide', [element, this.node]);
+                this.fireEvent('hidden', [element, this.node]);
             }
         },
 
@@ -2094,13 +2147,15 @@
          * @param {jQuery} node
          */
         show: function(node) {
+            this.fireEvent('showing');
+
             this.element.reveal();
 
             this.node = node = $(node)
                 .aria('toggled', true)
                 .addClass('is-active');
 
-            this.fireEvent('show', [this.element, node]);
+            this.fireEvent('shown', [this.element, node]);
         },
 
         /**
@@ -2228,8 +2283,11 @@
                 return;
             }
 
+            this.fireEvent('hiding');
+
             this.menus[this.current].conceal();
-            this.fireEvent('hide');
+
+            this.fireEvent('hidden');
 
             // Reset last
             this.current = null;
@@ -2285,6 +2343,8 @@
                 return;
             }
 
+            this.fireEvent('showing');
+
             var menu = this.menus[target],
                 height = menu.outerHeight(),
                 coords = this.node.offset(),
@@ -2302,7 +2362,7 @@
                 top: y
             }).reveal();
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -2408,10 +2468,10 @@
 
                 for (i = 0, l = group.length; i < l; i++) {
                     child = group[i];
-                    li = $('<li/>');
 
                     // Build tag
                     if (child.url) {
+                        li = $('<li/>');
                         tag = $('<a/>', {
                             text: child.title,
                             href: child.url,
@@ -2420,13 +2480,13 @@
 
                         // Add icon
                         $('<span/>').addClass(child.icon || 'caret-right').prependTo(tag);
+
                     } else {
+                        li = $(options.headingTemplate);
                         tag = $('<span/>', {
                             text: child.title,
                             role: 'presentation'
                         });
-
-                        li.addClass(Toolkit.vendor + 'flyout-heading');
                     }
 
                     if (child.attributes) {
@@ -2534,7 +2594,7 @@
         onHideChild: function(parent) {
             parent = $(parent);
             parent.removeClass('is-open');
-            parent.children('.' + Toolkit.vendor + 'flyout')
+            parent.children('[data-flyout-menu]')
                 .removeAttr('style')
                 .aria({
                     expanded: false,
@@ -2561,7 +2621,7 @@
          * @param {jQuery} parent
          */
         onPositionChild: function(parent) {
-            var menu = parent.children('.' + Toolkit.vendor + 'flyout');
+            var menu = parent.children('[data-flyout-menu]');
 
             if (!menu) {
                 return;
@@ -2634,7 +2694,8 @@
         showDelay: 350,
         hideDelay: 1000,
         itemLimit: 15,
-        template: '<div class="flyout"></div>'
+        template: '<div class="flyout" data-flyout-menu></div>',
+        headingTemplate: '<li class="flyout-heading"></li>'
     });
 
     Toolkit.create('flyout', function(url, options) {
@@ -2730,8 +2791,7 @@
          */
         _buildWrapper: function() {
             var input = this.input,
-                wrapper = $('<div/>')
-                    .addClass(Toolkit.vendor + 'custom-input')
+                wrapper = $(this.options.template)
                     .insertBefore(input)
                     .append(input);
 
@@ -2746,7 +2806,8 @@
         copyClasses: true,
         checkbox: 'input:checkbox',
         radio: 'input:radio',
-        select: 'select'
+        select: 'select',
+        template: '<div class="custom-input"></div>'
     });
 
     /**
@@ -2765,12 +2826,11 @@
          */
         constructor: function(checkbox, options) {
             this.input = checkbox = $(checkbox);
-            this.options = this.setOptions(options, checkbox);
+            this.options = options = this.setOptions(options, checkbox);
             this.wrapper = this._buildWrapper();
 
             // Create custom input
-            this.element = $('<label/>')
-                .addClass(Toolkit.vendor + 'checkbox')
+            this.element = $(options.checkboxTemplate)
                 .attr('for', checkbox.attr('id'))
                 .insertAfter(checkbox);
 
@@ -2778,6 +2838,8 @@
             this.initialize();
         }
 
+    }, {
+        checkboxTemplate: '<label class="checkbox"></label>'
     });
 
     /**
@@ -2796,12 +2858,11 @@
          */
         constructor: function(radio, options) {
             this.input = radio = $(radio);
-            this.options = this.setOptions(options, radio);
+            this.options = options = this.setOptions(options, radio);
             this.wrapper = this._buildWrapper();
 
             // Create custom input
-            this.element = $('<label/>')
-                .addClass(Toolkit.vendor + 'radio')
+            this.element = $(options.radioTemplate)
                 .attr('for', radio.attr('id'))
                 .insertAfter(radio);
 
@@ -2809,6 +2870,8 @@
             this.initialize();
         }
 
+    }, {
+        radioTemplate: '<label class="radio"></label>'
     });
 
     /**
@@ -2857,7 +2920,7 @@
 
             if (!options.native) {
                 events['blur input'] = 'hide';
-                events['clickout document .@select-options'] = 'hide';
+                events['clickout document [data-select-options]'] = 'hide';
                 events['clickout element'] = 'hide';
                 events['click element'] = 'onToggle';
 
@@ -2885,21 +2948,25 @@
          * Hide the dropdown and remove active states.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.element.removeClass('is-active');
 
             if (this.dropdown) {
                 this.dropdown.conceal();
             }
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
          * Show the dropdown and apply active states.
          */
         show: function() {
+            this.fireEvent('showing');
+
             if (this.options.hideOpened) {
-                $('.' + Toolkit.vendor + 'drop.select-options').each(function() {
+                $('[data-select-options]').each(function() {
                     $(this).siblings('select').toolkit('inputSelect', 'hide');
                 });
             }
@@ -2910,7 +2977,7 @@
                 this.dropdown.reveal();
             }
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -2919,11 +2986,10 @@
          * @returns {jQuery}
          */
         _buildButton: function() {
-            var vendor = Toolkit.vendor,
-                button = $('<div/>')
-                    .addClass(vendor + 'select')
-                    .append( $('<div/>').addClass(vendor + 'select-arrow').html(this.options.arrowContent) )
-                    .append( $('<div/>').addClass(vendor + 'select-label').html(Toolkit.messages.loading) )
+            var options = this.options,
+                button = $(options.selectTemplate)
+                    .find('[data-select-arrow]').html(options.arrowTemplate).end()
+                    .find('[data-select-label]').html(Toolkit.messages.loading).end()
                     .css('min-width', this.input.width())
                     .insertAfter(this.input);
 
@@ -2944,11 +3010,7 @@
             var select = this.input,
                 options = this.options,
                 buildOption = this._buildOption.bind(this),
-                vendor = Toolkit.vendor,
-                dropdown = $('<div/>')
-                    .addClass(vendor + 'drop ' + vendor + 'drop--down ' + vendor + 'select-options')
-                    .attr('role', 'listbox')
-                    .aria('multiselectable', this.multiple),
+                dropdown = $(options.optionsTemplate).attr('role', 'listbox').aria('multiselectable', this.multiple),
                 list = $('<ul/>'),
                 index = 0,
                 self = this;
@@ -2964,9 +3026,7 @@
                     }
 
                     list.append(
-                        $('<li/>')
-                            .addClass(vendor + 'drop-heading')
-                            .text(optgroup.attr('label'))
+                        $(options.headingTemplate).text(optgroup.attr('label'))
                     );
 
                     optgroup.children().each(function() {
@@ -3020,6 +3080,7 @@
         _buildOption: function(option, index) {
             var select = this.input,
                 dropdown = this.dropdown,
+                options = this.options,
                 selected = option.prop('selected'),
                 activeClass = 'is-active';
 
@@ -3032,8 +3093,8 @@
                 li.addClass(activeClass);
             }
 
-            if (description = this.readValue(option, this.options.getDescription)) {
-                content += ' <span class="' + Toolkit.vendor + 'drop-desc">' + description + '</span>';
+            if (description = this.readValue(option, options.getDescription)) {
+                content += $(options.descTemplate).html(description).prop('outerHTML');
             }
 
             var a = $('<a/>', {
@@ -3086,7 +3147,8 @@
 
                     $(this)
                         .aria('selected', true)
-                        .parent().addClass(activeClass);
+                        .parent()
+                        .addClass(activeClass);
 
                     self.hide();
                     self.index = index;
@@ -3181,7 +3243,7 @@
 
             // Set the label
             select.parent()
-                .find('.' + Toolkit.vendor + 'select-label')
+                .find('[data-select-label]')
                 .text(label);
 
             this.fireEvent('change', [select.val(), selected]);
@@ -3257,10 +3319,17 @@
         hideOpened: true,
         hideFirst: false,
         hideSelected: false,
-        arrowContent: '<span class="caret-down"></span>',
         getDefaultLabel: 'title',
         getOptionLabel: 'title',
-        getDescription: 'data-description'
+        getDescription: 'data-description',
+        selectTemplate: '<div class="select" data-select>' +
+            '<div class="select-arrow" data-select-arrow></div>' +
+            '<div class="select-label" data-select-label></div>' +
+            '</div>',
+        arrowTemplate: '<span class="caret-down"></span>',
+        optionsTemplate: '<div class="drop drop--down select-options" data-select-options></div>',
+        headingTemplate: '<li class="drop-heading"></li>',
+        descTemplate: '<span class="drop-desc"></span>'
     });
 
     Toolkit.create('input', function(options) {
@@ -3299,7 +3368,7 @@
             container = $(container);
 
             this.options = options = this.setOptions(options, container);
-            this.elements = container.find('.lazy-load');
+            this.elements = container.find(this.options.lazyClass);
 
             if (container.css('overflow') === 'auto') {
                 this.container = container;
@@ -3374,13 +3443,15 @@
                 return;
             }
 
+            this.fireEvent('loading');
+
             this.elements.each(function(index, node) {
                 if (node && this.inViewport(node)) {
                     this.show(node, index);
                 }
             }.bind(this));
 
-            this.fireEvent('load');
+            this.fireEvent('loaded');
         },
 
         /**
@@ -3403,7 +3474,10 @@
          */
         show: function(node, index) {
             node = $(node);
-            node.removeClass('lazy-load');
+
+            this.fireEvent('showing', [node]);
+
+            node.removeClass(this.options.lazyClass.substr(1));
 
             // Set the element being loaded for events
             this.element = node;
@@ -3429,7 +3503,7 @@
             this.elements.splice(index, 1, null);
             this.loaded++;
 
-            this.fireEvent('show', [node]);
+            this.fireEvent('shown', [node]);
         },
 
         /**
@@ -3461,7 +3535,8 @@
         forceLoad: false,
         delay: 10000,
         threshold: 150,
-        throttle: 50
+        throttle: 50,
+        lazyClass: '.lazy-load'
     });
 
     Toolkit.create('lazyLoad', function(options) {
@@ -3490,7 +3565,7 @@
 
             // Add class and set relative positioning
             if (!element.is('body')) {
-                element.addClass(Toolkit.vendor + 'mask-target');
+                element.addClass('is-maskable');
 
                 if (element.css('position') === 'static') {
                     element.css('position', 'relative');
@@ -3498,11 +3573,10 @@
             }
 
             // Find a mask or create it
-            var maskClass = Toolkit.vendor + 'mask',
-                mask = element.find('> .' + maskClass);
+            var mask = element.find('> [data-mask]');
 
             if (!mask.length) {
-                mask = $('<div/>').addClass(maskClass);
+                mask = $(options.maskTemplate);
             }
 
             this.setMask(mask);
@@ -3520,7 +3594,7 @@
         destructor: function() {
             this.mask.remove();
             this.element
-                .removeClass(Toolkit.vendor + 'mask-target')
+                .removeClass('is-maskable')
                 .removeClass('is-masked')
                 .css('position', '');
         },
@@ -3529,9 +3603,12 @@
          * Hide the mask and reveal the element.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.mask.conceal();
             this.element.removeClass('is-masked');
-            this.fireEvent('hide');
+
+            this.fireEvent('hidden');
         },
 
         /**
@@ -3558,16 +3635,12 @@
             this.mask = mask;
 
             // Create message if it does not exist
-            message = mask.find('> .' + Toolkit.vendor + 'mask-message');
+            message = mask.find('[data-mask-message]');
 
-            if (!message.length) {
-                message = $('<div/>')
-                    .addClass(Toolkit.vendor + 'mask-message')
+            if (!message.length && options.messageContent) {
+                message = $(options.messageTemplate)
+                    .html(options.messageContent)
                     .appendTo(mask);
-
-                if (options.messageContent) {
-                    message.html(options.messageContent);
-                }
             }
 
             this.message = message;
@@ -3577,9 +3650,12 @@
          * Show the mask and conceal the element.
          */
         show: function() {
+            this.fireEvent('showing');
+
             this.mask.reveal();
             this.element.addClass('is-masked');
-            this.fireEvent('show');
+
+            this.fireEvent('shown');
         },
 
         /**
@@ -3596,7 +3672,9 @@
     }, {
         selector: '',
         revealOnClick: false,
-        messageContent: ''
+        messageContent: '',
+        maskTemplate: '<div class="mask" data-mask></div>',
+        messageTemplate: '<div class="mask-message" data-mask-message></div>'
     });
 
     Toolkit.create('mask', function(options) {
@@ -3635,13 +3713,16 @@
 
     Toolkit.Matrix = Toolkit.Component.extend({
         name: 'Matrix',
-        version: '1.5.0',
-
-        /** Calculated final width of the column (may differ from width option). */
-        colWidth: 0,
+        version: '1.5.2',
 
         /** How many columns that can fit in the wrapper. */
         colCount: 0,
+
+        /** Height of each column. */
+        colHeights: [],
+
+        /** Calculated final width of the column (may differ from width option). */
+        colWidth: 0,
 
         /** Collection of items within the matrix. */
         items: [],
@@ -3662,8 +3743,8 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            this.element = element = $(element).addClass(Toolkit.vendor + 'matrix');
-            this.options = options = this.setOptions(options, element);
+            this.element = element = $(element);
+            this.options = this.setOptions(options, element);
 
             // Initialize events
             this.events = {
@@ -3672,13 +3753,8 @@
 
             this.initialize();
 
-            // If defer is disabled, render immediately, and again later
-            if (!options.defer) {
-                this.refresh();
-            }
-
-            // Always re-render once images are loaded
-            this._deferRender();
+            // Render the matrix
+            this.refresh();
         },
 
         /**
@@ -3695,9 +3771,11 @@
          * @param {jQuery} item
          */
         append: function(item) {
-            $(item)
+            item = $(item)
                 .appendTo(this.element)
                 .css('opacity', 0);
+
+            this.fireEvent('appending', [item]);
 
             this.refresh();
         },
@@ -3708,9 +3786,11 @@
          * @param {jQuery} item
          */
         prepend: function(item) {
-            $(item)
+            item = $(item)
                 .prependTo(this.element)
                 .css('opacity', 0);
+
+            this.fireEvent('prepending', [item]);
 
             this.refresh();
         },
@@ -3726,7 +3806,11 @@
                 self.cache('matrix-column-width', self.outerWidth());
             });
 
-            this.render();
+            if (this.options.defer) {
+                this._deferRender();
+            } else {
+                this.render();
+            }
         },
 
         /**
@@ -3735,6 +3819,11 @@
          * @param {jQuery} item
          */
         remove: function(item) {
+            item = $(item);
+
+            // Using event `remove` will cause the DOM element to delete itself
+            this.fireEvent('removing', [item]);
+
             this.items.each(function() {
                 var self = $(this);
 
@@ -3755,6 +3844,8 @@
         render: function() {
             this._calculateColumns();
 
+            this.fireEvent('rendering');
+
             var element = this.element,
                 items = this.items;
 
@@ -3764,7 +3855,7 @@
 
                 // Single column
             } else if (this.colCount <= 1) {
-                element.addClass('no-columns');
+                element.removeAttr('style').addClass('no-columns');
                 items.removeAttr('style');
 
                 // Multi column
@@ -3775,7 +3866,7 @@
                 this._positionItems();
             }
 
-            this.fireEvent('render');
+            this.fireEvent('rendered');
         },
 
         /**
@@ -3819,6 +3910,10 @@
             var promises = [];
 
             this.images = this.element.find('img').each(function(index, image) {
+                if (image.complete) {
+                    return; // Already loaded
+                }
+
                 var src = image.src,
                     def = $.Deferred();
 
@@ -3830,7 +3925,7 @@
                 promises.push(def.promise());
             });
 
-            $.when.apply($, promises).always(this.refresh.bind(this));
+            $.when.apply($, promises).always(this.render.bind(this));
         },
 
         /**
@@ -3889,9 +3984,9 @@
                 item,
                 span,
                 dir = this.options.rtl ? 'right' : 'left',
-                x = 0, // The left or right position value
                 y = [], // The top position values indexed by column
                 c = 0, // Current column in the loop
+                h = 0, // Smallest height column
                 i, // Items loop counter
                 l, // Items length
                 s, // Current span column in the loop
@@ -3906,11 +4001,20 @@
                 item = items[i];
                 span = item.span;
 
+                // Place the item in the smallest column
+                h = -1;
+
+                for (s = 0; s < this.colCount; s++) {
+                    if (h === -1 || y[s] < h) {
+                        h = y[s];
+                        c = s;
+                    }
+                }
+
                 // If the item extends too far out, move it to the next column
                 // Or if the last column has been reached
                 if ((c >= this.colCount) || ((span + c) > this.colCount)) {
                     c = 0;
-                    x = 0;
                 }
 
                 // Item spans a column or multiple columns
@@ -3927,7 +4031,7 @@
 
                     // Position the item
                     pos.top = top;
-                    pos[dir] = x;
+                    pos[dir] = (this.colWidth + gutter) * c;
                     pos.width = ((this.colWidth + gutter) * span) - gutter;
 
                     item.item.css(pos).reveal();
@@ -3939,7 +4043,8 @@
                     }
                 }
 
-                x += (this.colWidth + gutter);
+                this.colHeights[c] = y[c];
+
                 c++;
             }
 
@@ -3969,7 +4074,7 @@
 
     Toolkit.Modal = Toolkit.Component.extend({
         name: 'Modal',
-        version: '1.4.0',
+        version: '1.5.2',
 
         /** Blackout element if enabled. */
         blackout: null,
@@ -4001,7 +4106,7 @@
                 this.blackout = Toolkit.Blackout.instance();
 
                 if (options.stopScroll) {
-                    this.blackout.addHook('hide', function(hidden) {
+                    this.blackout.addHook('hidden', function(hidden) {
                         if (hidden) {
                             $('body').removeClass('no-scroll');
                         }
@@ -4015,8 +4120,9 @@
                 'clickout element': 'onHide',
                 'clickout document {selector}': 'onHide',
                 'click document {selector}': 'onShow',
-                'click element .@modal-hide': 'onHide',
-                'click element .@modal-submit': 'onSubmit'
+                'click element': 'onHide',
+                'click element [data-modal-close]': 'hide',
+                'click element [data-modal-submit]': 'onSubmit'
             };
 
             this.initialize();
@@ -4026,13 +4132,15 @@
          * Hide the modal and reset relevant values.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.element.conceal();
 
             if (this.blackout) {
                 this.blackout.hide();
             }
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -4051,9 +4159,11 @@
                 this.blackout.hideLoader();
             }
 
-            var body = this.element.find('.' + Toolkit.vendor + 'modal-inner');
+            this.fireEvent('showing');
 
+            var body = this.element.find('[data-modal-content]');
             body.html(content);
+
             this.fireEvent('load', [content]);
 
             // Reveal modal
@@ -4064,7 +4174,7 @@
                 body.css('min-height', $(window).height());
             }
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -4093,7 +4203,7 @@
             if (!content) {
                 return;
 
-            } else if (content.match(/^#[a-z0-9_\-\.:]+$/i)) {
+            } else if (content && content.match(/^#[a-z0-9_\-\.:]+$/i)) {
                 content = $(content).html();
                 ajax = false;
             }
@@ -4154,9 +4264,16 @@
          * @param {jQuery.Event} e
          */
         onHide: function(e) {
-            e.preventDefault();
-
             var element = this.element;
+
+            // Since the modal element covers the entire viewport, we can't trigger the `clickout` event
+            // So instead we have to bind a click event to the outer modal element to hide it
+            // This should not trigger if a child element is clicked
+            if (e.type === 'click' && !$(e.target).is(element)) {
+                return;
+            }
+
+            e.preventDefault();
 
             // If the modal is loading (AJAX) or is not shown, exit early
             // This stops cases where the blackout can be clicked early
@@ -4201,8 +4318,8 @@
         getContent: 'data-modal',
         template: '<div class="modal">' +
             '<div class="modal-outer">' +
-            '<div class="modal-inner"></div>' +
-            '<button class="modal-close modal-hide"><span class="x"></span></button>' +
+            '<div class="modal-inner" data-modal-content></div>' +
+            '<button class="modal-close" data-modal-close><span class="x"></span></button>' +
             '</div>' +
             '</div>'
     });
@@ -4237,9 +4354,9 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            var events = {}, vendor = Toolkit.vendor;
+            var events = {};
 
-            this.element = element = $(element).addClass(vendor + 'off-canvas').attr('role', 'complementary').conceal();
+            this.element = element = $(element).attr('role', 'complementary').conceal();
             this.options = options = this.setOptions(options, element);
 
             var animation = options.animation;
@@ -4255,12 +4372,12 @@
             }
 
             // Setup container
-            this.container = element.parents('.' + vendor + 'canvas').addClass(animation);
-            this.primary = element.siblings('.' + vendor + 'on-canvas').attr('role', 'main');
-            this.secondary = element.siblings('.' + vendor + 'off-canvas');
+            this.container = element.parent().addClass(animation);
+            this.primary = element.siblings('[data-offcanvas-content]').attr('role', 'main');
+            this.secondary = element.siblings('[data-offcanvas-sidebar]');
 
             // Determine the side
-            this.side = element.hasClass(vendor + 'off-canvas--left') ? 'left' : 'right';
+            this.side = element.data('offcanvas-sidebar') || 'left';
             this.opposite = (this.side === 'left') ? 'right' : 'left';
 
             // Initialize events
@@ -4288,6 +4405,8 @@
          * Hide the sidebar and reset the container.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.container.removeClass('move-' + this.opposite);
 
             this.element
@@ -4299,7 +4418,7 @@
                 $('body').removeClass('no-scroll');
             }
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -4319,6 +4438,8 @@
                 });
             }
 
+            this.fireEvent('showing');
+
             this.container.addClass('move-' + this.opposite);
 
             this.element
@@ -4330,7 +4451,7 @@
                 $('body').addClass('no-scroll');
             }
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -4391,9 +4512,9 @@
             e.preventDefault();
 
             var target = $(e.target),
-                sideClass = '.' + Toolkit.vendor + 'off-canvas';
+                selector = '[data-offcanvas-sidebar]';
 
-            if (target.is(sideClass) || target.parents(sideClass).length) {
+            if (target.is(selector) || target.parents(selector).length) {
                 return;
             }
 
@@ -4447,7 +4568,6 @@
             // Setup classes and ARIA
             element
                 .attr('role', 'complementary')
-                .addClass(Toolkit.vendor + 'pin')
                 .addClass(options.animation);
 
             this.elementTop = parseInt(element.css('top'), 10);
@@ -4744,7 +4864,7 @@
          * @param {Object} [options]
          */
         constructor: function(nodes, options) {
-            var element, vendor = Toolkit.vendor, key = this.keyName;
+            var element, key = this.keyName;
 
             this.options = options = this.setOptions(options);
             this.element = element = this.createElement()
@@ -4757,8 +4877,8 @@
             }
 
             // Elements for the title and content
-            this.elementHead = element.find('.' + vendor + key + '-head');
-            this.elementBody = element.find('.' + vendor + key + '-body');
+            this.elementHead = element.find('[data-' + key + '-header]');
+            this.elementBody = element.find('[data-' + key + '-content]');
 
             // Nodes found in the page on initialization, remove title attribute
             this.nodes = $(nodes).each(function(i, node) {
@@ -4791,6 +4911,8 @@
 
             this.runtime = {};
 
+            this.fireEvent('hiding');
+
             element
                 .removeClass(position)
                 .removeClass(className)
@@ -4801,7 +4923,7 @@
                 this.node.removeAttr('aria-describedby');
             }
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -4818,6 +4940,8 @@
             if (content === true) {
                 return;
             }
+
+            this.fireEvent('showing');
 
             // Add position class
             this.element
@@ -4855,7 +4979,7 @@
                     .off('mousemove', follow)
                     .on('mousemove', follow);
 
-                this.fireEvent('show');
+                this.fireEvent('shown');
 
                 // Position accordingly
             } else {
@@ -4866,7 +4990,7 @@
 
                 setTimeout(function() {
                     this.element.reveal();
-                    this.fireEvent('show');
+                    this.fireEvent('shown');
                 }.bind(this), options.delay || 0);
             }
         },
@@ -4947,8 +5071,8 @@
         delay: 0,
         template: '<div class="tooltip">' +
             '<div class="tooltip-inner">' +
-            '<div class="tooltip-head"></div>' +
-            '<div class="tooltip-body"></div>' +
+            '<div class="tooltip-head" data-tooltip-header></div>' +
+            '<div class="tooltip-body" data-tooltip-content></div>' +
             '</div>' +
             '<div class="tooltip-arrow"></div>' +
             '</div>'
@@ -4971,6 +5095,7 @@
         constructor: function(nodes, options) {
             options = options || {};
             options.mode = 'click'; // Click only
+            options.follow = false; // Disable mouse follow
 
             Toolkit.Tooltip.prototype.constructor.call(this, nodes, options);
         }
@@ -4979,8 +5104,8 @@
         getContent: 'data-popover',
         template: '<div class="popover">' +
             '<div class="popover-inner">' +
-            '<div class="popover-head"></div>' +
-            '<div class="popover-body"></div>' +
+            '<div class="popover-head" data-popover-header></div>' +
+            '<div class="popover-body" data-popover-content></div>' +
             '</div>' +
             '<div class="popover-arrow"></div>' +
             '</div>'
@@ -5022,7 +5147,7 @@
          * @param {Object} [options]
          */
         constructor: function(nodes, options) {
-            var element, vendor = Toolkit.vendor;
+            var element;
 
             this.options = options = this.setOptions(options);
             this.element = element = this.createElement();
@@ -5031,13 +5156,13 @@
             this.nodes = $(nodes);
 
             // The wrapping items element
-            this.items = element.find('.' + vendor + 'showcase-items');
+            this.items = element.find('[data-showcase-items]');
 
             // The wrapping tabs element
-            this.tabs = element.find('.' + vendor + 'showcase-tabs');
+            this.tabs = element.find('[data-showcase-tabs]');
 
             // The caption element
-            this.caption = element.find('.' + vendor + 'showcase-caption');
+            this.caption = element.find('[data-showcase-caption]');
 
             // Blackout element if enabled
             if (options.blackout) {
@@ -5052,14 +5177,14 @@
                 'swiperight element': 'prev',
                 'keydown window': 'onKeydown',
                 'click document {selector}': 'onShow',
-                'click element .@showcase-hide': 'onHide',
-                'click element .@showcase-next': 'next',
-                'click element .@showcase-prev': 'prev',
-                'click element .@showcase-tabs a': 'onJump'
+                'click element [data-showcase-close]': 'hide',
+                'click element [data-showcase-next]': 'next',
+                'click element [data-showcase-prev]': 'prev',
+                'click element [data-showcase-tabs] a': 'onJump'
             };
 
             // Stop `transitionend` events from bubbling up when the showcase is resized
-            this.events[Toolkit.transitionEnd + ' element .showcase-items'] = function(e) {
+            this.events[Toolkit.transitionEnd + ' element [data-showcase-items]'] = function(e) {
                 e.stopPropagation();
             };
 
@@ -5070,6 +5195,8 @@
          * Hide the showcase and reset inner elements.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             if (this.blackout) {
                 this.blackout.hide();
             }
@@ -5087,7 +5214,7 @@
                 .children('li')
                 .conceal();
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -5118,6 +5245,8 @@
                 items = this.data,
                 item = items[index],
                 deferred = $.Deferred();
+
+            this.fireEvent('jumping', [this.index]);
 
             // Update tabs
             this.tabs.find('a')
@@ -5179,7 +5308,7 @@
             // Save state
             this.index = index;
 
-            this.fireEvent('jump', [index]);
+            this.fireEvent('jumped', [index]);
         },
 
         /**
@@ -5193,13 +5322,15 @@
          * Position the element in the middle of the screen.
          */
         position: function() {
+            this.fireEvent('showing');
+
             if (this.blackout) {
                 this.blackout.hideLoader();
             }
 
             this.element.reveal();
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -5400,13 +5531,13 @@
         getTitle: 'title',
         template: '<div class="showcase">' +
             '<div class="showcase-inner">' +
-            '<ul class="showcase-items"></ul>' +
-            '<ol class="showcase-tabs bullets"></ol>' +
-            '<button class="showcase-prev"><span class="arrow-left"></span></button>' +
-            '<button class="showcase-next"><span class="arrow-right"></span></button>' +
+            '<ul class="showcase-items" data-showcase-items></ul>' +
+            '<ol class="showcase-tabs bullets" data-showcase-tabs></ol>' +
+            '<button class="showcase-prev" data-showcase-prev><span class="arrow-left"></span></button>' +
+            '<button class="showcase-next" data-showcase-next><span class="arrow-right"></span></button>' +
             '</div>' +
-            '<button class="showcase-close showcase-hide"><span class="x"></span></button>' +
-            '<div class="showcase-caption"></div>' +
+            '<button class="showcase-close" data-showcase-close><span class="x"></span></button>' +
+            '<div class="showcase-caption" data-showcase-caption></div>' +
             '</div>'
     });
 
@@ -5437,7 +5568,7 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            this.element = element = $(element).addClass(Toolkit.vendor + 'stalker');
+            this.element = element = $(element);
             this.options = options = this.setOptions(options);
 
             if (!options.target || !options.marker) {
@@ -5465,11 +5596,7 @@
          */
         destructor: function() {
             var targets = this.targets,
-                markers = this.markers,
-                vendor = Toolkit.vendor;
-
-            targets.removeClass(vendor + 'stalker-target');
-            markers.removeClass(vendor + 'stalker-marker');
+                markers = this.markers;
 
             if (this.options.applyToParent) {
                 targets.parent().removeClass('is-active');
@@ -5486,7 +5613,7 @@
          * @param {Element} marker
          */
         activate: function(marker) {
-            this._stalk(marker, 'activate');
+            this.stalk(marker, 'activate');
         },
 
         /**
@@ -5495,48 +5622,16 @@
          * @param {Element} marker
          */
         deactivate: function(marker) {
-            this._stalk(marker, 'deactivate');
-        },
-
-        /**
-         * Gather the targets and markers used for stalking.
-         */
-        refresh: function() {
-            var isWindow = this.container.is(window),
-                eTop = this.element.offset().top,
-                offset,
-                offsets = [],
-                vendor = Toolkit.vendor;
-
-            if (this.element.css('overflow') === 'auto' && !this.element.is('body')) {
-                this.element[0].scrollTop = 0; // Set scroll to top so offsets are correct
-            }
-
-            this.targets = $(this.options.target).addClass(vendor + 'stalker-target');
-
-            this.markers = $(this.options.marker).addClass(vendor + 'stalker-marker').each(function(index, marker) {
-                offset = $(marker).offset();
-
-                if (!isWindow) {
-                    offset.top -= eTop;
-                }
-
-                offsets.push(offset);
-            });
-
-            this.offsets = offsets;
-
-            console.log(this);
+            this.stalk(marker, 'deactivate');
         },
 
         /**
          * Either active or deactivate a target based on the marker.
          *
-         * @private
          * @param {Element} marker
          * @param {String} type
          */
-        _stalk: function(marker, type) {
+        stalk: function(marker, type) {
             marker = $(marker);
 
             // Stop all the unnecessary processing
@@ -5547,10 +5642,24 @@
             var options = this.options,
                 targetBy = options.targetBy,
                 markBy = options.markBy,
-                method = (type === 'activate') ? 'addClass' : 'removeClass',
                 target = this.targets.filter(function() {
                     return $(this).attr(targetBy).replace('#', '') === marker.attr(markBy);
-                });
+                }),
+                before,
+                after,
+                method;
+
+            if (type === 'activate') {
+                before = 'activating';
+                after = 'activated';
+                method = 'addClass';
+            } else {
+                before = 'deactivating';
+                after = 'deactivated';
+                method = 'removeClass';
+            }
+
+            this.fireEvent(before, [marker, target]);
 
             marker[method]('is-stalked');
 
@@ -5560,7 +5669,35 @@
                 target[method]('is-active');
             }
 
-            this.fireEvent(type, [marker, target]);
+            this.fireEvent(after, [marker, target]);
+        },
+
+        /**
+         * Gather the targets and markers used for stalking.
+         */
+        refresh: function() {
+            var isWindow = this.container.is(window),
+                eTop = this.element.offset().top,
+                offset,
+                offsets = [];
+
+            if (this.element.css('overflow') === 'auto' && !this.element.is('body')) {
+                this.element[0].scrollTop = 0; // Set scroll to top so offsets are correct
+            }
+
+            this.targets = $(this.options.target);
+
+            this.markers = $(this.options.marker).each(function(index, marker) {
+                offset = $(marker).offset();
+
+                if (!isWindow) {
+                    offset.top -= eTop;
+                }
+
+                offsets.push(offset);
+            });
+
+            this.offsets = offsets;
         },
 
         /**
@@ -5635,7 +5772,7 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            var sections, tabs, self = this, vendor = Toolkit.vendor;
+            var sections, tabs, self = this;
 
             this.element = element = $(element);
             this.options = options = this.setOptions(options, element);
@@ -5646,7 +5783,7 @@
             }
 
             // Find all the sections and set ARIA attributes
-            this.sections = sections = element.find('.' + vendor + 'tab-section').each(function(index, section) {
+            this.sections = sections = element.find('[data-tab-section]').each(function(index, section) {
                 section = $(section);
                 section
                     .attr('role', 'tabpanel')
@@ -5656,13 +5793,13 @@
             });
 
             // Find the nav and set ARIA attributes
-            this.nav = element.find('.' + vendor + 'tab-nav')
+            this.nav = element.find('[data-tab-nav]')
                 .attr('role', 'tablist');
 
             // Find the tabs within the nav and set ARIA attributes
             this.tabs = tabs = this.nav.find('a').each(function(index) {
                 $(this)
-                    .data('index', index)
+                    .data('tab-index', index)
                     .attr({
                         role: 'tab',
                         id: self.id('tab', index)
@@ -5677,11 +5814,11 @@
 
             // Initialize events
             this.events = {
-                '{mode} element .@tab-nav a': 'onShow'
+                '{mode} element [data-tab-nav] a': 'onShow'
             };
 
             if (options.mode !== 'click' && options.preventDefault) {
-                this.events['click element .@tab-nav a'] = function(e) {
+                this.events['click element [data-tab-nav] a'] = function(e) {
                     e.preventDefault();
                 };
             }
@@ -5689,19 +5826,21 @@
             this.initialize();
 
             // Trigger default tab to display
-            var index = options.defaultIndex;
+            var index = null;
 
-            if (options.persistState && options.cookie && $.cookie) {
-                index = $.cookie('toolkit.tab.' + options.cookie);
+            if (options.persistState) {
+                if (options.cookie && $.cookie) {
+                    index = $.cookie('toolkit.tab.' + options.cookie);
+                }
+
+                if (index === null && options.loadFragment && location.hash) {
+                    index = tabs.filter(function() {
+                        return ($(this).attr('href') === location.hash);
+                    }).eq(0).data('tab-index');
+                }
             }
 
-            if (!index && options.loadFragment && location.hash) {
-                index = tabs.filter(function() {
-                    return ($(this).attr('href') === location.hash);
-                }).eq(0).data('index');
-            }
-
-            if (!index || !tabs[index]) {
+            if (!tabs[index]) {
                 index = options.defaultIndex;
             }
 
@@ -5719,9 +5858,11 @@
          * Hide all sections.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             this.sections.conceal();
 
-            this.fireEvent('hide', [this.node]);
+            this.fireEvent('hidden');
         },
 
         /**
@@ -5742,11 +5883,13 @@
         show: function(tab) {
             tab = $(tab);
 
-            var index = tab.data('index'),
+            var index = tab.data('tab-index'),
                 section = this.sections.eq(index),
                 options = this.options,
                 ajax = this.readOption(tab, 'ajax'),
                 url = this.readValue(tab, this.readOption(tab, 'getUrl'));
+
+            this.fireEvent('showing', [this.index]);
 
             // Load content with AJAX
             if (ajax && url && url.substr(0, 1) !== '#' && !this.cache[url]) {
@@ -5782,7 +5925,8 @@
             // Toggle tabs
             this.tabs
                 .aria('toggled', false)
-                .parent().removeClass('is-active');
+                .parent()
+                .removeClass('is-active');
 
             // Toggle sections
             if (index === this.index && options.collapsible) {
@@ -5810,7 +5954,7 @@
             this.index = index;
             this.node = tab;
 
-            this.fireEvent('show', [tab]);
+            this.fireEvent('shown', [index]);
         },
 
         /**
@@ -5829,7 +5973,7 @@
 
     }, {
         mode: 'click',
-        ajax: true,
+        ajax: false,
         collapsible: false,
         defaultIndex: 0,
         persistState: false,
@@ -5880,8 +6024,7 @@
             options = $.extend({}, this.options, options || {});
 
             var self = this,
-                toast = $('<div/>')
-                    .addClass(Toolkit.vendor + 'toast')
+                toast = $(options.toastTemplate)
                     .addClass(options.animation)
                     .attr('role', 'note')
                     .html(content)
@@ -5912,11 +6055,13 @@
         hide: function(element) {
             element = $(element);
 
-            this.fireEvent('hide', [element]); // Must be called first since the element gets removed
+            // Pass the element since it gets removed
+            this.fireEvent('hiding', [element]);
 
             element.transitionend(function() {
-                $(this).remove();
-            }).conceal();
+                element.remove();
+                this.fireEvent('hidden');
+            }.bind(this)).conceal();
         },
 
         /**
@@ -5926,16 +6071,20 @@
          */
         show: function(element) {
             element = $(element);
+
+            this.fireEvent('showing', [element]);
+
             element.reveal();
 
-            this.fireEvent('show', [element]);
+            this.fireEvent('shown', [element]);
         }
 
     }, {
         position: 'bottom-left',
         animation: 'slide-up',
         duration: 5000,
-        template: '<aside class="toasts"></aside>'
+        template: '<aside class="toasts"></aside>',
+        toastTemplate: '<div class="toast"></div>'
     });
 
     Toolkit.create('toast', function(options) {
@@ -6018,7 +6167,7 @@
 
             // Enable shadow inputs
             if (options.shadow) {
-                this.wrapper = $('<div/>').addClass(Toolkit.vendor + 'type-ahead-shadow');
+                this.wrapper = $(this.options.shadowTemplate);
 
                 this.shadow = this.input.clone()
                     .addClass('is-shadow')
@@ -6083,16 +6232,10 @@
                 'aria-selected': 'false'
             });
 
-            a.append( $('<span/>', {
-                'class': Toolkit.vendor + 'type-ahead-title',
-                html: this.highlight(item.title)
-            }) );
+            a.append( $(this.options.titleTemplate).html(this.highlight(item.title)) );
 
             if (item.description) {
-                a.append( $('<span/>', {
-                    'class': Toolkit.vendor + 'type-ahead-desc',
-                    html: item.description
-                }) );
+                a.append( $(this.options.descTemplate).html(item.description) );
             }
 
             return a;
@@ -6102,6 +6245,8 @@
          * Hide the list and reset shadow.
          */
         hide: function() {
+            this.fireEvent('hiding');
+
             if (this.shadow) {
                 this.shadow.val('');
             }
@@ -6109,7 +6254,7 @@
             this.input.aria('expanded', false);
             this.element.conceal();
 
-            this.fireEvent('hide');
+            this.fireEvent('hidden');
         },
 
         /**
@@ -6121,8 +6266,9 @@
          */
         highlight: function(item) {
             var terms = this.term.replace(/[\-\[\]\{\}()*+?.,\\^$|#]/g, '\\$&').split(' '),
+                options = this.options,
                 callback = function(match) {
-                    return '<mark class="' + Toolkit.vendor + 'type-ahead-highlight">' + match + '</mark>';
+                    return $(options.highlightTemplate).html(match).prop('outerHTML');
                 };
 
             for (var i = 0, t; t = terms[i]; i++) {
@@ -6146,12 +6292,12 @@
         /**
          * Match an item if it contains the term.
          *
-         * @param {String} item
+         * @param {Object} item
          * @param {String} term
          * @returns {bool}
          */
         match: function(item, term) {
-            return (item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+            return (item.title.toLowerCase().indexOf(term.toLowerCase()) >= 0);
         },
 
         /**
@@ -6163,6 +6309,8 @@
                 return;
             }
 
+            this.fireEvent('showing');
+
             var iPos = this.input.offset();
 
             this.element.css({
@@ -6172,7 +6320,7 @@
 
             this.input.aria('expanded', true);
 
-            this.fireEvent('show');
+            this.fireEvent('shown');
         },
 
         /**
@@ -6262,7 +6410,7 @@
 
             if ($.type(options.matcher) === 'function') {
                 items = items.filter(function(item) {
-                    return options.matcher(item.title, term);
+                    return options.matcher(item, term);
                 });
             }
 
@@ -6290,7 +6438,7 @@
                     results.push(null);
 
                     elements.push(
-                        $('<li/>').addClass(Toolkit.vendor + 'type-ahead-heading').append( $('<span/>', { text: category }) )
+                        $(options.headingTemplate).append( $('<span/>', { text: category }) )
                     );
                 }
 
@@ -6524,6 +6672,11 @@
         shadow: false,
         query: {},
         template: '<div class="type-ahead"></div>',
+        shadowTemplate: '<div class="type-ahead-shadow"></div>',
+        titleTemplate: '<span class="type-ahead-title"></span>',
+        descTemplate: '<span class="type-ahead-desc"></span>',
+        highlightTemplate: '<mark class="type-ahead-highlight"></mark>',
+        headingTemplate: '<li class="type-ahead-heading"></li>',
 
         // Callbacks
         sorter: null,

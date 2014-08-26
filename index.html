@@ -9,8 +9,11 @@
     <link href="css/ui.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <script src="js/toolkit.js"></script>
     <script>
+        Toolkit.debug = true;
+
         $.extend(Toolkit.messages, {
             loading: 'Hold on just a second...',
             error: 'Something terrible has happened!'
@@ -94,7 +97,7 @@
             $('#res-height').html(win.height());
         }
 
-        function loadPlugin(key) {
+        function loadPlugin(key, hash) {
             if (!key) {
                 return;
             }
@@ -110,11 +113,11 @@
                 next = current.next();
 
             if (!prev.length) {
-                prev = switcher.find('option:last');
+                prev = switcher.find('optgroup option:last');
             }
 
             if (!next.length) {
-                next = switcher.find('option:first');
+                next = switcher.find('optgroup option:first');
             }
 
             $('#prev')
@@ -131,7 +134,7 @@
                 .find('.title')
                     .html(next.text());
 
-            location.hash = key;
+            history.pushState({ key: key }, current.text(), '?' + key + (hash || ''));
         }
 
         // Events
@@ -148,8 +151,8 @@
         $(function() {
             resize();
 
-            if (location.hash) {
-                loadPlugin(location.hash.substr(1));
+            if (location.search) {
+                loadPlugin(location.search.substr(1), location.hash);
             }
         });
     </script>
