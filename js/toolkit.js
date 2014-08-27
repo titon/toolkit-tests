@@ -63,7 +63,7 @@
         version: '1.5.2',
 
         /** Build date hash. */
-        build: 'hzbr6b7d',
+        build: 'hzd1q3mv',
 
         /** ARIA support. */
         aria: true,
@@ -529,11 +529,6 @@
     $.fn.toolkit = function(plugin, method, args) {
         var selector = this.selector,
             instance = this.data('toolkit.' + plugin) || Toolkit.cache[plugin + ':' + selector] || null;
-
-        // Check for the instance within the cache
-        //if (!instance && Toolkit.cache[plugin + ':' + selector]) {
-        ///    instance = Toolkit.cache[plugin + ':' + selector];
-        //}
 
         if (!instance) {
             return null;
@@ -2920,8 +2915,7 @@
 
             if (!options.native) {
                 events['blur input'] = 'hide';
-                events['clickout document [data-select-options]'] = 'hide';
-                events['clickout element'] = 'hide';
+                events['clickout dropdown'] = 'hide';
                 events['click element'] = 'onToggle';
 
                 if (!this.multiple) {
@@ -2948,6 +2942,10 @@
          * Hide the dropdown and remove active states.
          */
         hide: function() {
+            if (!this.dropdown.is(':shown')) {
+                return; // Vastly speeds up page time since click/out events aren't running
+            }
+
             this.fireEvent('hiding');
 
             this.element.removeClass('is-active');
@@ -2993,10 +2991,8 @@
                     .css('min-width', this.input.width())
                     .insertAfter(this.input);
 
-            // Hide the options be forcing a height on the select
-            if (this.multiple) {
-                this.input.css('max-height', button.height());
-            }
+            // Update the height of the native select input
+            this.input.css('min-height', button.outerHeight());
 
             return button;
         },
@@ -3576,7 +3572,7 @@
             var mask = element.find('> [data-mask]');
 
             if (!mask.length) {
-                mask = $(options.maskTemplate);
+                mask = $(options.template);
             }
 
             this.setMask(mask);
@@ -3673,7 +3669,7 @@
         selector: '',
         revealOnClick: false,
         messageContent: '',
-        maskTemplate: '<div class="mask" data-mask></div>',
+        template: '<div class="mask" data-mask></div>',
         messageTemplate: '<div class="mask-message" data-mask-message></div>'
     });
 

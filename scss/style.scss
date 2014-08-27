@@ -14,11 +14,28 @@ a {
 }
 
 .test-bar {
+    position: relative;
     background: #283442;
     padding: 1rem;
     color: #fff;
 
-    .viewport { float: right; }
+    .viewport {
+        float: right;
+        padding-top: 8px;
+    }
+}
+
+.test-logo {
+    background: url('http://titon.io/img/logo.png') no-repeat;
+    background-size: 184px 80px;
+    width: 184px;
+    height: 40px;
+    text-indent: -9999px;
+    overflow: hidden;
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .test-demo {
