@@ -63,7 +63,7 @@
         version: '1.5.2',
 
         /** Build date hash. */
-        build: 'hzd1q3mv',
+        build: 'hzef4g00',
 
         /** ARIA support. */
         aria: true,
@@ -492,12 +492,43 @@
     };
 
     /**
+     * Set a `transitionend` event. If the element has no transition set, trigger the callback immediately.
+     *
+     * @param {Object} data
+     * @param {Function} fn
+     * @returns {jQuery}
+     */
+    $.fn.transitionend = function(data, fn) {
+        if (arguments.length > 0) {
+            this.one(transitionEnd, null, data, fn);
+
+            // No transition defined so trigger callback immediately
+            var duration = this.css("transition-duration");
+
+            if (duration === "0s" || typeof duration === 'undefined') {
+                this.trigger(transitionEnd);
+            }
+        } else {
+            this.trigger(transitionEnd);
+        }
+
+        return this;
+    };
+
+    /**
      * Conceal the element by applying the hide class.
      * Should be used to trigger transitions and animations.
      *
+     * @param {bool} dontHide
      * @returns {jQuery}
      */
-    $.fn.conceal = function() {
+    $.fn.conceal = function(dontHide) {
+        if (this.hasClass('show') && !dontHide) {
+            this.transitionend(function() {
+                $(this).hide();
+            });
+        }
+
         return this
             .removeClass('show')
             .addClass('hide')
@@ -508,13 +539,22 @@
      * Reveal the element by applying the show class.
      * Should be used to trigger transitions and animations.
      *
+     * @param {bool} dontShow
      * @returns {jQuery}
      */
-    $.fn.reveal = function() {
-        return this
-            .removeClass('hide')
-            .addClass('show')
-            .aria('hidden', false);
+    $.fn.reveal = function(dontShow) {
+        if (!dontShow) {
+            this.show();
+        }
+
+        // We must place in a timeout or transitions do not occur
+        setTimeout(function() {
+            this.removeClass('hide')
+                .addClass('show')
+                .aria('hidden', false);
+        }.bind(this), 1);
+
+        return this;
     };
 
     /**
@@ -590,7 +630,7 @@
                 template = $(options.template);
 
                 if (template.length) {
-                    template.conceal().appendTo('body');
+                    template.hide().addClass('hide').appendTo('body');
                 }
             }
 
@@ -1086,12 +1126,12 @@
             // Or allow the same section to collapse
             if (options.mode === 'click' && (options.multiple || options.collapsible && isNode)) {
                 if (section.is(':shown') && this.node) {
-                    section.css('max-height', 0).conceal();
+                    section.css('max-height', 0).conceal(true);
                     parent.removeClass('is-active');
                     header.aria('toggled', false);
 
                 } else {
-                    section.css('max-height', height).reveal();
+                    section.css('max-height', height).reveal(true);
                     parent.addClass('is-active');
                     header.aria('toggled', true);
                 }
@@ -1104,8 +1144,8 @@
                     return;
                 }
 
-                this.sections.css('max-height', 0).conceal();
-                section.css('max-height', height).reveal();
+                this.sections.css('max-height', 0).conceal(true);
+                section.css('max-height', height).reveal(true);
 
                 this.headers.aria('toggled', false);
                 header.aria('toggled', true);
@@ -1405,30 +1445,6 @@
     });
 
     /**
-     * Set a `transitionend` event. If the element has no transition set, trigger the callback immediately.
-     *
-     * @param {Object} data
-     * @param {Function} fn
-     * @returns {jQuery}
-     */
-    $.fn.transitionend = function(data, fn) {
-        if (arguments.length > 0) {
-            this.one(transitionEnd, null, data, fn);
-
-            // No transition defined so trigger callback immediately
-            var duration = this.css("transition-duration");
-
-            if (duration === "0s" || typeof duration === 'undefined') {
-                this.trigger(transitionEnd);
-            }
-        } else {
-            this.trigger(transitionEnd);
-        }
-
-        return this;
-    };
-
-    /**
      * Throttle the execution of a function so it triggers at every delay interval.
      *
      * @param {Function} func
@@ -1644,10 +1660,10 @@
 
             if (this.options.animation === 'fade') {
                 this.items
-                    .conceal()
+                    .conceal(true)
                     .eq(visualIndex)
                     .transitionend(this._afterCycle.bind(this))
-                    .reveal();
+                    .reveal(true);
 
             } else {
                 this.container
@@ -2429,7 +2445,7 @@
             }
 
             var options = this.options,
-                menu = $(options.template).attr('role', 'menu').aria('hidden', true),
+                menu = $(options.template).attr('role', 'menu'),
                 groups = [],
                 ul,
                 li,
@@ -5208,7 +5224,7 @@
             this.items
                 .removeAttr('style')
                 .children('li')
-                .conceal();
+                .conceal(true);
 
             this.fireEvent('hidden');
         },
@@ -5251,7 +5267,7 @@
                 .addClass('is-active');
 
             // Reset previous styles
-            listItems.conceal();
+            listItems.conceal(true);
             caption.conceal();
             element
                 .addClass('is-loading')
@@ -5263,7 +5279,7 @@
             deferred.always(function(width, height) {
                 list.transitionend(function() {
                     caption.html(item.title).reveal();
-                    listItem.reveal();
+                    listItem.reveal(true);
                     self.position();
                     self.animating = false;
                 });
@@ -5348,7 +5364,8 @@
             this.index = -1;
             this.element
                 .addClass('is-loading')
-                .aria('busy', true);
+                .aria('busy', true)
+                .reveal();
 
             var options = this.inheritOptions(this.options, node),
                 read = this.readValue,
@@ -5529,8 +5546,8 @@
             '<div class="showcase-inner">' +
             '<ul class="showcase-items" data-showcase-items></ul>' +
             '<ol class="showcase-tabs bullets" data-showcase-tabs></ol>' +
-            '<button class="showcase-prev" data-showcase-prev><span class="arrow-left"></span></button>' +
-            '<button class="showcase-next" data-showcase-next><span class="arrow-right"></span></button>' +
+            '<button class="showcase-prev" data-showcase-prev></button>' +
+            '<button class="showcase-next" data-showcase-next></button>' +
             '</div>' +
             '<button class="showcase-close" data-showcase-close><span class="x"></span></button>' +
             '<div class="showcase-caption" data-showcase-caption></div>' +

@@ -149,6 +149,31 @@ $gray-dark: #7F8C8D;
     &:hover { opacity: 1; }
 }
 
+.carousel-next,
+.carousel-prev {
+    display: block;
+    position: absolute;
+    padding: .75rem;
+    width: auto;
+    height: auto;
+    z-index: 5;
+    top: 50%;
+    transform: translateY(-50%); // move up 50% of their height
+
+    &:focus { outline: none; }
+}
+
+.carousel-prev { left: 0; }
+.carousel-next { right: 0; }
+
+.carousel-tabs {
+    position: absolute;
+    top: .75rem;
+    left: 50%;
+    z-index: 5;
+    transform: translateX(-50%); // move left 50% of their width
+}
+
 //-------------------- Code --------------------//
 
 pre {
@@ -508,6 +533,31 @@ fieldset {
     opacity: .5;
 
     &:hover { opacity: 1; }
+}
+
+.showcase-next,
+.showcase-prev {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    background: #fff;
+    padding: 0;
+    border: 0;
+    transform: translateY(-50%); // move up 50% of their height
+    &:focus { outline: none; }
+}
+
+.showcase-prev { left: .75rem; }
+.showcase-next { right: .75rem; }
+
+.showcase-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: .75rem;
+    text-align: center;
 }
 
 .showcase-caption {

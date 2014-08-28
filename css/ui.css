@@ -103,6 +103,42 @@
   opacity: 1;
 }
 
+.carousel-next,
+.carousel-prev {
+  display: block;
+  position: absolute;
+  padding: .75rem;
+  width: auto;
+  height: auto;
+  z-index: 5;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.carousel-next:focus,
+.carousel-prev:focus {
+  outline: none;
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+.carousel-tabs {
+  position: absolute;
+  top: .75rem;
+  left: 50%;
+  z-index: 5;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 pre {
   color: black;
 }
@@ -412,6 +448,41 @@ fieldset {
 .showcase-prev:hover,
 .showcase-close:hover {
   opacity: 1;
+}
+
+.showcase-next,
+.showcase-prev {
+  display: block;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  background: #fff;
+  padding: 0;
+  border: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.showcase-next:focus,
+.showcase-prev:focus {
+  outline: none;
+}
+
+.showcase-prev {
+  left: .75rem;
+}
+
+.showcase-next {
+  right: .75rem;
+}
+
+.showcase-tabs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: .75rem;
+  text-align: center;
 }
 
 .showcase-caption {
