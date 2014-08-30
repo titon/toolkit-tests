@@ -165,28 +165,28 @@
 
 <script>
     $(function() {
-        $('#pin-1').pin({
+        Demo.instances.push( $('#pin-1').pin({
             throttle: 0
-        });
+        }).toolkit('pin') );
 
-        $('#pin-2').pin({
+        Demo.instances.push( $('#pin-2').pin({
             location: 'left',
             animation: 'sticky'
-        });
+        }).toolkit('pin') );
 
-        $('#pin-3').pin({
+        Demo.instances.push( $('#pin-3').pin({
             animation: 'slide'
-        });
+        }).toolkit('pin') );
 
-        $('#pin-4').pin({
+        Demo.instances.push( $('#pin-4').pin({
             location: 'left',
             lock: true
-        });
+        }).toolkit('pin') );
 
-        $('#pin-5').pin({
+        Demo.instances.push( $('#pin-5').pin({
             xOffset: 100,
             yOffset: 100,
             fixed: true
-        });
+        }).toolkit('pin') );
     });
 </script>

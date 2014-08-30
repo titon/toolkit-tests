@@ -18,11 +18,11 @@
             e.preventDefault();
         });
 
-        $('.js-flyout-1').flyout('tests/ajax/flyout.json');
+        Demo.instances.push( $('.js-flyout-1').flyout('tests/ajax/flyout.json').toolkit('flyout') );
 
-        $('.js-flyout-2').flyout('tests/ajax/flyout.json', {
+        Demo.instances.push( $('.js-flyout-2').flyout('tests/ajax/flyout.json', {
             mode: 'click',
             itemLimit: 5
-        });
+        }).toolkit('flyout') );
     });
 </script>

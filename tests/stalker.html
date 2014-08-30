@@ -169,16 +169,16 @@
 
 <script>
     $(function() {
-        $('body').stalker({
+        Demo.instances.push( $('body').stalker({
             target: '#stalker-targets a',
             marker: '#stalker-markers div[id]',
             onlyWithin: false,
             applyToParent: false
-        });
+        }).toolkit('stalker') );
 
-        $('#stalker-overflow').stalker({
+        Demo.instances.push( $('#stalker-overflow').stalker({
             target: '#stalker-targets a',
             marker: '#stalker-overflow-markers div[id]'
-        });
+        }).toolkit('stalker') );
     });
 </script>

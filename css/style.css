@@ -21,6 +21,7 @@ a {
 .test-bar .viewport {
   float: right;
   padding-top: 8px;
+  margin-right: 1rem;
 }
 
 .test-logo {

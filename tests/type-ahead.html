@@ -48,26 +48,26 @@
     ];
 
     $(function() {
-        $('#type-ahead-1').typeAhead({
+        Demo.instances.push( $('#type-ahead-1').typeAhead({
             source: 'tests/ajax/type-ahead.json'
-        });
+        }).toolkit('typeAhead') );
 
-        $('#type-ahead-2').typeAhead({
+        Demo.instances.push( $('#type-ahead-2').typeAhead({
             source: 'tests/ajax/type-ahead.json',
             minLength: 2,
             prefetch: true
-        });
+        }).toolkit('typeAhead') );
 
-        $('#type-ahead-3').typeAhead({
+        Demo.instances.push( $('#type-ahead-3').typeAhead({
             source: source,
             itemLimit: 3
-        });
+        }).toolkit('typeAhead') );
 
-        $('#type-ahead-4').typeAhead({
+        Demo.instances.push( $('#type-ahead-4').typeAhead({
             source: function() {
                 return source;
             },
             shadow: true
-        });
+        }).toolkit('typeAhead') );
     });
 </script>

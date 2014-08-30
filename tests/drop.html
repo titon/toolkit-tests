@@ -140,16 +140,16 @@
 
 <script>
     $(function() {
-        $('.js-drop-1').drop();
+        Demo.instances.push( $('.js-drop-1').drop().toolkit('drop') );
 
-        $('.js-drop-2').drop();
+        Demo.instances.push( $('.js-drop-2').drop().toolkit('drop') );
 
-        $('.js-drop-3').drop({
+        Demo.instances.push( $('.js-drop-3').drop({
             hideOpened: false
-        });
+        }).toolkit('drop') );
 
-        $('.js-drop-4').drop({
+        Demo.instances.push( $('.js-drop-4').drop({
             mode: 'hover'
-        });
+        }).toolkit('drop') );
     });
 </script>

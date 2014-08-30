@@ -63,7 +63,7 @@
         version: '1.5.2',
 
         /** Build date hash. */
-        build: 'hzef4g00',
+        build: 'hzg6s58g',
 
         /** ARIA support. */
         aria: true,
@@ -174,8 +174,8 @@
                 } else if (type === 'object') {
                     this[key] = $.extend(true, {}, value); // Clone object
 
-                    //} else if (type === 'function') {
-                    //    this[key] = value.bind(this);
+                } else if (type === 'function') {
+                    this[key] = value.bind(this); // Required for bindEvents()
                 }
             }
 
@@ -301,7 +301,7 @@
 
                 $.each(funcs, function(i, func) {
                     if (!$.isFunction(func)) {
-                        func = self[func].bind(self);
+                        func = self[func];
                     }
 
                     // Ready events
@@ -325,11 +325,6 @@
          */
         destroy: function() {
             this.fireEvent('destroying');
-
-            // Hide and remove active state
-            if (this.hide) {
-                this.hide();
-            }
 
             // Trigger destructor
             if (this.destructor) {
@@ -658,24 +653,26 @@
          * {@inheritdoc}
          */
         destroy: function() {
-            Toolkit.Base.prototype.destroy.call(this);
 
-            // Remove element only if it was created
-            if (this.created) {
-                this.element.remove();
-            }
-
-            // Remove instances or else the previous commands will fail
+            // Remove cached plugin instances
             var key = this.keyName;
 
-            if (this.nodes) {
+            if (this.nodes.length) {
                 this.nodes.removeData('toolkit.' + key);
 
-                // Remove the cached instance also
                 delete Toolkit.cache[key + '.' + this.nodes.selector];
 
-            } else if (this.element) {
+            } else if (this.element.length) {
                 this.element.removeData('toolkit.' + key);
+            }
+
+            // Trigger destructors
+            Toolkit.Base.prototype.destroy.call(this);
+
+            // Remove element and state only if it was created
+            if (this.created) {
+                this.hide();
+                this.element.remove();
             }
         },
 
@@ -1560,7 +1557,7 @@
 
             // Set events
             this.events = {
-                'resize window': $.throttle(this.calculate.bind(this), 50),
+                'resize window': $.throttle(this.calculate, 50),
                 'keydown window': 'onKeydown',
                 'swipeleft element': 'next',
                 'swipeup element': 'next',
@@ -1595,10 +1592,11 @@
          * Stop the carousel before destroying.
          */
         destructor: function() {
-            this.jump(0);
-
             // Remove timers
             clearInterval(this.timer);
+
+            // Go to first item
+            this.jump(0);
 
             // Remove clones
             this.container.transitionend(function() {
@@ -1662,12 +1660,12 @@
                 this.items
                     .conceal(true)
                     .eq(visualIndex)
-                    .transitionend(this._afterCycle.bind(this))
+                    .transitionend(this._afterCycle)
                     .reveal(true);
 
             } else {
                 this.container
-                    .transitionend(this._afterCycle.bind(this))
+                    .transitionend(this._afterCycle)
                     .css(this._position, -(cloneIndex * this._size));
             }
 
@@ -1698,7 +1696,7 @@
         reset: function() {
             if (this.options.autoCycle) {
                 clearInterval(this.timer);
-                this.timer = setInterval(this.onCycle.bind(this), this.options.duration);
+                this.timer = setInterval(this.onCycle, this.options.duration);
             }
         },
 
@@ -2134,6 +2132,16 @@
         },
 
         /**
+         * Hide element when destroying.
+         */
+        destructor: function() {
+            this.hide();
+
+            // Hide all other menus as well
+            $('[data-drop-menu]').conceal();
+        },
+
+        /**
          * Hide the opened element and remove active state.
          */
         hide: function() {
@@ -2256,7 +2264,7 @@
             this.initialize();
 
             // Load data from the URL
-            $.getJSON(url, this.load.bind(this));
+            $.getJSON(url, this.load);
         },
 
         /**
@@ -2717,7 +2725,7 @@
         name: 'Input',
         version: '1.4.0',
 
-        /** The original input element. */
+        /** The custom input element. */
         input: null,
 
         /** The element that wraps the custom input. */
@@ -2774,9 +2782,11 @@
                     });
                 }
 
-            } else {
-                this.wrapper.replaceWith(this.input);
-                this.input.removeAttr('style');
+                // Check for the wrapper as some inputs may be initialized but not used.
+                // Multi-selects using native controls for example.
+            } else if (this.wrapper) {
+                this.wrapper.replaceWith(element);
+                element.removeAttr('style');
             }
         },
 
@@ -2787,7 +2797,7 @@
          * @param {jQuery} to
          */
         copyClasses: function(from, to) {
-            var classes = ($(from).attr('class') || '').replace(/\binput\b/, '').trim();
+            var classes = ($(from).attr('class') || '').replace(this.options.filterClasses, '').trim();
 
             if (classes) {
                 $(to).addClass(classes);
@@ -2801,7 +2811,7 @@
          * @returns {jQuery}
          */
         _buildWrapper: function() {
-            var input = this.input,
+            var input = this.element,
                 wrapper = $(this.options.template)
                     .insertBefore(input)
                     .append(input);
@@ -2815,6 +2825,7 @@
 
     }, {
         copyClasses: true,
+        filterClasses: /\binput\b/,
         checkbox: 'input:checkbox',
         radio: 'input:radio',
         select: 'select',
@@ -2836,12 +2847,12 @@
          * @param {Object} [options]
          */
         constructor: function(checkbox, options) {
-            this.input = checkbox = $(checkbox);
+            this.element = checkbox = $(checkbox);
             this.options = options = this.setOptions(options, checkbox);
             this.wrapper = this._buildWrapper();
 
             // Create custom input
-            this.element = $(options.checkboxTemplate)
+            this.input = $(options.checkboxTemplate)
                 .attr('for', checkbox.attr('id'))
                 .insertAfter(checkbox);
 
@@ -2868,12 +2879,12 @@
          * @param {Object} [options]
          */
         constructor: function(radio, options) {
-            this.input = radio = $(radio);
+            this.element = radio = $(radio);
             this.options = options = this.setOptions(options, radio);
             this.wrapper = this._buildWrapper();
 
             // Create custom input
-            this.element = $(options.radioTemplate)
+            this.input = $(options.radioTemplate)
                 .attr('for', radio.attr('id'))
                 .insertAfter(radio);
 
@@ -2911,9 +2922,9 @@
         constructor: function(select, options) {
             var events = {};
 
-            this.input = select = $(select);
-            this.multiple = select.prop('multiple');
+            this.element = select = $(select);
             this.options = options = this.setOptions(options, select);
+            this.multiple = select.prop('multiple');
 
             // Multiple selects must use native controls
             if (this.multiple && options.native) {
@@ -2924,26 +2935,26 @@
             this.wrapper = this._buildWrapper();
 
             // Button element to open the drop menu
-            this.element = this._buildButton();
+            this.input = this._buildButton();
 
             // Initialize events
-            events['change input'] = 'onChange';
+            events['change element'] = 'onChange';
 
             if (!options.native) {
-                events['blur input'] = 'hide';
+                events['blur element'] = 'hide';
                 events['clickout dropdown'] = 'hide';
-                events['click element'] = 'onToggle';
+                events['click input'] = 'onToggle';
 
                 if (!this.multiple) {
                     events['keydown window'] = 'onCycle';
                 }
 
                 // Build custom dropdown when not in native
-                this._buildDropdown();
+                this.dropdown = this._buildDropdown();
 
                 // Cant hide/invisible the real select or we lose focus/blur
                 // So place it below .custom-input
-                this.input.css('z-index', 1);
+                this.element.css('z-index', 1);
             }
 
             this.events = events;
@@ -2951,7 +2962,7 @@
             this.initialize();
 
             // Trigger change immediately to update the label
-            this.input.change();
+            this.element.change();
         },
 
         /**
@@ -2964,7 +2975,7 @@
 
             this.fireEvent('hiding');
 
-            this.element.removeClass('is-active');
+            this.input.removeClass('is-active');
 
             if (this.dropdown) {
                 this.dropdown.conceal();
@@ -2985,7 +2996,7 @@
                 });
             }
 
-            this.element.addClass('is-active');
+            this.input.addClass('is-active');
 
             if (this.dropdown) {
                 this.dropdown.reveal();
@@ -3004,11 +3015,11 @@
                 button = $(options.selectTemplate)
                     .find('[data-select-arrow]').html(options.arrowTemplate).end()
                     .find('[data-select-label]').html(Toolkit.messages.loading).end()
-                    .css('min-width', this.input.width())
-                    .insertAfter(this.input);
+                    .css('min-width', this.element.width())
+                    .insertAfter(this.element);
 
             // Update the height of the native select input
-            this.input.css('min-height', button.outerHeight());
+            this.element.css('min-height', button.outerHeight());
 
             return button;
         },
@@ -3019,15 +3030,13 @@
          * @returns {jQuery}
          */
         _buildDropdown: function() {
-            var select = this.input,
+            var select = this.element,
                 options = this.options,
-                buildOption = this._buildOption.bind(this),
+                buildOption = this._buildOption,
                 dropdown = $(options.optionsTemplate).attr('role', 'listbox').aria('multiselectable', this.multiple),
                 list = $('<ul/>'),
                 index = 0,
                 self = this;
-
-            this.dropdown = dropdown;
 
             select.children().each(function() {
                 var optgroup = $(this);
@@ -3090,7 +3099,7 @@
          * @returns {jQuery}
          */
         _buildOption: function(option, index) {
-            var select = this.input,
+            var select = this.element,
                 dropdown = this.dropdown,
                 options = this.options,
                 selected = option.prop('selected'),
@@ -3278,7 +3287,7 @@
                 return;
             }
 
-            var options = this.input.find('option'),
+            var options = this.element.find('option'),
                 items = this.dropdown.find('a'),
                 activeClass = 'is-active',
                 index = this.index;
@@ -3303,7 +3312,7 @@
             items.eq(index).parent().addClass(activeClass);
 
             this.index = index;
-            this.input.change();
+            this.element.change();
         },
 
         /**
@@ -3312,7 +3321,7 @@
          * @private
          */
         onToggle: function() {
-            if (this.input.prop('disabled')) {
+            if (this.element.prop('disabled')) {
                 return;
             }
 
@@ -3370,6 +3379,9 @@
         /** How many items have been loaded. */
         loaded: 0,
 
+        /** Force load all timer. */
+        timer: null,
+
         /**
          * Initialize the lazy load.
          *
@@ -3386,7 +3398,7 @@
                 this.container = container;
             }
 
-            var callback = $.throttle(this.load.bind(this), options.throttle);
+            var callback = $.throttle(this.load, options.throttle);
 
             this.events = {
                 'scroll container': callback,
@@ -3401,6 +3413,7 @@
          * Load all images when destroying.
          */
         destructor: function() {
+            clearTimeout(this.timer);
             this.loadAll();
         },
 
@@ -3470,12 +3483,15 @@
          * Load the remaining hidden elements and remove any container events.
          */
         loadAll: function() {
+            if (this.loaded >= this.elements.length) {
+                return;
+            }
+
+            this.fireEvent('loadAll');
+
             this.elements.each(function(index, node) {
                 this.show(node, index);
             }.bind(this));
-
-            this.fireEvent('loadAll');
-            this.shutdown();
         },
 
         /**
@@ -3539,7 +3555,7 @@
 
             // Set force load on DOM ready
             if (this.options.forceLoad) {
-                setTimeout(this.loadAll.bind(this), this.options.delay);
+                this.timer = setTimeout(this.loadAll, this.options.delay);
             }
         }
 
@@ -3641,7 +3657,7 @@
             }
 
             if (options.revealOnClick) {
-                mask.click(this.hide.bind(this));
+                mask.click(this.hide);
             }
 
             this.mask = mask;
@@ -3760,7 +3776,7 @@
 
             // Initialize events
             this.events = {
-                'resize window': $.debounce(this.onResize.bind(this))
+                'resize window': $.debounce(this.onResize)
             };
 
             this.initialize();
@@ -3784,8 +3800,8 @@
          */
         append: function(item) {
             item = $(item)
-                .appendTo(this.element)
-                .css('opacity', 0);
+                .addClass('hide')
+                .appendTo(this.element);
 
             this.fireEvent('appending', [item]);
 
@@ -3799,8 +3815,8 @@
          */
         prepend: function(item) {
             item = $(item)
-                .prependTo(this.element)
-                .css('opacity', 0);
+                .addClass('hide')
+                .prependTo(this.element);
 
             this.fireEvent('prepending', [item]);
 
@@ -3937,7 +3953,7 @@
                 promises.push(def.promise());
             });
 
-            $.when.apply($, promises).always(this.render.bind(this));
+            $.when.apply($, promises).always(this.render);
         },
 
         /**
@@ -4359,6 +4375,9 @@
         /** The opposite of `side`. */
         opposite: 'right',
 
+        /** Will be true once document ready has triggered. We must use a flag as it can be called multiple times. */
+        _loaded: false,
+
         /**
          * Initialize off canvas.
          *
@@ -4411,6 +4430,13 @@
             this.events = events;
 
             this.initialize();
+        },
+
+        /**
+         * Hide sidebar when destroying.
+         */
+        destructor: function() {
+            this.hide();
         },
 
         /**
@@ -4485,7 +4511,7 @@
          * @private
          */
         onReady: function() {
-            if (!this.options.openOnLoad) {
+            if (!this.options.openOnLoad || this._loaded) {
                 return;
             }
 
@@ -4503,6 +4529,8 @@
                 sidebar.removeClass(transClass);
                 inner.removeClass(transClass);
             }, 15); // IE needs a minimum of 15
+
+            this._loaded = true;
         },
 
         /**
@@ -4588,8 +4616,8 @@
             var throttle = options.throttle;
 
             this.events = {
-                'scroll window': $.throttle(this.onScroll.bind(this), throttle),
-                'resize window': $.throttle(this.onResize.bind(this), throttle),
+                'scroll window': $.throttle(this.onScroll, throttle),
+                'resize window': $.throttle(this.onResize, throttle),
                 'ready document': 'onResize'
             };
 
@@ -4985,7 +5013,7 @@
 
             // Follow the mouse
             if (options.follow) {
-                var follow = this.onFollow.bind(this);
+                var follow = this.onFollow;
 
                 this.node
                     .off('mousemove', follow)
@@ -5594,7 +5622,7 @@
 
             // Initialize events
             this.events = {
-                'scroll container': $.throttle(this.onScroll.bind(this), options.throttle),
+                'scroll container': $.throttle(this.onScroll, options.throttle),
                 'ready document': 'onScroll'
             };
 
@@ -5649,6 +5677,8 @@
 
             // Stop all the unnecessary processing
             if (type === 'activate' && marker.hasClass('is-stalked')) {
+                return;
+            } else if (type === 'deactivate' && !marker.hasClass('is-stalked')) {
                 return;
             }
 
@@ -5861,10 +5891,10 @@
         },
 
         /**
-         * Reveal the last section when destroying.
+         * Reveal the first section when destroying.
          */
         destructor: function() {
-            this.sections.eq(this.index).reveal();
+            this.jump(0);
         },
 
         /**
@@ -6012,7 +6042,8 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            this.options = options = this.setOptions(options);
+            this.nodes = element = $(element);
+            this.options = options = this.setOptions(options, element);
             this.element = this.createElement()
                 .addClass(options.position)
                 .removeClass(options.animation)
@@ -6299,7 +6330,7 @@
          */
         lookup: function(term) {
             this.term = term;
-            this.timer = setTimeout(this.onFind.bind(this), this.options.throttle);
+            this.timer = setTimeout(this.onFind, this.options.throttle);
         },
 
         /**
@@ -6462,7 +6493,7 @@
 
                     a = options.builder(item);
                     a.on({
-                        mouseover: this.rewind.bind(this),
+                        mouseover: this.rewind,
                         click: $.proxy(this.onSelect, this, results.length)
                     });
 
@@ -6621,7 +6652,7 @@
                     var query = options.query;
                     query.term = term;
 
-                    $.getJSON(url, query, this.source.bind(this));
+                    $.getJSON(url, query, this.source);
                 }
 
                 // Use a literal array list

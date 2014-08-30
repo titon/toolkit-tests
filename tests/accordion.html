@@ -180,16 +180,16 @@
 
 <script>
     $(function() {
-        $('#accordion-1').accordion();
+        Demo.instances.push( $('#accordion-1').accordion().toolkit('accordion') );
 
-        $('#accordion-2').accordion({
+        Demo.instances.push( $('#accordion-2').accordion({
             collapsible: true,
             defaultIndex: 1
-        });
+        }).toolkit('accordion') );
 
-        $('#accordion-3').accordion({
+        Demo.instances.push( $('#accordion-3').accordion({
             multiple: true,
             defaultIndex: 5
-        });
+        }).toolkit('accordion') );
     });
 </script>

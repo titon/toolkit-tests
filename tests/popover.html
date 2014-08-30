@@ -48,27 +48,27 @@
 
 <script>
     $(function() {
-        $('.js-popover').popover({
+        Demo.instances.push( $('.js-popover').popover({
             ajax: true,
             getContent: 'href'
-        });
+        }).toolkit('popover') );
 
         $.each(['fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
-            $('.js-popover-' + value).popover({
+            Demo.instances.push( $('.js-popover-' + value).popover({
                 animation: value
-            });
+            }).toolkit('popover') );
         });
 
-        $('.js-popover-xoffset').popover({
+        Demo.instances.push( $('.js-popover-xoffset').popover({
             xOffset: 15
-        });
+        }).toolkit('popover') );
 
-        $('.js-popover-yoffset').popover({
+        Demo.instances.push( $('.js-popover-yoffset').popover({
             yOffset: 15
-        });
+        }).toolkit('popover') );
 
-        $('.js-popover-delay').popover({
+        Demo.instances.push( $('.js-popover-delay').popover({
             delay: 200
-        });
+        }).toolkit('popover') );
     });
 </script>

@@ -17,7 +17,7 @@
     $(function() {
         var body = $('body');
 
-        body.toast();
+        Demo.instances.push( body.toast().toolkit('toast') );
 
         $('.js-toast').on('click', function() {
             var animation = $(this).data('toast-animation');
@@ -37,15 +37,14 @@
         });
 
         $('#toast-dismiss').on('click', function() {
-            var toast = body.toolkit('toast'),
-                link = $('<a/>')
-                    .attr('href', 'javascript:;')
-                    .html('This toast will persist until dismissed.')
-                    .click(function() {
-                        toast.hide(this.parentNode);
-                    });
+            var link = $('<a/>')
+                .attr('href', 'javascript:;')
+                .html('This toast will persist until dismissed.')
+                .click(function() {
+                        body.toolkit('toast', 'hide', this.parentNode);
+                });
 
-            toast.create(link, { duration: 0 });
+            body.toolkit('toast', 'create', [link, { duration: 0 }]);
         });
     });
 </script>

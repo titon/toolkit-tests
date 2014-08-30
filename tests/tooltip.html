@@ -53,35 +53,35 @@
 
 <script>
     $(function() {
-        $('.js-tooltip').tooltip({
+        Demo.instances.push( $('.js-tooltip').tooltip({
             ajax: true,
             getContent: 'href'
-        });
+        }).toolkit('tooltip') );
 
         $.each(['fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
-            $('.js-tooltip-' + value).tooltip({
+            Demo.instances.push( $('.js-tooltip-' + value).tooltip({
                 animation: value
-            });
+            }).toolkit('tooltip') );
         });
 
-        $('.js-tooltip-xoffset').tooltip({
+        Demo.instances.push( $('.js-tooltip-xoffset').tooltip({
             xOffset: 15
-        });
+        }).toolkit('tooltip') );
 
-        $('.js-tooltip-yoffset').tooltip({
+        Demo.instances.push( $('.js-tooltip-yoffset').tooltip({
             yOffset: 15
-        });
+        }).toolkit('tooltip') );
 
-        $('.js-tooltip-delay').tooltip({
+        Demo.instances.push( $('.js-tooltip-delay').tooltip({
             delay: 200
-        });
+        }).toolkit('tooltip') );
 
-        $('.js-tooltip-mode').tooltip({
+        Demo.instances.push( $('.js-tooltip-mode').tooltip({
             mode: 'click'
-        });
+        }).toolkit('tooltip') );
 
-        $('.js-tooltip-follow').tooltip({
+        Demo.instances.push( $('.js-tooltip-follow').tooltip({
             follow: true
-        });
+        }).toolkit('tooltip') );
     });
 </script>

@@ -165,33 +165,33 @@
 
 <script>
     $(function() {
-        $('#carousel-1').carousel();
+        Demo.instances.push( $('#carousel-1').carousel().toolkit('carousel') );
 
-        $('#carousel-2').carousel({
+        Demo.instances.push( $('#carousel-2').carousel({
             infinite: false,
             reverse: true
-        });
+        }).toolkit('carousel') );
 
-        $('#carousel-3').carousel({
+        Demo.instances.push( $('#carousel-3').carousel({
             animation: 'fade',
             defaultIndex: 2
-        });
+        }).toolkit('carousel') );
 
-        $('#carousel-4').carousel({
+        Demo.instances.push( $('#carousel-4').carousel({
             animation: 'slide-up',
             autoCycle: false,
             infinite: false,
             loop: false
-        });
+        }).toolkit('carousel') );
 
-        $('#carousel-5').carousel({
+        Demo.instances.push( $('#carousel-5').carousel({
             itemsToShow: 4,
             itemsToCycle: 2
-        });
+        }).toolkit('carousel') );
 
-        $('#carousel-6').carousel({
+        Demo.instances.push( $('#carousel-6').carousel({
             animation: 'slide-up',
             itemsToShow: 2
-        });
+        }).toolkit('carousel') );
     });
 </script>

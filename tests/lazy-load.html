@@ -65,10 +65,10 @@
 </div>
 
 <script>
-    $('.lazy-overflow').lazyLoad();
+    Demo.instances.push( $('.lazy-overflow').lazyLoad().toolkit('lazyLoad') );
 
-    $('.lazy-container').lazyLoad({
+    Demo.instances.push( $('.lazy-container').lazyLoad({
         threshold: 50,
         forceLoad: true
-    });
+    }).toolkit('lazyLoad') );
 </script>

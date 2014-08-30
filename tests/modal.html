@@ -74,21 +74,22 @@
 
 <script>
     $(function() {
-        $('.js-modal-multi').modal();
-        $('.js-modal').modal();
+        Demo.instances.push( $('.js-modal-multi').modal().toolkit('modal') );
+
+        Demo.instances.push( $('.js-modal').modal().toolkit('modal') );
 
         $.each(['fade', 'from-above', 'from-below', 'slide-in-top', 'slide-in-right', 'slide-in-bottom', 'slide-in-left'], function(key, value) {
-            $('.js-modal-' + value).modal({
+            Demo.instances.push( $('.js-modal-' + value).modal({
                 animation: value,
                 ajax: false,
                 onLoad: function(content) {
                     this.element.find('.modal-inner').html('<div class="modal-body">' + content + '</div>');
                 }
-            });
+            }).toolkit('modal') );
         });
 
-        $('.js-modal-fullscreen').modal({
+        Demo.instances.push( $('.js-modal-fullscreen').modal({
             fullScreen: true
-        });
+        }).toolkit('modal') );
     });
 </script>

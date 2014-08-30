@@ -55,11 +55,11 @@
         </div>
     </main>
 
-    <aside class="off-canvas off-canvas--left" data-offcanvas-selector=".js-canvas-left" data-offcanvas-sidebar="left">
+    <aside class="off-canvas off-canvas--left" id="sidebar-1" data-offcanvas-selector=".js-canvas-left" data-offcanvas-sidebar="left">
         This sidebar is positioned outside the left viewport.
     </aside>
 
-    <aside class="off-canvas off-canvas--right" data-offcanvas-selector=".js-canvas-right" data-offcanvas-sidebar="right">
+    <aside class="off-canvas off-canvas--right" id="sidebar-2" data-offcanvas-selector=".js-canvas-right" data-offcanvas-sidebar="right">
         This sidebar is positioned outside the right viewport.
     </aside>
 </div>
@@ -69,6 +69,9 @@
         $('.off-canvas').offCanvas({
             animation: (location.hash || '#push').substr(1)
         });
+
+        Demo.instances.push( $('#sidebar-1').toolkit('offCanvas') );
+        Demo.instances.push( $('#sidebar-2').toolkit('offCanvas') );
 
         $('.js-canvas-animation').click(function() {
             setTimeout(function() {

@@ -7,19 +7,19 @@
 
     <pre><code>var Toolkit = {
 
-    /** Current version */
+    /** Current version. */
     version: '%version%',
 
-    /** Build date hash */
+    /** Build date hash. */
     build: '%build%',
 
-    /** Vendor namespace */
-    vendor: '',
-
-    /** ARIA support */
+    /** ARIA support. */
     aria: true,
 
-    /** Localization messages */
+    /** Global debugging. */
+    debug: false,
+
+    /** Localization messages. */
     messages: {
         loading: 'Loading...',
         error: 'An error has occurred!'
@@ -28,24 +28,27 @@
     /** Does the browser support transitions? */
     hasTransition: hasTransition,
 
-    /** Detect touch devices */
+    /** Detect touch devices. */
     isTouch: isTouch,
 
-    /** Detect retina displays */
+    /** Detect retina displays. */
     isRetina: isRetina,
 
-    /** Plugin instances indexed by the selector that activated it */
+    /** Name of the `transitionend` event. */
+    transitionEnd: transitionEnd,
+
+    /** Plugin instances indexed by the selector that activated it. */
     cache: {},
 
     /**
-    * Creates a jQuery plugin by extending the jQuery prototype with a method definition.
-    * The Toolkit plugin is only initialized if one has not been already.
-    * Plugins are either defined per element, or on a collection of elements.
-    *
-    * @param {String} plugin
-    * @param {Function} callback
-    * @param {bool} collection
-    */
+     * Creates a jQuery plugin by extending the jQuery prototype with a method definition.
+     * The Toolkit plugin is only initialized if one has not been already.
+     * Plugins are either defined per element, or on a collection of elements.
+     *
+     * @param {String} plugin
+     * @param {Function} callback
+     * @param {bool} collection
+     */
     create: function(plugin, callback, collection) {
         var name = plugin;
 
@@ -58,7 +61,7 @@
 
             // Apply the instance to a collection of elements
             function() {
-                var instance = Toolkit.cache[plugin + '.' + this.selector] = callback.apply(this, arguments);
+                var instance = Toolkit.cache[plugin + ':' + this.selector] = callback.apply(this, arguments);
 
                 return this.each(function() {
                     $(this).cache('toolkit.' + plugin, instance);
@@ -82,19 +85,19 @@
 
     <pre class="is-scrollable"><code>var Toolkit = {
 
-    /** Current version */
+    /** Current version. */
     version: '%version%',
 
-    /** Build date hash */
+    /** Build date hash. */
     build: '%build%',
 
-    /** Vendor namespace */
-    vendor: '',
-
-    /** ARIA support */
+    /** ARIA support. */
     aria: true,
 
-    /** Localization messages */
+    /** Global debugging. */
+    debug: false,
+
+    /** Localization messages. */
     messages: {
         loading: 'Loading...',
         error: 'An error has occurred!'
@@ -103,24 +106,27 @@
     /** Does the browser support transitions? */
     hasTransition: hasTransition,
 
-    /** Detect touch devices */
+    /** Detect touch devices. */
     isTouch: isTouch,
 
-    /** Detect retina displays */
+    /** Detect retina displays. */
     isRetina: isRetina,
 
-    /** Plugin instances indexed by the selector that activated it */
+    /** Name of the `transitionend` event. */
+    transitionEnd: transitionEnd,
+
+    /** Plugin instances indexed by the selector that activated it. */
     cache: {},
 
     /**
-    * Creates a jQuery plugin by extending the jQuery prototype with a method definition.
-    * The Toolkit plugin is only initialized if one has not been already.
-    * Plugins are either defined per element, or on a collection of elements.
-    *
-    * @param {String} plugin
-    * @param {Function} callback
-    * @param {bool} collection
-    */
+      * Creates a jQuery plugin by extending the jQuery prototype with a method definition.
+      * The Toolkit plugin is only initialized if one has not been already.
+      * Plugins are either defined per element, or on a collection of elements.
+      *
+      * @param {String} plugin
+      * @param {Function} callback
+      * @param {bool} collection
+      */
     create: function(plugin, callback, collection) {
         var name = plugin;
 
@@ -133,7 +139,7 @@
 
             // Apply the instance to a collection of elements
             function() {
-                var instance = Toolkit.cache[plugin + '.' + this.selector] = callback.apply(this, arguments);
+                var instance = Toolkit.cache[plugin + ':' + this.selector] = callback.apply(this, arguments);
 
                 return this.each(function() {
                     $(this).cache('toolkit.' + plugin, instance);

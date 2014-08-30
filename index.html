@@ -14,15 +14,16 @@
     <script src="js/toolkit.js"></script>
     <script>
         Toolkit.debug = true;
-
-        $.extend(Toolkit.messages, {
-            loading: 'Hold on just a second...',
-            error: 'Something terrible has happened!'
-        });
+        Toolkit.messages.loading = 'Hold on just a second...';
+        Toolkit.messages.error = 'Something terrible has happened!';
     </script>
 </head>
 <body>
     <div id="head" class="test-bar">
+        <button id="destroy" class="button is-error float-right" role="button">
+            Destroy
+        </button>
+
         <span class="viewport">
             <span id="res-width"></span>x<span id="res-height"></span>
         </span>
@@ -87,75 +88,6 @@
 
     <div id="skeleton" class="body"></div>
 
-    <script>
-        var skeleton = $('#skeleton'),
-            switcher = $('#plugin-switcher'),
-            win = $(window);
-
-        // Functions
-        function resize() {
-            $('#res-width').html(win.width());
-            $('#res-height').html(win.height());
-        }
-
-        function loadPlugin(key, hash) {
-            if (!key) {
-                return;
-            }
-
-            $.get('tests/' + key + '.html', function(response) {
-                skeleton.html(response);
-            });
-
-            switcher.val(key);
-
-            var current = switcher.find('option[value="' + key + '"]'),
-                prev = current.prev(),
-                next = current.next();
-
-            if (!prev.length) {
-                prev = switcher.find('optgroup option:last');
-            }
-
-            if (!next.length) {
-                next = switcher.find('optgroup option:first');
-            }
-
-            $('#prev')
-                .removeClass('is-disabled')
-                .prop('disabled', false)
-                .data('plugin', prev.attr('value'))
-                .find('.title')
-                    .html(prev.text());
-
-            $('#next')
-                .removeClass('is-disabled')
-                .prop('disabled', false)
-                .data('plugin', next.attr('value'))
-                .find('.title')
-                    .html(next.text());
-
-            history.pushState({ key: key }, current.text(), '?' + key + (hash || ''));
-        }
-
-        // Events
-        win.on('resize', resize);
-
-        switcher.change(function() {
-            loadPlugin($(this).val());
-        });
-
-        $('.plugin-goto').click(function() {
-            loadPlugin($(this).data('plugin'));
-        });
-
-        $(function() {
-            resize();
-
-            if (location.search) {
-                loadPlugin(location.search.substr(1), location.hash);
-            }
-        });
-    </script>
+    <script src="js/demo.js"></script>
 </body>
 </html>

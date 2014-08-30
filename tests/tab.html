@@ -279,27 +279,27 @@
 
 <script>
     $(function() {
-        $('#tab-1, #tab-6').tab();
+        Demo.instances.push( $('#tab-1, #tab-6').tab().toolkit('tab') );
 
-        $('#tab-2').tab({
+        Demo.instances.push( $('#tab-2').tab({
             collapsible: true,
             defaultIndex: 2
-        });
+        }).toolkit('tab') );
 
-        $('#tab-3').tab({
+        Demo.instances.push( $('#tab-3').tab({
             mode: 'hover',
             cookie: 'test3',
             persistState: true
-        });
+        }).toolkit('tab') );
 
-        $('#tab-4').tab({
+        Demo.instances.push( $('#tab-4').tab({
             persistState: true,
             loadFragment: true,
             preventDefault: false
-        });
+        }).toolkit('tab') );
 
-        $('#tab-5').tab({
+        Demo.instances.push( $('#tab-5').tab({
             ajax: true
-        });
+        }).toolkit('tab') );
     });
 </script>

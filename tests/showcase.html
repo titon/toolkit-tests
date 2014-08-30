@@ -46,11 +46,11 @@
 
 <script>
     $(function() {
-        $('.js-showcase').showcase();
+        Demo.instances.push( $('.js-showcase').showcase().toolkit('showcase') );
 
-        $('.js-showcase-2').showcase({
+        Demo.instances.push( $('.js-showcase-2').showcase({
             gutter: 25,
             stopScroll: false
-        });
+        }).toolkit('showcase') );
     });
 </script>
