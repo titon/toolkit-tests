@@ -99,5 +99,7 @@ $(function() {
     // Load plugin based on query string
     if (location.search) {
         Demo.loadPlugin(location.search.substr(1), location.hash);
+    } else {
+        Demo.loadPlugin('base', location.hash);
     }
 });
