@@ -89,11 +89,7 @@ $gray-dark: #7F8C8D;
     color: #fff;
 
     &.is-active,
-    .is-active & {
-        color: $white;
-        background: lighten($gray-dark, 5%);
-    }
-
+    .is-active &,
     &:hover {
         background: $gray-light;
     }
@@ -139,7 +135,24 @@ $gray-dark: #7F8C8D;
     }
 }
 
+.button-group--vertical {
+    > li,
+    > .button {
+        border-left: 0;
+        border-top: 1px solid rgba(0, 0, 0, .2);
+
+        &:first-child { border-top: 0; }
+    }
+}
+
 //-------------------- Carousel --------------------//
+
+.carousel {
+    .caret-left,
+    .caret-right {
+        border-width: 15px;
+    }
+}
 
 .carousel-next,
 .carousel-prev {
@@ -412,6 +425,7 @@ fieldset {
     background: $purple-dark;
     color: #fff;
     padding: 1rem;
+    top: 67px;
 }
 
 .on-canvas {

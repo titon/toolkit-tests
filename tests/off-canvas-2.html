@@ -66,9 +66,11 @@
 
 <script>
     $(function() {
+        var hash = location.hash;
+
         $('.off-canvas').offCanvas({
-            animation: (location.hash || '#on-top').substr(1),
-            openOnLoad: true,
+            animation: (hash || '#on-top').substr(1),
+            openOnLoad: (!hash || hash === '#on-top' || hash === '#squish'),
             hideOthers: false,
             stopScroll: false
         });

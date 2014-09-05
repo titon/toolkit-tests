@@ -5,6 +5,7 @@ html {
 body {
   background: #f0f1f2;
   color: #000;
+  padding-top: 67px;
   padding-bottom: 250px;
 }
 
@@ -13,10 +14,15 @@ a {
 }
 
 .test-bar {
-  position: relative;
+  position: fixed;
   background: #283442;
   padding: 1rem;
   color: #fff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 67px;
+  z-index: 550;
 }
 .test-bar .viewport {
   float: right;
@@ -40,7 +46,7 @@ a {
 }
 
 .test-demo {
-  padding: 2rem 4rem 4rem 4rem;
+  padding: 3rem 4rem 3rem 4rem;
   text-align: center;
 }
 .test-demo:first-child {
@@ -50,7 +56,8 @@ a {
   background: #344a5f;
   color: #fff;
 }
-.test-demo:nth-child(even) .test-header {
+.test-demo:nth-child(even) .test-header,
+.test-demo:nth-child(even) .test-note {
   color: #cfd4d9;
 }
 .test-demo > p:first-child {
@@ -61,6 +68,11 @@ a {
   margin-bottom: 2rem;
   font-size: 2rem;
   text-align: center;
+  color: #344a5f;
+}
+
+.test-note {
+  margin: 2rem 0 0 0;
   color: #344a5f;
 }
 
@@ -189,7 +201,7 @@ form,
 
 #stalker-targets {
   position: fixed;
-  top: 4rem;
-  right: 4rem;
+  top: 7rem;
+  right: 2rem;
   text-align: right;
 }

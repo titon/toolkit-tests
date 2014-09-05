@@ -48,11 +48,7 @@
   background: #7f8c8d;
   color: #fff;
 }
-.button.is-active, .is-active .button {
-  color: white;
-  background: #8c9899;
-}
-.button:hover {
+.button.is-active, .is-active .button, .button:hover {
   background: #95a5a6;
 }
 .button.is-info {
@@ -91,6 +87,21 @@
 .button-group > li:first-child,
 .button-group > .button:first-child {
   border-left: 0;
+}
+
+.button-group--vertical > li,
+.button-group--vertical > .button {
+  border-left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.button-group--vertical > li:first-child,
+.button-group--vertical > .button:first-child {
+  border-top: 0;
+}
+
+.carousel .caret-left,
+.carousel .caret-right {
+  border-width: 15px;
 }
 
 .carousel-next,
@@ -344,6 +355,7 @@ fieldset {
   background: #8e44ad;
   color: #fff;
   padding: 1rem;
+  top: 67px;
 }
 
 .on-canvas .test-demo {

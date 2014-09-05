@@ -39,7 +39,7 @@
      * If the value is a function, it will be executed to extract a value.
      *
      * @param {String} key
-     * @param {*} value
+     * @param {*} [value]
      * @returns {*}
      */
     $.fn.cache = function(key, value) {
@@ -63,7 +63,7 @@
         version: '1.5.2',
 
         /** Build date hash. */
-        build: 'hzg6s58g',
+        build: 'hzosyeep',
 
         /** ARIA support. */
         aria: true,
@@ -99,7 +99,7 @@
          *
          * @param {String} plugin
          * @param {Function} callback
-         * @param {bool} collection
+         * @param {bool} [collection]
          */
         create: function(plugin, callback, collection) {
             var name = plugin;
@@ -155,6 +155,9 @@
         // Inherit the prototype and merge properties
         $.extend(prototype, properties);
 
+        // Fetch the constructor function before setting the prototype
+        var constructor = prototype.constructor;
+
         // Class interface
         function Class() {
 
@@ -195,14 +198,14 @@
             }
 
             // Trigger constructor
-            if (properties.constructor) {
-                properties.constructor.apply(this, arguments);
+            if (constructor) {
+                constructor.apply(this, arguments);
             }
         }
 
         // Inherit the prototype
         Class.prototype = prototype;
-        Class.prototype.constructor = Class;
+        Class.prototype.constructor = constructor || Class;
 
         // Inherit and set default options
         Class.options = $.extend(true, {}, this.options || {}, options || {});
@@ -490,7 +493,7 @@
      * Set a `transitionend` event. If the element has no transition set, trigger the callback immediately.
      *
      * @param {Object} data
-     * @param {Function} fn
+     * @param {Function} [fn]
      * @returns {jQuery}
      */
     $.fn.transitionend = function(data, fn) {
@@ -514,7 +517,7 @@
      * Conceal the element by applying the hide class.
      * Should be used to trigger transitions and animations.
      *
-     * @param {bool} dontHide
+     * @param {bool} [dontHide]
      * @returns {jQuery}
      */
     $.fn.conceal = function(dontHide) {
@@ -534,7 +537,7 @@
      * Reveal the element by applying the show class.
      * Should be used to trigger transitions and animations.
      *
-     * @param {bool} dontShow
+     * @param {bool} [dontShow]
      * @returns {jQuery}
      */
     $.fn.reveal = function(dontShow) {
@@ -824,9 +827,9 @@
          * Request data from a URL and handle all the possible scenarios.
          *
          * @param {Object} options
-         * @param {Function} before
-         * @param {Function} done
-         * @param {Function} fail
+         * @param {Function} [before]
+         * @param {Function} [done]
+         * @param {Function} [fail]
          * @returns {jqXHR}
          */
         requestData: function(options, before, done, fail) {
@@ -963,13 +966,13 @@
                     e.preventDefault();
                 }
 
-                // Second click should close it
-                if (this.options.mode === 'click') {
-                    this.hide();
-                }
-
-                // Exit if the same node so it doesn't re-open
                 if (isNode) {
+                    // Second click should close it
+                    if (this.options.mode === 'click') {
+                        this.hide();
+                    }
+
+                    // Exit if the same node so it doesn't re-open
                     return;
                 }
 
@@ -992,7 +995,7 @@
      *
      * @param {Number} value
      * @param {Number} max
-     * @param {Number} min
+     * @param {Number} [min]
      * @returns {Number}
      */
     $.bound = function(value, max, min) {
@@ -1010,6 +1013,7 @@
     /**
      * Used for CSS animations and transitions.
      *
+     * @param {jQuery} obj
      * @returns {bool}
      */
     $.expr[':'].shown = function(obj) {
@@ -2721,6 +2725,15 @@
         return new Toolkit.Flyout(this, url, options);
     }, true);
 
+    /**
+     * Return the markup of the element in the collection as a string.
+     *
+     * @returns {String}
+     */
+    $.fn.toString = function() {
+        return this.prop('outerHTML');
+    };
+
     Toolkit.Input = Toolkit.Component.extend({
         name: 'Input',
         version: '1.4.0',
@@ -2977,9 +2990,7 @@
 
             this.input.removeClass('is-active');
 
-            if (this.dropdown) {
-                this.dropdown.conceal();
-            }
+            this.dropdown.conceal();
 
             this.fireEvent('hidden');
         },
@@ -2998,9 +3009,7 @@
 
             this.input.addClass('is-active');
 
-            if (this.dropdown) {
-                this.dropdown.reveal();
-            }
+            this.dropdown.reveal();
 
             this.fireEvent('shown');
         },
@@ -3037,6 +3046,9 @@
                 list = $('<ul/>'),
                 index = 0,
                 self = this;
+
+            // Must be set for `_buildOption()`
+            this.dropdown = dropdown;
 
             select.children().each(function() {
                 var optgroup = $(this);
@@ -3115,7 +3127,7 @@
             }
 
             if (description = this.readValue(option, options.getDescription)) {
-                content += $(options.descTemplate).html(description).prop('outerHTML');
+                content += $(options.descTemplate).html(description).toString();
             }
 
             var a = $('<a/>', {
@@ -4217,7 +4229,6 @@
             var options = this.options,
                 ajax = options.ajax;
 
-            // Get content
             if (content) {
                 ajax = false;
 
@@ -4231,7 +4242,7 @@
             if (!content) {
                 return;
 
-            } else if (content && content.match(/^#[a-z0-9_\-\.:]+$/i)) {
+            } else if (content.match(/^#[a-z0-9_\-\.:]+$/i)) {
                 content = $(content).html();
                 ajax = false;
             }
@@ -4786,8 +4797,8 @@
      *
      * @param {String} position
      * @param {Event|jQuery} relativeTo
-     * @param {Object} baseOffset
-     * @param {bool} isMouse
+     * @param {Object} [baseOffset]
+     * @param {bool} [isMouse]
      * @returns {jQuery}
      */
     $.fn.positionTo = function(position, relativeTo, baseOffset, isMouse) {
@@ -4927,7 +4938,7 @@
 
             // Initialize events
             this.events = {
-                '{mode} document {selector}': 'onShow'
+                '{mode} document {selector}': 'onShowToggle'
             };
 
             if (options.mode === 'click') {
@@ -4944,20 +4955,11 @@
          * Hide the tooltip.
          */
         hide: function() {
-            var options = this.options,
-                element = this.element,
-                position = element.data('new-position') || this.runtime.position || options.position,
-                className = this.runtime.className || options.className;
-
-            this.runtime = {};
-
             this.fireEvent('hiding');
 
-            element
-                .removeClass(position)
-                .removeClass(className)
-                .removeData('new-position')
-                .conceal();
+            this.reset();
+
+            this.element.conceal();
 
             if (this.node) {
                 this.node.removeAttr('aria-describedby');
@@ -5036,6 +5038,23 @@
         },
 
         /**
+         * Reset the current tooltip state by removing position and custom classes.
+         */
+        reset: function() {
+            var options = this.options,
+                element = this.element,
+                position = element.data('new-position') || this.runtime.position || options.position,
+                className = this.runtime.className || options.className;
+
+            this.runtime = {};
+
+            element
+                .removeClass(position)
+                .removeClass(className)
+                .removeData('new-position');
+        },
+
+        /**
          * Show the tooltip and determine whether to grab the content from an AJAX call,
          * a DOM node, or plain text. The content and title can also be passed as arguments.
          *
@@ -5045,6 +5064,8 @@
          */
         show: function(node, content, title) {
             var options;
+
+            this.reset();
 
             if (node) {
                 this.node = node = $(node);
@@ -5122,6 +5143,8 @@
         return new Toolkit.Tooltip(this, options);
     }, true);
 
+    var TooltipPrototype = Toolkit.Tooltip.prototype;
+
     Toolkit.Popover = Toolkit.Tooltip.extend({
         name: 'Popover',
         version: '1.5.0',
@@ -5137,7 +5160,29 @@
             options.mode = 'click'; // Click only
             options.follow = false; // Disable mouse follow
 
-            Toolkit.Tooltip.prototype.constructor.call(this, nodes, options);
+            TooltipPrototype.constructor.call(this, nodes, options);
+        },
+
+        /**
+         * {@inheritdoc}
+         */
+        reset: function() {
+            TooltipPrototype.reset.call(this);
+
+            if (this.node) {
+                this.node.removeClass('is-active');
+            }
+        },
+
+        /**
+         * {@inheritdoc}
+         */
+        show: function() {
+            TooltipPrototype.show.apply(this, arguments);
+
+            if (this.node) {
+                this.node.addClass('is-active');
+            }
         }
 
     }, {
@@ -6042,7 +6087,7 @@
          * @param {Object} [options]
          */
         constructor: function(element, options) {
-            this.nodes = element = $(element);
+            this.nodes = element = $(element); // Set to nodes so instances are unset during destroy()
             this.options = options = this.setOptions(options, element);
             this.element = this.createElement()
                 .addClass(options.position)
@@ -6312,7 +6357,7 @@
             var terms = this.term.replace(/[\-\[\]\{\}()*+?.,\\^$|#]/g, '\\$&').split(' '),
                 options = this.options,
                 callback = function(match) {
-                    return $(options.highlightTemplate).html(match).prop('outerHTML');
+                    return $(options.highlightTemplate).html(match).toString();
                 };
 
             for (var i = 0, t; t = terms[i]; i++) {

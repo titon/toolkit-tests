@@ -91,42 +91,25 @@
     <h2 class="test-header">Responsive scaled columns.</h2>
 
     <div class="grid test-grid">
-        <div class="col desktop-3 tablet-2 mobile-1">
-            Desktop: 25%<br>
-            Tablet: 33%<br>
-            Mobile: 33%
-        </div>
-
-        <div class="col desktop-6 tablet-4 mobile-1">
-            Desktop: 50%<br>
-            Tablet: 66%<br>
-            Mobile: 33%
-        </div>
-
-        <div class="col desktop-3 hide-tablet mobile-1">
-            Desktop: 25%<br>
-            Tablet: hidden<br>
-            Mobile: 33%
-        </div>
-    </div>
-
-    <div class="grid test-grid">
-        <div class="col large-4 medium-3 small-3">
-            Large: 33%<br>
+        <div class="col large-4 medium-3 small-6 xsmall-1">
+            Large: 33.3%<br>
             Medium: 25%<br>
-            Small: 50%
+            Small: 50%<br>
+            Extra Small: 16.6%
         </div>
 
-        <div class="col large-4 medium-6 small-3">
-            Large: 33%<br>
+        <div class="col large-4 medium-6 small-6 xsmall-1">
+            Large: 33.3%<br>
             Medium: 50%<br>
-            Small: 50%
+            Small: 50%<br>
+            Extra Small: 16.6%
         </div>
 
-        <div class="col large-4 medium-3 hide-small">
-            Large: 33%<br>
+        <div class="col large-4 medium-3 hide-small xsmall-4">
+            Large: 33.3%<br>
             Medium: 25%<br>
-            Small: hidden
+            Small: hidden<br>
+            Extra Small: 66.6%
         </div>
     </div>
 </div>
@@ -188,28 +171,17 @@
     <h2 class="test-header">Responsive pushing and pulling columns.</h2>
 
     <div class="grid test-grid">
-        <div class="col desktop-4 tablet-2 mobile-1">
-            Desktop: 33%<br>
-            Tablet: 33%<br>
-            Mobile: 33%
+        <div class="col large-4 medium-3 small-2 xsmall-4">
+            Large: 33.3%<br>
+            Medium: 25%<br>
+            Small: 16.6%<br>
+            Extra Small: 66.6%
         </div>
-        <div class="col desktop-6 desktop-push-2 tablet-3 tablet-push-1 mobile-2">
-            Desktop: 50%, 16% push<br>
-            Tablet: 50%, 16% push<br>
-            Mobile: 66%, no push
-        </div>
-    </div>
-
-    <div class="grid test-grid">
-        <div class="col large-4 medium-3 small-2">
-            Large: 33%<br>
-            Medium: 37%<br>
-            Small: 33%
-        </div>
-        <div class="col large-6 large-push-2 medium-4 medium-push-1 small-3 small-push-1">
-            Large: 50%, 16% push<br>
-            Medium: 50%, 12% push<br>
-            Small: 50%, 16%
+        <div class="col large-6 large-push-2 medium-3 medium-push-3 small-4 small-push-3 xsmall-1 xsmall-push-1">
+            Large: 50%, 16.6% push<br>
+            Medium: 25%, 25% push<br>
+            Small: 33.3%, 25% push<br>
+            Extra Small: 16.6%, 16.6% push
         </div>
     </div>
 </div>
@@ -218,13 +190,29 @@
     <h2 class="test-header">Persistent columns with push and pull overrides.</h2>
 
     <div class="grid test-grid">
-        <div class="col span-4 desktop-5 desktop-push-1">
-            Global: 33%<br>
-            Desktop: 41%, 8% push
+        <div class="col span-4 large-5 large-push-1">
+            Global: 33.3%<br>
+            Large: 41.6%, 8.3% push
         </div>
-        <div class="col span-7 push-1 desktop-5">
-            Global: 58%, 8% push<br>
-            Desktop: 41%
+        <div class="col span-7 push-1 large-5">
+            Global: 58.3%, 8.3% push<br>
+            Large: 41.6%
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Mobile collapsing rows.</h2>
+
+    <div class="grid test-grid">
+        <div class="col large-4 medium-4">
+            1
+        </div>
+        <div class="col large-4 medium-4">
+            2
+        </div>
+        <div class="col large-4 medium-4">
+            3
         </div>
     </div>
 </div>
