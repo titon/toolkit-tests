@@ -246,7 +246,6 @@ pre {
 
     &:focus {
         border-color: $blue-dark;
-        box-shadow: 0 0 5px $blue-light;
     }
 }
 
@@ -256,8 +255,6 @@ pre {
         &.is-error {
             .input {
                 border-color: $red-dark;
-
-                &:focus { box-shadow: 0 0 5px $red-light; }
             }
 
             .input-radio,
@@ -269,8 +266,6 @@ pre {
         &.is-success {
             .input {
                 border-color: $green-dark;
-
-                &:focus { box-shadow: 0 0 5px $green-light; }
             }
 
             .input-radio,
@@ -431,7 +426,7 @@ fieldset {
 .on-canvas {
     .test-demo { text-align: left; }
 
-    p:first-child { margin: 0 0 2rem 0; }
+    p { margin: 1.25rem 0 }
 }
 
 //-------------------- Pagination --------------------//
@@ -439,7 +434,7 @@ fieldset {
 .pagination {
     text-align: center;
 
-    ul { display: inline-block; }
+    ol { display: inline-block; }
 }
 
 .pagination--grouped li {

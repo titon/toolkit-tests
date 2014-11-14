@@ -21,9 +21,11 @@ var Demo = {
 
         Demo.destroyPlugins();
 
-        $.get('tests/' + key + '.html?' + Date.now(), function(response) {
+        $.get('/tests/' + key + '.html?' + Date.now(), function(response) {
+            window.scrollTo(0, 0);
             skeleton.html(response);
             Demo.updateNav(key, hash);
+
         }).fail(function() {
             skeleton.html('Plugin does not exist.');
             Demo.updateNav('');
@@ -82,6 +84,11 @@ var Demo = {
 
 $(function() {
     Demo.resize();
+
+    // Modify all AJAX URLs and prefix with the host
+    $.ajaxPrefilter(function(options) {
+        options.url = location.origin + location.pathname + options.url.substr(1);
+    });
 
     // Events
     $(window).on('resize', Demo.resize);

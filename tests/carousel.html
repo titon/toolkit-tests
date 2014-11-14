@@ -165,7 +165,9 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('#carousel-1').carousel().toolkit('carousel') );
+        Demo.instances.push( $('#carousel-1').carousel({
+            swipe: true
+        }).toolkit('carousel') );
 
         Demo.instances.push( $('#carousel-2').carousel({
             infinite: false,

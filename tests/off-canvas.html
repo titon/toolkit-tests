@@ -1,6 +1,8 @@
 <div class="canvas">
     <main class="on-canvas" data-offcanvas-content>
         <div class="test-demo">
+            <h2 class="test-header">Default. Locks scrolling.</h2>
+
             <p class="align-center">
                 <button type="button" class="button js-canvas-left">Open Left Sidebar</button>
                 <button type="button" class="button js-canvas-right">Open Right Sidebar</button>
@@ -67,7 +69,8 @@
 <script>
     $(function() {
         $('.off-canvas').offCanvas({
-            animation: (location.hash || '#push').substr(1)
+            animation: (location.hash || '#push').substr(1),
+            swipe: true
         });
 
         Demo.instances.push( $('#sidebar-1').toolkit('offCanvas') );

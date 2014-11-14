@@ -1,6 +1,8 @@
 <div class="canvas">
     <main class="on-canvas" data-offcanvas-content>
         <div class="test-demo">
+            <h2 class="test-header">Opens on load. Multiple open.</h2>
+
             <p class="align-center">
                 <button type="button" class="button js-canvas-left">Open Left Sidebar</button>
                 <button type="button" class="button js-canvas-right">Open Right Sidebar</button>
@@ -9,11 +11,6 @@
             <h2 class="test-header">Animations.</h2>
 
             <p class="align-center">
-                <a href="#push" class="button js-canvas-animation">Push</a>
-                <a href="#push-reveal" class="button js-canvas-animation">Push Reveal</a>
-                <a href="#push-down" class="button js-canvas-animation">Push Down</a>
-                <a href="#reverse-push" class="button js-canvas-animation">Reverse Push</a>
-                <a href="#reveal" class="button js-canvas-animation">Reveal</a>
                 <a href="#on-top" class="button js-canvas-animation">On Top</a>
                 <a href="#squish" class="button js-canvas-animation">Squish</a>
             </p>
@@ -72,7 +69,8 @@
             animation: (hash || '#on-top').substr(1),
             openOnLoad: (!hash || hash === '#on-top' || hash === '#squish'),
             hideOthers: false,
-            stopScroll: false
+            stopScroll: false,
+            swipe: true
         });
 
         Demo.instances.push( $('#sidebar-1').toolkit('offCanvas') );

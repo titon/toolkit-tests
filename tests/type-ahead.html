@@ -49,11 +49,11 @@
 
     $(function() {
         Demo.instances.push( $('#type-ahead-1').typeAhead({
-            source: 'tests/ajax/type-ahead.json'
+            source: '/tests/ajax/type-ahead.json'
         }).toolkit('typeAhead') );
 
         Demo.instances.push( $('#type-ahead-2').typeAhead({
-            source: 'tests/ajax/type-ahead.json',
+            source: '/tests/ajax/type-ahead.json',
             minLength: 2,
             prefetch: true
         }).toolkit('typeAhead') );
