@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Titon Toolkit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" media="screen" rel="stylesheet" type="text/css">
     <link href="css/toolkit.css" rel="stylesheet" type="text/css">
@@ -19,71 +19,75 @@
     </script>
 </head>
 <body>
-    <div id="head" class="test-bar">
-        <button id="destroy" class="button is-error float-right" role="button">
-            Destroy
-        </button>
-
-        <span class="viewport">
-            <span id="res-width"></span>x<span id="res-height"></span>
-        </span>
-
-        <button id="prev" class="button plugin-goto is-disabled" role="button" disabled>
-            <span class="caret-left"></span>
-            <span class="title">Typography</span>
-        </button>
-
-        <select id="plugin-switcher" class="input">
-            <option value="">-- Select a plugin --</option>
-            <optgroup label="Components">
-                <option value="base" selected>Base</option>
-                <option value="accordion">Accordion</option>
-                <option value="breadcrumb">Breadcrumb</option>
-                <option value="button">Button</option>
-                <option value="button-group">Button Group</option>
-                <option value="carousel">Carousel</option>
-                <option value="code">Code</option>
-                <option value="divider">Divider</option>
-                <option value="drop">Drop</option>
-                <option value="flyout">Flyout</option>
-                <option value="form">Form</option>
-                <option value="grid">Grid</option>
-                <option value="icon">Icon</option>
-                <option value="input">Input</option>
-                <option value="input-group">Input Group</option>
-                <option value="label">Label</option>
-                <option value="lazy-load">Lazy Load</option>
-                <option value="loader">Loader</option>
-                <option value="mask">Mask</option>
-                <option value="matrix">Matrix</option>
-                <option value="modal">Modal</option>
-                <option value="notice">Notice</option>
-                <option value="off-canvas">Off Canvas</option>
-                <option value="off-canvas-2">Off Canvas - Alternate</option>
-                <option value="pagination">Pagination</option>
-                <option value="pin">Pin</option>
-                <option value="popover">Popover</option>
-                <option value="progress">Progress</option>
-                <option value="responsive">Responsive</option>
-                <option value="showcase">Showcase</option>
-                <option value="stalker">Stalker</option>
-                <option value="step">Step</option>
-                <option value="switch">Switch</option>
-                <option value="tab">Tab</option>
-                <option value="table">Table</option>
-                <option value="toast">Toast</option>
-                <option value="tooltip">Tooltip</option>
-                <option value="type-ahead">Type Ahead</option>
-                <option value="typography">Typography</option>
-            </optgroup>
-        </select>
-
-        <button id="next" class="button plugin-goto is-disabled" role="button" disabled>
-            <span class="title">Accordion</span>
-            <span class="caret-right"></span>
-        </button>
-
+    <div id="head" class="test-bar clear-fix">
         <h1 class="test-logo">Titon Toolkit</h1>
+
+        <div class="bar-right">
+            <button id="destroy" class="button is-error float-right" role="button">
+                Destroy
+            </button>
+
+            <span class="viewport">
+                <span id="res-width"></span>x<span id="res-height"></span>
+            </span>
+        </div>
+
+        <div class="bar-left">
+            <button id="prev" class="button plugin-goto is-disabled hide-xsmall" role="button" disabled>
+                <span class="caret-left"></span>
+                <span class="title">Typography</span>
+            </button>
+
+            <select id="plugin-switcher" class="input">
+                <option value="">-- Select a plugin --</option>
+                <optgroup label="Components">
+                    <option value="base" selected>Base</option>
+                    <option value="accordion">Accordion</option>
+                    <option value="breadcrumb">Breadcrumb</option>
+                    <option value="button">Button</option>
+                    <option value="button-group">Button Group</option>
+                    <option value="carousel">Carousel</option>
+                    <option value="code">Code</option>
+                    <option value="divider">Divider</option>
+                    <option value="drop">Drop</option>
+                    <option value="flyout">Flyout</option>
+                    <option value="form">Form</option>
+                    <option value="grid">Grid</option>
+                    <option value="icon">Icon</option>
+                    <option value="input">Input</option>
+                    <option value="input-group">Input Group</option>
+                    <option value="label">Label</option>
+                    <option value="lazy-load">Lazy Load</option>
+                    <option value="loader">Loader</option>
+                    <option value="mask">Mask</option>
+                    <option value="matrix">Matrix</option>
+                    <option value="modal">Modal</option>
+                    <option value="notice">Notice</option>
+                    <option value="off-canvas">Off Canvas</option>
+                    <option value="off-canvas-2">Off Canvas - Alternate</option>
+                    <option value="pagination">Pagination</option>
+                    <option value="pin">Pin</option>
+                    <option value="popover">Popover</option>
+                    <option value="progress">Progress</option>
+                    <option value="responsive">Responsive</option>
+                    <option value="showcase">Showcase</option>
+                    <option value="stalker">Stalker</option>
+                    <option value="step">Step</option>
+                    <option value="switch">Switch</option>
+                    <option value="tab">Tab</option>
+                    <option value="table">Table</option>
+                    <option value="toast">Toast</option>
+                    <option value="tooltip">Tooltip</option>
+                    <option value="type-ahead">Type Ahead</option>
+                    <option value="typography">Typography</option>
+                </optgroup>
+            </select>
+
+            <button id="next" class="button plugin-goto is-disabled hide-xsmall" role="button" disabled>
+                <span class="title">Accordion</span>
+                <span class="caret-right"></span>
+            </button>
+        </div>
     </div>
 
     <div id="skeleton" class="body"></div>

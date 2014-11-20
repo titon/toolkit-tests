@@ -1,4 +1,4 @@
-/*! Titon Toolkit v1.5.3 | BSD-3 License | titon.io */
+/*! Titon Toolkit v2.0.0 | BSD-3 License | titon.io */
 (function($, window, document) {
 'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -61,10 +61,10 @@ $.fn.cache = function(key, value) {
 var Toolkit = {
 
     /** Current version. */
-    version: '1.5.3',
+    version: '2.0.0',
 
     /** Build date hash. */
-    build: 'i2grczog',
+    build: 'i2phcev5',
 
     /** Vendor namespace. */
     vendor: '',
@@ -226,7 +226,7 @@ Toolkit.Base = Toolkit.Class.extend({
     name: 'Base',
 
     /** Current version of the plugin. */
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** Cached data and AJAX requests. */
     cache: {},
@@ -619,7 +619,7 @@ $.fn.toolkit = function(plugin, method, args) {
 
 Toolkit.Component = Toolkit.Base.extend({
     name: 'Component',
-    version: '1.4.1',
+    version: '2.0.0',
 
     /** Whether the element was created automatically or not. */
     created: false,
@@ -1176,7 +1176,7 @@ $.expr[':'].shown = function(obj) {
 
 Toolkit.Accordion = Toolkit.Component.extend({
     name: 'Accordion',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Collection of header elements. */
     headers: [],
@@ -1363,7 +1363,7 @@ var blackout = null;
 
 Toolkit.Blackout = Toolkit.Component.extend({
     name: 'Blackout',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** How many times the blackout has been opened while being opened. */
     count: 0,
@@ -1675,7 +1675,7 @@ $.throttle = function(func, delay) {
 
 Toolkit.Carousel = Toolkit.Component.extend({
     name: 'Carousel',
-    version: '1.5.3',
+    version: '2.0.0',
 
     /** Is the carousel currently animating? */
     animating: false,
@@ -2259,7 +2259,7 @@ Toolkit.create('carousel', function(options) {
 $.event.special.clickout = (function() {
     var elements = [];
 
-    $(document).on('click.toolkit.out', function(e) {
+    $(document).on(isTouch ? 'touchend' : 'click', function(e) {
         if (!elements.length) {
             return;
         }
@@ -2320,7 +2320,7 @@ $.event.special.clickout = (function() {
 
 Toolkit.Drop = Toolkit.Component.extend({
     name: 'Drop',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /**
      * Initialize the drop.
@@ -2436,7 +2436,7 @@ Toolkit.create('drop', function(options) {
 
 Toolkit.Flyout = Toolkit.Component.extend({
     name: 'Flyout',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Current URL to generate a flyout menu for. */
     current: null,
@@ -2945,7 +2945,7 @@ $.fn.toString = function() {
 
 Toolkit.Input = Toolkit.Component.extend({
     name: 'Input',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** The custom input element. */
     input: null,
@@ -3060,7 +3060,7 @@ Toolkit.Input = Toolkit.Component.extend({
  */
 Toolkit.InputCheckbox = Toolkit.Input.extend({
     name: 'InputCheckbox',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /**
      * Initialize the checkbox.
@@ -3092,7 +3092,7 @@ Toolkit.InputCheckbox = Toolkit.Input.extend({
  */
 Toolkit.InputRadio = Toolkit.Input.extend({
     name: 'InputRadio',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /**
      * Initialize the radio.
@@ -3124,7 +3124,7 @@ Toolkit.InputRadio = Toolkit.Input.extend({
  */
 Toolkit.InputSelect = Toolkit.Input.extend({
     name: 'InputSelect',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** The custom drop element. */
     dropdown: null,
@@ -3590,7 +3590,7 @@ Toolkit.create('inputSelect', function(options) {
 
 Toolkit.LazyLoad = Toolkit.Component.extend({
     name: 'LazyLoad',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** Container to monitor scroll events on. */
     container: $(window),
@@ -3793,7 +3793,7 @@ Toolkit.create('lazyLoad', function(options) {
 
 Toolkit.Mask = Toolkit.Component.extend({
     name: 'Mask',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Mask element used for overlaying. */
     mask: null,
@@ -3956,7 +3956,7 @@ $.debounce = function(func, threshold) {
 
 Toolkit.Matrix = Toolkit.Component.extend({
     name: 'Matrix',
-    version: '1.5.2',
+    version: '2.0.0',
 
     /** How many columns that can fit in the wrapper. */
     colCount: 0,
@@ -4306,7 +4306,7 @@ Toolkit.create('matrix', function(options) {
 
 Toolkit.Modal = Toolkit.Component.extend({
     name: 'Modal',
-    version: '1.5.2',
+    version: '2.0.0',
 
     /** Blackout element if enabled. */
     blackout: null,
@@ -4536,7 +4536,7 @@ Toolkit.create('modal', function(options) {
 
 Toolkit.OffCanvas = Toolkit.Component.extend({
     name: 'OffCanvas',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** The parent container. */
     container: null,
@@ -4758,7 +4758,7 @@ Toolkit.create('offCanvas', function(options) {
 
 Toolkit.Pin = Toolkit.Component.extend({
     name: 'Pin',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** Will the element be pinned? */
     active: true,
@@ -5071,7 +5071,7 @@ $.fn.positionTo = function(position, relativeTo, baseOffset, isMouse) {
 
 Toolkit.Tooltip = Toolkit.Component.extend({
     name: 'Tooltip',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** The element to insert the title. */
     elementHead: null,
@@ -5295,7 +5295,7 @@ var TooltipPrototype = Toolkit.Tooltip.prototype;
 
 Toolkit.Popover = Toolkit.Tooltip.extend({
     name: 'Popover',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /**
      * Initialize the popover.
@@ -5350,7 +5350,7 @@ Toolkit.create('popover', function(options) {
 
 Toolkit.Showcase = Toolkit.Component.extend({
     name: 'Showcase',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /** Is the showcase currently animating? */
     animating: false,
@@ -5784,7 +5784,7 @@ Toolkit.create('showcase', function(options) {
 
 Toolkit.Stalker = Toolkit.Component.extend({
     name: 'Stalker',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Container to monitor scroll events on. */
     container: $(window),
@@ -5977,7 +5977,7 @@ Toolkit.create('stalker', function(options) {
 
 Toolkit.Tab = Toolkit.Component.extend({
     name: 'Tab',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Index of the section currently displayed. */
     index: 0,
@@ -6223,7 +6223,7 @@ Toolkit.create('tab', function(options) {
 
 Toolkit.Toast = Toolkit.Component.extend({
     name: 'Toast',
-    version: '1.5.0',
+    version: '2.0.0',
 
     /**
      * Initialize the toast.
@@ -6327,7 +6327,7 @@ Toolkit.create('toast', function(options) {
 
 Toolkit.TypeAhead = Toolkit.Component.extend({
     name: 'TypeAhead',
-    version: '1.4.0',
+    version: '2.0.0',
 
     /** Current index in the drop menu while cycling. */
     index: -1,

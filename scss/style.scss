@@ -1,12 +1,11 @@
 
 html {
-    font: normal 14px/1.5rem "Droid Sans", sans-serif;
+    font: normal 12px/1.5rem "Droid Sans", sans-serif;
 }
 
 body {
     background: #f0f1f2;
     color: #000;
-    //padding-top: 67px;
     padding-bottom: 250px;
 }
 
@@ -15,38 +14,32 @@ a {
 }
 
 .test-bar {
-    //position: fixed;
     background: #283442;
     padding: 1rem;
     color: #fff;
-    //top: 0;
-    //left: 0;
     width: 100%;
-    height: 67px;
-    z-index: 550;
 
     .viewport {
         float: right;
         padding-top: 8px;
         margin-right: 1rem;
     }
+
+    .bar-right { display: none; }
+    .bar-left { text-align: center; }
 }
 
 .test-logo {
-    background: url('http://titon.io/img/logo.png') no-repeat;
+    background: url('http://titon.io/img/logo.png') 50% 0 no-repeat;
     background-size: 184px 80px;
-    width: 184px;
     height: 40px;
     text-indent: -9999px;
     overflow: hidden;
-    position: absolute;
-    top: 1.2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: 1rem;
 }
 
 .test-demo {
-    padding: 3rem 4rem 3rem 4rem;
+    padding: 2rem;
     text-align: center;
 
     &:first-child { padding-top: 4rem; }
@@ -86,6 +79,10 @@ form,
     text-align: left;
 }
 
+textarea {
+    max-width: 100%;
+}
+
 .vertical-container {
     width: 200px;
     height: 200px;
@@ -100,11 +97,20 @@ form,
     }
 }
 
+.touch-note {
+    color: #C0392B;
+    text-align: center;
+    margin-top: 0;
+    padding: 1rem;
+
+    .no-touch & { display: none; }
+}
+
 //-------------------- Carousel --------------------//
 
-#carousel-1 { width: 400px; }
-#carousel-2, #carousel-4, #carousel-5 { width: 800px; }
-#carousel-3, #carousel-6 { width: 500px; }
+#carousel-1 { max-width: 400px; }
+#carousel-2, #carousel-4, #carousel-5 { max-width: 800px; }
+#carousel-3, #carousel-6 { max-width: 500px; }
 
 //-------------------- Grid --------------------//
 
@@ -186,4 +192,40 @@ form,
     top: 7rem;
     right: 2rem;
     text-align: right;
+}
+
+//-------------------- Responsive --------------------//
+
+@media only screen and (min-width: 641px) {
+    html { font-size: 13px; }
+
+    .test-bar .bar-left {
+        float: left;
+        margin-top: 0;
+    }
+
+    .test-bar .bar-right {
+        float: right;
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    html { font-size: 14px; }
+
+    .test-bar {
+        height: 67px;
+    }
+
+    .test-logo {
+        width: 184px;
+        position: absolute;
+        top: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .test-demo {
+        padding: 3rem 4rem 3rem 4rem;
+    }
 }

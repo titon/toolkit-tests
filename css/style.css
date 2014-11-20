@@ -1,5 +1,5 @@
 html {
-  font: normal 14px/1.5rem "Droid Sans", sans-serif;
+  font: normal 12px/1.5rem "Droid Sans", sans-serif;
 }
 
 body {
@@ -17,32 +17,30 @@ a {
   padding: 1rem;
   color: #fff;
   width: 100%;
-  height: 67px;
-  z-index: 550;
 }
 .test-bar .viewport {
   float: right;
   padding-top: 8px;
   margin-right: 1rem;
 }
+.test-bar .bar-right {
+  display: none;
+}
+.test-bar .bar-left {
+  text-align: center;
+}
 
 .test-logo {
-  background: url("http://titon.io/img/logo.png") no-repeat;
+  background: url("http://titon.io/img/logo.png") 50% 0 no-repeat;
   background-size: 184px 80px;
-  width: 184px;
   height: 40px;
   text-indent: -9999px;
   overflow: hidden;
-  position: absolute;
-  top: 1.2rem;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
+  margin-bottom: 1rem;
 }
 
 .test-demo {
-  padding: 3rem 4rem 3rem 4rem;
+  padding: 2rem;
   text-align: center;
 }
 .test-demo:first-child {
@@ -83,6 +81,10 @@ form,
   text-align: left;
 }
 
+textarea {
+  max-width: 100%;
+}
+
 .vertical-container {
   width: 200px;
   height: 200px;
@@ -96,16 +98,26 @@ form,
   padding: 5px;
 }
 
+.touch-note {
+  color: #C0392B;
+  text-align: center;
+  margin-top: 0;
+  padding: 1rem;
+}
+.no-touch .touch-note {
+  display: none;
+}
+
 #carousel-1 {
-  width: 400px;
+  max-width: 400px;
 }
 
 #carousel-2, #carousel-4, #carousel-5 {
-  width: 800px;
+  max-width: 800px;
 }
 
 #carousel-3, #carousel-6 {
-  width: 500px;
+  max-width: 500px;
 }
 
 .test-grid .col {
@@ -200,4 +212,43 @@ form,
   top: 7rem;
   right: 2rem;
   text-align: right;
+}
+
+@media only screen and (min-width: 641px) {
+  html {
+    font-size: 13px;
+  }
+
+  .test-bar .bar-left {
+    float: left;
+    margin-top: 0;
+  }
+
+  .test-bar .bar-right {
+    float: right;
+    display: block;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+
+  .test-bar {
+    height: 67px;
+  }
+
+  .test-logo {
+    width: 184px;
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  .test-demo {
+    padding: 3rem 4rem 3rem 4rem;
+  }
 }

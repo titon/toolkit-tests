@@ -1,4 +1,4 @@
-/*! Titon Toolkit v1.5.3 | BSD-3 License | titon.io */
+/*! Titon Toolkit v2.0.0 | BSD-3 License | titon.io */
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -392,10 +392,8 @@ th {
   padding: 0;
 }
 
-/*# sourceMappingURL=normalize.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -648,10 +646,8 @@ th {
   width: 100%;
 }
 
-/*# sourceMappingURL=base.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -743,10 +739,8 @@ mark {
   color: #6fae3f;
 }
 
-/*# sourceMappingURL=typography.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1399,10 +1393,8 @@ mark {
   float: right !important;
 }
 
-/*# sourceMappingURL=grid.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1635,10 +1627,8 @@ textarea.input {
   display: none;
 }
 
-/*# sourceMappingURL=form.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1695,10 +1685,8 @@ kbd {
   top: -3px;
 }
 
-/*# sourceMappingURL=code.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1727,10 +1715,8 @@ kbd {
   max-height: 0;
 }
 
-/*# sourceMappingURL=accordion.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1933,10 +1919,8 @@ kbd {
           animation-delay: -0.0s;
 }
 
-/*# sourceMappingURL=loader.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -1969,10 +1953,8 @@ kbd {
   background: #fff !important;
 }
 
-/*# sourceMappingURL=blackout.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2026,10 +2008,8 @@ kbd {
   margin-left: 1rem;
 }
 
-/*# sourceMappingURL=breadcrumb.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2135,10 +2115,8 @@ kbd {
   top: 0;
 }
 
-/*# sourceMappingURL=button.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2302,10 +2280,8 @@ kbd {
   display: table-cell;
 }
 
-/*# sourceMappingURL=button-group.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2313,6 +2289,7 @@ kbd {
   margin: 0 auto;
   text-align: left;
   position: relative;
+  max-width: 100%;
 }
 .carousel.no-next .carousel-next {
   display: none;
@@ -2384,10 +2361,8 @@ kbd {
   padding-bottom: 100%;
 }
 
-/*# sourceMappingURL=carousel.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2421,10 +2396,8 @@ kbd {
   vertical-align: middle;
 }
 
-/*# sourceMappingURL=divider.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2512,10 +2485,8 @@ kbd {
   right: 0;
 }
 
-/*# sourceMappingURL=drop.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2584,10 +2555,8 @@ kbd {
   text-decoration: none;
 }
 
-/*# sourceMappingURL=flyout.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2654,10 +2623,8 @@ kbd {
           transform: rotateX(180deg);
 }
 
-/*# sourceMappingURL=icon.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2767,10 +2734,8 @@ kbd {
   display: none !important;
 }
 
-/*# sourceMappingURL=input.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2824,10 +2789,8 @@ kbd {
   border-bottom-right-radius: 0.2rem;
 }
 
-/*# sourceMappingURL=input-group.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2931,10 +2894,8 @@ kbd {
   border-left-color: #c2c2c2;
 }
 
-/*# sourceMappingURL=label.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2944,10 +2905,8 @@ kbd {
           transition: background-image 0.3s;
 }
 
-/*# sourceMappingURL=lazy-load.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -2989,10 +2948,8 @@ kbd {
   -webkit-backface-visibility: hidden;
 }
 
-/*# sourceMappingURL=mask.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3018,10 +2975,8 @@ kbd {
   clear: both;
 }
 
-/*# sourceMappingURL=matrix.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3160,10 +3115,8 @@ kbd {
           transform: translateX(0);
 }
 
-/*# sourceMappingURL=modal.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3196,10 +3149,8 @@ kbd {
   margin: 0 0 0.625rem 0;
 }
 
-/*# sourceMappingURL=notice.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3314,10 +3265,8 @@ kbd {
   }
 }
 
-/*# sourceMappingURL=off-canvas.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3398,13 +3347,15 @@ kbd {
   border-radius: 0 1rem 0 0/0 3rem 0 0;
 }
 
-/*# sourceMappingURL=pagination.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
+.pin {
+  position: absolute;
+}
+
 .pin.sticky {
   -webkit-transition: top 0.6s ease-in-out, right 0.2s ease-in-out, left 0.2s ease-in-out;
           transition: top 0.6s ease-in-out, right 0.2s ease-in-out, left 0.2s ease-in-out;
@@ -3415,10 +3366,8 @@ kbd {
           transition: top 0.2s linear, right 0.2s linear, left 0.2s linear;
 }
 
-/*# sourceMappingURL=pin.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3523,10 +3472,8 @@ kbd {
           transform: rotate(0deg);
 }
 
-/*# sourceMappingURL=tooltip.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3580,10 +3527,8 @@ kbd {
   left: -6px;
 }
 
-/*# sourceMappingURL=popover.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3630,10 +3575,8 @@ kbd {
           transition: width 0.5s, background 0.5s;
 }
 
-/*# sourceMappingURL=progress.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3713,10 +3656,8 @@ kbd {
   display: block;
 }
 
-/*# sourceMappingURL=showcase.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3774,10 +3715,8 @@ kbd {
   font-size: 1.3rem;
 }
 
-/*# sourceMappingURL=step.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3888,10 +3827,8 @@ kbd {
   opacity: 1 !important;
 }
 
-/*# sourceMappingURL=switch.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -3925,10 +3862,8 @@ kbd {
   text-align: left;
 }
 
-/*# sourceMappingURL=tab.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -4021,18 +3956,21 @@ kbd {
   padding: 1rem;
 }
 
-/*# sourceMappingURL=table.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
 .toasts {
   position: fixed;
-  margin: 1.25rem;
+  padding: 1.25rem;
   width: 20%;
   z-index: 500;
+}
+@media only screen and (max-width: 641px) {
+  .toasts {
+    width: 100%;
+  }
 }
 .toasts.top-left {
   top: 0;
@@ -4132,10 +4070,8 @@ kbd {
           transform: translateX(0);
 }
 
-/*# sourceMappingURL=toast.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
@@ -4195,10 +4131,8 @@ kbd {
   zoom: 1;
 }
 
-/*# sourceMappingURL=type-ahead.css.map */
-
 /**
- * @copyright   2010-2014, The Titon Project
+ * @copyright   2010-2015, The Titon Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */

@@ -90,6 +90,9 @@ $(function() {
         options.url = location.origin + location.pathname + options.url.substr(1);
     });
 
+    // Set classes
+    $('html').addClass(Toolkit.isTouch ? 'touch' : 'no-touch');
+
     // Events
     $(window).on('resize', Demo.resize);
 

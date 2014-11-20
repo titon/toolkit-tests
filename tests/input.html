@@ -443,22 +443,31 @@
 
 <script>
     $(function() {
-        $('#input').input();
+        $('#input').input({
+            native: false
+        });
 
-        $('#input-copy').input();
+        $('#input-copy').input({
+            native: false
+        });
 
-        $('.js-select').inputSelect();
+        $('.js-select').inputSelect({
+            native: false
+        });
 
         $('.js-select-multi').inputSelect({
+            native: false,
             multipleFormat: 'list',
             listLimit: 3
         });
 
         $('.js-select-hide-option').inputSelect({
+            native: false,
             hideFirst: true
         });
 
         $('.js-select-hide-selected').inputSelect({
+            native: false,
             hideSelected: true
         });
 
