@@ -32,10 +32,23 @@ a {
 .test-logo {
     background: url('http://titon.io/img/logo.png') 50% 0 no-repeat;
     background-size: 184px 80px;
+    width: 184px;
     height: 40px;
-    text-indent: -9999px;
-    overflow: hidden;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem auto;
+    position: relative;
+
+    span { visibility: hidden; }
+
+    &::after {
+        content: attr(data-version);
+        display: inline-block;
+        position: absolute;
+        left: 105%;
+        top: 50%;
+        color: #dd6195;
+        font-size: 1.5rem;
+        transform: translateY(-50%);
+    }
 }
 
 .test-demo {
@@ -80,6 +93,7 @@ form,
 }
 
 textarea {
+    width: 100%;
     max-width: 100%;
 }
 
@@ -95,6 +109,11 @@ textarea {
         color: #fff;
         padding: 5px;
     }
+}
+
+.switcher {
+    background: #fff url("../img/select-arrow@2x.png") right .75rem top 50% no-repeat;
+    background-size: 12px 12px;
 }
 
 .touch-note {
@@ -170,6 +189,8 @@ textarea {
 }
 
 .stalker {
+    .button { margin: 0; }
+
     .button-group {
         width: 100%;
 
@@ -189,7 +210,7 @@ textarea {
 
 #stalker-targets {
     position: fixed;
-    top: 7rem;
+    top: 12rem;
     right: 2rem;
     text-align: right;
 }
@@ -218,14 +239,16 @@ textarea {
     }
 
     .test-logo {
-        width: 184px;
         position: absolute;
         top: 1.2rem;
         left: 50%;
         transform: translateX(-50%);
+        margin: 0;
     }
 
     .test-demo {
         padding: 3rem 4rem 3rem 4rem;
     }
+
+    #stalker-targets { top: 7rem; }
 }

@@ -47,6 +47,7 @@
 .button {
   background: #7F8C8D;
   color: #fff;
+  margin: 1px 0;
 }
 .button.is-active, .is-active .button, .button:hover {
   background: #95A5A6;
@@ -80,6 +81,10 @@
   opacity: .5;
 }
 
+.button-group + .button-group {
+  margin: 0 1rem;
+}
+
 .button-group > li,
 .button-group > .button {
   border-left: 1px solid rgba(0, 0, 0, 0.2);
@@ -93,6 +98,7 @@
 .button-group--vertical > .button {
   border-left: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0;
 }
 .button-group--vertical > li:first-child,
 .button-group--vertical > .button:first-child {
@@ -242,6 +248,10 @@ fieldset {
 }
 .select-options li.is-disabled {
   background: rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin: 1px 0;
 }
 
 .input-addon {

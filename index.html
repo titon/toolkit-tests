@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Titon Toolkit</title>
+    <title>Titon Toolkit - Demos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" media="screen" rel="stylesheet" type="text/css">
@@ -20,7 +20,9 @@
 </head>
 <body>
     <div id="head" class="test-bar clear-fix">
-        <h1 class="test-logo">Titon Toolkit</h1>
+        <h1 class="test-logo" data-version="2.0">
+            <span>Titon Toolkit</span>
+        </h1>
 
         <div class="bar-right">
             <button id="destroy" class="button is-error float-right" role="button">
@@ -38,7 +40,7 @@
                 <span class="title">Typography</span>
             </button>
 
-            <select id="plugin-switcher" class="input">
+            <select id="plugin-switcher" class="input switcher">
                 <option value="">-- Select a plugin --</option>
                 <optgroup label="Components">
                     <option value="base" selected>Base</option>

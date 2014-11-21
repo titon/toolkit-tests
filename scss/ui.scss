@@ -87,6 +87,7 @@ $gray-dark: #7F8C8D;
 .button {
     background: $gray-dark;
     color: #fff;
+    margin: 1px 0;
 
     &.is-active,
     .is-active &,
@@ -126,6 +127,10 @@ $gray-dark: #7F8C8D;
 
 //-------------------- Button Group --------------------//
 
+.button-group + .button-group {
+    margin: 0 1rem;
+}
+
 .button-group {
     > li,
     > .button {
@@ -140,6 +145,7 @@ $gray-dark: #7F8C8D;
     > .button {
         border-left: 0;
         border-top: 1px solid rgba(0, 0, 0, .2);
+        margin: 0;
 
         &:first-child { border-top: 0; }
     }
@@ -302,6 +308,10 @@ fieldset {
 }
 
 //-------------------- Input Group --------------------//
+
+.input-group {
+    margin: 1px 0;
+}
 
 .input-addon {
     background: $teal-dark;
