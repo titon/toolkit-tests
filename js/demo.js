@@ -73,7 +73,9 @@ var Demo = {
             .find('.title')
                 .html(next.text());
 
-        history.pushState({ key: key }, current.text(), '?' + key + (hash || ''));
+        if (history.pushState) {
+            history.pushState({key: key}, current.text(), '?' + key + (hash || ''));
+        }
     },
 
     random: function(min, max) {
@@ -87,7 +89,13 @@ $(function() {
 
     // Modify all AJAX URLs and prefix with the host
     $.ajaxPrefilter(function(options) {
-        options.url = location.origin + location.pathname + options.url.substr(1);
+        var base = location.href.replace('index.html', '');
+
+        if (base.indexOf('?')) {
+            base = base.split('?')[0];
+        }
+
+        options.url = base + options.url.substr(1);
     });
 
     // Set classes
