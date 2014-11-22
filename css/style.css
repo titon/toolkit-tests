@@ -5,7 +5,7 @@ html {
 body {
   background: #f0f1f2;
   color: #000;
-  padding-bottom: 250px;
+  padding-bottom: 200px;
 }
 
 a {
@@ -42,7 +42,7 @@ a {
   visibility: hidden;
 }
 .test-logo::after {
-  content: "2.0";
+  content: attr(data-version);
   display: inline-block;
   position: absolute;
   left: 105%;
@@ -57,9 +57,6 @@ a {
 .test-demo {
   padding: 2rem;
   text-align: center;
-}
-.test-demo:first-child {
-  padding-top: 4rem;
 }
 .test-demo:nth-child(even) {
   background: #344a5f;
@@ -83,6 +80,11 @@ a {
 .test-note {
   margin: 2rem 0 0 0;
   color: #344a5f;
+}
+
+.test-footer {
+  padding: 2rem;
+  text-align: center;
 }
 
 form,
@@ -119,14 +121,18 @@ textarea {
   background-size: 12px 12px;
 }
 
-.touch-note {
-  color: #C0392B;
-  text-align: center;
-  margin-top: 0;
-  padding: 1rem;
-}
-.no-touch .touch-note {
+.show-touch {
   display: none;
+}
+
+.touch .show-touch {
+  display: block;
+}
+
+.body > .notice {
+  margin: 0;
+  color: #fff;
+  text-align: center;
 }
 
 #carousel-1 {
@@ -145,7 +151,8 @@ textarea {
   color: #000;
   background: #fbfbfb;
   border: 1px solid #e5e5e5;
-  padding: 1rem;
+  padding: 1rem 0;
+  text-align: center;
 }
 
 [class*="icon-16"] {
@@ -180,14 +187,14 @@ textarea {
 
 .lazy-item {
   display: block;
-  width: 200px;
-  height: 200px;
-  background-size: 200px 200px;
+  width: 150px;
+  height: 150px;
+  background-size: 150px 150px;
   margin: 0 auto;
 }
 .lazy-item img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .pin-container {
@@ -233,9 +240,12 @@ textarea {
 
 #stalker-targets {
   position: fixed;
-  top: 12rem;
+  top: 50%;
   right: 2rem;
   text-align: right;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 641px) {
@@ -274,9 +284,5 @@ textarea {
 
   .test-demo {
     padding: 3rem 4rem 3rem 4rem;
-  }
-
-  #stalker-targets {
-    top: 7rem;
   }
 }

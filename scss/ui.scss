@@ -132,11 +132,21 @@ $gray-dark: #7F8C8D;
 }
 
 .button-group {
-    > li,
+    > li .button,
     > .button {
         border-left: 1px solid rgba(0, 0, 0, .2);
+    }
 
+    > .button {
         &:first-child { border-left: 0; }
+    }
+
+    > li {
+        margin: 1px 0;
+
+        .button { margin: 0; }
+
+        &:first-child .button { border-left: 0; }
     }
 }
 
@@ -249,6 +259,7 @@ pre {
 
 .input {
     color: #000;
+    margin: 1px 0;
 
     &:focus {
         border-color: $blue-dark;
@@ -311,6 +322,8 @@ fieldset {
 
 .input-group {
     margin: 1px 0;
+
+    .input { margin: 0; }
 }
 
 .input-addon {
@@ -368,7 +381,11 @@ fieldset {
 
 //-------------------- Matrix --------------------//
 
-.matrix { margin-top: 1rem; }
+.matrix {
+    margin-top: 1rem;
+
+    li { margin: 0 20px 20px 0; }
+}
 
 //-------------------- Modal --------------------//
 
@@ -436,6 +453,8 @@ fieldset {
     .test-demo { text-align: left; }
 
     p { margin: 1.25rem 0 }
+
+    > .notice { margin: 0; }
 }
 
 @media only screen and (min-width: 1024px) {

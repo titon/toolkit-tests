@@ -114,6 +114,10 @@ $(function() {
         Demo.loadPlugin($(this).data('plugin'));
     });
 
+    $('#to-top').click(function() {
+        window.scrollTo(0, 0);
+    });
+
     // Load plugin based on query string
     if (location.search) {
         Demo.loadPlugin(location.search.substr(1), location.hash);

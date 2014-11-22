@@ -1,4 +1,6 @@
 <div class="test-demo">
+    <h2 class="test-header">Default. No throttle.</h2>
+
     <div class="grid pin-container">
         <div class="col span-8">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
@@ -99,7 +101,7 @@
 <div class="test-demo">
     <h2 class="test-header">Height locking.</h2>
 
-    <div class="grid pin-container">
+    <div class="grid pin-container" id="pin-lock-parent">
         <aside class="pin col span-3" id="pin-4">
             This sidebar will be pinned on the left and won't move since the
             height is larger than the content and lock is enabled.
@@ -179,6 +181,8 @@
 
 <script>
     $(function() {
+        $('#pin-4').height($('#pin-lock-parent').outerHeight());
+
         Demo.instances.push( $('#pin-1').pin({
             throttle: 0
         }).toolkit('pin') );

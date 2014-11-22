@@ -1,4 +1,4 @@
-/*! Titon Toolkit v2.0.0 | BSD-3 License | titon.io */
+/*! Titon Toolkit v2.0.0-rc.1 | BSD-3 License | titon.io */
 (function($, window, document) {
 'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -61,10 +61,10 @@ $.fn.cache = function(key, value) {
 var Toolkit = {
 
     /** Current version. */
-    version: '2.0.0',
+    version: '2.0.0-rc.1',
 
     /** Build date hash. */
-    build: 'i2phcev5',
+    build: 'i2s8sgwx',
 
     /** Vendor namespace. */
     vendor: '',
@@ -1174,6 +1174,35 @@ $.expr[':'].shown = function(obj) {
     return ($(obj).css('visibility') !== 'hidden');
 };
 
+/**
+ * An event that triggers when a horizontal browser window resize occurs.
+ *
+ * @returns {Object}
+ */
+$.event.special.horizontalresize = (function() {
+    var win = $(window),
+        lastWidth = win.width();
+
+    function handleResize(e) {
+        var currentWidth = win.width();
+
+        if (currentWidth !== lastWidth) {
+            lastWidth = currentWidth;
+
+            $(e.target).trigger('horizontalresize');
+        }
+    }
+
+    return {
+        setup: function() {
+            win.on('resize', handleResize);
+        },
+        teardown: function() {
+            win.off('resize', handleResize);
+        }
+    };
+})();
+
 Toolkit.Accordion = Toolkit.Component.extend({
     name: 'Accordion',
     version: '2.0.0',
@@ -1227,7 +1256,7 @@ Toolkit.Accordion = Toolkit.Component.extend({
 
         // Set events
         this.addEvents([
-            ['resize', 'window', $.debounce(this.calculate.bind(this))],
+            ['horizontalresize', 'window', $.debounce(this.calculate.bind(this))],
             ['{mode}', 'element', 'onShow', this.ns('header')]
         ]);
 
@@ -3990,7 +4019,7 @@ Toolkit.Matrix = Toolkit.Component.extend({
         this.options = this.setOptions(options, this.element);
 
         // Set events
-        this.addEvent('resize', 'window', $.debounce(this.onResize.bind(this)));
+        this.addEvent('horizontalresize', 'window', $.debounce(this.onResize.bind(this)));
 
         this.initialize();
 
@@ -6921,5 +6950,36 @@ Toolkit.TypeAhead = Toolkit.Component.extend({
 Toolkit.create('typeAhead', function(options) {
     return new Toolkit.TypeAhead(this, options);
 });
+
+/**
+ * An event that triggers when a vertical browser window resize occurs.
+ *
+ * @returns {Object}
+ */
+$.event.special.verticalresize = (function() {
+    var win = $(window),
+        lastHeight = win.height();
+
+    function handleResize(e) {
+        var currentHeight = win.height();
+
+        if (currentHeight !== lastHeight) {
+            lastHeight = currentHeight;
+
+            $(e.target).trigger('verticalresize');
+        }
+    }
+
+    return {
+        setup: function() {
+            win.on('resize', handleResize);
+        },
+        teardown: function() {
+            win.off('resize', handleResize);
+        }
+    };
+})();
+    // An empty file that includes all event and extension dependencies.
+    // This should make these always available, even if the build is customized.;
 
 })(jQuery, window, document);

@@ -85,12 +85,20 @@
   margin: 0 1rem;
 }
 
-.button-group > li,
+.button-group > li .button,
 .button-group > .button {
   border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
-.button-group > li:first-child,
 .button-group > .button:first-child {
+  border-left: 0;
+}
+.button-group > li {
+  margin: 1px 0;
+}
+.button-group > li .button {
+  margin: 0;
+}
+.button-group > li:first-child .button {
   border-left: 0;
 }
 
@@ -204,6 +212,7 @@ pre {
 
 .input {
   color: #000;
+  margin: 1px 0;
 }
 .input:focus {
   border-color: #2980B9;
@@ -252,6 +261,9 @@ fieldset {
 
 .input-group {
   margin: 1px 0;
+}
+.input-group .input {
+  margin: 0;
 }
 
 .input-addon {
@@ -303,6 +315,9 @@ fieldset {
 
 .matrix {
   margin-top: 1rem;
+}
+.matrix li {
+  margin: 0 20px 20px 0;
 }
 
 .modal-outer {
@@ -363,6 +378,9 @@ fieldset {
 }
 .on-canvas p {
   margin: 1.25rem 0;
+}
+.on-canvas > .notice {
+  margin: 0;
 }
 
 @media only screen and (min-width: 1024px) {
