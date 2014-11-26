@@ -4,7 +4,7 @@
 
 <div>
     <div class="test-demo">
-        <h2 class="test-header">Default. Locked scrolling.</h2>
+        <h2 class="test-header">Default. Locked scrolling. Clickout disabled.</h2>
 
         <a href="http://placehold.it/500x500/4c6278/ffffff" class="js-showcase" title="A 1:1 square image.">
             <img src="http://placehold.it/200x150/4c6278/ffffff" alt="">
@@ -54,7 +54,9 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('.js-showcase').showcase().toolkit('showcase') );
+        Demo.instances.push( $('.js-showcase').showcase({
+            clickout: false
+        }).toolkit('showcase') );
 
         Demo.instances.push( $('.js-showcase-2').showcase({
             gutter: 25,

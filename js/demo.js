@@ -80,43 +80,52 @@ var Demo = {
 
     random: function(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+
+    // Modify all AJAX URLs and prefix with the host
+    setupAjax: function() {
+        $.ajaxPrefilter(function(options) {
+            var base = location.href.replace('index.html', '');
+
+            if (base.indexOf('?')) {
+                base = base.split('?')[0];
+            }
+
+            options.url = base + options.url.substr(1);
+        });
+    },
+
+    setupUi: function() {
+        $('html').addClass(Toolkit.isTouch ? 'touch' : 'no-touch');
+
+        $('#logo').attr('data-version', Toolkit.version);
+    },
+
+    bindEvents: function() {
+        $(window).on('resize', Demo.resize);
+
+        $('#plugin-switcher').change(function() {
+            Demo.loadPlugin($(this).val());
+        });
+
+        $('#destroy').click(Demo.destroyPlugins);
+
+        $('.plugin-goto').click(function() {
+            Demo.loadPlugin($(this).data('plugin'));
+        });
+
+        $('#to-top').click(function() {
+            window.scrollTo(0, 0);
+        });
     }
 
 };
 
 $(function() {
     Demo.resize();
-
-    // Modify all AJAX URLs and prefix with the host
-    $.ajaxPrefilter(function(options) {
-        var base = location.href.replace('index.html', '');
-
-        if (base.indexOf('?')) {
-            base = base.split('?')[0];
-        }
-
-        options.url = base + options.url.substr(1);
-    });
-
-    // Set classes
-    $('html').addClass(Toolkit.isTouch ? 'touch' : 'no-touch');
-
-    // Events
-    $(window).on('resize', Demo.resize);
-
-    $('#plugin-switcher').change(function() {
-        Demo.loadPlugin($(this).val());
-    });
-
-    $('#destroy').click(Demo.destroyPlugins);
-
-    $('.plugin-goto').click(function() {
-        Demo.loadPlugin($(this).data('plugin'));
-    });
-
-    $('#to-top').click(function() {
-        window.scrollTo(0, 0);
-    });
+    Demo.setupAjax();
+    Demo.setupUi();
+    Demo.bindEvents();
 
     // Load plugin based on query string
     if (location.search) {

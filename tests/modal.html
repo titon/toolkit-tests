@@ -20,7 +20,7 @@
 </div>
 
 <div class="test-demo">
-    <h2 class="test-header">Animations.</h2>
+    <h2 class="test-header">Animations. Clickout disabled.</h2>
 
     <a href="javascript:;" class="button js-modal-fade" data-modal="Will fade in.">Fade</a>
     <a href="javascript:;" class="button js-modal-from-above" data-modal="Will drop in from above.">From Above</a>
@@ -102,7 +102,7 @@
         $.each(['fade', 'from-above', 'from-below', 'slide-in-top', 'slide-in-right', 'slide-in-bottom', 'slide-in-left'], function(key, value) {
             Demo.instances.push( $('.js-modal-' + value).modal({
                 animation: value,
-                ajax: false,
+                clickout: false,
                 onLoad: function(content) {
                     this.element.find('.modal-inner').html('<div class="modal-body">' + content + '</div>');
                 }

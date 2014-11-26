@@ -1,4 +1,4 @@
-/*! Titon Toolkit v2.0.0-rc.1 | BSD-3 License | titon.io */
+/*! Titon Toolkit v2.0.0-rc.2 | BSD-3 License | titon.io */
 (function($, window, document) {
 'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -61,10 +61,10 @@ $.fn.cache = function(key, value) {
 var Toolkit = {
 
     /** Current version. */
-    version: '2.0.0-rc.1',
+    version: '2.0.0-rc.2',
 
     /** Build date hash. */
-    build: 'i2wlyvq1',
+    build: 'i2xzrzkm',
 
     /** Vendor namespace. */
     vendor: '',
@@ -794,8 +794,9 @@ Toolkit.Component = Toolkit.Base.extend({
      * If the content is a literal string, set it directly.
      *
      * @param {String} content
+     * @param {Object} [params]
      */
-    loadContent: function(content) {
+    loadContent: function(content, params) {
         var ajax = false;
 
         // Load content from an element matching ID
@@ -804,7 +805,7 @@ Toolkit.Component = Toolkit.Base.extend({
 
         // Load content from an AJAX request
         // Matches http://, https://, /url, and many others
-        } else if (content.match(/^([a-z]+:)?\/\//) || content.match(/^\/[\w\-\.\/]+$/i)) {
+        } else if (content.match(/^([a-z]+:)?\/\//) || content.match(/^\/[\w\-\.\/]+/i)) {
             ajax = true;
         }
 
@@ -812,7 +813,7 @@ Toolkit.Component = Toolkit.Base.extend({
             this.position(this.cache[content]);
 
         } else if (ajax) {
-            this.requestData(content);
+            this.requestData(content, params);
 
         } else {
             this.position(content);
@@ -1136,6 +1137,7 @@ Toolkit.Component = Toolkit.Base.extend({
     }
 
 }, {
+    ajax: {},
     context: null,
     className: '',
     template: '',
@@ -4379,10 +4381,13 @@ Toolkit.Modal = Toolkit.Component.extend({
             //['clickout', 'element', 'onHide'],
             //['clickout', 'document', 'onHide', '{selector}'],
             ['click', 'document', 'onShow', '{selector}'],
-            ['click', 'element', 'onHide'],
             ['click', 'element', 'hide', this.ns('close')],
             ['click', 'element', 'onSubmit', this.ns('submit')]
         ]);
+
+        if (options.clickout) {
+            this.addEvent('click', 'element', 'onHide');
+        }
 
         this.initialize();
     },
@@ -4546,10 +4551,10 @@ Toolkit.Modal = Toolkit.Component.extend({
 
 }, {
     animation: 'fade',
-    ajax: true,
     blackout: true,
     fullScreen: false,
     stopScroll: true,
+    clickout: true,
     getContent: 'data-modal',
     template: '<div class="' + vendor + 'modal">' +
         '<div class="' + vendor + 'modal-outer">' +
@@ -5297,7 +5302,6 @@ Toolkit.Tooltip = Toolkit.Component.extend({
 }, {
     mode: 'hover',
     animation: 'fade',
-    ajax: false,
     follow: false,
     position: 'top-center',
     showLoading: true,
@@ -5433,8 +5437,6 @@ Toolkit.Showcase = Toolkit.Component.extend({
 
         // Initialize events
         this.addEvents([
-            ['clickout', 'element', 'onHide'],
-            ['clickout', 'document', 'onHide', '{selector}'],
             ['keydown', 'window', 'onKeydown'],
             ['click', 'document', 'onShow', '{selector}'],
             ['click', 'element', 'hide', this.ns('close')],
@@ -5442,6 +5444,13 @@ Toolkit.Showcase = Toolkit.Component.extend({
             ['click', 'element', 'prev', this.ns('prev')],
             ['click', 'element', 'onJump', this.ns('tabs') + ' a']
         ]);
+
+        if (options.clickout) {
+            this.addEvents([
+                ['clickout', 'document', 'onHide', '{selector}'],
+                ['clickout', 'element', 'onHide']
+            ]);
+        }
 
         if (options.swipe) {
             this.addEvents([
@@ -5790,6 +5799,7 @@ Toolkit.Showcase = Toolkit.Component.extend({
 }, {
     blackout: true,
     stopScroll: true,
+    clickout: true,
     swipe: Toolkit.isTouch,
     gutter: 50,
     getCategory: 'data-showcase',
@@ -6143,9 +6153,9 @@ Toolkit.Tab = Toolkit.Component.extend({
 
         this.fireEvent('showing', [this.index]);
 
-        // Load content with AJAX
-        if (this.readOption(tab, 'ajax') && url && url.substr(0, 1) !== '#' && !this.cache[url]) {
-            this.requestData(url, { section: section });
+        // Load content for AJAX requests
+        if (url.substr(0, 10) !== 'javascript' && url.substr(0, 1) !== '#') {
+            this.loadContent(url, { section: section });
         }
 
         // Toggle tabs
@@ -6226,7 +6236,7 @@ Toolkit.Tab = Toolkit.Component.extend({
      * @param {jQuery.Event} e
      */
     onShow: function(e) {
-        if (this.options.preventDefault || (this.options.ajax && e.currentTarget.getAttribute('href').substr(0, 1) !== '#')) {
+        if (this.options.preventDefault || e.currentTarget.getAttribute('href').substr(0, 1) !== '#') {
             e.preventDefault();
         }
 
@@ -6235,7 +6245,6 @@ Toolkit.Tab = Toolkit.Component.extend({
 
 }, {
     mode: 'click',
-    ajax: false,
     collapsible: false,
     defaultIndex: 0,
     persistState: false,
