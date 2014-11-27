@@ -1,5 +1,5 @@
 <?php
-// Handle webhooks from GitHub.
+// Handle webhooks from GitHub and update the remote repository each time there's a push.
 // This looks insecure but we're actually validating based on a secret token, so it should be ok.
 header('Content-Type: text/plain; charset=utf-8');
 
