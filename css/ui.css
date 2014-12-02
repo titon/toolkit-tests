@@ -28,14 +28,11 @@
   background: #1ABC9C;
 }
 
-.breadcrumb {
-  background: #ECF0F1;
-}
 .breadcrumb a {
-  color: #E74C3C;
+  color: #3498DB;
 }
 .breadcrumb a:hover {
-  color: #C0392B;
+  color: #2980B9;
 }
 .breadcrumb a .caret {
   color: #95A5A6;

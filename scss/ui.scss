@@ -67,12 +67,10 @@ $gray-dark: #7F8C8D;
 //-------------------- Breadcrumb --------------------//
 
 .breadcrumb {
-    background: $white-light;
-
     a {
-        color: $red-light;
+        color: $blue-light;
 
-        &:hover { color: $red-dark; }
+        &:hover { color: $blue-dark; }
 
         .caret { color: $gray-light; }
     }

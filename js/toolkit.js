@@ -64,7 +64,7 @@ var Toolkit = {
     version: '2.0.0-rc.2',
 
     /** Build date hash. */
-    build: 'i2xzrzkm',
+    build: 'i36izimj',
 
     /** Vendor namespace. */
     vendor: '',
