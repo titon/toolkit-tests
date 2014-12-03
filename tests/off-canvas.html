@@ -10,7 +10,7 @@
 
         <div>
             <div class="test-demo">
-                <h2 class="test-header">Default. Locks scrolling.</h2>
+                <h2 class="test-header">Default.</h2>
 
                 <p class="align-center">
                     <button type="button" class="button js-canvas-left">Toggle Left Sidebar</button>
@@ -82,7 +82,8 @@
     $(function() {
         $('.off-canvas').offCanvas({
             animation: (location.hash || '#push').substr(1),
-            swipe: true
+            swipe: true,
+            stopScroll: false
         });
 
         Demo.instances.push( $('#sidebar-1').toolkit('offCanvas') );
