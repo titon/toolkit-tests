@@ -1,3 +1,7 @@
+<div class="notice is-warning show-touch">
+    Nested menus are not supported on touch devices.
+</div>
+
 <div class="notice is-error show-touch">
     Drop menus do not reposition into the viewport.
 </div>
@@ -7,7 +11,7 @@
         <h2 class="test-header">Default.</h2>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-1" data-drop="#drop-1a" aria-controls="drop-1a" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-1a" aria-controls="drop-1a" aria-haspopup="true">
                 Open Dropdown
                 <span class="caret-down"></span>
             </button>
@@ -20,7 +24,7 @@
         </div>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-1" data-drop="#drop-1b" aria-controls="drop-1b" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-1b" aria-controls="drop-1b" aria-haspopup="true">
                 Open Dropdown
                 <span class="caret-down"></span>
             </button>
@@ -37,7 +41,7 @@
         <h2 class="test-header">Drop lefts. Nested drops.</h2>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-2" data-drop="#drop-2a" aria-controls="drop-2a" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-2a" aria-controls="drop-2a" aria-haspopup="true">
                 Open Dropleft
                 <span class="caret-down"></span>
             </button>
@@ -60,7 +64,7 @@
         </div>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-2" data-drop="#drop-2b" aria-controls="drop-2b" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-2b" aria-controls="drop-2b" aria-haspopup="true">
                 Open Dropleft
                 <span class="caret-down"></span>
             </button>
@@ -84,10 +88,10 @@
     </div>
 
     <div class="test-demo">
-        <h2 class="test-header">Drop rights. Item headings. Doesn't hide other drops.</h2>
+        <h2 class="test-header">Drop rights. Item headings.</h2>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-3" data-drop="#drop-3a" aria-controls="drop-3a" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-3a" aria-controls="drop-3a" aria-haspopup="true">
                 Open Dropright
                 <span class="caret-down"></span>
             </button>
@@ -101,7 +105,7 @@
         </div>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-3" data-drop="#drop-3b" aria-controls="drop-3b" aria-haspopup="true">
+            <button type="button" class="button js-drop" data-drop="#drop-3b" aria-controls="drop-3b" aria-haspopup="true">
                 Open Dropright
                 <span class="caret-down"></span>
             </button>
@@ -119,7 +123,7 @@
         <h2 class="test-header">Drop ups. Item dividers. Hover activated.</h2>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-4" data-drop="#drop-4a" aria-controls="drop-4a" aria-haspopup="true">
+            <button type="button" class="button js-drop-hover" data-drop="#drop-4a" aria-controls="drop-4a" aria-haspopup="true">
                 Open Dropup
                 <span class="caret-down"></span>
             </button>
@@ -132,7 +136,7 @@
         </div>
 
         <div class="button-group">
-            <button type="button" class="button js-drop-4" data-drop="#drop-4b" aria-controls="drop-4b" aria-haspopup="true">
+            <button type="button" class="button js-drop-hover" data-drop="#drop-4b" aria-controls="drop-4b" aria-haspopup="true">
                 Open Dropup
                 <span class="caret-down"></span>
             </button>
@@ -148,15 +152,9 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('.js-drop-1').drop().toolkit('drop') );
+        Demo.instances.push( $('.js-drop').drop().toolkit('drop') );
 
-        Demo.instances.push( $('.js-drop-2').drop().toolkit('drop') );
-
-        Demo.instances.push( $('.js-drop-3').drop({
-            hideOpened: false
-        }).toolkit('drop') );
-
-        Demo.instances.push( $('.js-drop-4').drop({
+        Demo.instances.push( $('.js-drop-hover').drop({
             mode: 'hover'
         }).toolkit('drop') );
     });

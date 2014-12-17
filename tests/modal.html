@@ -3,10 +3,11 @@
 
     <a href="/tests/ajax/modal.html" class="button js-modal">Load with AJAX</a>
     <a href="#dom" class="button js-modal">Load from DOM</a>
+    <a href="#iframe" class="button js-modal">Load an iframe</a>
 
     <div id="dom" style="display: none">
         <div class="modal-head">
-            <h4>DOM Load</h4>
+            <h4>From DOM</h4>
         </div>
 
         <div class="modal-body">
@@ -17,6 +18,20 @@
             <button type="button" class="button" data-modal-close>Close</button>
         </div>
     </div>
+
+<div id="iframe" style="display: none">
+    <div class="modal-head">
+        <h4>With iframe</h4>
+    </div>
+
+    <div class="modal-body">
+        <iframe src="http://titon.io" frameborder="0" style="width: 100%"></iframe>
+    </div>
+
+    <div class="modal-foot">
+        <button type="button" class="button" data-modal-close>Close</button>
+    </div>
+</div>
 </div>
 
 <div class="test-demo">

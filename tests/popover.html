@@ -10,8 +10,7 @@
         <a href="#dom" class="button js-popover">Load from DOM</a>
         <a href="javascript:;" class="button js-popover"
            data-popover="This content is loaded from an HTML attribute."
-           data-popover-getcontent="data-popover"
-           data-popover-ajax="false">Load from attribute</a>
+           data-popover-getcontent="data-popover">Load from attribute</a>
 
         <div id="dom" style="display: none">This content is loaded from a hidden DOM element.</div>
     </div>
@@ -19,10 +18,10 @@
     <div class="test-demo">
         <h2 class="test-header">Animations.</h2>
 
-        <a href="javascript:;" class="button js-popover-fade" data-popover="Will fade in.">Fade</a>
-        <a href="javascript:;" class="button js-popover-from-above" data-popover="Will drop in from above.">From Above</a>
-        <a href="javascript:;" class="button js-popover-from-below" data-popover="Will drop in from below.">From Below</a>
-        <a href="javascript:;" class="button js-popover-flip-rotate" data-popover="Will flip rotate into place.">Flip Rotate</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-animation="fade" data-popover="Will fade in.">Fade</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-animation="from-above" data-popover="Will drop in from above.">From Above</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-animation="from-below" data-popover="Will drop in from below.">From Below</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-animation="flip-rotate" data-popover="Will flip rotate into place.">Flip Rotate</a>
     </div>
 
     <div class="test-demo">
@@ -48,30 +47,17 @@
         <h2 class="test-header">Additional features.</h2>
 
         <a href="/tests/ajax/popover.html" class="button js-popover" title="Popover Title">With Title</a>
-        <a href="javascript:;" class="button js-popover-xoffset" data-popover="Will be shifted on the X axis.">X Offset</a>
-        <a href="javascript:;" class="button js-popover-yoffset" data-popover="Will be shifted on the Y axis.">Y Offset</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-xoffset="15" data-popover="Will be shifted on the X axis.">X Offset</a>
+        <a href="javascript:;" class="button js-popover-2" data-popover-yoffset="15" data-popover="Will be shifted on the Y axis.">Y Offset</a>
     </div>
 </div>
 
 <script>
     $(function() {
         Demo.instances.push( $('.js-popover').popover({
-            ajax: true,
             getContent: 'href'
         }).toolkit('popover') );
 
-        $.each(['fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
-            Demo.instances.push( $('.js-popover-' + value).popover({
-                animation: value
-            }).toolkit('popover') );
-        });
-
-        Demo.instances.push( $('.js-popover-xoffset').popover({
-            xOffset: 15
-        }).toolkit('popover') );
-
-        Demo.instances.push( $('.js-popover-yoffset').popover({
-            yOffset: 15
-        }).toolkit('popover') );
+        Demo.instances.push( $('.js-popover-2').popover().toolkit('popover') );
     });
 </script>

@@ -14,8 +14,7 @@
         <a href="#dom" class="button js-tooltip">Load from DOM</a>
         <a href="javascript:;" class="button js-tooltip"
            data-tooltip="This content is loaded from an HTML attribute."
-           data-tooltip-getcontent="data-tooltip"
-           data-tooltip-ajax="false">Load from attribute</a>
+           data-tooltip-getcontent="data-tooltip">Load from attribute</a>
 
         <div id="dom" style="display: none">This content is loaded from a hidden DOM element.</div>
     </div>
@@ -23,10 +22,10 @@
     <div class="test-demo">
         <h2 class="test-header">Animations.</h2>
 
-        <a href="javascript:;" class="button js-tooltip-fade" data-tooltip="Will fade in.">Fade</a>
-        <a href="javascript:;" class="button js-tooltip-from-above" data-tooltip="Will drop in from above.">From Above</a>
-        <a href="javascript:;" class="button js-tooltip-from-below" data-tooltip="Will drop in from below.">From Below</a>
-        <a href="javascript:;" class="button js-tooltip-flip-rotate" data-tooltip="Will flip rotate into place.">Flip Rotate</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-animation="fade" data-tooltip="Will fade in.">Fade</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-animation="from-above" data-tooltip="Will drop in from above.">From Above</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-animation="from-below" data-tooltip="Will drop in from below.">From Below</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-animation="flip-rotate" data-tooltip="Will flip rotate into place.">Flip Rotate</a>
     </div>
 
     <div class="test-demo">
@@ -49,15 +48,15 @@
 
         <br><br>
 
-        <a href="javascript:;" class="button js-tooltip-follow" data-tooltip="The tooltip will follow the mouse cursor.">Mouse Follow</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-follow="true" data-tooltip="The tooltip will follow the mouse cursor.">Mouse Follow</a>
     </div>
 
     <div class="test-demo">
         <h2 class="test-header">Additional features.</h2>
 
         <a href="/tests/ajax/tooltip.html" class="button js-tooltip" title="Tooltip Title">With Title</a>
-        <a href="javascript:;" class="button js-tooltip-xoffset" data-tooltip="Will be shifted on the X axis.">X Offset</a>
-        <a href="javascript:;" class="button js-tooltip-yoffset" data-tooltip="Will be shifted on the Y axis.">Y Offset</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-xoffset="15" data-tooltip="Will be shifted on the X axis.">X Offset</a>
+        <a href="javascript:;" class="button js-tooltip-2" data-tooltip-yoffset="15" data-tooltip="Will be shifted on the Y axis.">Y Offset</a>
         <a href="javascript:;" class="button js-tooltip-mode" data-tooltip="Will display on click instead of hover.">On Click</a>
     </div>
 </div>
@@ -65,30 +64,13 @@
 <script>
     $(function() {
         Demo.instances.push( $('.js-tooltip').tooltip({
-            ajax: true,
             getContent: 'href'
         }).toolkit('tooltip') );
 
-        $.each(['fade', 'from-above', 'from-below', 'flip-rotate'], function(key, value) {
-            Demo.instances.push( $('.js-tooltip-' + value).tooltip({
-                animation: value
-            }).toolkit('tooltip') );
-        });
-
-        Demo.instances.push( $('.js-tooltip-xoffset').tooltip({
-            xOffset: 15
-        }).toolkit('tooltip') );
-
-        Demo.instances.push( $('.js-tooltip-yoffset').tooltip({
-            yOffset: 15
-        }).toolkit('tooltip') );
+        Demo.instances.push( $('.js-tooltip-2').tooltip().toolkit('tooltip') );
 
         Demo.instances.push( $('.js-tooltip-mode').tooltip({
             mode: 'click'
-        }).toolkit('tooltip') );
-
-        Demo.instances.push( $('.js-tooltip-follow').tooltip({
-            follow: true
         }).toolkit('tooltip') );
     });
 </script>
