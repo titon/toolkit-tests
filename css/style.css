@@ -21,13 +21,24 @@ a {
 .test-bar .viewport {
   float: right;
   padding-top: 8px;
-  margin-right: 1rem;
 }
 .test-bar .bar-right {
   display: none;
 }
+.test-bar .bar-right .button {
+  float: right;
+  margin-left: .5rem;
+}
 .test-bar .bar-left {
   text-align: center;
+}
+.test-bar .bar-left .button,
+.test-bar .bar-left .input {
+  float: left;
+  margin-right: .5rem;
+}
+.test-bar .button {
+  border-radius: .2rem;
 }
 
 .test-logo {
@@ -127,6 +138,7 @@ textarea {
 .switcher {
   background: #fff url("../img/select-arrow@2x.png") right 0.75rem top 50% no-repeat;
   background-size: 12px 12px;
+  border: 0;
 }
 
 .show-touch {

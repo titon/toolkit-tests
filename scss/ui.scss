@@ -762,7 +762,23 @@ fieldset {
 
 //-------------------- RTL --------------------//
 
-html[dir="rtl"] {
+.rtl {
+    .button-group {
+        > li .button,
+        > .button {
+            border-right: 1px solid rgba(0, 0, 0, .2);
+            border-left: 0;
+        }
+
+        > .button {
+            &:first-child { border-right: 0; }
+        }
+
+        > li {
+            &:first-child .button { border-right: 0; }
+        }
+    }
+
     .pagination--grouped li {
         border-left: 0;
         border-right: 1px solid rgba(0, 0, 0, .2);

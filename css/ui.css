@@ -652,14 +652,25 @@ fieldset {
   text-align: left;
 }
 
-html[dir="rtl"] .pagination--grouped li {
+.rtl .button-group > li .button,
+.rtl .button-group > .button {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 0;
+}
+.rtl .button-group > .button:first-child {
+  border-right: 0;
+}
+.rtl .button-group > li:first-child .button {
+  border-right: 0;
+}
+.rtl .pagination--grouped li {
   border-left: 0;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
-html[dir="rtl"] .pagination--grouped li:first-child {
+.rtl .pagination--grouped li:first-child {
   border-right: 0;
 }
-html[dir="rtl"] .tabs .span-10 {
+.rtl .tabs .span-10 {
   padding-left: 0;
   padding-right: 3rem;
 }

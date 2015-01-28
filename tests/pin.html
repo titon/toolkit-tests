@@ -194,8 +194,6 @@
         var dir = Toolkit.rtl ? 'right' : 'left',
             opp = Toolkit.rtl ? 'left' : 'right';
 
-        $('#pin-4').height($('#pin-lock-parent').outerHeight());
-
         Demo.instances.push( $('#pin-1').pin({
             location: opp,
             throttle: 0
@@ -211,7 +209,7 @@
             animation: 'slide'
         }).toolkit('pin') );
 
-        Demo.instances.push( $('#pin-4').pin({
+        Demo.instances.push( $('#pin-4').height($('#pin-lock-parent').outerHeight()).pin({
             location: dir,
             lock: true
         }).toolkit('pin') );
