@@ -110,6 +110,9 @@
   border-top: 0;
 }
 
+.carousel {
+  margin: 0 auto;
+}
 .carousel .caret-left,
 .carousel .caret-right {
   border-width: 15px;
@@ -567,6 +570,10 @@ fieldset {
   background: #ECF0F1;
 }
 
+.tabs .span-10 {
+  padding-left: 3rem;
+}
+
 .table {
   color: #000;
 }
@@ -643,4 +650,16 @@ fieldset {
   width: 172px;
   margin: 0 auto;
   text-align: left;
+}
+
+html[dir="rtl"] .pagination--grouped li {
+  border-left: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+html[dir="rtl"] .pagination--grouped li:first-child {
+  border-right: 0;
+}
+html[dir="rtl"] .tabs .span-10 {
+  padding-left: 0;
+  padding-right: 3rem;
 }

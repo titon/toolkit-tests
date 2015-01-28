@@ -326,6 +326,14 @@ td, th {
 *, *::after, *::before {
   box-sizing: border-box; }
 
+*[dir="rtl"] {
+  direction: rtl;
+  unicode-bidi: embed; }
+
+bdo[dir="rtl"] {
+  direction: rtl;
+  unicode-bidi: bidi-override; }
+
 .align-left {
   text-align: left; }
 
@@ -365,8 +373,7 @@ td, th {
   overflow: hidden !important; }
 
 .no-transition {
-  -webkit-transition: none !important;
-          transition: none !important; }
+  transition: none !important; }
 
 .sr-only {
   position: absolute;
@@ -639,8 +646,7 @@ label, .input-static {
 .input {
   background: #fbfbfb;
   border-radius: 0.2rem;
-  -webkit-transition: all 0.3s;
-          transition: all 0.3s; }
+  transition: all 0.3s; }
   .input:hover {
     border-color: #c2c2c2; }
   .input:focus {
@@ -741,7 +747,8 @@ textarea.input {
     margin: 0;
     padding: 0; }
   .form--inline .field-label {
-    margin: 0 0.625rem 0 0; }
+    margin: 0;
+    margin-right: 0.625rem; }
   .form--inline legend, .form--inline .field-help {
     display: none; }
 
@@ -812,8 +819,7 @@ kbd {
 .accordion-section {
   overflow: hidden;
   position: relative;
-  -webkit-transition: all 0.3s ease-in-out;
-          transition: all 0.3s ease-in-out; }
+  transition: all 0.3s ease-in-out; }
   .accordion-section.hide {
     max-height: 0; }
 
@@ -1003,8 +1009,7 @@ kbd {
   opacity: 0;
   visibility: hidden;
   background: rgba(0, 0, 0, 0.85);
-  -webkit-transition: opacity 0.3s;
-          transition: opacity 0.3s;
+  transition: opacity 0.3s;
   -webkit-backface-visibility: hidden; }
   .blackout .loader {
     position: absolute;
@@ -1024,7 +1029,6 @@ kbd {
  * @link        http://titon.io
  */
 .breadcrumb {
-  text-align: left;
   margin: 1.25rem 0; }
   .breadcrumb ul, .breadcrumb ol {
     list-style: none;
@@ -1164,7 +1168,6 @@ kbd {
  */
 .carousel {
   margin: 0 auto;
-  text-align: left;
   position: relative;
   max-width: 100%; }
   .carousel.no-next .carousel-next {
@@ -1186,8 +1189,7 @@ kbd {
     position: absolute;
     top: 0;
     left: 0;
-    -webkit-transition: left 1s, top 1s;
-            transition: left 1s, top 1s; }
+    transition: left 1s, top 1s, right 1s; }
     .carousel-items > ul > li {
       width: 100%;
       height: auto;
@@ -1213,8 +1215,7 @@ kbd {
     left: 0;
     opacity: 0;
     z-index: 1;
-    -webkit-transition: opacity 1s, visibility 1s;
-            transition: opacity 1s, visibility 1s; }
+    transition: opacity 1s, visibility 1s; }
     .carousel.fade .carousel-items > ul > li.show {
       z-index: 5; }
 
@@ -1262,7 +1263,6 @@ kbd {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: left;
   position: absolute;
   top: 100%;
   left: 0;
@@ -1271,8 +1271,7 @@ kbd {
   z-index: 500;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: left 0.3s, opacity 0.3s, visibility 0.3s;
-          transition: left 0.3s, opacity 0.3s, visibility 0.3s; }
+  transition: left 0.3s, opacity 0.3s, visibility 0.3s; }
   .drop .drop {
     display: block;
     top: 0;
@@ -1287,10 +1286,10 @@ kbd {
     .drop li > a {
       padding: 0.5rem;
       display: block; }
-      .drop li > a .caret-right {
+      .drop li > a .caret-right, .drop li > a .caret-left {
         float: right;
         display: none; }
-    .drop li.has-children > a .caret-right {
+    .drop li.has-children > a .caret-right, .drop li.has-children > a .caret-left {
       display: inline-block; }
     .drop li:hover .drop {
       visibility: visible;
@@ -1336,8 +1335,7 @@ kbd {
   z-index: 500;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.3s, visibility 0.3s;
-          transition: opacity 0.3s, visibility 0.3s; }
+  transition: opacity 0.3s, visibility 0.3s; }
   .flyout ul {
     list-style: none;
     margin: 0;
@@ -1351,16 +1349,15 @@ kbd {
       line-height: 100%;
       display: block;
       text-decoration: none; }
-      .flyout li > a .caret-right {
+      .flyout li > a .caret-right, .flyout li > a .caret-left {
         display: none; }
-    .flyout li.has-children > a .caret-right {
+    .flyout li.has-children > a .caret-right, .flyout li.has-children > a .caret-left {
       float: right;
       display: inline-block;
       margin-top: 3px; }
     .flyout li > .flyout {
       left: 90%;
-      -webkit-transition: left 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s;
-              transition: left 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s; }
+      transition: left 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s; }
       .flyout li > .flyout.push-left {
         left: auto;
         right: 90%; }
@@ -2163,8 +2160,7 @@ kbd {
  */
 .lazy-load {
   background-image: none !important;
-  -webkit-transition: background-image 0.3s;
-          transition: background-image 0.3s; }
+  transition: background-image 0.3s; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -2181,8 +2177,7 @@ kbd {
   opacity: 0;
   visibility: hidden;
   background: rgba(0, 0, 0, 0.85);
-  -webkit-transition: all 0.3s;
-          transition: all 0.3s;
+  transition: all 0.3s;
   color: #fff;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2219,8 +2214,7 @@ kbd {
     float: left;
     margin: 0;
     padding: 0;
-    -webkit-transition: top 0.3s, left 0.3s, bottom 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s;
-            transition: top 0.3s, left 0.3s, bottom 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s; }
+    transition: top 0.3s, left 0.3s, bottom 0.3s, right 0.3s, opacity 0.3s, visibility 0.3s; }
   .matrix.no-columns > li {
     position: relative !important; }
   .matrix::after {
@@ -2243,8 +2237,7 @@ kbd {
   visibility: hidden;
   z-index: 610;
   overflow: auto;
-  -webkit-transition: opacity 0.3s, visibility 0.3s;
-          transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
   -webkit-overflow-scrolling: touch; }
   .modal.is-loading .modal-close {
     display: none; }
@@ -2268,8 +2261,8 @@ kbd {
 .modal-outer {
   position: relative;
   margin: 1.25rem;
-  -webkit-transition: -webkit-transform 0.3s;
-          transition: transform 0.3s; }
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s; }
   @media only screen and (min-width: 640px) {
     .modal-outer {
       width: 50%;
@@ -2349,8 +2342,7 @@ kbd {
  */
 .notice {
   margin: 1.25rem 0;
-  padding: 0.75rem;
-  text-align: left; }
+  padding: 0.75rem; }
   .notice hr {
     border: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.15); }
@@ -2383,8 +2375,8 @@ kbd {
   z-index: 1;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s, visibility 0.5s;
-          transition: transform 0.5s, opacity 0.5s, visibility 0.5s;
+  transition: -webkit-transform 0.5s, opacity 0.5s, visibility 0.5s;
+  transition: transform 0.5s, opacity 0.5s, visibility 0.5s;
   -webkit-overflow-scrolling: touch; }
 
 .on-canvas {
@@ -2392,8 +2384,8 @@ kbd {
   width: 100%;
   max-width: 100%;
   z-index: 2;
-  -webkit-transition: -webkit-transform 0.5s, padding 0.5s;
-          transition: transform 0.5s, padding 0.5s; }
+  transition: -webkit-transform 0.5s, padding 0.5s;
+  transition: transform 0.5s, padding 0.5s; }
 
 .canvas {
   position: relative;
@@ -2512,12 +2504,10 @@ kbd {
   position: absolute; }
 
 .pin.sticky {
-  -webkit-transition: top 0.6s ease-in-out, right 0.2s ease-in-out, left 0.2s ease-in-out;
-          transition: top 0.6s ease-in-out, right 0.2s ease-in-out, left 0.2s ease-in-out; }
+  transition: top 0.6s ease-in-out, right 0.2s ease-in-out, left 0.2s ease-in-out; }
 
 .pin.slide {
-  -webkit-transition: top 0.2s linear, right 0.2s linear, left 0.2s linear;
-          transition: top 0.2s linear, right 0.2s linear, left 0.2s linear; }
+  transition: top 0.2s linear, right 0.2s linear, left 0.2s linear; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -2566,8 +2556,8 @@ kbd {
     position: absolute; }
 
 .tooltip.fade, .tooltip.from-above, .tooltip.from-below, .tooltip.flip-rotate, .popover.fade, .popover.from-above, .popover.from-below, .popover.flip-rotate {
-  -webkit-transition: opacity 0.15s, visibility 0.15s, -webkit-transform 0.15s;
-          transition: opacity 0.15s, visibility 0.15s, transform 0.15s; }
+  transition: opacity 0.15s, visibility 0.15s, -webkit-transform 0.15s;
+  transition: opacity 0.15s, visibility 0.15s, transform 0.15s; }
 .tooltip.fade, .popover.fade {
   opacity: 0; }
 .tooltip.from-above, .popover.from-above {
@@ -2676,8 +2666,7 @@ kbd {
   text-align: center;
   font-size: 1rem;
   float: left;
-  -webkit-transition: width 0.5s, background 0.5s;
-          transition: width 0.5s, background 0.5s; }
+  transition: width 0.5s, background 0.5s; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -2700,8 +2689,7 @@ kbd {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  -webkit-transition: opacity 0.3s, visibility 0.3s;
-          transition: opacity 0.3s, visibility 0.3s; }
+  transition: opacity 0.3s, visibility 0.3s; }
   .showcase.is-loading .showcase-prev, .showcase.is-loading .showcase-next, .showcase.is-loading .showcase-tabs, .showcase.is-single .showcase-prev, .showcase.is-single .showcase-next, .showcase.is-single .showcase-tabs {
     display: none !important; }
   .showcase.is-loading .showcase-close {
@@ -2717,8 +2705,7 @@ kbd {
 
 .showcase-caption {
   opacity: 0;
-  -webkit-transition: opacity 0.3s, visibility 0.3s;
-          transition: opacity 0.3s, visibility 0.3s; }
+  transition: opacity 0.3s, visibility 0.3s; }
 
 .showcase-inner {
   position: relative;
@@ -2732,15 +2719,13 @@ kbd {
   height: 100px;
   position: relative;
   overflow: hidden;
-  -webkit-transition: width 0.3s, height 0.3s;
-          transition: width 0.3s, height 0.3s; }
+  transition: width 0.3s, height 0.3s; }
   .showcase-items > li {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
-    -webkit-transition: opacity 0.3s, visibility 0.3s;
-            transition: opacity 0.3s, visibility 0.3s; }
+    transition: opacity 0.3s, visibility 0.3s; }
     .showcase-items > li > img {
       max-width: 100%;
       width: 100%;
@@ -2766,7 +2751,8 @@ kbd {
       display: table;
       clear: both; }
   .steps .step {
-    padding: 0 2em 0 3.5em;
+    padding-left: 3.5em;
+    padding-right: 2em;
     position: relative;
     display: block;
     line-height: 3em;
@@ -2839,16 +2825,14 @@ kbd {
   display: block;
   position: relative;
   font-size: 1rem;
-  -webkit-transition: background 0.3s;
-          transition: background 0.3s; }
+  transition: background 0.3s; }
   .switch-bar::before, .switch-bar::after {
     position: absolute;
     padding: 0.75rem;
     top: 0;
     opacity: 1;
     z-index: 1;
-    -webkit-transition: opacity 0.3s;
-            transition: opacity 0.3s; }
+    transition: opacity 0.3s; }
   .switch-bar::before {
     left: 0;
     opacity: 0;
@@ -2875,8 +2859,7 @@ kbd {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-transition: left 0.3s;
-          transition: left 0.3s; }
+  transition: left 0.3s; }
   .switch-toggle::before {
     content: "\00A0"; }
 
@@ -2929,8 +2912,7 @@ kbd {
     vertical-align: top;
     border: 1px solid #e5e5e5; }
   .table thead th {
-    vertical-align: bottom;
-    text-align: left; }
+    vertical-align: bottom; }
     .table thead th .sorter {
       margin: -0.5rem 0.25rem; }
   .table tbody + tbody {
@@ -3026,8 +3008,8 @@ kbd {
 
 .toast {
   margin-top: 1rem;
-  -webkit-transition: opacity 0.3s, visibility 0.3s, -webkit-transform 0.3s;
-          transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  transition: opacity 0.3s, visibility 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
   opacity: 0;
   visibility: hidden; }
   .toast.show {
@@ -3080,8 +3062,7 @@ kbd {
   z-index: 500;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.3s, visibility 0.3s;
-          transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
   -webkit-backface-visibility: hidden; }
   .type-ahead ul {
     list-style: none;

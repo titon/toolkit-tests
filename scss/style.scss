@@ -54,7 +54,6 @@ a {
 
 .test-demo {
     padding: 2rem;
-    text-align: center;
 
     &:nth-child(even) {
         background: #344a5f;
@@ -74,9 +73,19 @@ a {
     color: #344a5f;
 }
 
-.test-note {
-    margin: 2rem 0 0 0;
-    color: #344a5f;
+.test-body {
+    display: inline-block;
+    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &.full {
+        display: block;
+        left: 0;
+        right: 0;
+        transform: translateX(0);
+    }
 }
 
 .test-footer {
@@ -84,18 +93,13 @@ a {
     text-align: center;
 }
 
-// Fix align center issues
-form,
-.accordion,
-.mask-target,
-.pin-container,
-.switch,
-.table,
-.tabs,
-.stalker {
-    text-align: left;
+.test-note {
+    margin: 2rem 0 0 0;
+    color: #344a5f;
+    text-align: center;
 }
 
+// Fix align center issues
 textarea {
     width: 100%;
     max-width: 100%;
@@ -221,6 +225,12 @@ textarea {
     right: 2rem;
     text-align: right;
     transform: translateY(-50%);
+    width: 100px;
+
+    .button-group {
+        margin: 0 !important;
+        display: block;
+    }
 }
 
 //-------------------- Responsive --------------------//
@@ -256,5 +266,25 @@ textarea {
 
     .test-demo {
         padding: 3rem 4rem 3rem 4rem;
+    }
+}
+
+//-------------------- RTL --------------------//
+
+html[dir="rtl"] {
+    .test-body {
+        left: auto;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .switcher {
+        background-position: left .75rem top 50%;
+    }
+
+    #stalker-targets {
+        right: auto;
+        left: 2rem;
+        text-align: left;
     }
 }

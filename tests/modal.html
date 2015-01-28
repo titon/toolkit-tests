@@ -1,109 +1,115 @@
 <div class="test-demo">
     <h2 class="test-header">Default.</h2>
 
-    <a href="/tests/ajax/modal.html" class="button js-modal">Load with AJAX</a>
-    <a href="#dom" class="button js-modal">Load from DOM</a>
-    <a href="#iframe" class="button js-modal">Load an iframe</a>
+    <div class="test-body">
+        <a href="/tests/ajax/modal.html" class="button js-modal">Load with AJAX</a>
+        <a href="#dom" class="button js-modal">Load from DOM</a>
+        <a href="#iframe" class="button js-modal">Load an iframe</a>
 
-    <div id="dom" style="display: none">
-        <div class="modal-head">
-            <h4>From DOM</h4>
+        <div id="dom" style="display: none">
+            <div class="modal-head">
+                <h4>From DOM</h4>
+            </div>
+
+            <div class="modal-body">
+                This content is loaded from a hidden DOM element.
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="button" data-modal-close>Close</button>
+            </div>
         </div>
 
-        <div class="modal-body">
-            This content is loaded from a hidden DOM element.
+        <div id="iframe" style="display: none">
+            <div class="modal-head">
+                <h4>With iframe</h4>
+            </div>
+
+            <div class="modal-body">
+                <iframe src="http://titon.io" frameborder="0" style="width: 100%"></iframe>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="button" data-modal-close>Close</button>
+            </div>
         </div>
-
-        <div class="modal-foot">
-            <button type="button" class="button" data-modal-close>Close</button>
-        </div>
     </div>
-
-<div id="iframe" style="display: none">
-    <div class="modal-head">
-        <h4>With iframe</h4>
-    </div>
-
-    <div class="modal-body">
-        <iframe src="http://titon.io" frameborder="0" style="width: 100%"></iframe>
-    </div>
-
-    <div class="modal-foot">
-        <button type="button" class="button" data-modal-close>Close</button>
-    </div>
-</div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Animations. Clickout disabled.</h2>
 
-    <a href="javascript:;" class="button js-modal-fade" data-modal="Will fade in.">Fade</a>
-    <a href="javascript:;" class="button js-modal-from-above" data-modal="Will drop in from above.">From Above</a>
-    <a href="javascript:;" class="button js-modal-from-below" data-modal="Will drop in from below.">From Below</a>
-    <a href="javascript:;" class="button js-modal-slide-in-top" data-modal="Will slide in from the top.">Slide In Top</a>
-    <a href="javascript:;" class="button js-modal-slide-in-right" data-modal="Will slide in from the right.">Slide In Right</a>
-    <a href="javascript:;" class="button js-modal-slide-in-left" data-modal="Will slide in from the left.">Slide In Left</a>
-    <a href="javascript:;" class="button js-modal-slide-in-bottom" data-modal="Will slide in from the bottom.">Slide In Bottom</a>
+    <div class="test-body">
+        <a href="javascript:;" class="button js-modal-fade" data-modal="Will fade in.">Fade</a>
+        <a href="javascript:;" class="button js-modal-from-above" data-modal="Will drop in from above.">From Above</a>
+        <a href="javascript:;" class="button js-modal-from-below" data-modal="Will drop in from below.">From Below</a>
+        <a href="javascript:;" class="button js-modal-slide-in-top" data-modal="Will slide in from the top.">Slide In Top</a>
+        <a href="javascript:;" class="button js-modal-slide-in-right" data-modal="Will slide in from the right.">Slide In Right</a>
+        <a href="javascript:;" class="button js-modal-slide-in-left" data-modal="Will slide in from the left.">Slide In Left</a>
+        <a href="javascript:;" class="button js-modal-slide-in-bottom" data-modal="Will slide in from the bottom.">Slide In Bottom</a>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Additional features.</h2>
 
-    <a href="/tests/ajax/modal.html" class="button js-modal-fullscreen">Fullscreen</a>
-    <a href="#overflow" class="button js-modal">Height Overflow</a>
-    <a href="/tests/ajax/modal-form.html" class="button js-modal">Form Posting</a>
-    <a href="/tests/ajax/modal.json" class="button js-modal">JSON Handling</a>
-    <a href="/tests/ajax/modal-multi.html" class="button js-modal-multi">Multiple Modals</a>
+    <div class="test-body">
+        <a href="/tests/ajax/modal.html" class="button js-modal-fullscreen">Fullscreen</a>
+        <a href="#overflow" class="button js-modal">Height Overflow</a>
+        <a href="/tests/ajax/modal-form.html" class="button js-modal">Form Posting</a>
+        <a href="/tests/ajax/modal.json" class="button js-modal">JSON Handling</a>
+        <a href="/tests/ajax/modal-multi.html" class="button js-modal-multi">Multiple Modals</a>
 
-    <div id="overflow" style="display: none">
-        <div class="modal-head">
-            <h4>Overflowing Height</h4>
-        </div>
+        <div id="overflow" style="display: none">
+            <div class="modal-head">
+                <h4>Overflowing Height</h4>
+            </div>
 
-        <div class="modal-body">
-            <p>This content is loaded from a hidden DOM element. This approach requires the markup to be in the page.</p>
+            <div class="modal-body">
+                <p>This content is loaded from a hidden DOM element. This approach requires the markup to be in the page.</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis vestibulum massa,
-                at lobortis libero. Suspendisse dictum ullamcorper lorem id tempus. Praesent adipiscing
-                velit vitae nisl vulputate, in ultricies turpis fringilla. Mauris iaculis, odio in
-                consectetur convallis, quam ipsum pretium justo, ac posuere turpis mi a nibh. Nam vitae
-                sem tortor. Duis eu lacinia odio, in euismod neque. Praesent eu bibendum libero. Vivamus
-                justo erat, fringilla in nisi pulvinar, interdum auctor elit. Donec eu lorem porttitor,
-                ultrices justo id, volutpat nisi. Suspendisse vel arcu quis massa auctor commodo vitae
-                nec nisi. Sed sollicitudin purus libero, in pulvinar lorem gravida eu. Etiam pharetra
-                tincidunt risus sit amet egestas. In hac habitasse platea dictumst. Maecenas eu pellentesque
-                ante, eget varius urna.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis vestibulum massa,
+                    at lobortis libero. Suspendisse dictum ullamcorper lorem id tempus. Praesent adipiscing
+                    velit vitae nisl vulputate, in ultricies turpis fringilla. Mauris iaculis, odio in
+                    consectetur convallis, quam ipsum pretium justo, ac posuere turpis mi a nibh. Nam vitae
+                    sem tortor. Duis eu lacinia odio, in euismod neque. Praesent eu bibendum libero. Vivamus
+                    justo erat, fringilla in nisi pulvinar, interdum auctor elit. Donec eu lorem porttitor,
+                    ultrices justo id, volutpat nisi. Suspendisse vel arcu quis massa auctor commodo vitae
+                    nec nisi. Sed sollicitudin purus libero, in pulvinar lorem gravida eu. Etiam pharetra
+                    tincidunt risus sit amet egestas. In hac habitasse platea dictumst. Maecenas eu pellentesque
+                    ante, eget varius urna.</p>
 
-            <p>Vivamus consectetur lorem at lobortis elementum. Etiam laoreet et lectus vel egestas.
-                Integer egestas lacus tempor ante iaculis feugiat. Integer sem justo, auctor vel augue ut,
-                pellentesque accumsan quam. Suspendisse eget feugiat ante. Vestibulum tempus metus vitae
-                massa fringilla euismod. Nulla id sem libero. Quisque molestie ipsum non neque pellentesque,
-                vel aliquam ante pretium. Donec et magna euismod, porttitor purus non, tempor lacus.
-                Vestibulum laoreet mauris non nibh cursus eleifend. Proin ac tempor lorem, vel semper tellus.
-                Donec at vestibulum dolor, sit amet eleifend mi. Nulla auctor massa nec tempus gravida.</p>
+                <p>Vivamus consectetur lorem at lobortis elementum. Etiam laoreet et lectus vel egestas.
+                    Integer egestas lacus tempor ante iaculis feugiat. Integer sem justo, auctor vel augue ut,
+                    pellentesque accumsan quam. Suspendisse eget feugiat ante. Vestibulum tempus metus vitae
+                    massa fringilla euismod. Nulla id sem libero. Quisque molestie ipsum non neque pellentesque,
+                    vel aliquam ante pretium. Donec et magna euismod, porttitor purus non, tempor lacus.
+                    Vestibulum laoreet mauris non nibh cursus eleifend. Proin ac tempor lorem, vel semper tellus.
+                    Donec at vestibulum dolor, sit amet eleifend mi. Nulla auctor massa nec tempus gravida.</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis vestibulum massa,
-                at lobortis libero. Suspendisse dictum ullamcorper lorem id tempus. Praesent adipiscing
-                velit vitae nisl vulputate, in ultricies turpis fringilla. Mauris iaculis, odio in
-                consectetur convallis, quam ipsum pretium justo, ac posuere turpis mi a nibh. Nam vitae
-                sem tortor. Duis eu lacinia odio, in euismod neque. Praesent eu bibendum libero. Vivamus
-                justo erat, fringilla in nisi pulvinar, interdum auctor elit. Donec eu lorem porttitor,
-                ultrices justo id, volutpat nisi. Suspendisse vel arcu quis massa auctor commodo vitae
-                nec nisi. Sed sollicitudin purus libero, in pulvinar lorem gravida eu. Etiam pharetra
-                tincidunt risus sit amet egestas. In hac habitasse platea dictumst. Maecenas eu pellentesque
-                ante, eget varius urna.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis vestibulum massa,
+                    at lobortis libero. Suspendisse dictum ullamcorper lorem id tempus. Praesent adipiscing
+                    velit vitae nisl vulputate, in ultricies turpis fringilla. Mauris iaculis, odio in
+                    consectetur convallis, quam ipsum pretium justo, ac posuere turpis mi a nibh. Nam vitae
+                    sem tortor. Duis eu lacinia odio, in euismod neque. Praesent eu bibendum libero. Vivamus
+                    justo erat, fringilla in nisi pulvinar, interdum auctor elit. Donec eu lorem porttitor,
+                    ultrices justo id, volutpat nisi. Suspendisse vel arcu quis massa auctor commodo vitae
+                    nec nisi. Sed sollicitudin purus libero, in pulvinar lorem gravida eu. Etiam pharetra
+                    tincidunt risus sit amet egestas. In hac habitasse platea dictumst. Maecenas eu pellentesque
+                    ante, eget varius urna.</p>
 
-            <p>Vivamus consectetur lorem at lobortis elementum. Etiam laoreet et lectus vel egestas.
-                Integer egestas lacus tempor ante iaculis feugiat. Integer sem justo, auctor vel augue ut,
-                pellentesque accumsan quam. Suspendisse eget feugiat ante. Vestibulum tempus metus vitae
-                massa fringilla euismod. Nulla id sem libero. Quisque molestie ipsum non neque pellentesque,
-                vel aliquam ante pretium. Donec et magna euismod, porttitor purus non, tempor lacus.
-                Vestibulum laoreet mauris non nibh cursus eleifend. Proin ac tempor lorem, vel semper tellus.
-                Donec at vestibulum dolor, sit amet eleifend mi. Nulla auctor massa nec tempus gravida.</p>
-        </div>
+                <p>Vivamus consectetur lorem at lobortis elementum. Etiam laoreet et lectus vel egestas.
+                    Integer egestas lacus tempor ante iaculis feugiat. Integer sem justo, auctor vel augue ut,
+                    pellentesque accumsan quam. Suspendisse eget feugiat ante. Vestibulum tempus metus vitae
+                    massa fringilla euismod. Nulla id sem libero. Quisque molestie ipsum non neque pellentesque,
+                    vel aliquam ante pretium. Donec et magna euismod, porttitor purus non, tempor lacus.
+                    Vestibulum laoreet mauris non nibh cursus eleifend. Proin ac tempor lorem, vel semper tellus.
+                    Donec at vestibulum dolor, sit amet eleifend mi. Nulla auctor massa nec tempus gravida.</p>
+            </div>
 
-        <div class="modal-foot">
-            <button type="button" class="button" data-modal-close>Close</button>
+            <div class="modal-foot">
+                <button type="button" class="button" data-modal-close>Close</button>
+            </div>
         </div>
     </div>
 </div>
