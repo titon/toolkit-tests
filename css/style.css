@@ -32,13 +32,13 @@ a {
 .test-bar .bar-left {
   text-align: center;
 }
-.test-bar .bar-left .button,
-.test-bar .bar-left .input {
-  float: left;
-  margin-right: .5rem;
-}
 .test-bar .button {
   border-radius: .2rem;
+}
+.test-bar .bar-left::after,
+.test-bar .bar-right::after {
+  clear: both;
+  content: "";
 }
 
 .test-logo {
@@ -98,12 +98,13 @@ a {
   transform: translateX(-50%);
 }
 .test-body.full {
-  display: block;
-  left: 0;
-  right: 0;
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
+  position: static !important;
+  display: block !important;
+  left: 0 !important;
+  right: 0 !important;
+  -webkit-transform: none !important;
+  -ms-transform: none !important;
+  transform: none !important;
 }
 
 .test-footer {
@@ -281,6 +282,11 @@ textarea {
   .test-bar .bar-left {
     float: left;
     margin-top: 0;
+  }
+  .test-bar .bar-left .button,
+  .test-bar .bar-left .input {
+    float: left;
+    margin-right: .5rem;
   }
 
   .test-bar .bar-right {

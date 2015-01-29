@@ -35,16 +35,18 @@ a {
 
     .bar-left {
         text-align: center;
-
-        .button,
-        .input {
-            float: left;
-            margin-right: .5rem;
-        }
     }
 
     .button {
         border-radius: .2rem;
+    }
+
+    .bar-left,
+    .bar-right {
+        &::after {
+            clear: both;
+            content: "";
+        }
     }
 }
 
@@ -100,10 +102,11 @@ a {
     transform: translateX(-50%);
 
     &.full {
-        display: block;
-        left: 0;
-        right: 0;
-        transform: translateX(0);
+        position: static !important;
+        display: block !important;;
+        left: 0 !important;;
+        right: 0 !important;;
+        transform: none !important;;
     }
 }
 
@@ -261,6 +264,12 @@ textarea {
     .test-bar .bar-left {
         float: left;
         margin-top: 0;
+
+        .button,
+        .input {
+            float: left;
+            margin-right: .5rem;
+        }
     }
 
     .test-bar .bar-right {

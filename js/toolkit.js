@@ -10,6 +10,9 @@ var isTouch = !!(('ontouchstart' in window) || (window.DocumentTouch && document
 // Does the device support retina display
 var isRetina = (window.devicePixelRatio > 1);
 
+// Is the HTML document currently set to RTL mode?
+var isRTL = (document.documentElement.dir === 'rtl');
+
 // Check if transitions exist
 var hasTransition = (function() {
     var prefixes = 'transition WebkitTransition MozTransition OTransition msTransition'.split(' '),
@@ -64,16 +67,13 @@ var Toolkit = {
     version: '2.0.2',
 
     /** Build date hash. */
-    build: 'i5fy51jd',
+    build: 'i5ispn5s',
 
     /** Vendor namespace. */
     vendor: '',
 
     /** ARIA support. */
     aria: true,
-
-    /** Right-to-left support. */
-    rtl: false,
 
     /** Global debugging. */
     debug: false,
@@ -92,6 +92,9 @@ var Toolkit = {
 
     /** Detect retina displays. */
     isRetina: isRetina,
+
+    /** Detect right-to-left support. */
+    isRTL: isRTL,
 
     /** Name of the `transitionend` event. */
     transitionEnd: transitionEnd,
@@ -1857,7 +1860,7 @@ Toolkit.Carousel = Toolkit.Component.extend({
     /** The dimension (width or height) to read sizes from. */
     _dimension: '',
 
-    /** The position (left or top) to modify for cycling. */
+    /** The position (left, right, or top) to modify for cycling. */
     _position: '',
 
     /** The size to cycle with. */
@@ -1965,10 +1968,12 @@ Toolkit.Carousel = Toolkit.Component.extend({
         this.jump(0);
 
         // Remove clones
+        var dir = this._position;
+
         this.container.transitionend(function() {
             $(this)
                 .addClass('no-transition')
-                .css('left', 0)
+                .css(dir, 0)
                 .find('li.is-cloned')
                     .remove();
         });
@@ -2281,7 +2286,7 @@ Toolkit.Carousel = Toolkit.Component.extend({
 
         } else if (animation === 'slide') {
             this._dimension = 'width';
-            this._position = Toolkit.rtl ? 'right' : 'left';
+            this._position = options.rtl ? 'right' : 'left';
         }
     },
 
@@ -2393,6 +2398,7 @@ Toolkit.Carousel = Toolkit.Component.extend({
     infinite: true,
     loop: true,
     reverse: false,
+    rtl: Toolkit.isRTL,
     swipe: Toolkit.isTouch,
     itemsToShow: 1,
     itemsToCycle: 1,
@@ -2724,23 +2730,30 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
             return;
         }
 
+        this.fireEvent('showing');
+
         var height = element.outerHeight(),
             coords = node.offset(),
             x = coords.left + options.xOffset,
             y = coords.top + options.yOffset + node.outerHeight(),
-            windowScroll = $(window).height();
+            windowScroll = $(window).height(),
+            dir = 'left';
 
         // If menu goes below half page, position it above
         if (y > (windowScroll / 2)) {
             y = coords.top - options.yOffset - height;
         }
 
-        this.fireEvent('showing');
+        // Change position for RTL
+        if (Toolkit.isRTL) {
+            x = $(window).width() - coords.left - node.outerWidth();
+            dir = 'right';
+        }
 
-        element.css({
-            left: x,
-            top: y
-        }).reveal();
+        element
+            .css('top', y)
+            .css(dir, x)
+            .reveal();
 
         this.fireEvent('shown');
     },
@@ -2861,7 +2874,9 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
                     });
 
                     // Add icon
-                    $('<span/>').addClass(child.icon || 'caret-right').prependTo(tag);
+                    $('<span/>')
+                        .addClass(child.icon || (Toolkit.isRTL ? 'caret-left' : 'caret-right'))
+                        .prependTo(tag);
 
                 } else {
                     li = $(options.headingTemplate);
@@ -2978,22 +2993,27 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
         // Get sizes after menu positioning
         var win = $(window),
             winHeight = win.height() + win.scrollTop(),
-            winWidth = win.width(),
-            parentTop = parent.offset().top,
+            parentOffset = parent.offset(),
             parentHeight = parent.outerHeight(),
-            parentRight = parent.offset().left + parent.outerWidth();
+            oppositeClass = 'push-opposite';
 
         // Display menu horizontally on opposite side if it spills out of viewport
-        var hWidth = parentRight + menu.outerWidth();
-
-        if (hWidth >= winWidth) {
-            menu.addClass('push-left');
+        if (Toolkit.isRTL) {
+            if ((parentOffset.left - menu.outerWidth()) < 0) {
+                menu.addClass(oppositeClass);
+            } else {
+                menu.removeClass(oppositeClass);
+            }
         } else {
-            menu.removeClass('push-left');
+            if ((parentOffset.left + parent.outerWidth() + menu.outerWidth()) >= win.width()) {
+                menu.addClass(oppositeClass);
+            } else {
+                menu.removeClass(oppositeClass);
+            }
         }
 
         // Reverse menu vertically if below half way fold
-        if (parentTop > (winHeight / 2)) {
+        if (parentOffset.top > (winHeight / 2)) {
             menu.css('top', '-' + (menu.outerHeight() - parentHeight) + 'px');
         } else {
             menu.css('top', 0);
@@ -4385,7 +4405,7 @@ Toolkit.Matrix = Toolkit.Component.extend({
 }, {
     width: 200,
     gutter: 20,
-    rtl: Toolkit.rtl,
+    rtl: Toolkit.isRTL,
     defer: true
 });
 
@@ -5520,7 +5540,7 @@ Toolkit.Showcase = Toolkit.TemplateComponent.extend({
 
         // Reset previous styles
         listItems.conceal(true);
-        caption.conceal();
+        caption.conceal(true);
         element
             .addClass('is-loading')
             .aria('busy', true)
@@ -5531,7 +5551,7 @@ Toolkit.Showcase = Toolkit.TemplateComponent.extend({
 
         deferred.always(function(width, height) {
             list.transitionend(function() {
-                caption.html(item.title).reveal();
+                caption.html(item.title).reveal(true);
                 listItem.reveal(true);
                 self.position();
                 self.animating = false;
@@ -5568,6 +5588,11 @@ Toolkit.Showcase = Toolkit.TemplateComponent.extend({
                     deferred.resolve(this.width, this.height);
                     listItem.append(img);
                 };
+        }
+
+        // Hide loader
+        if (this.blackout) {
+            this.blackout.hideLoader();
         }
 
         // Save state
@@ -6572,10 +6597,10 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
 
         var iPos = this.input.offset();
 
-        this.element.css({
-            left: iPos.left,
-            top: (iPos.top + this.input.outerHeight())
-        }).reveal();
+        this.element
+            .css('top', iPos.top + this.input.outerHeight())
+            .css(Toolkit.isRTL ? 'right' : 'left', iPos.left)
+            .reveal();
 
         this.input.aria('expanded', true);
 

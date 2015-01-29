@@ -16,7 +16,7 @@ var Demo = {
     loadStyles: function() {
         var styles = [];
 
-        if (Toolkit.rtl) {
+        if (Toolkit.isRTL) {
             styles.push('css/toolkit-rtl.css');
         } else {
             styles.push('css/toolkit.css');
@@ -92,7 +92,7 @@ var Demo = {
                 .html(next.text());
 
         if (history.pushState) {
-            var query = '?' + key + '&rtl=' + (Toolkit.rtl ? 1 : 0);
+            var query = '?' + key + '&rtl=' + (Toolkit.isRTL ? 1 : 0);
 
             history.pushState({key: key}, current.text(), query + (hash || ''));
         }
@@ -103,7 +103,7 @@ var Demo = {
     },
 
     // Modify all AJAX URLs and prefix with the host
-    setupAjax: function() {
+    setupAJAX: function() {
         $.ajaxPrefilter(function(options) {
             var base = location.href.replace('index.html', '');
 
@@ -115,15 +115,14 @@ var Demo = {
         });
     },
 
-    setupUi: function() {
+    setupUI: function() {
         $('html')
             .addClass(Toolkit.isTouch ? 'touch' : 'no-touch')
-            .addClass(Toolkit.rtl ? 'rtl' : 'ltr')
-            .attr('dir', Toolkit.rtl ? 'rtl' : 'ltr');
+            .addClass(Toolkit.isRTL ? 'rtl' : 'ltr');
 
         $('#logo').attr('data-version', Toolkit.version);
 
-        if (Toolkit.rtl) {
+        if (Toolkit.isRTL) {
             $('#rtl').hide();
             $('#ltr').show();
         }
@@ -159,10 +158,12 @@ var Demo = {
 
 };
 
+console.log(Toolkit);
+
 Demo.loadStyles();
 Demo.resize();
-Demo.setupAjax();
-Demo.setupUi();
+Demo.setupAJAX();
+Demo.setupUI();
 Demo.bindEvents();
 
 // Load plugin based on query string
