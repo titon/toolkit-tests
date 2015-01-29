@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "gulp": "*",
-        "gulp-ruby-sass": "*",
+        "gulp-sass": "*",
         "gulp-autoprefixer": "*"
     }
 }

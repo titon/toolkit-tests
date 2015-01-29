@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     prefixer = require('gulp-autoprefixer');
 
 gulp.task('css', function() {
