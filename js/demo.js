@@ -158,8 +158,6 @@ var Demo = {
 
 };
 
-console.log(Toolkit);
-
 Demo.loadStyles();
 Demo.resize();
 Demo.setupAJAX();

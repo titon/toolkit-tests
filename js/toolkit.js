@@ -67,10 +67,10 @@ var Toolkit = {
     version: '2.0.2',
 
     /** Build date hash. */
-    build: 'i5ispn5s',
+    build: 'i5u9qd9e',
 
-    /** Vendor namespace. */
-    vendor: '',
+    /** CSS namespace. */
+    namespace: '',
 
     /** ARIA support. */
     aria: true,
@@ -83,6 +83,9 @@ var Toolkit = {
         loading: 'Loading...',
         error: 'An error has occurred!'
     },
+
+    /** BEM class name separators. */
+    bemSeparators: ['-', '--'],
 
     /** Does the browser support transitions? */
     hasTransition: hasTransition,
@@ -103,6 +106,44 @@ var Toolkit = {
     cache: {},
 
     /**
+     * Generate a BEM (block-element-modifier) valid CSS class name.
+     *
+     * @param {String} block
+     * @param {String} [element]
+     * @param {String} [modifier]
+     * @returns {String}
+     */
+    bem: function(block, element, modifier) {
+        var seps = Toolkit.bemSeparators;
+
+        if (element) {
+            block += seps[0] + element;
+        }
+
+        if (modifier) {
+            block += seps[1] + modifier;
+        }
+
+        return Toolkit.namespace + block;
+    },
+
+    /**
+     * Parse a value and convert it to a template string.
+     * If the template is a function, execute it and pass the `bem()` function,
+     * and the current namespace as arguments.
+     *
+     * @param {String|Function} template
+     * @returns {String}
+     */
+    buildTemplate: function(template) {
+        if (typeof template === 'function') {
+            template = template.call(null, Toolkit.bem, Toolkit.namespace);
+        }
+
+        return template + '';
+    },
+
+    /**
      * Creates a jQuery plugin by extending the jQuery prototype with a method definition.
      * The Toolkit plugin is only initialized if one has not been already.
      * Plugins are either defined per element, or on a collection of elements.
@@ -111,7 +152,7 @@ var Toolkit = {
      * @param {Function} callback
      * @param {bool} [collection]
      */
-    create: function(plugin, callback, collection) {
+    createPlugin: function(plugin, callback, collection) {
         var name = plugin;
 
         // Prefix with toolkit to avoid collisions
@@ -139,6 +180,7 @@ var Toolkit = {
                 });
             };
     }
+
 };
 
 // Make it available
@@ -853,6 +895,16 @@ Toolkit.Component = Toolkit.Base.extend({
     },
 
     /**
+     * Render a template and return a jQuery element.
+     *
+     * @param {String|Function} template
+     * @returns {jQuery}
+     */
+    render: function(template) {
+        return $(Toolkit.buildTemplate(template));
+    },
+
+    /**
      * Request data from a URL and handle all the possible scenarios.
      *
      * @param {Object} options
@@ -1070,7 +1122,7 @@ Toolkit.TemplateComponent = Toolkit.Component.extend({
         var template = $(options.templateFrom);
 
         if (!template.length) {
-            template = $(options.template);
+            template = this.render(options.template);
         }
 
         if (!template.length) {
@@ -1155,8 +1207,8 @@ Toolkit.CompositeComponent = Toolkit.TemplateComponent.extend({
     createWrapper: function() {
         var options = this.options;
 
-        return this.wrapper = $(options.wrapperTemplate)
-            .addClass(options.wrapperClass)
+        return this.wrapper = this.render(options.wrapperTemplate)
+            .addClass(Toolkit.buildTemplate(options.wrapperClass))
             .attr('id', this.id('wrapper'))
             .appendTo('body');
     },
@@ -1512,12 +1564,9 @@ Toolkit.Accordion = Toolkit.Component.extend({
     collapsible: false
 });
 
-Toolkit.create('accordion', function(options) {
+Toolkit.createPlugin('accordion', function(options) {
     return new Toolkit.Accordion(this, options);
 });
-
-// Dereference the vendor property
-var vendor = Toolkit.vendor;
 
 /** Has the blackout been created already? */
 var blackout = null;
@@ -1545,7 +1594,7 @@ Toolkit.Blackout = Toolkit.TemplateComponent.extend({
         this.element = this.createElement();
 
         // Generate loader elements
-        this.loader = $(options.loaderTemplate).appendTo(this.element);
+        this.loader = this.render(options.loaderTemplate).appendTo(this.element);
         this.message = this.loader.find(this.ns('message', 'loader'));
 
         if (options.showLoading) {
@@ -1623,12 +1672,16 @@ Toolkit.Blackout = Toolkit.TemplateComponent.extend({
 
 }, {
     showLoading: true,
-    template: '<div class="' + vendor + 'blackout"></div>',
+    template: function(bem) {
+        return '<div class="' + bem('blackout') + '"></div>';
+    },
     templateFrom: '#toolkit-blackout-1',
-    loaderTemplate: '<div class="' + vendor + 'loader bar-wave">' +
-        '<span></span><span></span><span></span><span></span><span></span>' +
-        '<div class="' + vendor + 'loader-message" data-loader-message></div>' +
-    '</div>'
+    loaderTemplate: function(bem) {
+        return '<div class="' + bem('loader') + ' bar-wave">' +
+            '<span></span><span></span><span></span><span></span><span></span>' +
+            '<div class="' + bem('loader', 'message') + '" data-loader-message></div>' +
+        '</div>';
+    }
 });
 
 /**
@@ -1968,7 +2021,7 @@ Toolkit.Carousel = Toolkit.Component.extend({
         this.jump(0);
 
         // Remove clones
-        var dir = this._position;
+        var dir = this._position || 'left';
 
         this.container.transitionend(function() {
             $(this)
@@ -2405,7 +2458,7 @@ Toolkit.Carousel = Toolkit.Component.extend({
     defaultIndex: 0
 });
 
-Toolkit.create('carousel', function(options) {
+Toolkit.createPlugin('carousel', function(options) {
     return new Toolkit.Carousel(this, options);
 });
 
@@ -2604,7 +2657,7 @@ Toolkit.Drop = Toolkit.CompositeComponent.extend({
     getTarget: 'data-drop'
 });
 
-Toolkit.create('drop', function(options) {
+Toolkit.createPlugin('drop', function(options) {
     return new Toolkit.Drop(this, options);
 }, true);
 
@@ -2879,7 +2932,7 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
                         .prependTo(tag);
 
                 } else {
-                    li = $(options.headingTemplate);
+                    li = this.render(options.template);
                     tag = $('<span/>', {
                         text: child.title,
                         role: 'presentation'
@@ -2898,7 +2951,7 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
                 li.append(tag).appendTo(ul);
 
                 if (child.children && child.children.length) {
-                    var childMenu = $(options.template)
+                    var childMenu = this.render(options.template)
                         .conceal()
                         .appendTo(li);
 
@@ -3033,12 +3086,18 @@ Toolkit.Flyout = Toolkit.CompositeComponent.extend({
     showDelay: 350,
     hideDelay: 1000,
     itemLimit: 15,
-    wrapperClass: vendor + 'flyouts',
-    template: '<div class="' + vendor + 'flyout" data-flyout-menu></div>',
-    headingTemplate: '<li class="' + vendor + 'flyout-heading"></li>'
+    wrapperClass: function(bem) {
+        return bem('flyouts');
+    },
+    template: function(bem) {
+        return '<div class="' + bem('flyout') + '" data-flyout-menu></div>';
+    },
+    headingTemplate: function(bem) {
+        return '<li class="' + bem('flyout', 'heading') + '"></li>';
+    }
 });
 
-Toolkit.create('flyout', function(url, options) {
+Toolkit.createPlugin('flyout', function(url, options) {
     return new Toolkit.Flyout(this, url, options);
 }, true);
 
@@ -3142,7 +3201,7 @@ Toolkit.Input = Toolkit.Component.extend({
      */
     _buildWrapper: function() {
         var input = this.element,
-            wrapper = $(this.options.template)
+            wrapper = this.render(this.options.template)
                 .insertBefore(input)
                 .append(input);
 
@@ -3159,7 +3218,9 @@ Toolkit.Input = Toolkit.Component.extend({
     checkbox: 'input:checkbox',
     radio: 'input:radio',
     select: 'select',
-    template: '<div class="' + vendor + 'custom-input"></div>'
+    template: function(bem) {
+        return '<div class="' + bem('custom-input') + '"></div>';
+    }
 });
 
 /**
@@ -3182,7 +3243,7 @@ Toolkit.InputCheckbox = Toolkit.Input.extend({
         this.wrapper = this._buildWrapper();
 
         // Create custom input
-        this.input = $(options.checkboxTemplate)
+        this.input = this.render(options.checkboxTemplate)
             .attr('for', checkbox.attr('id'))
             .insertAfter(checkbox);
 
@@ -3191,7 +3252,9 @@ Toolkit.InputCheckbox = Toolkit.Input.extend({
     }
 
 }, {
-    checkboxTemplate: '<label class="' + vendor + 'checkbox"></label>'
+    checkboxTemplate: function(bem) {
+        return '<label class="' + bem('checkbox') + '"></label>';
+    }
 });
 
 /**
@@ -3214,7 +3277,7 @@ Toolkit.InputRadio = Toolkit.Input.extend({
         this.wrapper = this._buildWrapper();
 
         // Create custom input
-        this.input = $(options.radioTemplate)
+        this.input = this.render(options.radioTemplate)
             .attr('for', radio.attr('id'))
             .insertAfter(radio);
 
@@ -3223,7 +3286,9 @@ Toolkit.InputRadio = Toolkit.Input.extend({
     }
 
 }, {
-    radioTemplate: '<label class="' + vendor + 'radio"></label>'
+    radioTemplate: function(bem) {
+        return '<label class="' + bem('radio') + '"></label>';
+    }
 });
 
 /**
@@ -3336,8 +3401,8 @@ Toolkit.InputSelect = Toolkit.Input.extend({
      */
     _buildButton: function() {
         var options = this.options,
-            button = $(options.selectTemplate)
-                .find(this.ns('arrow', 'select')).html(options.arrowTemplate).end()
+            button = this.render(options.selectTemplate)
+                .find(this.ns('arrow', 'select')).html(this.render(options.arrowTemplate)).end()
                 .find(this.ns('label', 'select')).html(Toolkit.messages.loading).end()
                 .css('min-width', this.element.width())
                 .insertAfter(this.element);
@@ -3357,7 +3422,8 @@ Toolkit.InputSelect = Toolkit.Input.extend({
         var select = this.element,
             options = this.options,
             buildOption = this._buildOption.bind(this),
-            dropdown = $(options.optionsTemplate).attr('role', 'listbox').aria('multiselectable', this.multiple),
+            renderTemplate = this.render.bind(this),
+            dropdown = renderTemplate(options.optionsTemplate).attr('role', 'listbox').aria('multiselectable', this.multiple),
             list = $('<ul/>'),
             index = 0,
             self = this;
@@ -3374,7 +3440,7 @@ Toolkit.InputSelect = Toolkit.Input.extend({
                 }
 
                 list.append(
-                    $(options.headingTemplate).text(optgroup.attr('label'))
+                    renderTemplate(options.headingTemplate).text(optgroup.attr('label'))
                 );
 
                 optgroup.children().each(function() {
@@ -3442,7 +3508,7 @@ Toolkit.InputSelect = Toolkit.Input.extend({
         }
 
         if (description = this.readValue(option, options.getDescription)) {
-            content += $(options.descTemplate).html(description).toString();
+            content += this.render(options.descTemplate).html(description).toString();
         }
 
         var a = $('<a/>', {
@@ -3670,29 +3736,37 @@ Toolkit.InputSelect = Toolkit.Input.extend({
     getDefaultLabel: 'title',
     getOptionLabel: 'title',
     getDescription: 'data-description',
-    selectTemplate: '<div class="' + vendor + 'select" data-select>' +
-        '<div class="' + vendor + 'select-arrow" data-select-arrow></div>' +
-        '<div class="' + vendor + 'select-label" data-select-label></div>' +
-    '</div>',
+    selectTemplate: function(bem) {
+        return '<div class="' + bem('select') + '" data-select>' +
+            '<div class="' + bem('select', 'arrow') + '" data-select-arrow></div>' +
+            '<div class="' + bem('select', 'label') + '" data-select-label></div>' +
+        '</div>';
+    },
     arrowTemplate: '<span class="caret-down"></span>',
-    optionsTemplate: '<div class="' + vendor + 'drop ' + vendor + 'drop--down ' + vendor + 'select-options" data-select-options></div>',
-    headingTemplate: '<li class="' + vendor + 'drop-heading"></li>',
-    descTemplate: '<span class="' + vendor + 'drop-desc"></span>'
+    optionsTemplate: function(bem) {
+        return '<div class="' + bem('drop') + ' ' + bem('drop', '', 'down') + ' ' + bem('select', 'options') + '" data-select-options></div>';
+    },
+    headingTemplate: function(bem) {
+        return '<li class="' + bem('drop', 'heading') + '"></li>';
+    },
+    descTemplate: function(bem) {
+        return '<span class="' + bem('drop', 'desc') + '"></span>';
+    }
 });
 
-Toolkit.create('input', function(options) {
+Toolkit.createPlugin('input', function(options) {
     return new Toolkit.Input(this, options);
 });
 
-Toolkit.create('inputRadio', function(options) {
+Toolkit.createPlugin('inputRadio', function(options) {
     return new Toolkit.InputRadio(this, options);
 });
 
-Toolkit.create('inputCheckbox', function(options) {
+Toolkit.createPlugin('inputCheckbox', function(options) {
     return new Toolkit.InputCheckbox(this, options);
 });
 
-Toolkit.create('inputSelect', function(options) {
+Toolkit.createPlugin('inputSelect', function(options) {
     return new Toolkit.InputSelect(this, options);
 });
 
@@ -3896,7 +3970,7 @@ Toolkit.LazyLoad = Toolkit.Component.extend({
     lazyClass: '.lazy-load'
 });
 
-Toolkit.create('lazyLoad', function(options) {
+Toolkit.createPlugin('lazyLoad', function(options) {
     return new Toolkit.LazyLoad(this, options);
 });
 
@@ -3935,7 +4009,7 @@ Toolkit.Mask = Toolkit.Component.extend({
         var mask = element.find('> ' + this.ns());
 
         if (!mask.length) {
-            mask = $(options.template);
+            mask = this.render(options.template);
         }
 
         this.setMask(mask);
@@ -3997,7 +4071,7 @@ Toolkit.Mask = Toolkit.Component.extend({
         message = mask.find(this.ns('message'));
 
         if (!message.length && options.messageContent) {
-            message = $(options.messageTemplate)
+            message = this.render(options.messageTemplate)
                 .html(options.messageContent)
                 .appendTo(mask);
         }
@@ -4032,11 +4106,15 @@ Toolkit.Mask = Toolkit.Component.extend({
     selector: '',
     revealOnClick: false,
     messageContent: '',
-    template: '<div class="' + vendor + 'mask" data-mask></div>',
-    messageTemplate: '<div class="' + vendor + 'mask-message" data-mask-message></div>'
+    template: function(bem) {
+        return '<div class="' + bem('mask') + '" data-mask></div>';
+    },
+    messageTemplate: function(bem) {
+        return '<div class="' + bem('mask', 'message') + '" data-mask-message></div>';
+    }
 });
 
-Toolkit.create('mask', function(options) {
+Toolkit.createPlugin('mask', function(options) {
     return new Toolkit.Mask(this, options);
 });
 
@@ -4409,7 +4487,7 @@ Toolkit.Matrix = Toolkit.Component.extend({
     defer: true
 });
 
-Toolkit.create('matrix', function(options) {
+Toolkit.createPlugin('matrix', function(options) {
     return new Toolkit.Matrix(this, options);
 });
 
@@ -4627,15 +4705,17 @@ Toolkit.Modal = Toolkit.TemplateComponent.extend({
     stopScroll: true,
     clickout: true,
     getContent: 'data-modal',
-    template: '<div class="' + vendor + 'modal">' +
-        '<div class="' + vendor + 'modal-outer">' +
-            '<div class="' + vendor + 'modal-inner" data-modal-content></div>' +
-            '<button class="' + vendor + 'modal-close" data-modal-close><span class="x"></span></button>' +
-        '</div>' +
-    '</div>'
+    template: function(bem) {
+        return '<div class="' + bem('modal') + '">' +
+            '<div class="' + bem('modal', 'outer') + '">' +
+                '<div class="' + bem('modal', 'inner') + '" data-modal-content></div>' +
+                '<button class="' + bem('modal', 'close') + '" data-modal-close><span class="x"></span></button>' +
+            '</div>' +
+        '</div>';
+    }
 });
 
-Toolkit.create('modal', function(options) {
+Toolkit.createPlugin('modal', function(options) {
     return new Toolkit.Modal(this, options);
 }, true);
 
@@ -4857,7 +4937,7 @@ Toolkit.OffCanvas = Toolkit.Component.extend({
     swipe: Toolkit.isTouch
 });
 
-Toolkit.create('offCanvas', function(options) {
+Toolkit.createPlugin('offCanvas', function(options) {
     return new Toolkit.OffCanvas(this, options);
 });
 
@@ -5061,7 +5141,7 @@ Toolkit.Pin = Toolkit.Component.extend({
     lock: true
 });
 
-Toolkit.create('pin', function(options) {
+Toolkit.createPlugin('pin', function(options) {
     return new Toolkit.Pin(this, options);
 });
 
@@ -5341,17 +5421,21 @@ Toolkit.Tooltip = Toolkit.CompositeComponent.extend({
     mouseThrottle: 50,
     xOffset: 0,
     yOffset: 0,
-    wrapperClass: vendor + 'tooltips',
-    template: '<div class="' + vendor + 'tooltip">' +
-        '<div class="' + vendor + 'tooltip-inner">' +
-            '<div class="' + vendor + 'tooltip-head" data-tooltip-header></div>' +
-            '<div class="' + vendor + 'tooltip-body" data-tooltip-content></div>' +
-        '</div>' +
-        '<div class="' + vendor + 'tooltip-arrow"></div>' +
-    '</div>'
+    wrapperClass: function(bem) {
+        return bem('tooltips');
+    },
+    template: function(bem) {
+        return '<div class="' + bem('tooltip') + '">' +
+            '<div class="' + bem('tooltip', 'inner') + '">' +
+                '<div class="' + bem('tooltip', 'head') + '" data-tooltip-header></div>' +
+                '<div class="' + bem('tooltip', 'body') + '" data-tooltip-content></div>' +
+            '</div>' +
+            '<div class="' + bem('tooltip', 'arrow') + '"></div>' +
+        '</div>';
+    }
 });
 
-Toolkit.create('tooltip', function(options) {
+Toolkit.createPlugin('tooltip', function(options) {
     return new Toolkit.Tooltip(this, options);
 }, true);
 
@@ -5375,17 +5459,21 @@ Toolkit.Popover = Toolkit.Tooltip.extend({
 
 }, {
     getContent: 'data-popover',
-    wrapperClass: vendor + 'popovers',
-    template: '<div class="' + vendor + 'popover">' +
-        '<div class="' + vendor + 'popover-inner">' +
-            '<div class="' + vendor + 'popover-head" data-popover-header></div>' +
-            '<div class="' + vendor + 'popover-body" data-popover-content></div>' +
-        '</div>' +
-        '<div class="' + vendor + 'popover-arrow"></div>' +
-    '</div>'
+    wrapperClass: function(bem) {
+        return bem('popovers');
+    },
+    template: function(bem) {
+        return '<div class="' + bem('popover') + '">' +
+            '<div class="' + bem('popover', 'inner') + '">' +
+                '<div class="' + bem('popover', 'head') + '" data-popover-header></div>' +
+                '<div class="' + bem('popover', 'body') + '" data-popover-content></div>' +
+            '</div>' +
+            '<div class="' + bem('popover', 'arrow') + '"></div>' +
+        '</div>';
+    }
 });
 
-Toolkit.create('popover', function(options) {
+Toolkit.createPlugin('popover', function(options) {
     return new Toolkit.Popover(this, options);
 }, true);
 
@@ -5818,19 +5906,21 @@ Toolkit.Showcase = Toolkit.TemplateComponent.extend({
     getCategory: 'data-showcase',
     getImage: 'href',
     getTitle: 'title',
-    template: '<div class="' + vendor + 'showcase">' +
-        '<div class="' + vendor + 'showcase-inner">' +
-            '<ul class="' + vendor + 'showcase-items" data-showcase-items></ul>' +
-            '<ol class="' + vendor + 'showcase-tabs bullets" data-showcase-tabs></ol>' +
-            '<button class="' + vendor + 'showcase-prev" data-showcase-prev></button>' +
-            '<button class="' + vendor + 'showcase-next" data-showcase-next></button>' +
-        '</div>' +
-        '<button class="' + vendor + 'showcase-close" data-showcase-close><span class="x"></span></button>' +
-        '<div class="' + vendor + 'showcase-caption" data-showcase-caption></div>' +
-    '</div>'
+    template: function(bem) {
+        return '<div class="' + bem('showcase') + '">' +
+            '<div class="' + bem('showcase', 'inner') + '">' +
+                '<ul class="' + bem('showcase', 'items') + '" data-showcase-items></ul>' +
+                '<ol class="' + bem('showcase', 'tabs') + ' bullets" data-showcase-tabs></ol>' +
+                '<button class="' + bem('showcase', 'prev') + '" data-showcase-prev></button>' +
+                '<button class="' + bem('showcase', 'next') + '" data-showcase-next></button>' +
+            '</div>' +
+            '<button class="' + bem('showcase', 'close') + '" data-showcase-close><span class="x"></span></button>' +
+            '<div class="' + bem('showcase', 'caption') + '" data-showcase-caption></div>' +
+        '</div>';
+    }
 });
 
-Toolkit.create('showcase', function(options) {
+Toolkit.createPlugin('showcase', function(options) {
     return new Toolkit.Showcase(this, options);
 }, true);
 
@@ -6023,7 +6113,7 @@ Toolkit.Stalker = Toolkit.Component.extend({
     applyToParent: true
 });
 
-Toolkit.create('stalker', function(options) {
+Toolkit.createPlugin('stalker', function(options) {
     return new Toolkit.Stalker(this, options);
 });
 
@@ -6268,7 +6358,7 @@ Toolkit.Tab = Toolkit.Component.extend({
     getUrl: 'href'
 });
 
-Toolkit.create('tab', function(options) {
+Toolkit.createPlugin('tab', function(options) {
     return new Toolkit.Tab(this, options);
 });
 
@@ -6308,7 +6398,7 @@ Toolkit.Toast = Toolkit.CompositeComponent.extend({
         options = $.extend({}, this.options, options || {});
 
         var self = this,
-            toast = $(options.template)
+            toast = this.render(options.template)
                 .addClass(options.animation)
                 .attr('role', 'note')
                 .html(content)
@@ -6367,11 +6457,15 @@ Toolkit.Toast = Toolkit.CompositeComponent.extend({
     position: 'bottom-left',
     animation: 'slide-up',
     duration: 5000,
-    wrapperClass: vendor + 'toasts',
-    template: '<div class="' + vendor + 'toast"></div>'
+    wrapperClass: function(bem) {
+        return bem('toasts');
+    },
+    template: function(bem) {
+        return '<div class="' + bem('toast') + '"></div>';
+    }
 });
 
-Toolkit.create('toast', function(options) {
+Toolkit.createPlugin('toast', function(options) {
     return new Toolkit.Toast(this, options);
 });
 
@@ -6451,7 +6545,7 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
 
         // Enable shadow inputs
         if (options.shadow) {
-            this.wrapper = $(this.options.shadowTemplate);
+            this.wrapper = this.render(this.options.shadowTemplate);
 
             this.shadow = this.input.clone()
                 .addClass('is-shadow')
@@ -6516,10 +6610,10 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
             'aria-selected': 'false'
         });
 
-        a.append( $(this.options.titleTemplate).html(this.highlight(item.title)) );
+        a.append( this.render(this.options.titleTemplate).html(this.highlight(item.title)) );
 
         if (item.description) {
-            a.append( $(this.options.descTemplate).html(item.description) );
+            a.append( this.render(this.options.descTemplate).html(item.description) );
         }
 
         return a;
@@ -6552,8 +6646,8 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
         var terms = this.term.replace(/[\-\[\]\{\}()*+?.,\\^$|#]/g, '\\$&').split(' '),
             options = this.options,
             callback = function(match) {
-                return $(options.highlightTemplate).html(match).toString();
-            };
+                return this.render(options.highlightTemplate).html(match).toString();
+            }.bind(this);
 
         for (var i = 0, t; t = terms[i]; i++) {
             item = item.replace(new RegExp(t, 'ig'), callback);
@@ -6722,7 +6816,7 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
                 results.push(null);
 
                 elements.push(
-                    $(options.headingTemplate).append( $('<span/>', { text: category }) )
+                    this.render(options.headingTemplate).append( $('<span/>', { text: category }) )
                 );
             }
 
@@ -6955,12 +7049,24 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
     prefetch: false,
     shadow: false,
     query: {},
-    template: '<div class="' + vendor + 'type-ahead"></div>',
-    shadowTemplate: '<div class="' + vendor + 'type-ahead-shadow"></div>',
-    titleTemplate: '<span class="' + vendor + 'type-ahead-title"></span>',
-    descTemplate: '<span class="' + vendor + 'type-ahead-desc"></span>',
-    highlightTemplate: '<mark class="' + vendor + 'type-ahead-highlight"></mark>',
-    headingTemplate: '<li class="' + vendor + 'type-ahead-heading"></li>',
+    template: function(bem) {
+        return '<div class="' + bem('type-ahead') + '"></div>';
+    },
+    shadowTemplate: function(bem) {
+        return '<div class="' + bem('type-ahead', 'shadow') + '"></div>';
+    },
+    titleTemplate: function(bem) {
+        return '<span class="' + bem('type-ahead', 'title') + '"></span>';
+    },
+    descTemplate: function(bem) {
+        return '<span class="' + bem('type-ahead', 'desc') + '"></span>';
+    },
+    highlightTemplate: function(bem) {
+        return '<mark class="' + bem('type-ahead', 'highlight') + '"></mark>';
+    },
+    headingTemplate: function(bem) {
+        return '<li class="' + bem('type-ahead', 'heading') + '"></li>';
+    },
 
     // Callbacks
     sorter: null,
@@ -6968,7 +7074,7 @@ Toolkit.TypeAhead = Toolkit.TemplateComponent.extend({
     builder: null
 });
 
-Toolkit.create('typeAhead', function(options) {
+Toolkit.createPlugin('typeAhead', function(options) {
     return new Toolkit.TypeAhead(this, options);
 });
 

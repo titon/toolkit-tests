@@ -1,0 +1,270 @@
+<div class="test-demo">
+    <h2 class="test-header">Three column.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region">
+            <aside class="block span-3">1 - 25%</aside>
+            <section class="block span-6">2 - 50%</section>
+            <aside class="block span-3">3 - 25%</aside>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Three column. Ordered</h2>
+
+    <div class="test-body full">
+        <div class="region test-region">
+            <section class="block span-6 order-3">1 - 50%</section>
+            <aside class="block span-3 order-1">2 - 25%</aside>
+            <aside class="block span-3 order-2">3 - 25%</aside>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Horizontal columns.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Horizontal columns. Altered shrink, grow, &amp; order.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region">
+            <div class="block shrink no-grow">
+                1<br>
+                Grow: 0<br>
+                Shrink: 1
+            </div>
+            <div class="block">
+                2
+            </div>
+            <div class="block order-2">
+                3<br>
+                Order: 2
+            </div>
+            <div class="block" style="flex-grow: 3">
+                4<br>
+                Grow: 3
+            </div>
+            <div class="block order-1">
+                5<br>
+                Order: 1
+            </div>
+            <div class="block order-3" style="flex-grow: 2;">
+                6<br>
+                Grow: 2<br>
+                Order: 3
+            </div>
+            <div class="block">
+                7
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Horizontal non-wrapping and wrapping.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+        <br>
+        <div class="region test-region test-region-wrap region--wrap">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Horizontal alignment. No grow. Base width.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region test-region-alignment flow-left">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+        </div>
+        <div class="region test-region test-region-alignment flow-center">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+        </div>
+        <div class="region test-region test-region-alignment flow-right">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+        </div>
+        <div class="region test-region test-region-alignment flow-between">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+        </div>
+        <div class="region test-region test-region-alignment flow-around">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Vertical alignment. No grow. Base height.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region-vertical">
+            <div class="block">
+                <div class="region region--vertical test-region test-region-alignment flow-top">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="region region--vertical test-region test-region-alignment flow-center">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="region region--vertical test-region test-region-alignment flow-bottom">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="region region--vertical test-region test-region-alignment flow-between">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="block">
+                <div class="region region--vertical test-region test-region-alignment flow-around">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Vertical with order.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region region--vertical">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block order-2">3</div>
+            <div class="block order-1">4</div>
+            <div class="block">5</div>
+        </div>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Grid with spacing. Responsive.</h2>
+
+    <div class="test-body full">
+        <div class="region test-region test-region-grid region--grid">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3<br></div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6<br><br></div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9<br></div>
+            <div class="block">10</div>
+            <div class="block">11<br><br><br></div>
+            <div class="block">12</div>
+            <div class="block">13</div>
+            <div class="block">14</div>
+            <div class="block">15</div>
+        </div>
+
+        <p class="test-note">
+            Flexbox doesn't support last line styling,<br>
+            so an unequal amount of blocks will grow.
+        </p>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Responsive sizes &amp; breakpoints. Collapses on mobile (manual).</h2>
+
+    <div class="test-body full">
+        <div class="concept-1">
+            <header class="test-box">Header</header>
+
+            <div class="region test-region">
+                <aside class="block large-3 medium-3 medium-order-2 small-4 small-order-2 xsmall-order-3">
+                    Left Sidebar<br>
+                    Large: 25%<br>
+                    Medium: 25%, order 2<br>
+                    Small: 33.3%, order 2<br>
+                    Xsmall: collapsed, order 3
+                </aside>
+
+                <section class="block large-7 medium-6 medium-order-1 small-4 small-order-3 xsmall-order-1">
+                    Content<br>
+                    Large: 58.3%<br>
+                    Medium: 50%, order 1<br>
+                    Small: 33.3%, order 3<br>
+                    Xsmall: collapsed, order 1
+                </section>
+
+                <aside class="block large-2 medium-3 small-4 small-order-1 xsmall-order-2">
+                    Right Sidebar<br>
+                    Large: 16.6%<br>
+                    Medium: 25%<br>
+                    Small: 33.3%, order 1<br>
+                    Xsmall: collapsed, order 2
+                </aside>
+            </div>
+
+            <footer class="test-box">Footer</footer>
+        </div>
+
+        <p class="test-note">
+            A 3 column layout, with header and footer, that should collapse vertically on mobile.
+        </p>
+    </div>
+</div>
+

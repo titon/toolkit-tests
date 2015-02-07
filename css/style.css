@@ -134,12 +134,45 @@ textarea {
 #carousel-3, #carousel-6 {
   max-width: 500px; }
 
-.test-grid .col {
+.test-grid .col, .test-region .block, .test-box {
   color: #000;
   background: #fbfbfb;
   border: 1px solid #e5e5e5;
-  padding: 1rem 0;
+  padding: 1rem;
   text-align: center; }
+
+.test-grid .col {
+  padding: 1rem 0; }
+
+.test-region-alignment .block {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 15%;
+  -ms-flex: 0 0 15%;
+  flex: 0 0 15%; }
+
+.test-region-wrap .block {
+  -webkit-flex-basis: 23%;
+  -ms-flex-preferred-size: 23%;
+  flex-basis: 23%; }
+
+.test-region-grid .block {
+  -webkit-flex-basis: 200px;
+  -ms-flex-preferred-size: 200px;
+  flex-basis: 200px; }
+
+.test-region-vertical, .test-region-vertical .region {
+  height: 400px; }
+
+.concept-1 section {
+  height: 500px; }
+
+@media screen and (max-width: 640px) {
+  .concept-1 .region {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; } }
 
 [class*="icon-16"] {
   background: url("../img/icons-16@2x.png") no-repeat;

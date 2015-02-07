@@ -164,14 +164,47 @@ textarea {
 #carousel-2, #carousel-4, #carousel-5 { max-width: 800px; }
 #carousel-3, #carousel-6 { max-width: 500px; }
 
-//-------------------- Grid --------------------//
+//-------------------- Grid, Flex --------------------//
 
-.test-grid .col {
+.test-grid .col,
+.test-region .block,
+.test-box {
     color: #000;
     background: #fbfbfb;
     border: 1px solid #e5e5e5;
-    padding: 1rem 0;
+    padding: 1rem;
     text-align: center;
+}
+
+.test-grid .col {
+    padding: 1rem 0;
+}
+
+.test-region-alignment .block {
+    flex: 0 0 15%;
+}
+
+.test-region-wrap .block {
+    flex-basis: 23%
+}
+
+.test-region-grid .block {
+    flex-basis: 200px;
+}
+
+.test-region-vertical,
+.test-region-vertical .region {
+    height: 400px;
+}
+
+.concept-1 section {
+    height: 500px;
+}
+
+@media screen and (max-width: 640px) {
+    .concept-1 .region {
+        flex-direction: column;
+    }
 }
 
 //-------------------- Icon --------------------//
