@@ -35,4 +35,4 @@ try {
     echo $e->getMessage();
 }
 
-exit();
+exit(0);
