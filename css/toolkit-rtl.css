@@ -375,6 +375,12 @@ bdo[dir="rtl"] {
 .no-transition {
   transition: none !important; }
 
+.fluid {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3705,12 +3711,6 @@ kbd {
  * @license     http://opensource.org/licenses/BSD-3-Clause
  * @link        http://titon.io
  */
-.fluid {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%; }
-
 .show-retina, .show-print {
   display: none !important; }
 
