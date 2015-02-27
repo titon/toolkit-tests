@@ -1,4 +1,4 @@
-/*! Titon Toolkit v2.0.2 | BSD-3 License | titon.io */
+/*! Titon Toolkit v2.1.0 | BSD-3 License | titon.io */
 (function($, window, document) {
 'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -64,10 +64,10 @@ $.fn.cache = function(key, value) {
 var Toolkit = {
 
     /** Current version. */
-    version: '2.0.2',
+    version: '2.1.0',
 
     /** Build date hash. */
-    build: 'i6l7q0ik',
+    build: 'i6mtov3e',
 
     /** CSS namespace. */
     namespace: '',
@@ -674,7 +674,7 @@ $.fn.toolkit = function(plugin, method, args) {
  */
 Toolkit.Component = Toolkit.Base.extend({
     name: 'Component',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** The target element. Either the embedded element, or the current element in the composite layer. */
     element: null,
@@ -1887,7 +1887,7 @@ $.throttle = function(func, delay) {
 
 Toolkit.Carousel = Toolkit.Component.extend({
     name: 'Carousel',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** Is the carousel currently animating? */
     animating: false,
@@ -2535,7 +2535,7 @@ $.event.special.clickout = (function() {
 
 Toolkit.Drop = Toolkit.CompositeComponent.extend({
     name: 'Drop',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /**
      * Initialize the drop.
@@ -2663,7 +2663,7 @@ Toolkit.createPlugin('drop', function(options) {
 
 Toolkit.Flyout = Toolkit.CompositeComponent.extend({
     name: 'Flyout',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** Current URL to generate a flyout menu for. */
     url: '',
@@ -3112,7 +3112,7 @@ $.fn.toString = function() {
 
 Toolkit.Input = Toolkit.Component.extend({
     name: 'Input',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** The custom input element. */
     input: null,
@@ -3229,7 +3229,7 @@ Toolkit.Input = Toolkit.Component.extend({
  */
 Toolkit.InputCheckbox = Toolkit.Input.extend({
     name: 'InputCheckbox',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /**
      * Initialize the checkbox.
@@ -3263,7 +3263,7 @@ Toolkit.InputCheckbox = Toolkit.Input.extend({
  */
 Toolkit.InputRadio = Toolkit.Input.extend({
     name: 'InputRadio',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /**
      * Initialize the radio.
@@ -3297,7 +3297,7 @@ Toolkit.InputRadio = Toolkit.Input.extend({
  */
 Toolkit.InputSelect = Toolkit.Input.extend({
     name: 'InputSelect',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** The custom drop element. */
     dropdown: null,
@@ -3772,7 +3772,7 @@ Toolkit.createPlugin('inputSelect', function(options) {
 
 Toolkit.LazyLoad = Toolkit.Component.extend({
     name: 'LazyLoad',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** Container to monitor scroll events on. */
     container: $(window),
@@ -4493,7 +4493,7 @@ Toolkit.createPlugin('matrix', function(options) {
 
 Toolkit.Modal = Toolkit.TemplateComponent.extend({
     name: 'Modal',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** Blackout element if enabled. */
     blackout: null,
@@ -5257,7 +5257,7 @@ $.fn.positionTo = function(position, relativeTo, baseOffset, isMouse) {
 
 Toolkit.Tooltip = Toolkit.CompositeComponent.extend({
     name: 'Tooltip',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /**
      * Initialize the tooltip.
@@ -5479,7 +5479,7 @@ Toolkit.createPlugin('popover', function(options) {
 
 Toolkit.Showcase = Toolkit.TemplateComponent.extend({
     name: 'Showcase',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /** Is the showcase currently animating? */
     animating: false,
@@ -6364,7 +6364,7 @@ Toolkit.createPlugin('tab', function(options) {
 
 Toolkit.Toast = Toolkit.CompositeComponent.extend({
     name: 'Toast',
-    version: '2.0.0',
+    version: '2.1.0',
 
     /**
      * Initialize the toast.
