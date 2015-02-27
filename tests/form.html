@@ -1,328 +1,348 @@
 <div class="test-demo">
     <h2 class="test-header">Default.</h2>
 
-    <input type="text" class="input" value="Default">
-    <input type="text" class="input" value="Disabled" disabled>
-    <input type="text" class="input" value="Readonly" readonly>
-    <input type="text" class="input" placeholder="Placeholder">
+    <div class="test-body">
+        <input type="text" class="input" value="Default">
+        <input type="text" class="input" value="Disabled" disabled>
+        <input type="text" class="input" value="Readonly" readonly>
+        <input type="text" class="input" placeholder="Placeholder">
 
-    <br><br>
+        <br><br>
 
-    <textarea class="input" rows="3" cols="50"></textarea>
+        <textarea class="input" rows="3" cols="50"></textarea>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Selects.</h2>
 
-    <select class="input">
-        <option value="">Option 1</option>
-        <option value="">Option 2</option>
-        <option value="">Option 3</option>
-    </select>
-
-    <select class="input">
-        <optgroup label="Optgroup 1">
+    <div class="test-body">
+        <select class="input">
             <option value="">Option 1</option>
             <option value="">Option 2</option>
             <option value="">Option 3</option>
-        </optgroup>
-        <optgroup label="Optgroup 2">
-            <option value="">Option 4</option>
-            <option value="">Option 5</option>
-            <option value="">Option 6</option>
-        </optgroup>
-    </select>
+        </select>
 
-    <select class="input" disabled>
-        <option value="">Option 1</option>
-        <option value="">Option 2</option>
-        <option value="">Option 3</option>
-    </select>
+        <select class="input">
+            <optgroup label="Optgroup 1">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+            </optgroup>
+            <optgroup label="Optgroup 2">
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+            </optgroup>
+        </select>
 
-    <select class="input">
-        <option value="">Option 1</option>
-        <option value="" disabled>Option 2</option>
-        <option value="">Option 3</option>
-    </select>
-
-    <select class="input">
-        <optgroup label="Optgroup 1">
+        <select class="input" disabled>
             <option value="">Option 1</option>
             <option value="">Option 2</option>
-            <option value="" disabled>Option 3</option>
-        </optgroup>
-        <optgroup label="Optgroup 2" disabled>
-            <option value="">Option 4</option>
-            <option value="">Option 5</option>
-            <option value="">Option 6</option>
-        </optgroup>
-    </select>
+            <option value="">Option 3</option>
+        </select>
+
+        <select class="input">
+            <option value="">Option 1</option>
+            <option value="" disabled>Option 2</option>
+            <option value="">Option 3</option>
+        </select>
+
+        <select class="input">
+            <optgroup label="Optgroup 1">
+                <option value="">Option 1</option>
+                <option value="">Option 2</option>
+                <option value="" disabled>Option 3</option>
+            </optgroup>
+            <optgroup label="Optgroup 2" disabled>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+            </optgroup>
+        </select>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Multiple selects.</h2>
 
-    <select class="input" multiple>
-        <option value="">Option 1</option>
-        <option value="">Option 2</option>
-        <option value="">Option 3</option>
-        <option value="">Option 4</option>
-        <option value="">Option 5</option>
-    </select>
+    <div class="test-body">
+        <select class="input" multiple>
+            <option value="">Option 1</option>
+            <option value="">Option 2</option>
+            <option value="">Option 3</option>
+            <option value="">Option 4</option>
+            <option value="">Option 5</option>
+        </select>
 
-    <select class="input" multiple>
-        <option value="">Option 1</option>
-        <option value="" disabled>Option 2</option>
-        <option value="" disabled>Option 3</option>
-        <option value="">Option 4</option>
-        <option value="">Option 5</option>
-    </select>
+        <select class="input" multiple>
+            <option value="">Option 1</option>
+            <option value="" disabled>Option 2</option>
+            <option value="" disabled>Option 3</option>
+            <option value="">Option 4</option>
+            <option value="">Option 5</option>
+        </select>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Checkboxes and radios.</h2>
 
-    <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
-    <label class="input-checkbox is-disabled"><input type="checkbox" name="checkbox" disabled> Checkbox disabled</label>
+    <div class="test-body">
+        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+        <label class="input-checkbox is-disabled"><input type="checkbox" name="checkbox" disabled> Checkbox disabled</label>
 
-    <br>
+        <br>
 
-    <label class="input-radio"><input type="radio" name="radio"> Radio</label>
-    <label class="input-radio is-disabled"><input type="radio" name="radio" disabled> Radio disabled</label>
+        <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+        <label class="input-radio is-disabled"><input type="radio" name="radio" disabled> Radio disabled</label>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Sizes.</h2>
 
-    <input type="text" class="input small" value="Small Input">
+    <div class="test-body">
+        <input type="text" class="input small" value="Small Input">
 
-    <select class="input small"><option value="">Small Select</option></select>
+        <select class="input small"><option value="">Small Select</option></select>
 
-    <div class="input-static small">Small Static</div>
+        <div class="input-static small">Small Static</div>
 
-    <label class="input-checkbox small"><input type="checkbox" name="checkbox"> Small Checkbox</label>
+        <label class="input-checkbox small"><input type="checkbox" name="checkbox"> Small Checkbox</label>
 
-    <label class="input-radio small"><input type="radio" name="radio"> Small Radio</label>
+        <label class="input-radio small"><input type="radio" name="radio"> Small Radio</label>
 
-    <br><br>
+        <br><br>
 
-    <input type="text" class="input" value="Default Input">
+        <input type="text" class="input" value="Default Input">
 
-    <select class="input"><option value="">Default Select</option></select>
+        <select class="input"><option value="">Default Select</option></select>
 
-    <div class="input-static">Default Static</div>
+        <div class="input-static">Default Static</div>
 
-    <label class="input-checkbox"><input type="checkbox" name="checkbox"> Default Checkbox</label>
+        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Default Checkbox</label>
 
-    <label class="input-radio"><input type="radio" name="radio"> Default Radio</label>
+        <label class="input-radio"><input type="radio" name="radio"> Default Radio</label>
 
-    <br><br>
+        <br><br>
 
-    <input type="text" class="input large" value="Large Input">
+        <input type="text" class="input large" value="Large Input">
 
-    <select class="input large"><option value="">Large Select</option></select>
+        <select class="input large"><option value="">Large Select</option></select>
 
-    <div class="input-static large">Large Static</div>
+        <div class="input-static large">Large Static</div>
 
-    <label class="input-checkbox large"><input type="checkbox" name="checkbox"> Large Checkbox</label>
+        <label class="input-checkbox large"><input type="checkbox" name="checkbox"> Large Checkbox</label>
 
-    <label class="input-radio large"><input type="radio" name="radio"> Large Radio</label>
+        <label class="input-radio large"><input type="radio" name="radio"> Large Radio</label>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">States.</h2>
 
-    <div class="field is-required">
-        <input type="text" class="input" value="Input" required>
+    <div class="test-body">
+        <div class="field is-required">
+            <input type="text" class="input" value="Input" required>
 
-        <select class="input" required><option value="">Select</option></select>
+            <select class="input" required><option value="">Select</option></select>
 
-        <label class="input-checkbox"><input type="checkbox" name="checkbox" required> Checkbox</label>
+            <label class="input-checkbox"><input type="checkbox" name="checkbox" required> Checkbox</label>
 
-        <label class="input-radio"><input type="radio" name="radio" required> Radio</label>
-    </div>
+            <label class="input-radio"><input type="radio" name="radio" required> Radio</label>
+        </div>
 
-    <div class="field is-success">
-        <input type="text" class="input" value="Input">
+        <div class="field is-success">
+            <input type="text" class="input" value="Input">
 
-        <select class="input"><option value="">Select</option></select>
+            <select class="input"><option value="">Select</option></select>
 
-        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+            <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
 
-        <label class="input-radio"><input type="radio" name="radio"> Radio</label>
-    </div>
+            <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+        </div>
 
-    <div class="field is-error">
-        <input type="text" class="input" value="Input">
+        <div class="field is-error">
+            <input type="text" class="input" value="Input">
 
-        <select class="input"><option value="">Select</option></select>
+            <select class="input"><option value="">Select</option></select>
 
-        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+            <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
 
-        <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+            <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+        </div>
     </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Form.</h2>
 
-    <form action="">
-        <fieldset class="no-legend">
-            <ol class="fields">
-                <li>
-                    <label class="field-label">Input</label>
-                    <input type="text" class="input" value="">
-                    <div class="field-help">This is a string of help text below the input.</div>
-                </li>
-                <li>
-                    <label class="field-label">Static</label>
-                    <div class="input-static">Titon Toolkit</div>
-                </li>
-                <li>
-                    <label class="field-label">Select</label>
-                    <select class="input">
-                        <option value="">Option 1</option>
-                        <option value="">Option 2</option>
-                        <option value="">Option 3</option>
-                    </select>
-                </li>
-                <li>
-                    <label class="field-label">Textarea</label>
-                    <textarea class="input" rows="3" cols="10"></textarea>
-                </li>
-            </ol>
-        </fieldset>
-
-        <fieldset>
-            <legend>Fieldset with legend</legend>
-
-            <div class="field">
-                <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
-            </div>
-            <div class="field">
-                <label class="input-radio"><input type="radio" name="radio"> Radio</label>
-            </div>
-        </fieldset>
-
-        <div class="form-actions">
-            <button type="submit" class="button is-info">Submit</button>
-            <button type="reset" class="button">Reset</button>
-        </div>
-    </form>
-</div>
-
-<div class="test-demo">
-    <h2 class="test-header">Horizontal form.</h2>
-
-    <form action="" class="form--horizontal">
-        <fieldset class="no-legend">
-            <ol class="fields">
-                <li>
-                    <label class="field-label col span-4">Input</label>
-                    <div class="field-col col span-8">
+    <div class="test-body full">
+        <form action="">
+            <fieldset class="no-legend">
+                <ol class="fields">
+                    <li>
+                        <label class="field-label">Input</label>
                         <input type="text" class="input" value="">
                         <div class="field-help">This is a string of help text below the input.</div>
-                    </div>
-                </li>
-                <li>
-                    <label class="field-label col span-4">Static</label>
-                    <div class="field-col col span-8">
+                    </li>
+                    <li>
+                        <label class="field-label">Static</label>
                         <div class="input-static">Titon Toolkit</div>
-                    </div>
-                </li>
-                <li>
-                    <label class="field-label col span-4">Select</label>
-                    <div class="field-col col span-8">
+                    </li>
+                    <li>
+                        <label class="field-label">Select</label>
                         <select class="input">
                             <option value="">Option 1</option>
                             <option value="">Option 2</option>
                             <option value="">Option 3</option>
                         </select>
-                    </div>
-                </li>
-                <li>
-                    <label class="field-label col span-4">Textarea</label>
-                    <div class="field-col col span-8">
+                    </li>
+                    <li>
+                        <label class="field-label">Textarea</label>
                         <textarea class="input" rows="3" cols="10"></textarea>
-                    </div>
-                </li>
-            </ol>
-        </fieldset>
+                    </li>
+                </ol>
+            </fieldset>
 
-        <fieldset>
-            <legend>Fieldset with legend</legend>
+            <fieldset>
+                <legend>Fieldset with legend</legend>
 
-            <div class="field">
-                <div class="field-col col span-8 push-4">
+                <div class="field">
                     <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
                 </div>
-            </div>
-            <div class="field">
-                <div class="field-col col span-8 push-4">
+                <div class="field">
                     <label class="input-radio"><input type="radio" name="radio"> Radio</label>
                 </div>
-            </div>
-        </fieldset>
+            </fieldset>
 
-        <div class="form-actions">
-            <button type="submit" class="button is-info">Submit</button>
-            <button type="reset" class="button">Reset</button>
-        </div>
-    </form>
+            <div class="form-actions">
+                <button type="submit" class="button is-info">Submit</button>
+                <button type="reset" class="button">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Horizontal form.</h2>
+
+    <div class="test-body full">
+        <form action="" class="form--horizontal">
+            <fieldset class="no-legend">
+                <ol class="fields">
+                    <li>
+                        <label class="field-label col span-4">Input</label>
+                        <div class="field-col col span-8">
+                            <input type="text" class="input" value="">
+                            <div class="field-help">This is a string of help text below the input.</div>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="field-label col span-4">Static</label>
+                        <div class="field-col col span-8">
+                            <div class="input-static">Titon Toolkit</div>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="field-label col span-4">Select</label>
+                        <div class="field-col col span-8">
+                            <select class="input">
+                                <option value="">Option 1</option>
+                                <option value="">Option 2</option>
+                                <option value="">Option 3</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="field-label col span-4">Textarea</label>
+                        <div class="field-col col span-8">
+                            <textarea class="input" rows="3" cols="10"></textarea>
+                        </div>
+                    </li>
+                </ol>
+            </fieldset>
+
+            <fieldset>
+                <legend>Fieldset with legend</legend>
+
+                <div class="field">
+                    <div class="field-col col span-8 push-4">
+                        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-col col span-8 push-4">
+                        <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" class="button is-info">Submit</button>
+                <button type="reset" class="button">Reset</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Inline form.</h2>
 
-    <form action="" class="form--inline">
-        <fieldset class="no-legend">
-            <ol class="fields">
-                <li>
-                    <label class="field-label">Input</label>
-                    <input type="text" class="input" value="">
-                    <div class="field-help">This is a string of help text below the input.</div>
-                </li>
-                <li>
-                    <label class="field-label">Static</label>
-                    <div class="input-static">Titon Toolkit</div>
-                </li>
-                <li>
-                    <label class="field-label">Select</label>
-                    <select class="input">
-                        <option value="">Option 1</option>
-                        <option value="">Option 2</option>
-                        <option value="">Option 3</option>
-                    </select>
-                </li>
-            </ol>
-        </fieldset>
+    <div class="test-body">
+        <form action="" class="form--inline">
+            <fieldset class="no-legend">
+                <ol class="fields">
+                    <li>
+                        <label class="field-label">Input</label>
+                        <input type="text" class="input" value="">
+                        <div class="field-help">This is a string of help text below the input.</div>
+                    </li>
+                    <li>
+                        <label class="field-label">Static</label>
+                        <div class="input-static">Titon Toolkit</div>
+                    </li>
+                    <li>
+                        <label class="field-label">Select</label>
+                        <select class="input">
+                            <option value="">Option 1</option>
+                            <option value="">Option 2</option>
+                            <option value="">Option 3</option>
+                        </select>
+                    </li>
+                </ol>
+            </fieldset>
 
-        <fieldset>
-            <legend>Fieldset with legend</legend>
+            <fieldset>
+                <legend>Fieldset with legend</legend>
 
-            <div class="field">
-                <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+                <div class="field">
+                    <label class="input-checkbox"><input type="checkbox" name="checkbox"> Checkbox</label>
+                </div>
+                <div class="field">
+                    <label class="input-radio"><input type="radio" name="radio"> Radio</label>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" class="button is-info">Submit</button>
+                <button type="reset" class="button">Reset</button>
             </div>
-            <div class="field">
-                <label class="input-radio"><input type="radio" name="radio"> Radio</label>
-            </div>
-        </fieldset>
-
-        <div class="form-actions">
-            <button type="submit" class="button is-info">Submit</button>
-            <button type="reset" class="button">Reset</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="test-demo">
     <h2 class="test-header">Line heights.</h2>
 
-    <input type="text" class="input" value="Input">
-    <select class="input"><option>Select</option></select>
-    <button type="Button" class="button">Button</button>
-    <a href="javascript:;" class="button">Anchor</a>
-    <input type="submit" class="button" value="Input">
+    <div class="test-body">
+        <input type="text" class="input" value="Input">
+        <select class="input"><option>Select</option></select>
+        <button type="Button" class="button">Button</button>
+        <a href="javascript:;" class="button">Anchor</a>
+        <input type="submit" class="button" value="Input">
+    </div>
 
     <p class="test-note">Heights will differ between browsers as they override line-height.</p>
 </div>

@@ -1,7 +1,7 @@
 {
     "name": "titon-toolkit-tests",
-    "description": "Full HTML, CSS, and JS test cases for Titon Toolkit.",
-    "copyright": "Copyright 2010-2014, The Titon Project",
+    "description": "Full HTML, CSS, and JS testing suite for Titon Toolkit.",
+    "copyright": "Copyright 2010-2015, The Titon Project",
     "homepage": "http://titon.io",
     "licenses": [
         {
@@ -19,7 +19,8 @@
     },
     "devDependencies": {
         "gulp": "*",
-        "gulp-ruby-sass": "*",
-        "gulp-autoprefixer": "*"
+        "gulp-sass": "*",
+        "gulp-autoprefixer": "*",
+        "gulp-imagemin": "*"
     }
 }

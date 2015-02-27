@@ -22,11 +22,32 @@ a {
     .viewport {
         float: right;
         padding-top: 8px;
-        margin-right: 1rem;
     }
 
-    .bar-right { display: none; }
-    .bar-left { text-align: center; }
+    .bar-right {
+        display: none;
+
+        .button {
+            float: right;
+            margin-left: .5rem;
+        }
+    }
+
+    .bar-left {
+        text-align: center;
+    }
+
+    .button {
+        border-radius: .2rem;
+    }
+
+    .bar-left,
+    .bar-right {
+        &::after {
+            clear: both;
+            content: "";
+        }
+    }
 }
 
 .test-logo {
@@ -54,7 +75,6 @@ a {
 
 .test-demo {
     padding: 2rem;
-    text-align: center;
 
     &:nth-child(even) {
         background: #344a5f;
@@ -74,9 +94,20 @@ a {
     color: #344a5f;
 }
 
-.test-note {
-    margin: 2rem 0 0 0;
-    color: #344a5f;
+.test-body {
+    display: inline-block;
+    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &.full {
+        position: static !important;
+        display: block !important;;
+        left: 0 !important;;
+        right: 0 !important;;
+        transform: none !important;;
+    }
 }
 
 .test-footer {
@@ -84,18 +115,13 @@ a {
     text-align: center;
 }
 
-// Fix align center issues
-form,
-.accordion,
-.mask-target,
-.pin-container,
-.switch,
-.table,
-.tabs,
-.stalker {
-    text-align: left;
+.test-note {
+    margin: 2rem 0 0 0;
+    color: #344a5f;
+    text-align: center;
 }
 
+// Fix align center issues
 textarea {
     width: 100%;
     max-width: 100%;
@@ -118,6 +144,7 @@ textarea {
 .switcher {
     background: #fff url("../img/select-arrow@2x.png") right .75rem top 50% no-repeat;
     background-size: 12px 12px;
+    border: 0;
 }
 
 .show-touch { display: none; }
@@ -137,14 +164,47 @@ textarea {
 #carousel-2, #carousel-4, #carousel-5 { max-width: 800px; }
 #carousel-3, #carousel-6 { max-width: 500px; }
 
-//-------------------- Grid --------------------//
+//-------------------- Grid, Flex --------------------//
 
-.test-grid .col {
+.test-grid .col,
+.test-region .block,
+.test-box {
     color: #000;
     background: #fbfbfb;
     border: 1px solid #e5e5e5;
-    padding: 1rem 0;
+    padding: 1rem;
     text-align: center;
+}
+
+.test-grid .col {
+    padding: 1rem 0;
+}
+
+.test-region-alignment .block {
+    flex: 0 0 15%;
+}
+
+.test-region-wrap .block {
+    flex-basis: 23%
+}
+
+.test-region-grid .block {
+    flex-basis: 200px;
+}
+
+.test-region-vertical,
+.test-region-vertical .region {
+    height: 400px;
+}
+
+.concept-1 section {
+    height: 500px;
+}
+
+@media screen and (max-width: 640px) {
+    .concept-1 .region {
+        flex-direction: column;
+    }
 }
 
 //-------------------- Icon --------------------//
@@ -221,6 +281,12 @@ textarea {
     right: 2rem;
     text-align: right;
     transform: translateY(-50%);
+    width: 100px;
+
+    .button-group {
+        margin: 0 !important;
+        display: block;
+    }
 }
 
 //-------------------- Responsive --------------------//
@@ -231,6 +297,12 @@ textarea {
     .test-bar .bar-left {
         float: left;
         margin-top: 0;
+
+        .button,
+        .input {
+            float: left;
+            margin-right: .5rem;
+        }
     }
 
     .test-bar .bar-right {
@@ -256,5 +328,25 @@ textarea {
 
     .test-demo {
         padding: 3rem 4rem 3rem 4rem;
+    }
+}
+
+//-------------------- RTL --------------------//
+
+html[dir="rtl"] {
+    .test-body {
+        left: auto;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .switcher {
+        background-position: left .75rem top 50%;
+    }
+
+    #stalker-targets {
+        right: auto;
+        left: 2rem;
+        text-align: left;
     }
 }

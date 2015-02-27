@@ -162,6 +162,8 @@ $gray-dark: #7F8C8D;
 //-------------------- Carousel --------------------//
 
 .carousel {
+    margin: 0 auto;
+
     .caret-left,
     .caret-right {
         border-width: 15px;
@@ -664,6 +666,12 @@ fieldset {
     background: $white-light;
 }
 
+//-------------------- Tab --------------------//
+
+.tabs .span-10 {
+    padding-left: 3rem;
+}
+
 //-------------------- Table --------------------//
 
 .table {
@@ -750,4 +758,36 @@ fieldset {
     width: 172px;
     margin: 0 auto;
     text-align: left;
+}
+
+//-------------------- RTL --------------------//
+
+.rtl {
+    .button-group {
+        > li .button,
+        > .button {
+            border-right: 1px solid rgba(0, 0, 0, .2);
+            border-left: 0;
+        }
+
+        > .button {
+            &:first-child { border-right: 0; }
+        }
+
+        > li {
+            &:first-child .button { border-right: 0; }
+        }
+    }
+
+    .pagination--grouped li {
+        border-left: 0;
+        border-right: 1px solid rgba(0, 0, 0, .2);
+
+        &:first-child { border-right: 0; }
+    }
+
+    .tabs .span-10 {
+        padding-left: 0;
+        padding-right: 3rem;
+    }
 }
