@@ -67,7 +67,7 @@ var Toolkit = {
     version: '2.1.0',
 
     /** Build date hash. */
-    build: 'i6mtov3e',
+    build: 'i7chst6q',
 
     /** CSS namespace. */
     namespace: '',
