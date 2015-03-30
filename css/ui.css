@@ -120,7 +120,8 @@ pre {
   color: black; }
 
 .drop {
-  background: #16A085; }
+  background: #16A085;
+  border: 1px solid #1ABC9C; }
   .drop li > a {
     color: #fff; }
   .drop li > a:hover, .drop li.is-active > a {
@@ -138,7 +139,10 @@ pre {
   display: block; }
 
 .flyout {
-  background: #D35400; }
+  background: #D35400;
+  border: 1px solid #E67E22;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
   .flyout li > a {
     color: #fff; }
   .flyout li > a:hover, .flyout li.is-open > a {
@@ -237,16 +241,6 @@ fieldset {
 
 .modal-foot {
   text-align: center; }
-
-.modal-close {
-  background: none;
-  border: 0;
-  position: absolute;
-  top: .75rem;
-  right: .75rem;
-  opacity: .5; }
-  .modal-close:hover {
-    opacity: 1; }
 
 .notice {
   background: #95A5A6; }
@@ -450,7 +444,8 @@ fieldset {
   padding: .5rem; }
 
 .type-ahead {
-  background: #C0392B; }
+  background: #C0392B;
+  border: 1px solid #E74C3C; }
   .type-ahead li > a {
     color: #fff; }
   .type-ahead li > a:hover, .type-ahead li.is-active > a {

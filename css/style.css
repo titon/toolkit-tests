@@ -163,10 +163,11 @@ textarea {
 .test-region-vertical, .test-region-vertical .region {
   height: 400px; }
 
-.concept-1 section {
-  height: 500px; }
+@media only screen and (min-width: 641px) {
+  .concept-1 section {
+    height: 500px; } }
 
-@media screen and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
   .concept-1 .region {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

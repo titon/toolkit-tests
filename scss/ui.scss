@@ -213,13 +213,14 @@ pre {
 
 .drop {
     background: $teal-dark;
+    border: 1px solid $teal-light;
 
     li > a {
         color: $white;
     }
 
     li > a:hover,
-    li.is-active > a {background: $teal-light; }
+    li.is-active > a { background: $teal-light; }
 }
 
 .drop-heading {
@@ -240,6 +241,8 @@ pre {
 
 .flyout {
     background: $orange-dark;
+    border: 1px solid $orange-light;
+    box-sizing: content-box;
 
     li > a {
         color: $white;
@@ -406,17 +409,6 @@ fieldset {
 
 .modal-foot {
     text-align: center;
-}
-
-.modal-close {
-    background: none;
-    border: 0;
-    position: absolute;
-    top: .75rem;
-    right: .75rem;
-    opacity: .5;
-
-    &:hover { opacity: 1; }
 }
 
 //-------------------- Notice --------------------//
@@ -735,6 +727,7 @@ fieldset {
 
 .type-ahead {
     background: $red-dark;
+    border: 1px solid $red-light;
 
     li > a {
         color: $white;
