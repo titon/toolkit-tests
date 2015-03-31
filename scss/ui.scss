@@ -121,6 +121,13 @@ $gray-dark: #7F8C8D;
         background: $gray-dark;
         opacity: .5;
     }
+
+    &.pill,
+    &.skew,
+    &.oval {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
 }
 
 //-------------------- Button Group --------------------//
@@ -146,6 +153,20 @@ $gray-dark: #7F8C8D;
 
         &:first-child .button { border-left: 0; }
     }
+
+    &.pill,
+    &.skew,
+    &.oval {
+        > li:first-child .button,
+        > .button:first-child {
+            padding-left: 1.25rem;
+        }
+
+        > li:last-child .button,
+        > .button:last-child {
+            padding-right: 1.25rem;
+        }
+    }
 }
 
 .button-group--vertical {
@@ -156,6 +177,10 @@ $gray-dark: #7F8C8D;
         margin: 0;
 
         &:first-child { border-top: 0; }
+    }
+
+    .button {
+        padding: .75rem !important;
     }
 }
 
@@ -214,6 +239,7 @@ pre {
 .drop {
     background: $teal-dark;
     border: 1px solid $teal-light;
+    text-align: left;
 
     li > a {
         color: $white;
@@ -266,6 +292,35 @@ pre {
 
     &:focus {
         border-color: $blue-dark;
+    }
+}
+
+.input-radio + .input-radio,
+.input-checkbox + .input-checkbox {
+    margin-left: 1rem;
+}
+
+select.input:not([multiple]) {
+    padding-right: 2.5rem;
+    background: #fff url('../img/select-arrow.png') calc(100% - .75rem) 50% no-repeat;
+
+    @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (-moz-min-device-pixel-ratio: 2),
+        only screen and (min-device-pixel-ratio: 2) {
+        background-image: url('../img/select-arrow@2x.png');
+        background-size: 12px 12px;
+    }
+
+    &.small {
+        padding-right: 2.25rem;
+        background-position: calc(100% - .5rem) 50%;
+        background-size: 8px 8px;
+    }
+
+    &.large {
+        padding-right: 2.75rem;
+        background-position: calc(100% - 1rem) 50%;
     }
 }
 

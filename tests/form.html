@@ -96,6 +96,10 @@
 
         <label class="input-radio"><input type="radio" name="radio"> Radio</label>
         <label class="input-radio is-disabled"><input type="radio" name="radio" disabled> Radio disabled</label>
+
+        <p class="test-note">
+            Uses native browser controls.
+        </p>
     </div>
 </div>
 
@@ -104,39 +108,47 @@
 
     <div class="test-body">
         <input type="text" class="input small" value="Small Input">
-
-        <select class="input small"><option value="">Small Select</option></select>
-
-        <div class="input-static small">Small Static</div>
-
-        <label class="input-checkbox small"><input type="checkbox" name="checkbox"> Small Checkbox</label>
-
-        <label class="input-radio small"><input type="radio" name="radio"> Small Radio</label>
-
-        <br><br>
-
         <input type="text" class="input" value="Default Input">
-
-        <select class="input"><option value="">Default Select</option></select>
-
-        <div class="input-static">Default Static</div>
-
-        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Default Checkbox</label>
-
-        <label class="input-radio"><input type="radio" name="radio"> Default Radio</label>
-
-        <br><br>
-
         <input type="text" class="input large" value="Large Input">
 
+        <br><br>
+
+        <select class="input small"><option value="">Small Select</option></select>
+        <select class="input"><option value="">Default Select</option></select>
         <select class="input large"><option value="">Large Select</option></select>
 
+        <br><br>
+
+        <div class="input-static small">Small Static</div>
+        <div class="input-static">Default Static</div>
         <div class="input-static large">Large Static</div>
 
+        <br><br>
+
+        <label class="input-checkbox small"><input type="checkbox" name="checkbox"> Small Checkbox</label>
+        <label class="input-checkbox"><input type="checkbox" name="checkbox"> Default Checkbox</label>
         <label class="input-checkbox large"><input type="checkbox" name="checkbox"> Large Checkbox</label>
 
+        <br><br>
+
+        <label class="input-radio small"><input type="radio" name="radio"> Small Radio</label>
+        <label class="input-radio"><input type="radio" name="radio"> Default Radio</label>
         <label class="input-radio large"><input type="radio" name="radio"> Large Radio</label>
     </div>
+</div>
+
+<div class="test-demo">
+    <h2 class="test-header">Line heights.</h2>
+
+    <div class="test-body">
+        <input type="text" class="input" value="Input">
+        <select class="input"><option>Select</option></select>
+        <button type="Button" class="button">Button</button>
+        <a href="javascript:;" class="button">Anchor</a>
+        <input type="submit" class="button" value="Input">
+    </div>
+
+    <p class="test-note">Heights will differ between browsers as they override line-height.</p>
 </div>
 
 <div class="test-demo">
@@ -176,7 +188,7 @@
 </div>
 
 <div class="test-demo">
-    <h2 class="test-header">Form.</h2>
+    <h2 class="test-header">Vertical form.</h2>
 
     <div class="test-body full">
         <form action="">
@@ -331,20 +343,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div class="test-demo">
-    <h2 class="test-header">Line heights.</h2>
-
-    <div class="test-body">
-        <input type="text" class="input" value="Input">
-        <select class="input"><option>Select</option></select>
-        <button type="Button" class="button">Button</button>
-        <a href="javascript:;" class="button">Anchor</a>
-        <input type="submit" class="button" value="Input">
-    </div>
-
-    <p class="test-note">Heights will differ between browsers as they override line-height.</p>
 </div>
 
 <script>

@@ -75,7 +75,8 @@ a {
   left: 50%;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
-  transform: translateX(-50%); }
+  transform: translateX(-50%);
+  text-align: center; }
   .test-body.full {
     position: static !important;
     display: block !important;
@@ -83,16 +84,21 @@ a {
     right: 0 !important;
     -webkit-transform: none !important;
     -ms-transform: none !important;
-    transform: none !important; }
+    transform: none !important;
+    text-align: left; }
+  .test-body.align-center {
+    text-align: center !important; }
 
 .test-footer {
   padding: 2rem;
   text-align: center; }
 
 .test-note {
-  margin: 2rem 0 0 0;
+  margin: 1.5rem 0;
   color: #344a5f;
   text-align: center; }
+  .test-note:last-child {
+    margin-bottom: 0; }
 
 textarea {
   width: 100%;
@@ -110,8 +116,6 @@ textarea {
     padding: 5px; }
 
 .switcher {
-  background: #fff url("../img/select-arrow@2x.png") right .75rem top 50% no-repeat;
-  background-size: 12px 12px;
   border: 0; }
 
 .show-touch {
