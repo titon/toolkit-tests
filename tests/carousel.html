@@ -66,7 +66,7 @@
     </div>
 
     <div class="test-demo">
-        <h2 class="test-header">Square aspect ratio. Fade animation. Looped scrolling. No arrows. Default index 2.</h2>
+        <h2 class="test-header">Square aspect ratio. Fade animation. Looped scrolling. No arrows. Default index 2. Shorter duration.</h2>
 
         <div class="test-body full">
             <div class="carousel carousel--square" id="carousel-3">
@@ -94,7 +94,7 @@
     </div>
 
     <div class="test-demo">
-        <h2 class="test-header">Restrictive scrolling. Slide up animation. No auto-cycle. No bullets.</h2>
+        <h2 class="test-header">Non-looped scrolling. Slide up animation. No auto-cycle. No bullets.</h2>
 
         <div class="test-body full">
             <div class="carousel" id="carousel-4">
@@ -196,7 +196,8 @@
 
         Demo.instances.push( $('#carousel-3').carousel({
             animation: 'fade',
-            defaultIndex: 2
+            defaultIndex: 2,
+            duration: 2500
         }).toolkit('carousel') );
 
         Demo.instances.push( $('#carousel-4').carousel({

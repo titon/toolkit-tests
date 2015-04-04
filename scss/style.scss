@@ -100,13 +100,19 @@ a {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    text-align: center;
 
     &.full {
         position: static !important;
-        display: block !important;;
-        left: 0 !important;;
-        right: 0 !important;;
-        transform: none !important;;
+        display: block !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        text-align: left;
+    }
+
+    &.align-center {
+        text-align: center !important;
     }
 }
 
@@ -116,9 +122,13 @@ a {
 }
 
 .test-note {
-    margin: 2rem 0 0 0;
+    margin: 1.5rem 0;
     color: #344a5f;
     text-align: center;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 // Fix align center issues
@@ -142,8 +152,6 @@ textarea {
 }
 
 .switcher {
-    background: #fff url("../img/select-arrow@2x.png") right .75rem top 50% no-repeat;
-    background-size: 12px 12px;
     border: 0;
 }
 
@@ -197,11 +205,13 @@ textarea {
     height: 400px;
 }
 
-.concept-1 section {
-    height: 500px;
+@media only screen and (min-width: 641px) {
+    .concept-1 section {
+        height: 500px;
+    }
 }
 
-@media screen and (max-width: 640px) {
+@media only screen and (max-width: 640px) {
     .concept-1 .region {
         flex-direction: column;
     }
