@@ -21,7 +21,7 @@
 
                 <h2 class="test-header">Animations.</h2>
 
-                <p class="align-center">
+                <p class="align-center" id="off-canvas-animations">
                     <a href="#push" class="button js-canvas-animation">Push</a>
                     <a href="#push-reveal" class="button js-canvas-animation">Push Reveal</a>
                     <a href="#push-down" class="button js-canvas-animation">Push Down</a>
@@ -30,6 +30,12 @@
                     <a href="#on-top" class="button js-canvas-animation">On Top</a>
                     <a href="#squish" class="button js-canvas-animation">Squish</a>
                 </p>
+
+                <p class="test-note">
+                    After you select an animation, click the toggle buttons above.
+                </p>
+
+                <div class="divider"></div>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
                     Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
@@ -80,10 +86,12 @@
 
 <script>
     $(function() {
+        var hash = location.hash || '#push';
+
         $('.off-canvas').offCanvas({
-            animation: (location.hash || '#push').substr(1),
+            animation: hash.substr(1),
             swipe: true,
-            stopScroll: false
+            stopScroll: true
         });
 
         Demo.instances.push( $('#sidebar-1').toolkit('offCanvas') );
@@ -94,5 +102,7 @@
                 location.reload();
             }, 10);
         });
+
+        $('#off-canvas-animations').find('a[href="' + hash + '"]').addClass('is-active');
     });
 </script>
