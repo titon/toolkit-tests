@@ -21,10 +21,16 @@
 
                 <h2 class="test-header">Animations.</h2>
 
-                <p class="align-center">
+                <p class="align-center" id="off-canvas-animations">
                     <a href="#on-top" class="button js-canvas-animation">On Top</a>
                     <a href="#squish" class="button js-canvas-animation">Squish</a>
                 </p>
+
+                <p class="test-note">
+                    After you select an animation, click the toggle buttons above.
+                </p>
+
+                <div class="divider"></div>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor gravida diam.
                     Donec eget magna nunc. Suspendisse ipsum lacus, pellentesque sit amet lacinia quis,
@@ -75,11 +81,11 @@
 
 <script>
     $(function() {
-        var hash = location.hash;
+        var hash = location.hash || '#on-top';
 
         $('.off-canvas').offCanvas({
-            animation: (hash || '#on-top').substr(1),
-            openOnLoad: (!hash || hash === '#on-top' || hash === '#squish'),
+            animation: hash.substr(1),
+            openOnLoad: (hash === '#on-top' || hash === '#squish'),
             hideOthers: false,
             stopScroll: false,
             swipe: true,
@@ -103,5 +109,7 @@
                 location.reload();
             }, 10);
         });
+
+        $('#off-canvas-animations').find('a[href="' + hash + '"]').addClass('is-active');
     });
 </script>

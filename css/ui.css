@@ -296,10 +296,6 @@ fieldset {
 .on-canvas > .notice {
   margin: 0; }
 
-@media only screen and (min-width: 1024px) {
-  .off-canvas {
-    top: 67px; } }
-
 .pagination {
   text-align: center; }
   .pagination ol {
