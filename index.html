@@ -28,15 +28,15 @@
         </h1>
 
         <div class="bar-right">
-            <button id="destroy" class="button is-error" role="button">
+            <button id="destroy" class="button is-error" role="button" tabindex="20">
                 Destroy
             </button>
 
-            <button id="rtl" class="button is-success" role="button">
+            <button id="rtl" class="button is-success" role="button" tabindex="15">
                 RTL
             </button>
 
-            <button id="ltr" class="button is-success" role="button" style="display: none">
+            <button id="ltr" class="button is-success" role="button" style="display: none" tabindex="15">
                 LTR
             </button>
 
@@ -46,12 +46,12 @@
         </div>
 
         <div class="bar-left">
-            <button id="prev" class="button plugin-goto is-disabled hide-xsmall" role="button" disabled>
+            <button id="prev" class="button plugin-goto is-disabled hide-xsmall" role="button" tabindex="5">
                 <span class="caret-left"></span>
                 <span class="title">Typography</span>
             </button>
 
-            <select id="plugin-switcher" class="input switcher">
+            <select id="plugin-switcher" class="input switcher" tabindex="1">
                 <option value="">-- Select a plugin --</option>
                 <optgroup label="Components">
                     <option value="base" selected>Base</option>
@@ -97,7 +97,7 @@
                 </optgroup>
             </select>
 
-            <button id="next" class="button plugin-goto is-disabled hide-xsmall" role="button" disabled>
+            <button id="next" class="button plugin-goto is-disabled hide-xsmall" role="button" tabindex="10">
                 <span class="title">Accordion</span>
                 <span class="caret-right"></span>
             </button>
@@ -107,7 +107,7 @@
     <div id="skeleton" class="body"></div>
 
     <footer id="foot" class="test-footer">
-        <button type="button" id="to-top" class="button">Back to Top</button>
+        <button type="button" id="to-top" class="button" tabindex="100">Back to Top</button>
     </footer>
 
     <script src="js/demo.js"></script>

@@ -20,6 +20,6 @@ gulp.task('img', function () {
 
 gulp.task('default', ['css']);
 
-gulp.task('watch', function() {
+gulp.task('watch', ['css'], function() {
     gulp.watch('./scss/**/*.scss', ['css']);
 });

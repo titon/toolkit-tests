@@ -659,8 +659,7 @@ label, .input-static {
   .input:hover {
     border-color: #c2c2c2; }
   .input:focus {
-    border-color: #45c5eb;
-    outline: none; }
+    border-color: #45c5eb; }
   .input[readonly] {
     color: #c2c2c2;
     border: 1px solid #e5e5e5; }
@@ -1891,8 +1890,6 @@ kbd {
     padding: 1rem; }
   .button.is-disabled, .button[disabled] {
     cursor: not-allowed; }
-  .button:focus {
-    outline: none; }
   .button.oval {
     border-radius: 7rem/2.75rem; }
   .button.pill {
