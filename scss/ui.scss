@@ -87,8 +87,6 @@ $gray-dark: #7F8C8D;
     color: #fff;
     margin: 1px 0;
 
-    &.is-active,
-    .is-active &,
     &:hover {
         background: $gray-light;
     }
@@ -120,6 +118,13 @@ $gray-dark: #7F8C8D;
     &.is-disabled {
         background: $gray-dark;
         opacity: .5;
+    }
+
+    &.is-active,
+    .is-active & {
+        background: $gray-light;
+
+        &:hover { background: lighten($gray-light, 5%); }
     }
 
     &.pill,
@@ -687,6 +692,10 @@ fieldset {
             border-bottom-color: $yellow-dark;
         }
     }
+}
+
+.steps.is-complete ol {
+    background: $yellow-light;
 }
 
 //-------------------- Switch --------------------//

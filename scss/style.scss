@@ -137,20 +137,6 @@ textarea {
     max-width: 100%;
 }
 
-.vertical-container {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    margin: 0 auto;
-    background: #fff;
-
-    .vertical-center {
-        background: #2980B9;
-        color: #fff;
-        padding: 5px;
-    }
-}
-
 .switcher {
     border: 0;
 }
@@ -163,6 +149,27 @@ textarea {
         margin: 0;
         color: #fff;
         text-align: center;
+    }
+}
+
+//-------------------- Base --------------------//
+
+.test-fluid {
+    max-width: 800px;
+    margin: auto;
+}
+
+.test-vertical {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+
+    .vertical-center {
+        background: #2980B9;
+        color: #fff;
+        padding: 5px;
     }
 }
 

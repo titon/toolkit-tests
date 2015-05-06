@@ -33,7 +33,7 @@
   background: #7F8C8D;
   color: #fff;
   margin: 1px 0; }
-  .button.is-active, .is-active .button, .button:hover {
+  .button:hover {
     background: #95A5A6; }
   .button.is-info {
     background: #2980B9; }
@@ -54,6 +54,10 @@
   .button.is-disabled {
     background: #7F8C8D;
     opacity: .5; }
+  .button.is-active, .is-active .button {
+    background: #95A5A6; }
+    .button.is-active:hover, .is-active .button:hover {
+      background: #a3b1b2; }
   .button.pill, .button.skew, .button.oval {
     padding-left: 1.25rem;
     padding-right: 1.25rem; }
@@ -417,6 +421,9 @@ fieldset {
   .steps ol li.is-complete .step::after {
     border-right-color: #F39C12;
     border-bottom-color: #F39C12; }
+
+.steps.is-complete ol {
+  background: #F1C40F; }
 
 .switch input:checked + .switch-bar {
   background: #E74C3C;
