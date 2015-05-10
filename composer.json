@@ -1,0 +1,14 @@
+{
+    "type": "library",
+    "name": "titon/toolkit-tests",
+    "description": "Full HTML, CSS, and JS testing suite for Titon Toolkit.",
+    "keywords": ["titon", "toolkit", "tests", "demos"],
+    "homepage": "http://titon.io",
+    "license": "BSD-3",
+    "authors": [
+        {
+            "name": "Miles Johnson",
+            "homepage": "http://milesj.me"
+        }
+    ]
+}
