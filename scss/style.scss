@@ -179,6 +179,27 @@ textarea {
 #carousel-2, #carousel-4, #carousel-5 { max-width: 800px; }
 #carousel-3, #carousel-6 { max-width: 500px; }
 
+#carousel-5 {
+    .carousel-items > ul > li {
+        width: calc(25% - 20px);
+
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}
+
+#carousel-6 {
+    .carousel-items > ul > li {
+        height: 250px;
+
+        // Be wary of clones
+        &:nth-child(5) {
+            height: 500px;
+        }
+    }
+}
+
 //-------------------- Grid, Flex --------------------//
 
 .test-grid .col,

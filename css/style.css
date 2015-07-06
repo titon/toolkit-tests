@@ -26,12 +26,13 @@ a {
     text-align: center; }
   .test-bar .button {
     border-radius: .2rem; }
-  .test-bar .bar-left::after, .test-bar .bar-right::after {
+  .test-bar .bar-left::after,
+  .test-bar .bar-right::after {
     clear: both;
     content: ""; }
 
 .test-logo {
-  background: url('http://titon.io/img/logo.png') 50% 0 no-repeat;
+  background: url("http://titon.io/img/logo.png") 50% 0 no-repeat;
   background-size: 184px 80px;
   width: 184px;
   height: 40px;
@@ -48,8 +49,8 @@ a {
     color: #dd6195;
     font-size: 1.5rem;
     -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
     white-space: nowrap; }
 
 .test-demo {
@@ -57,7 +58,8 @@ a {
   .test-demo:nth-child(even) {
     background: #344a5f;
     color: #fff; }
-    .test-demo:nth-child(even) .test-header, .test-demo:nth-child(even) .test-note {
+    .test-demo:nth-child(even) .test-header,
+    .test-demo:nth-child(even) .test-note {
       color: #cfd4d9; }
   .test-demo > p:first-child {
     margin-top: 0; }
@@ -74,8 +76,8 @@ a {
   position: relative;
   left: 50%;
   -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   text-align: center; }
   .test-body.full {
     position: static !important;
@@ -83,8 +85,8 @@ a {
     left: 0 !important;
     right: 0 !important;
     -webkit-transform: none !important;
-    -ms-transform: none !important;
-    transform: none !important;
+        -ms-transform: none !important;
+            transform: none !important;
     text-align: left; }
   .test-body.align-center {
     text-align: center !important; }
@@ -142,7 +144,19 @@ textarea {
 #carousel-3, #carousel-6 {
   max-width: 500px; }
 
-.test-grid .col, .test-region .block, .test-box {
+#carousel-5 .carousel-items > ul > li {
+  width: calc(25% - 20px); }
+  #carousel-5 .carousel-items > ul > li:not(:last-child) {
+    margin-right: 20px; }
+
+#carousel-6 .carousel-items > ul > li {
+  height: 250px; }
+  #carousel-6 .carousel-items > ul > li:nth-child(5) {
+    height: 500px; }
+
+.test-grid .col,
+.test-region .block,
+.test-box {
   color: #000;
   background: #fbfbfb;
   border: 1px solid #e5e5e5;
@@ -153,22 +167,22 @@ textarea {
   padding: 1rem 0; }
 
 .test-region-alignment .block {
-  -webkit-box-flex: 0;
   -webkit-flex: 0 0 15%;
-  -ms-flex: 0 0 15%;
-  flex: 0 0 15%; }
+      -ms-flex: 0 0 15%;
+          flex: 0 0 15%; }
 
 .test-region-wrap .block {
   -webkit-flex-basis: 23%;
-  -ms-flex-preferred-size: 23%;
-  flex-basis: 23%; }
+      -ms-flex-preferred-size: 23%;
+          flex-basis: 23%; }
 
 .test-region-grid .block {
   -webkit-flex-basis: 200px;
-  -ms-flex-preferred-size: 200px;
-  flex-basis: 200px; }
+      -ms-flex-preferred-size: 200px;
+          flex-basis: 200px; }
 
-.test-region-vertical, .test-region-vertical .region {
+.test-region-vertical,
+.test-region-vertical .region {
   height: 400px; }
 
 @media only screen and (min-width: 641px) {
@@ -177,11 +191,9 @@ textarea {
 
 @media only screen and (max-width: 640px) {
   .concept-1 .region {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column; } }
+        -ms-flex-direction: column;
+            flex-direction: column; } }
 
 [class*="icon-16"] {
   background: url("../img/icons-16@2x.png") no-repeat;
@@ -234,14 +246,19 @@ textarea {
 
 .stalker .button {
   margin: 0; }
+
 .stalker .button-group {
   width: 100%; }
-  .stalker .button-group > li, .stalker .button-group > .button {
+  .stalker .button-group > li,
+  .stalker .button-group > .button {
     border-left: 0; }
 
-#stalker-overflow-markers h6, #stalker-markers h6 {
+#stalker-overflow-markers h6,
+#stalker-markers h6 {
   margin: 2rem 0 1rem 0; }
-#stalker-overflow-markers div:first-child h6, #stalker-markers div:first-child h6 {
+
+#stalker-overflow-markers div:first-child h6,
+#stalker-markers div:first-child h6 {
   margin-top: 0; }
 
 #stalker-targets {
@@ -250,8 +267,8 @@ textarea {
   right: 2rem;
   text-align: right;
   -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   width: 100px; }
   #stalker-targets .button-group {
     margin: 0 !important;
@@ -263,7 +280,8 @@ textarea {
   .test-bar .bar-left {
     float: left;
     margin-top: 0; }
-    .test-bar .bar-left .button, .test-bar .bar-left .input {
+    .test-bar .bar-left .button,
+    .test-bar .bar-left .input {
       float: left;
       margin-right: .5rem; }
   .test-bar .bar-right {
@@ -280,8 +298,8 @@ textarea {
     top: 1.2rem;
     left: 50%;
     -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
     margin: 0; }
   .test-demo {
     padding: 3rem 4rem 3rem 4rem; } }
@@ -290,10 +308,12 @@ html[dir="rtl"] .test-body {
   left: auto;
   right: 50%;
   -webkit-transform: translateX(50%);
-  -ms-transform: translateX(50%);
-  transform: translateX(50%); }
+      -ms-transform: translateX(50%);
+          transform: translateX(50%); }
+
 html[dir="rtl"] .switcher {
-  background-position: left .75rem top 50%; }
+  background-position: left 0.75rem top 50%; }
+
 html[dir="rtl"] #stalker-targets {
   right: auto;
   left: 2rem;
