@@ -1,4 +1,4 @@
-/*! Titon Toolkit v2.1.5 | BSD-3-Clause | titon.io */
+/*! Titon Toolkit v2.1.6 | BSD-3-Clause | titon.io */
 (function($, window, document) {
 'use strict';
     // Include an empty jQuery file so that we can setup local dependencies
@@ -64,10 +64,10 @@ $.fn.cache = function(key, value) {
 var Toolkit = {
 
     /** Current version. */
-    version: '2.1.5',
+    version: '2.1.6',
 
     /** Build date hash. */
-    build: 'ibs8nqvq',
+    build: 'ibs94a46',
 
     /** CSS namespace. */
     namespace: '',
@@ -671,7 +671,7 @@ $.fn.toolkit = function(plugin, method, args) {
 
 var Component = Toolkit.Component = Base.extend({
     name: 'Component',
-    version: '2.1.0',
+    version: '2.1.6',
 
     /** The target element. Either the embedded element, or the current element in the composite layer. */
     element: null,
@@ -1724,7 +1724,7 @@ $.throttle = function(func, delay) {
 
 var Carousel = Toolkit.Carousel = Component.extend({
     name: 'Carousel',
-    version: '2.1.0',
+    version: '2.1.6',
 
     /** Is the carousel currently animating? */
     animating: false,
@@ -4973,7 +4973,7 @@ Toolkit.createPlugin('offCanvas', function(options) {
 
 var Pin = Toolkit.Pin = Component.extend({
     name: 'Pin',
-    version: '2.0.0',
+    version: '2.1.6',
 
     /** Will the element be pinned? */
     active: true,
