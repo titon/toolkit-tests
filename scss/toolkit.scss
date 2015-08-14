@@ -1,0 +1,65 @@
+/**
+ * @copyright   2010-2015, The Titon Project
+ * @license     http://opensource.org/licenses/BSD-3-Clause
+ * @link        http://titon.io
+ */
+
+@import "common";
+
+// Enable everything
+$toolkit-settings-flags: (
+    "small-size": true,
+    "large-size": true,
+    "all-effects": true,
+    "all-modifiers": true,
+    "all-animations": true,
+    "all-modules": true,
+    "all-positions": true,
+) !default;
+
+// Layout styles
+@import "layout/base";
+@import "layout/typography";
+@import "layout/code";
+
+// Behavior styles
+@import "behaviors/lazy-load";
+@import "behaviors/mask";
+@import "behaviors/pin";
+
+// Component styles
+@import "components/accordion";
+@import "components/breadcrumb";
+@import "components/button";
+@import "components/button-group";
+@import "components/carousel";
+@import "components/checkbox";
+@import "components/divider";
+@import "components/drop";
+@import "components/flex";
+@import "components/flyout";
+@import "components/form";
+@import "components/grid";
+@import "components/input";
+@import "components/input-group";
+@import "components/label";
+@import "components/loader";
+@import "components/matrix";
+@import "components/modal";
+@import "components/notice";
+@import "components/off-canvas";
+@import "components/pagination";
+@import "components/popover";
+@import "components/progress";
+@import "components/radio";
+@import "components/select";
+@import "components/step";
+@import "components/switch";
+@import "components/tab";
+@import "components/table";
+@import "components/toast";
+@import "components/tooltip";
+@import "components/type-ahead";
+
+// Responsive last
+@import "layout/responsive";
