@@ -1,0 +1,8 @@
+@import "common";
+
+//-------------------- Accordion --------------------//
+
+.accordion-header {
+    background: theme-setting("bg-dark");
+    color: theme-setting("fg-light");
+}

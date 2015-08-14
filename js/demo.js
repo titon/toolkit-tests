@@ -9,8 +9,8 @@ var Demo = {
     resize: function() {
         var win = $(window);
 
-        $('#res-width').html(win.width());
-        $('#res-height').html(win.height());
+        $('#viewport-width').html(win.width());
+        $('#viewport-height').html(win.height());
     },
 
     loadStyles: function() {
@@ -22,7 +22,7 @@ var Demo = {
             styles.push('css/toolkit.css');
         }
 
-        styles.push('css/ui.css');
+        styles.push('css/theme.css');
         styles.push('css/style.css');
 
         styles.forEach(function(path) {

@@ -22,36 +22,20 @@
     </script>
 </head>
 <body>
-    <header id="head" class="test-bar clear-fix">
-        <h1 class="test-logo" id="logo" data-version="...">
-            <span>Titon Toolkit</span>
-        </h1>
-
-        <div class="bar-right">
-            <button id="destroy" class="button is-error" role="button" tabindex="20">
-                Destroy
-            </button>
-
-            <button id="rtl" class="button is-success" role="button" tabindex="15">
-                RTL
-            </button>
-
-            <button id="ltr" class="button is-success" role="button" style="display: none" tabindex="15">
-                LTR
-            </button>
-
-            <span class="viewport">
-                <span id="res-width"></span>x<span id="res-height"></span>
-            </span>
+    <header id="head" class="test-head">
+        <div class="test-head-left">
+            <h1 class="test-head-logo" id="logo" data-version="...">
+                <span>Titon Toolkit</span>
+            </h1>
         </div>
 
-        <div class="bar-left">
-            <button id="prev" class="button plugin-goto is-disabled hide-xsmall" role="button" tabindex="5">
+        <div class="test-head-center">
+            <button id="prev" class="button is-disabled" role="button" tabindex="5" disabled>
                 <span class="caret-left"></span>
-                <span class="title">Typography</span>
+                <span class="test-head-button">Typography</span>
             </button>
 
-            <select id="plugin-switcher" class="input switcher" tabindex="1">
+            <select id="switcher" class="input test-head-switcher" tabindex="1">
                 <option value="">-- Select a plugin --</option>
                 <optgroup label="Components">
                     <option value="base" selected>Base</option>
@@ -97,9 +81,27 @@
                 </optgroup>
             </select>
 
-            <button id="next" class="button plugin-goto is-disabled hide-xsmall" role="button" tabindex="10">
-                <span class="title">Accordion</span>
+            <button id="next" class="button is-disabled" role="button" tabindex="10" disabled>
+                <span class="test-head-button">Accordion</span>
                 <span class="caret-right"></span>
+            </button>
+        </div>
+
+        <div class="test-head-right">
+            <span class="test-head-viewport">
+                <span id="viewport-width"></span>x<span id="viewport-height"></span>
+            </span>
+
+            <button id="destroy" class="button is-error" role="button" tabindex="20">
+                Destroy
+            </button>
+
+            <button id="rtl" class="button is-success" role="button" tabindex="15">
+                RTL
+            </button>
+
+            <button id="ltr" class="button is-success" role="button" style="display: none" tabindex="15">
+                LTR
             </button>
         </div>
     </header>

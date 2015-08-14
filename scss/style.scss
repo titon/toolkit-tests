@@ -1,64 +1,71 @@
+@import "common";
 
 html {
     font: normal 12px/1.5rem "Droid Sans", sans-serif;
 }
 
 body {
-    background: #f0f1f2;
-    color: #000;
-    padding-bottom: 200px;
+    background: theme-setting("bg-lightest");
+    color: theme-setting("fg-dark");
+    margin: 0;
+    padding: 0 0 200px 0;
 }
 
 a {
     text-decoration: none;
 }
 
-.test-bar {
-    background: #283442;
+//-------------------- Header --------------------//
+
+.test-head {
+    background: theme-setting("bg-darkest");
     padding: 1rem;
     color: #fff;
     width: 100%;
+    justify-content: space-between;
+    align-items: center;
 
-    .viewport {
-        float: right;
-        padding-top: 8px;
-    }
-
-    .bar-right {
-        display: none;
-
-        .button {
-            float: right;
-            margin-left: .5rem;
-        }
-    }
-
-    .bar-left {
-        text-align: center;
-    }
-
-    .button {
+    .button,
+    .input {
+        border: 0;
         border-radius: .2rem;
-    }
-
-    .bar-left,
-    .bar-right {
-        &::after {
-            clear: both;
-            content: "";
-        }
+        margin: 0 .25rem;
     }
 }
 
-.test-logo {
+.test-head-left {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.test-head-center {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.test-head-right {
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    width: 25%;
+
+    .button {
+        margin-left: .5rem;
+    }
+}
+
+.test-head-logo {
     background: url('http://titon.io/img/logo.png') 50% 0 no-repeat;
     background-size: 184px 80px;
     width: 184px;
     height: 40px;
-    margin: 0 auto 1rem auto;
     position: relative;
+    margin: auto;
 
-    span { visibility: hidden; }
+    span {
+        visibility: hidden;
+    }
 
     &::after {
         content: attr(data-version);
@@ -66,35 +73,43 @@ a {
         position: absolute;
         left: 105%;
         top: 50%;
-        color: #dd6195;
+        color: theme-setting("success");
         font-size: 1.5rem;
         transform: translateY(-50%);
         white-space: nowrap;
     }
 }
 
-.test-demo {
+//-------------------- Footer --------------------//
+
+.test-footer {
     padding: 2rem;
-
-    &:nth-child(even) {
-        background: #344a5f;
-        color: #fff;
-
-        .test-header,
-        .test-note { color: #cfd4d9; }
-    }
-
-    > p:first-child { margin-top: 0; }
+    text-align: center;
 }
 
-.test-header {
+//-------------------- Body --------------------//
+
+.test-demo {
+    padding: 2rem;
+    border-bottom: 1px solid theme-setting("bg-light");
+
+    &:nth-child(even) {
+        background: theme-setting("bg-lighter");
+    }
+
+    > p:first-child {
+        margin-top: 0;
+    }
+}
+
+.test-demo-title {
     margin-bottom: 2rem;
     font-size: 2rem;
     text-align: center;
-    color: #344a5f;
+    color: theme-setting("fb-dark");
 }
 
-.test-body {
+.test-demo-body {
     display: inline-block;
     margin: 0 auto;
     position: relative;
@@ -116,14 +131,10 @@ a {
     }
 }
 
-.test-footer {
-    padding: 2rem;
-    text-align: center;
-}
-
 .test-note {
     margin: 1.5rem 0;
-    color: #344a5f;
+    color: theme-setting("fg-dark");
+    opacity: .5;
     text-align: center;
 
     &:last-child {
@@ -137,231 +148,50 @@ textarea {
     max-width: 100%;
 }
 
-.switcher {
-    border: 0;
-}
-
-.show-touch { display: none; }
-.touch .show-touch { display: block; }
-
-.body {
-    > .notice {
-        margin: 0;
-        color: #fff;
-        text-align: center;
-    }
-}
-
 //-------------------- Base --------------------//
 
-.test-fluid {
+.test-module-fluid {
     max-width: 800px;
     margin: auto;
 }
 
-.test-vertical {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    margin: 0 auto;
-    background: #fff;
-
-    .vertical-center {
-        background: #2980B9;
-        color: #fff;
-        padding: 5px;
-    }
-}
-
-//-------------------- Carousel --------------------//
-
-#carousel-1 { max-width: 400px; }
-#carousel-2, #carousel-4, #carousel-5 { max-width: 800px; }
-#carousel-3, #carousel-6 { max-width: 500px; }
-
-#carousel-5 {
-    .carousel-items > ul > li {
-        width: calc(25% - 20px);
-
-        &:not(:last-child) {
-            margin-right: 20px;
-        }
-    }
-}
-
-#carousel-6 {
-    .carousel-items > ul > li {
-        height: 250px;
-
-        // Be wary of clones
-        &:nth-child(5) {
-            height: 500px;
-        }
-    }
-}
-
-//-------------------- Grid, Flex --------------------//
-
-.test-grid .col,
-.test-region .block,
-.test-box {
-    color: #000;
-    background: #fbfbfb;
-    border: 1px solid #e5e5e5;
-    padding: 1rem;
-    text-align: center;
-}
-
-.test-grid .col {
-    padding: 1rem 0;
-}
-
-.test-region-alignment .block {
-    flex: 0 0 15%;
-}
-
-.test-region-wrap .block {
-    flex-basis: 23%
-}
-
-.test-region-grid .block {
-    flex-basis: 200px;
-}
-
-.test-region-vertical,
-.test-region-vertical .region {
-    height: 400px;
-}
-
-@media only screen and (min-width: 641px) {
-    .concept-1 section {
-        height: 500px;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    .concept-1 .region {
-        flex-direction: column;
-    }
-}
-
-//-------------------- Icon --------------------//
-
-[class*="icon-16"] { background: url("../img/icons-16@2x.png") no-repeat; background-size: 80px 16px; }
-.icon-16-home { background-position: 0 0; }
-.icon-16-view { background-position: -16px 0; }
-.icon-16-edit { background-position: -32px 0; }
-.icon-16-user { background-position: -48px 0; }
-.icon-16-comment { background-position: -64px 0; }
-
-//-------------------- Lazy Load --------------------//
-
-.lazy-overflow {
-    height: 350px;
-    overflow: auto;
-}
-
-.lazy-item {
-    display: block;
-    width: 150px;
-    height: 150px;
-    background-size: 150px 150px;
-    margin: 0 auto;
-
-    img {
-        width: 150px;
-        height: 150px;
-    }
-}
-
-//-------------------- Pin --------------------//
-
-.pin-container {
-    position: relative;
-
-    .col p:first-child { margin-top: 0; }
-}
-
-#pin-3 { top: 50px; }
-#pin-4 { height: 350px; }
-
-//-------------------- Stalker --------------------//
-
-.stalker-overflow {
-    height: 250px;
-    overflow: auto;
-    position: relative;
-}
-
-.stalker {
-    .button { margin: 0; }
-
-    .button-group {
-        width: 100%;
-
-        > li,
-        > .button {
-            border-left: 0;
-        }
-    }
-}
-
-#stalker-overflow-markers,
-#stalker-markers {
-    h6 { margin: 2rem 0 1rem 0; }
-
-    div:first-child h6 { margin-top: 0; }
-}
-
-#stalker-targets {
-    position: fixed;
-    top: 50%;
-    right: 2rem;
-    text-align: right;
-    transform: translateY(-50%);
-    width: 100px;
-
-    .button-group {
-        margin: 0 !important;
-        display: block;
-    }
-}
-
 //-------------------- Responsive --------------------//
 
-@media only screen and (min-width: 641px) {
-    html { font-size: 13px; }
-
-    .test-bar .bar-left {
-        float: left;
-        margin-top: 0;
-
-        .button,
-        .input {
-            float: left;
-            margin-right: .5rem;
-        }
+@include if-small() {
+    html {
+        font-size: 13px;
     }
 
-    .test-bar .bar-right {
-        float: right;
-        display: block;
+    .test-head {
+        display: flex;
+    }
+
+    .test-head-left {
+        width: 25%;
+        margin: 0;
+        text-align: left;
+    }
+
+    .test-head-center {
+        text-align: right;
+    }
+
+    .test-head-logo {
+        margin: 0;
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    html { font-size: 14px; }
-
-    .test-bar {
-        height: 67px;
+@include if-medium() {
+    html {
+        font-size: 14px;
     }
 
-    .test-logo {
-        position: absolute;
-        top: 1.2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0;
+    .test-head-center {
+        text-align: center;
+    }
+
+    .test-head-right {
+        display: flex;
     }
 
     .test-demo {
@@ -370,21 +200,3 @@ textarea {
 }
 
 //-------------------- RTL --------------------//
-
-html[dir="rtl"] {
-    .test-body {
-        left: auto;
-        right: 50%;
-        transform: translateX(50%);
-    }
-
-    .switcher {
-        background-position: left .75rem top 50%;
-    }
-
-    #stalker-targets {
-        right: auto;
-        left: 2rem;
-        text-align: left;
-    }
-}
