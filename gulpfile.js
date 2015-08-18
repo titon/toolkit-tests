@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     web = require('node-static');
 
-gulp.task('server', ['watch'], function() {
+gulp.task('test', ['watch'], function() {
     var server = new web.Server('.', {
         serverInfo: 'Titon Toolkit',
         indexFile: 'index.html'
@@ -23,7 +23,7 @@ gulp.task('css', function() {
     return gulp.src('./scss/**/*.scss')
         .pipe(sass({
             style: 'expanded',
-            includePaths: ['toolkit/scss-3.0/']
+            includePaths: ['./toolkit/scss-3.0/']
         }))
         .pipe(prefixer({
             browsers: ['last 3 versions']

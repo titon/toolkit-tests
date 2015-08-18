@@ -118,6 +118,12 @@ a {
     > p:first-child {
         margin-top: 0;
     }
+
+    // Fix align center issues
+    textarea {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .test-demo-title {
@@ -147,6 +153,10 @@ a {
     &.align-center {
         text-align: center !important;
     }
+
+    &.align-left {
+        text-align: left !important;
+    }
 }
 
 .test-note {
@@ -160,17 +170,32 @@ a {
     }
 }
 
-// Fix align center issues
-textarea {
-    width: 100%;
-    max-width: 100%;
-}
-
 //-------------------- Base --------------------//
 
-.test-module-fluid {
+.test-base-fluid {
     max-width: 800px;
     margin: auto;
+}
+
+.test-responsive-table {
+    width: 100%;
+    border-spacing: .5rem;
+    border-collapse: separate;
+
+    td {
+        padding: 1rem;
+        max-width: 50%;
+
+        &[class*="show-"] {
+            background: theme-setting("success-light");
+            color: darken(theme-setting("success-dark"), 10%);
+        }
+
+        &[class*="hide-"] {
+            background: theme-setting("error-light");
+            color: darken(theme-setting("error-dark"), 10%);
+        }
+    }
 }
 
 //-------------------- Responsive --------------------//

@@ -500,6 +500,9 @@ a {
     background: #e9eef1; }
   .test-demo > p:first-child {
     margin-top: 0; }
+  .test-demo textarea {
+    width: 100%;
+    max-width: 100%; }
 
 .test-demo-title {
   margin-bottom: 2rem;
@@ -526,6 +529,8 @@ a {
     text-align: left; }
   .test-demo-body.align-center {
     text-align: center !important; }
+  .test-demo-body.align-left {
+    text-align: left !important; }
 
 .test-note {
   margin: 1.5rem 0;
@@ -535,13 +540,23 @@ a {
   .test-note:last-child {
     margin-bottom: 0; }
 
-textarea {
-  width: 100%;
-  max-width: 100%; }
-
-.test-module-fluid {
+.test-base-fluid {
   max-width: 800px;
   margin: auto; }
+
+.test-responsive-table {
+  width: 100%;
+  border-spacing: .5rem;
+  border-collapse: separate; }
+  .test-responsive-table td {
+    padding: 1rem;
+    max-width: 50%; }
+    .test-responsive-table td[class*="show-"] {
+      background: #7cdda7;
+      color: #003434; }
+    .test-responsive-table td[class*="hide-"] {
+      background: #f8b2b2;
+      color: #732927; }
 
 @media only screen and (min-width: 641px) {
   html {

@@ -34,7 +34,7 @@
             });
         },
 
-        loadDefaultPlugin: function() {
+        loadDefaultModule: function() {
             if (location.search) {
                 var query = location.search.substr(1);
 
@@ -42,19 +42,19 @@
                     query = query.split('&')[0];
                 }
 
-                Test.loadPlugin(query, location.hash);
+                Test.loadModule(query, location.hash);
 
             } else {
-                Test.loadPlugin('base', location.hash);
+                Test.loadModule('base', location.hash);
             }
         },
 
-        loadPlugin: function(key, hash) {
+        loadModule: function(key, hash) {
             if (!key) {
                 return;
             }
 
-            Test.destroyPlugins();
+            Test.destroyModules();
 
             var xhr = new XMLHttpRequest();
 
@@ -66,7 +66,7 @@
                         Test.updateNav(key, hash);
 
                     } else {
-                        skeleton.innerHTML = 'Plugin does not exist.';
+                        skeleton.innerHTML = 'Module does not exist.';
                         Test.updateNav('');
                     }
                 }
@@ -76,10 +76,10 @@
             xhr.send(null);
         },
 
-        destroyPlugins: function() {
-            Test.instances.forEach(function(plugin) {
-                if (plugin && plugin.destroy) {
-                    plugin.destroy();
+        destroyModules: function() {
+            Test.instances.forEach(function(module) {
+                if (module && module.destroy) {
+                    module.destroy();
                 }
             });
 
@@ -89,23 +89,17 @@
         updateNav: function(key, hash) {
             switcher.value = key;
 
-            var currentOption = switcher.options[switcher.selectedIndex],
-                prevOption = currentOption.previousElementSibling,
-                nextOption = currentOption.nextElementSibling;
-
-            if (!prevOption) {
-                prevOption = switcher.options[switcher.options.length - 1];
-            }
-
-            if (!nextOption) {
-                nextOption = switcher.options[0];
-            }
+            var index = switcher.selectedIndex,
+                options = switcher.options,
+                currentOption = options[index],
+                prevOption = options[index - 1] || options[options.length - 1],
+                nextOption = options[index + 1] || options[0];
 
             Test.updateButton(prev, prevOption);
             Test.updateButton(next, nextOption);
 
             if (history.pushState) {
-                var query = '?' + key + '&rtl=' + (Toolkit.isRTL ? 1 : 0);
+                var query = '?' + key + '&rtl=' + (Toolkit.isRTL ? 1 : 0) + '&theme=0';
 
                 history.pushState({ key: key }, currentOption.textContent, query + (hash || ''));
             }
@@ -139,7 +133,7 @@
 
         bindEvents: function() {
             switcher.addEventListener('change', Test.onSwitch);
-            destroy.addEventListener('click', Test.destroyPlugins);
+            destroy.addEventListener('click', Test.destroyModules);
             prev.addEventListener('click', Test.onGoTo);
             next.addEventListener('click', Test.onGoTo);
             win.addEventListener('resize', Test.onResize);
@@ -166,18 +160,18 @@
         },
 
         onSwitch: function(e) {
-            Test.loadPlugin(e.currentTarget.value);
+            Test.loadModule(e.currentTarget.value);
         },
 
         onGoTo: function(e) {
-            Test.loadPlugin(e.currentTarget.getAttribute('data-plugin'));
+            Test.loadModule(e.currentTarget.getAttribute('data-plugin'));
         }
     };
 
     Test.loadStyles();
     Test.setupUI();
     Test.bindEvents();
-    Test.loadDefaultPlugin();
+    Test.loadDefaultModule();
 
     win.Test = Test;
 })(window, document);
