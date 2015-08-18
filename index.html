@@ -30,7 +30,7 @@
         </div>
 
         <div class="test-head-center">
-            <button id="prev" class="button test-head-prev is-disabled" role="button" tabindex="5" disabled>
+            <button id="prev" class="button test-button test-head-prev is-disabled" role="button" tabindex="5" disabled>
                 <span class="caret-left"></span>
                 <span class="test-head-button">Typography</span>
             </button>
@@ -42,12 +42,14 @@
                     <option value="responsive">Responsive</option>
                     <option value="typography">Typography</option>
                 </optgroup>
+
                 <optgroup label="Behaviors">
                     <option value="lazy-load">Lazy Load</option>
                     <option value="mask">Mask</option>
                     <option value="pin">Pin</option>
                     <option value="stalker">Stalker</option>
                 </optgroup>
+
                 <optgroup label="Components">
                     <option value="accordion">Accordion</option>
                     <option value="breadcrumb">Breadcrumb</option>
@@ -86,7 +88,7 @@
                 </optgroup>
             </select>
 
-            <button id="next" class="button test-head-next is-disabled" role="button" tabindex="10" disabled>
+            <button id="next" class="button test-button test-head-next is-disabled" role="button" tabindex="10" disabled>
                 <span class="test-head-button">Accordion</span>
                 <span class="caret-right"></span>
             </button>
@@ -111,10 +113,10 @@
         </div>
     </header>
 
-    <div id="skeleton" class="body"></div>
+    <main id="body" class="test-body" role="main"></main>
 
     <footer id="foot" class="test-footer">
-        <button type="button" id="top" class="button" tabindex="100">Back to Top</button>
+        <button type="button" id="top" class="button test-button" tabindex="100">Back to Top</button>
     </footer>
 
     <script src="js/test.js"></script>

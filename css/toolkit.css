@@ -796,7 +796,7 @@ kbd {
   z-index: 500;
   opacity: 0;
   visibility: hidden;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   transition: all 0.3s;
   color: #fff;
   -webkit-user-select: none;

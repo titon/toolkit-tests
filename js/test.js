@@ -1,7 +1,7 @@
 (function(win, doc) {
     "use strict";
 
-    var skeleton = doc.getElementById('skeleton'),
+    var body = doc.getElementById('body'),
         switcher = doc.getElementById('switcher'),
         destroy = doc.getElementById('destroy'),
         prev = doc.getElementById('prev'),
@@ -62,11 +62,15 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         window.scrollTo(0, 0);
-                        skeleton.innerHTML = xhr.responseText;
+                        body.innerHTML = xhr.responseText;
                         Test.updateNav(key, hash);
 
+                        // Execute script blocks
+                        Array.prototype.slice.call(body.querySelectorAll('script')).forEach(function(script) {
+                            eval(script.textContent);
+                        });
                     } else {
-                        skeleton.innerHTML = 'Module does not exist.';
+                        body.innerHTML = 'Module does not exist.';
                         Test.updateNav('');
                     }
                 }

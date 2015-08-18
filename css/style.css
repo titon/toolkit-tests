@@ -482,15 +482,21 @@ a {
     white-space: nowrap; }
 
 .test-head-prev {
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem; }
+  border-radius: 0 !important;
+  border-top-left-radius: 0.2rem !important;
+  border-bottom-left-radius: 0.2rem !important; }
 
 .test-head-next {
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem; }
+  border-radius: 0 !important;
+  border-top-right-radius: 0.2rem !important;
+  border-bottom-right-radius: 0.2rem !important; }
 
 .test-footer {
   padding: 2rem;
+  text-align: center; }
+
+.test-body > .notice:first-child {
+  margin: 0;
   text-align: center; }
 
 .test-demo {
@@ -532,6 +538,16 @@ a {
   .test-demo-body.align-left {
     text-align: left !important; }
 
+.test-button {
+  border-radius: 0.2rem;
+  background: #727cb6;
+  color: #fff; }
+  .test-button:hover {
+    background: #444a6d; }
+  .test-button.is-active,
+  .is-active > .test-button {
+    background: #aeb3d3; }
+
 .test-note {
   margin: 1.5rem 0;
   color: #242a30;
@@ -543,6 +559,61 @@ a {
 .test-base-fluid {
   max-width: 800px;
   margin: auto; }
+
+.test-lazy-load-overflow {
+  height: 350px;
+  overflow: auto; }
+
+.test-lazy-load-item {
+  display: block;
+  width: 150px;
+  height: 150px;
+  background-size: 150px 150px;
+  margin: 0 auto; }
+  .test-lazy-load-item img {
+    width: 150px;
+    height: 150px; }
+
+.test-mask-wrapper > p {
+  margin: 0; }
+
+.test-mask-wrapper .js-mask {
+  margin-top: 1rem;
+  border-radius: .5rem; }
+
+.test-pin-container {
+  position: relative; }
+  .test-pin-container .col p:first-child {
+    margin-top: 0; }
+
+.test-stalker {
+  max-width: 800px; }
+  .test-stalker div {
+    margin-bottom: 2rem; }
+  .test-stalker.is-overflow {
+    height: 250px;
+    overflow: auto;
+    position: relative; }
+
+.test-stalker-targets {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .test-stalker-targets li {
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1; }
+  .test-stalker-targets a {
+    display: block;
+    border-radius: 0 !important;
+    text-align: center; }
 
 .test-responsive-table {
   width: 100%;

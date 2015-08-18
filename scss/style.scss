@@ -89,13 +89,15 @@ a {
 }
 
 .test-head-prev {
-    border-top-left-radius: theme-setting("round-radius");
-    border-bottom-left-radius: theme-setting("round-radius");
+    border-radius: 0 !important;
+    border-top-left-radius: theme-setting("round-radius") !important;
+    border-bottom-left-radius: theme-setting("round-radius") !important;
 }
 
 .test-head-next {
-    border-top-right-radius: theme-setting("round-radius");
-    border-bottom-right-radius: theme-setting("round-radius");
+    border-radius: 0 !important;
+    border-top-right-radius: theme-setting("round-radius") !important;
+    border-bottom-right-radius: theme-setting("round-radius") !important;
 }
 
 //-------------------- Footer --------------------//
@@ -106,6 +108,13 @@ a {
 }
 
 //-------------------- Body --------------------//
+
+.test-body {
+    > .notice:first-child {
+        margin: 0;
+        text-align: center;
+    }
+}
 
 .test-demo {
     padding: 2rem;
@@ -159,6 +168,23 @@ a {
     }
 }
 
+//-------------------- UI --------------------//
+
+.test-button {
+    border-radius: theme-setting("round-radius");
+    background: theme-setting("primary");
+    color: #fff;
+
+    &:hover {
+        background: theme-setting("primary-dark");
+    }
+
+    &.is-active,
+    .is-active > & {
+        background: theme-setting("primary-light");
+    }
+}
+
 .test-note {
     margin: 1.5rem 0;
     color: theme-setting("fg-dark");
@@ -170,11 +196,83 @@ a {
     }
 }
 
-//-------------------- Base --------------------//
+//-------------------- Modules --------------------//
 
 .test-base-fluid {
     max-width: 800px;
     margin: auto;
+}
+
+.test-lazy-load-overflow {
+    height: 350px;
+    overflow: auto;
+}
+
+.test-lazy-load-item {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-size: 150px 150px;
+    margin: 0 auto;
+
+    img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+.test-mask-wrapper {
+    > p {
+        margin: 0;
+    }
+
+    .js-mask {
+        margin-top: 1rem;
+        border-radius: .5rem;
+    }
+}
+
+.test-pin-container {
+    position: relative;
+
+    .col p:first-child {
+        margin-top: 0;
+    }
+}
+
+.test-stalker {
+    max-width: 800px;
+
+    div {
+        margin-bottom: 2rem;
+    }
+
+    &.is-overflow {
+        height: 250px;
+        overflow: auto;
+        position: relative;
+    }
+}
+
+.test-stalker-targets {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        flex-grow: 1;
+    }
+
+    a {
+        display: block;
+        border-radius: 0 !important;
+        text-align: center;
+    }
 }
 
 .test-responsive-table {
@@ -212,9 +310,6 @@ a {
     .test-head-left {
         margin: 0;
         text-align: left;
-    }
-
-    .test-head-center {
     }
 
     .test-head-logo {
