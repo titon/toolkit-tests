@@ -21,6 +21,7 @@
         "gulp": "*",
         "gulp-sass": "*",
         "gulp-autoprefixer": "*",
-        "gulp-imagemin": "*"
+        "gulp-imagemin": "*",
+        "node-static": "*"
     }
 }

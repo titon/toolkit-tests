@@ -185,14 +185,14 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('body').stalker({
+        Test.instances.push( $('body').stalker({
             target: '#stalker-targets a',
             marker: '#stalker-markers div[id]',
             onlyWithin: false,
             applyToParent: false
         }).toolkit('stalker') );
 
-        Demo.instances.push( $('#stalker-overflow').stalker({
+        Test.instances.push( $('#stalker-overflow').stalker({
             target: '#stalker-targets a',
             marker: '#stalker-overflow-markers div[id]'
         }).toolkit('stalker') );

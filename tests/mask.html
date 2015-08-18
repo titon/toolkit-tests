@@ -34,12 +34,12 @@
         // Document mask needs to be in the body
         $('#body-mask').appendTo('body');
 
-        Demo.instances.push( $('.js-mask').mask({
+        Test.instances.push( $('.js-mask').mask({
             selector: '#masker',
             messageContent: 'Custom message defined through options.'
         }).toolkit('mask') );
 
-        Demo.instances.push( $('body').mask({
+        Test.instances.push( $('body').mask({
             selector: '#body-masker',
             revealOnClick: true
         }).toolkit('mask') );

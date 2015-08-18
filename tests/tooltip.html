@@ -71,13 +71,13 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('.js-tooltip').tooltip({
+        Test.instances.push( $('.js-tooltip').tooltip({
             getContent: 'href'
         }).toolkit('tooltip') );
 
-        Demo.instances.push( $('.js-tooltip-2').tooltip().toolkit('tooltip') );
+        Test.instances.push( $('.js-tooltip-2').tooltip().toolkit('tooltip') );
 
-        Demo.instances.push( $('.js-tooltip-mode').tooltip({
+        Test.instances.push( $('.js-tooltip-mode').tooltip({
             mode: 'click'
         }).toolkit('tooltip') );
     });

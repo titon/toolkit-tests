@@ -116,12 +116,12 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('.js-modal-multi').modal().toolkit('modal') );
+        Test.instances.push( $('.js-modal-multi').modal().toolkit('modal') );
 
-        Demo.instances.push( $('.js-modal').modal().toolkit('modal') );
+        Test.instances.push( $('.js-modal').modal().toolkit('modal') );
 
         $.each(['fade', 'from-above', 'from-below', 'slide-in-top', 'slide-in-right', 'slide-in-bottom', 'slide-in-left'], function(key, value) {
-            Demo.instances.push( $('.js-modal-' + value).modal({
+            Test.instances.push( $('.js-modal-' + value).modal({
                 animation: value,
                 clickout: false,
                 onLoad: function(content) {
@@ -130,7 +130,7 @@
             }).toolkit('modal') );
         });
 
-        Demo.instances.push( $('.js-modal-fullscreen').modal({
+        Test.instances.push( $('.js-modal-fullscreen').modal({
             fullScreen: true
         }).toolkit('modal') );
     });

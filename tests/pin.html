@@ -194,27 +194,27 @@
         var dir = Toolkit.rtl ? 'right' : 'left',
             opp = Toolkit.rtl ? 'left' : 'right';
 
-        Demo.instances.push( $('#pin-1').pin({
+        Test.instances.push( $('#pin-1').pin({
             location: opp,
             throttle: 0
         }).toolkit('pin') );
 
-        Demo.instances.push( $('#pin-2').pin({
+        Test.instances.push( $('#pin-2').pin({
             location: dir,
             animation: 'sticky'
         }).toolkit('pin') );
 
-        Demo.instances.push( $('#pin-3').pin({
+        Test.instances.push( $('#pin-3').pin({
             location: opp,
             animation: 'slide'
         }).toolkit('pin') );
 
-        Demo.instances.push( $('#pin-4').height($('#pin-lock-parent').outerHeight()).pin({
+        Test.instances.push( $('#pin-4').height($('#pin-lock-parent').outerHeight()).pin({
             location: dir,
             lock: true
         }).toolkit('pin') );
 
-        Demo.instances.push( $('#pin-5').pin({
+        Test.instances.push( $('#pin-5').pin({
             location: opp,
             xOffset: 100,
             yOffset: 100,

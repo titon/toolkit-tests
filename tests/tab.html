@@ -355,31 +355,31 @@
 
 <script>
     $(function() {
-        Demo.instances.push( $('#tab-1').tab().toolkit('tab') );
+        Test.instances.push( $('#tab-1').tab().toolkit('tab') );
 
-        Demo.instances.push( $('#tab-2').tab({
+        Test.instances.push( $('#tab-2').tab({
             collapsible: true,
             defaultIndex: 2
         }).toolkit('tab') );
 
-        Demo.instances.push( $('#tab-3').tab({
+        Test.instances.push( $('#tab-3').tab({
             mode: 'hover',
             cookie: 'test3',
             persistState: true
         }).toolkit('tab') );
 
-        Demo.instances.push( $('#tab-4').tab({
+        Test.instances.push( $('#tab-4').tab({
             persistState: true,
             loadFragment: true,
             preventDefault: false
         }).toolkit('tab') );
 
-        Demo.instances.push( $('#tab-5').tab({
+        Test.instances.push( $('#tab-5').tab({
             ajax: true
         }).toolkit('tab') );
 
-        Demo.instances.push( $('#tab-6').tab().toolkit('tab') );
-        Demo.instances.push( $('#tab-7').tab().toolkit('tab') );
-        Demo.instances.push( $('#tab-8').tab().toolkit('tab') );
+        Test.instances.push( $('#tab-6').tab().toolkit('tab') );
+        Test.instances.push( $('#tab-7').tab().toolkit('tab') );
+        Test.instances.push( $('#tab-8').tab().toolkit('tab') );
     });
 </script>

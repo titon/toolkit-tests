@@ -100,11 +100,11 @@
         }
 
         var w = 200,
-            h = Demo.random(200, 600),
+            h = Test.random(200, 600),
             i = new Image();
 
         if (id === '#matrix-3') {
-            w = Demo.random(200, 600);
+            w = Test.random(200, 600);
         }
 
         i.src = 'http://placehold.it/' + w + 'x' + h + '/000000/ffffff.png&text=' + (matrix.items.length + 1);
@@ -115,14 +115,14 @@
     }
 
     $(function() {
-        Demo.instances.push( $('#matrix-1').matrix().toolkit('matrix') );
+        Test.instances.push( $('#matrix-1').matrix().toolkit('matrix') );
 
-        Demo.instances.push( $('#matrix-2').matrix({
+        Test.instances.push( $('#matrix-2').matrix({
             width: 250,
             rtl: true
         }).toolkit('matrix') );
 
-        Demo.instances.push( $('#matrix-3').matrix({
+        Test.instances.push( $('#matrix-3').matrix({
             gutter: 5
         }).toolkit('matrix') );
     });
