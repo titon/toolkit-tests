@@ -110,7 +110,7 @@ a {
 //-------------------- Body --------------------//
 
 .test-body {
-    > .notice:first-child {
+    > .notice {
         margin: 0;
         text-align: center;
     }
@@ -188,7 +188,7 @@ a {
 .test-note {
     margin: 1.5rem 0;
     color: theme-setting("fg-dark");
-    opacity: .5;
+    opacity: .65;
     text-align: center;
 
     &:last-child {

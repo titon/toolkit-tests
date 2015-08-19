@@ -495,7 +495,7 @@ a {
   padding: 2rem;
   text-align: center; }
 
-.test-body > .notice:first-child {
+.test-body > .notice {
   margin: 0;
   text-align: center; }
 
@@ -551,7 +551,7 @@ a {
 .test-note {
   margin: 1.5rem 0;
   color: #242a30;
-  opacity: .5;
+  opacity: .65;
   text-align: center; }
   .test-note:last-child {
     margin-bottom: 0; }

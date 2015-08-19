@@ -682,13 +682,11 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   font-weight: normal; }
 
-p {
-  margin: 1.25rem 0 0 0; }
+p, ul, ol {
+  margin: 1.25rem 0; }
 
-ul, ol {
-  margin: 1.25rem 0 0 0; }
-  ul ul, ul ol, ol ul, ol ol {
-    margin: 0; }
+ul ul, ul ol, ol ul, ol ol {
+  margin: 0; }
 
 hr {
   margin: 1.25rem 0; }
@@ -859,9 +857,9 @@ kbd {
  * @link        http://titon.io
  */
 .breadcrumb ul, .breadcrumb ol {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
 
 .breadcrumb li {
   position: relative; }
@@ -905,6 +903,7 @@ kbd {
   line-height: normal;
   white-space: nowrap;
   text-decoration: none;
+  background: #fff;
   font-size: 1rem;
   padding: 0.75rem; }
   .button.small, .small .button {
@@ -984,9 +983,9 @@ kbd {
  */
 .button-group {
   white-space: nowrap;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
   .button-group > li,
   .button-group > .button {
     border-radius: 0; }
@@ -1101,7 +1100,9 @@ kbd {
 
 .button-group--justified {
   width: 100%;
-  max-width: 100%; }
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
   .button-group--justified > li,
   .button-group--justified > .button {
     -webkit-flex-grow: 1;
@@ -1194,11 +1195,13 @@ kbd {
   top: 100%;
   left: 0;
   width: 200px;
-  line-height: 100%;
+  line-height: 1;
   z-index: 500;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  background: #fff;
+  text-align: left; }
   .drop .drop {
     display: block;
     top: 0;
@@ -1206,10 +1209,13 @@ kbd {
     z-index: 501; }
   .drop li {
     position: relative; }
-    .drop li > a .caret-right,
-    .drop li > a .caret-left {
-      float: right;
-      display: none; }
+    .drop li > a {
+      padding: 0.5rem;
+      display: block; }
+      .drop li > a .caret-right,
+      .drop li > a .caret-left {
+        float: right;
+        display: none; }
     .drop li.has-children > a .caret-right,
     .drop li.has-children > a .caret-left {
       display: inline-block; }
@@ -1220,7 +1226,7 @@ kbd {
 
 .drop-divider {
   margin: 0.625rem 0;
-  border-top: 1px solid #b3bdc6; }
+  border-top: 1px solid #d7dee5; }
 
 .drop-heading {
   padding: 0.5rem; }
@@ -1678,17 +1684,18 @@ kbd {
   display: flex;
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
+          flex-wrap: nowrap;
+  background: #fff;
+  line-height: 1; }
   .flyout .flyout {
+    top: 0;
     left: 90%; }
     .flyout .flyout.push-opposite {
       left: auto;
       right: 90%; }
   .flyout a {
     padding: 0.5rem;
-    line-height: 1;
-    display: block;
-    text-decoration: none; }
+    display: block; }
     .flyout a .caret-right,
     .flyout a .caret-left {
       display: none; }
@@ -1710,7 +1717,6 @@ kbd {
 
 .flyout-heading {
   padding: 0.5rem;
-  line-height: 1;
   display: block; }
 
 /**
@@ -1719,17 +1725,17 @@ kbd {
  * @link        http://titon.io
  */
 fieldset {
-  padding: 0.75rem 0;
+  padding: 1.5rem 0 0.75rem 0;
   margin: 0;
   border: 0;
-  border-top: 1px solid #b3bdc6; }
+  border-top: 1px solid #d7dee5; }
   fieldset.no-legend {
     border: 0;
     padding: 0; }
 
 legend {
   font-size: 1.3rem;
-  padding: 0 0.75rem; }
+  padding-right: 0.75rem; }
 
 select[multiple],
 select[size] {
@@ -1766,7 +1772,6 @@ label {
 
 .form--horizontal .field-label {
   text-align: right;
-  border: 1px solid transparent;
   padding-top: 0.75rem; }
 
 .form--horizontal .field-col {
@@ -2179,6 +2184,7 @@ label {
 .input,
 .input-static,
 .input-choice {
+  border: 0;
   line-height: normal;
   -webkit-appearance: none;
   font-size: 1rem;
@@ -2195,8 +2201,7 @@ label {
     padding: 1rem; }
 
 .input {
-  background: #d7dee5;
-  border: 1px solid #b3bdc6; }
+  background: #fff; }
   .input.is-disabled,
   .input:disabled,
   .input option:disabled,
@@ -2205,14 +2210,12 @@ label {
 
 .input-static {
   background: transparent;
-  border-color: transparent;
   padding-left: 0 !important;
   padding-right: 0 !important; }
 
 .input-choice {
   padding-left: 0 !important;
-  padding-right: 0 !important;
-  border: 0; }
+  padding-right: 0 !important; }
   .input-choice input[type="checkbox"],
   .input-choice input[type="radio"] {
     vertical-align: middle;
@@ -2240,17 +2243,14 @@ textarea.input {
  */
 .input-group-addon {
   font-size: 1rem;
-  padding: 0.75rem; }
+  padding: 0.75rem;
+  background: #d7dee5; }
 
 .input-group {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  vertical-align: middle;
-  white-space: nowrap;
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle; }
   .input-group > * {
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
@@ -2289,7 +2289,8 @@ textarea.input {
   border-radius: 2px;
   white-space: nowrap;
   top: -1px;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  background: #fff; }
   .label.small {
     font-size: .6rem;
     padding: 0.2rem 0.35rem; }
@@ -2316,7 +2317,7 @@ textarea.input {
     top: 0;
     right: 100%;
     border: .65rem solid transparent;
-    border-right-color: #b3bdc6; }
+    border-right-color: #fff; }
   .label--arrow-left.small::after {
     border-width: .5rem; }
   .label--arrow-left.large::after {
@@ -2331,7 +2332,7 @@ textarea.input {
     top: 0;
     left: 100%;
     border: .65rem solid transparent;
-    border-left-color: #b3bdc6; }
+    border-left-color: #fff; }
   .label--arrow-right.small::after {
     border-width: .5rem; }
   .label--arrow-right.large::after {
@@ -2346,7 +2347,7 @@ textarea.input {
     border: 1em solid transparent;
     border-top-width: 0 !important;
     border-left-width: 0 !important;
-    border-right-color: #b3bdc6; }
+    border-right-color: #d7dee5; }
 
 .label--ribbon-right {
   border-top-right-radius: 0;
@@ -2357,7 +2358,7 @@ textarea.input {
     border: 1em solid transparent;
     border-top-width: 0 !important;
     border-right-width: 0 !important;
-    border-left-color: #b3bdc6; }
+    border-left-color: #d7dee5; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -2369,7 +2370,8 @@ textarea.input {
   text-align: center; }
   .loader > span {
     display: inline-block;
-    margin: 0 2px; }
+    margin: 0 2px;
+    background: #fff; }
 
 .loader-message {
   margin-top: 1rem; }
@@ -2391,7 +2393,6 @@ textarea.input {
             transform: scaleY(2); } }
 
 .loader--bar-wave > span {
-  background: #000;
   height: 2.5rem;
   width: 0.65rem;
   -webkit-animation: bar-wave 1.2s infinite ease-in-out;
@@ -2429,7 +2430,6 @@ textarea.input {
             transform: scale(1); } }
 
 .loader--bubble-wave > span {
-  background: #000;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 100%;
@@ -2472,7 +2472,7 @@ textarea.input {
   position: relative;
   margin: 0 auto; }
   .loader--bubble-spinner .loader-spinner > span {
-    background: #000;
+    background: #fff;
     width: 14px;
     height: 14px;
     position: absolute;
@@ -2791,9 +2791,9 @@ textarea.input {
  * @link        http://titon.io
  */
 .pagination ol {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
   .pagination ol > li {
     position: relative;
     margin-right: 0.625rem; }
@@ -2868,11 +2868,11 @@ textarea.input {
   margin-top: -8px; }
 
 .popover.center-left .popover-arrow {
-  border-left-color: #000;
+  border-left-color: #fff;
   right: -16px; }
 
 .popover.center-right .popover-arrow {
-  border-right-color: #000;
+  border-right-color: #fff;
   left: -16px; }
 
 .popover.top-center .popover-arrow,
@@ -2881,11 +2881,11 @@ textarea.input {
   margin-left: -8px; }
 
 .popover.top-center .popover-arrow {
-  border-top-color: #000;
+  border-top-color: #fff;
   bottom: -16px; }
 
 .popover.bottom-center .popover-arrow {
-  border-bottom-color: #000;
+  border-bottom-color: #fff;
   top: -16px; }
 
 .popover.fade {
@@ -2928,7 +2928,8 @@ textarea.input {
   position: relative;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  background: #d7dee5; }
   .progress.round {
     border-radius: 0.2rem; }
     .progress.round .progress-bar:first-child {
@@ -2947,7 +2948,8 @@ textarea.input {
   position: relative;
   text-align: center;
   font-size: 1rem;
-  transition: width 0.5s, background 0.5s; }
+  transition: width 0.5s, background 0.5s;
+  background: #fff; }
 
 .progress.small .progress-bar {
   height: 1rem;
@@ -3030,10 +3032,9 @@ textarea.input {
   position: relative;
   display: block;
   line-height: 3em;
-  height: 3em;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1; }
+  height: 3em; }
+  .step.is-complete {
+    background: #fff; }
   .step::after {
     height: 2.165em;
     width: 2.165em;
@@ -3042,12 +3043,17 @@ textarea.input {
     position: absolute;
     z-index: 2;
     content: "";
-    -webkit-transform: rotate(135deg);
-        -ms-transform: rotate(135deg);
-            transform: rotate(135deg); }
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    background: inherit;
+    border-right: 1px solid #d7dee5;
+    border-bottom: 1px solid #d7dee5; }
 
 .steps {
-  font-size: 1rem; }
+  font-size: 1rem;
+  background: #d7dee5;
+  display: inline-block; }
   .steps ol {
     overflow: hidden;
     display: -webkit-flex;
@@ -3071,13 +3077,16 @@ textarea.input {
   font-size: 0;
   width: 7rem;
   cursor: pointer; }
+  .switch input {
+    display: none; }
 
 .switch-bar {
   display: block;
   position: relative;
   font-size: 1rem;
   transition: background 0.3s;
-  text-align: left; }
+  text-align: left;
+  background: #d7dee5; }
   .switch-bar::before,
   .switch-bar::after {
     position: absolute;
@@ -3111,7 +3120,8 @@ textarea.input {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  transition: left 0.3s; }
+  transition: left 0.3s;
+  background: #fff; }
   .switch-toggle::before {
     content: "\00A0"; }
 
@@ -3274,7 +3284,8 @@ textarea.input {
   margin-top: 1rem;
   transition: all 0.3s;
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden;
+  background: #fff; }
 
 .toast.slide-up {
   -webkit-transform: translateY(50%);
@@ -3323,7 +3334,8 @@ textarea.input {
   z-index: 700;
   max-width: 200px;
   visibility: hidden;
-  transition: all 0.15s; }
+  transition: all 0.15s;
+  background: #fff; }
 
 .tooltip-arrow,
 .popover-arrow {
@@ -3343,11 +3355,11 @@ textarea.input {
   margin-top: -6px; }
 
 .tooltip.center-left .tooltip-arrow {
-  border-left-color: #000;
+  border-left-color: #fff;
   right: -12px; }
 
 .tooltip.center-right .tooltip-arrow {
-  border-right-color: #000;
+  border-right-color: #fff;
   left: -12px; }
 
 .tooltip.top-center .tooltip-arrow,
@@ -3356,11 +3368,11 @@ textarea.input {
   margin-left: -6px; }
 
 .tooltip.top-center .tooltip-arrow {
-  border-top-color: #000;
+  border-top-color: #fff;
   bottom: -12px; }
 
 .tooltip.bottom-center .tooltip-arrow {
-  border-bottom-color: #000;
+  border-bottom-color: #fff;
   top: -12px; }
 
 .tooltip.fade {

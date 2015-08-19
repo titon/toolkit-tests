@@ -70,7 +70,7 @@
                             eval(script.textContent);
                         });
                     } else {
-                        body.innerHTML = 'Module does not exist.';
+                        body.innerHTML = '<div class="notice is-error">Module does not exist.</div>';
                         Test.updateNav('');
                     }
                 }
