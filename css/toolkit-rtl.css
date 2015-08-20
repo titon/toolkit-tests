@@ -765,7 +765,7 @@ pre {
     background: transparent;
     display: block; }
   pre.is-scrollable {
-    max-height: 350px;
+    max-height: 30rem;
     overflow-y: auto; }
 
 kbd {
@@ -869,26 +869,18 @@ kbd {
 .breadcrumb a {
   font-size: 1rem;
   padding: 0.75rem;
-  display: block;
-  line-height: 1;
-  padding-left: 0; }
-  .breadcrumb a .caret {
-    margin-right: 0.75rem;
-    position: relative; }
+  display: inline-block; }
+
+.breadcrumb .caret {
+  vertical-align: middle; }
 
 .breadcrumb.small a {
   font-size: 0.7rem;
-  padding: 0.5rem;
-  padding-left: 0; }
-  .breadcrumb.small a .caret {
-    margin-right: 0.5rem; }
+  padding: 0.5rem; }
 
 .breadcrumb.large a {
   font-size: 1.3rem;
-  padding: 1rem;
-  padding-left: 0; }
-  .breadcrumb.large a .caret {
-    margin-right: 1rem; }
+  padding: 1rem; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -903,6 +895,7 @@ kbd {
   line-height: normal;
   white-space: nowrap;
   text-decoration: none;
+  text-align: center;
   background: #fff;
   font-size: 1rem;
   padding: 0.75rem; }
@@ -1194,7 +1187,7 @@ kbd {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 200px;
+  width: 15rem;
   line-height: 1;
   z-index: 500;
   opacity: 0;
@@ -1210,7 +1203,7 @@ kbd {
   .drop li {
     position: relative; }
     .drop li > a {
-      padding: 0.5rem;
+      padding: 0.75rem;
       display: block; }
       .drop li > a .caret-right,
       .drop li > a .caret-left {
@@ -1229,7 +1222,7 @@ kbd {
   border-top: 1px solid #d7dee5; }
 
 .drop-heading {
-  padding: 0.5rem; }
+  padding: 0.75rem; }
 
 .drop--up {
   top: auto;
@@ -1695,7 +1688,7 @@ kbd {
       right: auto;
       left: 90%; }
   .flyout a {
-    padding: 0.5rem;
+    padding: 0.75rem;
     display: block; }
     .flyout a .caret-right,
     .flyout a .caret-left {
@@ -1717,7 +1710,7 @@ kbd {
         left: 100%; }
 
 .flyout-heading {
-  padding: 0.5rem;
+  padding: 0.75rem;
   display: block; }
 
 /**
@@ -2229,13 +2222,13 @@ select.input {
   -moz-appearance: none;
   appearance: none; }
   select.input[multiple] {
-    max-height: 500px; }
+    max-height: 45rem; }
   select.input::-ms-expand {
     display: none; }
 
 textarea.input {
   line-height: 1.35;
-  min-height: 150px; }
+  min-height: 10rem; }
 
 /**
  * @copyright   2010-2015, The Titon Project
@@ -2562,7 +2555,7 @@ textarea.input {
   left: 0.75rem;
   line-height: 1;
   opacity: 0.5;
-  padding: 5px; }
+  padding: 0.5rem; }
   .modal-close:hover {
     opacity: 1; }
 
@@ -2666,7 +2659,7 @@ textarea.input {
   float: left;
   margin-right: 1.25rem;
   line-height: 1;
-  padding: 5px;
+  padding: 0.5rem;
   background: none;
   border: 0; }
   .notice-close ~ p {
@@ -2854,7 +2847,8 @@ textarea.input {
 .popover {
   z-index: 700;
   max-width: 300px;
-  transition: all 0.15s; }
+  transition: all 0.15s;
+  padding: 0.75rem; }
 
 .popover-arrow {
   border: 8px solid transparent; }
@@ -3003,7 +2997,7 @@ textarea.input {
   border-top-color: #000; }
 
 .select-options {
-  max-height: 300px;
+  max-height: 25rem;
   overflow: auto;
   z-index: 5; }
   .select-options li.is-disabled > a,
@@ -3181,31 +3175,29 @@ textarea.input {
  */
 .table {
   width: 100%;
-  background: #d7dee5;
+  background: #f7f9fa;
   border-collapse: collapse; }
   .table th,
   .table td {
     padding: 0.75rem;
-    border: 1px solid #b3bdc6; }
+    border: 1px solid #d7dee5; }
   .table thead th {
     vertical-align: bottom; }
   .table tbody + tbody {
     border-top-width: 2px; }
   .table thead tr,
   .table tfoot tr {
-    background: #2d353c; }
+    background: #d7dee5; }
   .table tbody tr.table-divider {
-    background: #f7f9fa; }
+    background: #d7dee5; }
 
 .table-responsive {
   width: 100%;
   max-width: 100%;
   overflow-x: auto; }
 
-.table.is-striped tbody tr {
-  background: #d7dee5; }
-  .table.is-striped tbody tr:nth-child(odd) {
-    background: #e9eef1; }
+.table.is-striped tbody tr:nth-child(even) {
+  background: #fcfdfd; }
 
 .table.is-sortable thead th {
   padding: 0; }
@@ -3240,7 +3232,7 @@ textarea.input {
  */
 .toasts {
   position: fixed;
-  padding: 1.25rem;
+  margin: 1.25rem;
   width: 20%;
   z-index: 500; }
   @media only screen and (max-width: 641px) {
@@ -3286,7 +3278,8 @@ textarea.input {
   transition: all 0.3s;
   opacity: 0;
   visibility: hidden;
-  background: #fff; }
+  background: #fff;
+  padding: 0.75rem; }
 
 .toast.slide-up {
   -webkit-transform: translateY(50%);
@@ -3333,10 +3326,11 @@ textarea.input {
 .popover {
   border: 0;
   z-index: 700;
-  max-width: 200px;
+  max-width: 15rem;
   visibility: hidden;
   transition: all 0.15s;
-  background: #fff; }
+  background: #fff;
+  padding: 0.5rem; }
 
 .tooltip-arrow,
 .popover-arrow {
@@ -3416,17 +3410,15 @@ textarea.input {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
+  background: #fff;
+  width: 15rem;
   -webkit-backface-visibility: hidden; }
-  .type-ahead ul {
-    min-width: 200px; }
   .type-ahead a {
-    padding: 0.5rem;
-    line-height: 1;
+    padding: 0.75rem;
     display: block; }
 
 .type-ahead-heading {
-  padding: 0.5rem;
-  line-height: 1;
+  padding: 0.75rem;
   display: block; }
 
 .type-ahead-highlight {
@@ -3435,7 +3427,7 @@ textarea.input {
 
 .type-ahead-desc {
   display: block;
-  font-size: .7rem; }
+  font-size: 0.7rem; }
 
 .type-ahead-shadow {
   position: relative; }

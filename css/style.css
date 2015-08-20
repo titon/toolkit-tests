@@ -402,7 +402,7 @@
  * Align an element in the center of another element using position absolute.
  */
 html {
-  font: normal 12px/1.5rem "Droid Sans", sans-serif; }
+  font: normal 14px/1.5rem "Droid Sans", Verdana, sans-serif; }
 
 body {
   background: #f7f9fa;
@@ -411,7 +411,10 @@ body {
   padding: 0 0 200px 0; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: #727cb6; }
+  a:hover {
+    color: #444a6d; }
 
 .test-head {
   background: #1a2229;

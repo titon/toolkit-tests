@@ -1,25 +1,3 @@
-<div class="test-demo" id="input">
-    <h2 class="test-demo-title">Custom checkboxes and radios.</h2>
-
-    <div class="test-demo-body full align-center">
-        <div class="field">
-            <label class="input-checkbox" for="checkbox-1"><input id="checkbox-1" type="checkbox" name="checkboxes[]" checked> 1</label>
-            <label class="input-checkbox" for="checkbox-2"><input id="checkbox-2" type="checkbox" name="checkboxes[]"> 2</label>
-            <label class="input-checkbox" for="checkbox-3"><input id="checkbox-3" type="checkbox" name="checkboxes[]"> 3</label>
-            <label class="input-checkbox" for="checkbox-4"><input id="checkbox-4" type="checkbox" name="checkboxes[]" disabled> 4</label>
-            <label class="input-checkbox" for="checkbox-5"><input id="checkbox-5" type="checkbox" name="checkboxes[]"> 5</label>
-        </div>
-
-        <div class="field">
-            <label class="input-checkbox" for="radio-1"><input id="radio-1" type="radio" value="1" name="radio[]" checked> 1</label>
-            <label class="input-checkbox" for="radio-2"><input id="radio-2" type="radio" value="2" name="radio[]"> 2</label>
-            <label class="input-checkbox" for="radio-3"><input id="radio-3" type="radio" value="3" name="radio[]"> 3</label>
-            <label class="input-checkbox" for="radio-4"><input id="radio-4" type="radio" value="4" name="radio[]" disabled> 4</label>
-            <label class="input-checkbox" for="radio-5"><input id="radio-5" type="radio" value="5" name="radio[]"> 5</label>
-        </div>
-    </div>
-</div>
-
 <div class="test-demo">
     <h2 class="test-demo-title">Custom selects and option menus.</h2>
 
@@ -473,10 +451,6 @@
 
 <script>
     $(function() {
-        $('#input').input({
-            native: false
-        });
-
         $('#input-copy').input({
             native: false
         });
@@ -503,14 +477,6 @@
 
         $('.js-select-native').inputSelect({
             native: true
-        });
-
-        $('input:checkbox').each(function() {
-            Test.instances.push( $(this).toolkit('inputCheckbox') );
-        });
-
-        $('input:radio').each(function() {
-            Test.instances.push( $(this).toolkit('inputRadio') );
         });
 
         $('select').each(function() {

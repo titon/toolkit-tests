@@ -1,0 +1,19 @@
+<div class="test-demo">
+    <h2 class="test-demo-title">Custom checkboxes.</h2>
+
+    <div class="test-demo-body full align-center">
+        <label class="input-checkbox" for="checkbox-1"><input id="checkbox-1" type="checkbox" name="checkboxes[]" checked> 1</label>
+        <label class="input-checkbox" for="checkbox-2"><input id="checkbox-2" type="checkbox" name="checkboxes[]"> 2</label>
+        <label class="input-checkbox" for="checkbox-3"><input id="checkbox-3" type="checkbox" name="checkboxes[]"> 3</label>
+        <label class="input-checkbox" for="checkbox-4"><input id="checkbox-4" type="checkbox" name="checkboxes[]" disabled> 4</label>
+        <label class="input-checkbox" for="checkbox-5"><input id="checkbox-5" type="checkbox" name="checkboxes[]"> 5</label>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('input:checkbox').each(function() {
+            Test.instances.push( $(this).inputCheckbox().toolkit('inputCheckbox') );
+        });
+    });
+</script>

@@ -1,7 +1,7 @@
 @import "common";
 
 html {
-    font: normal 12px/1.5rem "Droid Sans", sans-serif;
+    font: normal 14px/1.5rem "Droid Sans", Verdana, sans-serif;
 }
 
 body {
@@ -13,6 +13,11 @@ body {
 
 a {
     text-decoration: none;
+    color: theme-setting("primary");
+
+    &:hover {
+        color: theme-setting("primary-dark");
+    }
 }
 
 //-------------------- Header --------------------//

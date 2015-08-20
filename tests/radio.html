@@ -1,0 +1,19 @@
+<div class="test-demo">
+    <h2 class="test-demo-title">Custom radios.</h2>
+
+    <div class="test-demo-body full align-center">
+        <label class="input-radio" for="radio-1"><input id="radio-1" type="radio" name="radio" checked> 1</label>
+        <label class="input-radio" for="radio-2"><input id="radio-2" type="radio" name="radio"> 2</label>
+        <label class="input-radio" for="radio-3"><input id="radio-3" type="radio" name="radio"> 3</label>
+        <label class="input-radio" for="radio-4"><input id="radio-4" type="radio" name="radio" disabled> 4</label>
+        <label class="input-radio" for="radio-5"><input id="radio-5" type="radio" name="radio"> 5</label>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('input:radio').each(function() {
+            Test.instances.push( $(this).inputRadio().toolkit('inputRadio') );
+        });
+    });
+</script>
