@@ -458,7 +458,8 @@ a {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 25%; }
+  width: 25%;
+  position: relative; }
   .test-head-right .button {
     margin-left: .5rem; }
 
@@ -493,6 +494,18 @@ a {
   border-radius: 0 !important;
   border-top-right-radius: 0.2rem !important;
   border-bottom-right-radius: 0.2rem !important; }
+
+.test-settings {
+  color: #889097;
+  background: #232b32;
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  margin-top: 1rem; }
+  .test-settings li {
+    margin: 1rem; }
+  .test-settings input {
+    position: relative;
+    bottom: -2px; }
 
 .test-footer {
   padding: 2rem;

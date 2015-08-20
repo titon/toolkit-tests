@@ -8,7 +8,7 @@
         next = doc.getElementById('next'),
         top = doc.getElementById('top'),
         rtl = doc.getElementById('rtl'),
-        ltr = doc.getElementById('ltr');
+        theme = doc.getElementById('theme');
 
     var Test = {
         instances: [],
@@ -20,7 +20,7 @@
             styles.push('css/toolkit' + (Toolkit.isRTL ? '-rtl' : '') + '.css');
             styles.push('css/style.css');
 
-            if (location.search.indexOf('theme=0') === -1) {
+            if (theme.checked) {
                 styles.push('css/theme.css');
             }
 
@@ -95,18 +95,12 @@
 
             var index = switcher.selectedIndex,
                 options = switcher.options,
-                currentOption = options[index],
                 prevOption = options[index - 1] || options[options.length - 1],
                 nextOption = options[index + 1] || options[0];
 
             Test.updateButton(prev, prevOption);
             Test.updateButton(next, nextOption);
-
-            if (history.pushState) {
-                var query = '?' + key + '&rtl=' + (Toolkit.isRTL ? 1 : 0) + '&theme=0';
-
-                history.pushState({ key: key }, currentOption.textContent, query + (hash || ''));
-            }
+            Test.updateHistory(key, hash);
         },
 
         updateButton: function(button, option) {
@@ -114,6 +108,14 @@
             button.classList.remove('is-disabled');
             button.setAttribute('data-plugin', option.value);
             button.querySelector('.test-head-button').innerHTML = option.textContent;
+        },
+
+        updateHistory: function(key, hash) {
+            if (history.pushState) {
+                var query = '?' + key + '&rtl=' + (rtl.checked ? 1 : 0) + '&theme=' + (theme.checked ? 1 : 0);
+
+                history.pushState({ key: key }, key, query + (hash || ''));
+            }
         },
 
         random: function(min, max) {
@@ -129,33 +131,32 @@
             doc.getElementById('logo')
                 .setAttribute('data-version', Toolkit.version);
 
-            if (Toolkit.isRTL) {
-                rtl.style.display = 'none';
-                ltr.style.display = '';
+            // Settings
+            if (location.search.indexOf('rtl=1') >= 0) {
+                rtl.checked = true;
             }
+
+            if (location.search.indexOf('theme=1') >= 0) {
+                theme.checked = true;
+            }
+
+            // Components
+            new Toolkit.Drop('#settings');
         },
 
         bindEvents: function() {
             switcher.addEventListener('change', Test.onSwitch);
             destroy.addEventListener('click', Test.destroyModules);
+            theme.addEventListener('change', Test.onChangeSetting);
             prev.addEventListener('click', Test.onGoTo);
             next.addEventListener('click', Test.onGoTo);
             win.addEventListener('resize', Test.onResize);
-            rtl.addEventListener('click', Test.goRTL);
-            ltr.addEventListener('click', Test.goLTR);
+            rtl.addEventListener('change', Test.onChangeSetting);
             top.addEventListener('click', function() {
                 window.scrollTo(0, 0);
             });
 
             Test.onResize();
-        },
-
-        goRTL: function() {
-            location.href = location.href.replace('rtl=0', 'rtl=1');
-        },
-
-        goLTR: function() {
-            location.href = location.href.replace('rtl=1', 'rtl=0');
         },
 
         onResize: function() {
@@ -169,12 +170,17 @@
 
         onGoTo: function(e) {
             Test.loadModule(e.currentTarget.getAttribute('data-plugin'));
+        },
+
+        onChangeSetting: function(e) {
+            Test.updateHistory(switcher.value, location.hash);
+            location.reload();
         }
     };
 
-    Test.loadStyles();
     Test.setupUI();
     Test.bindEvents();
+    Test.loadStyles();
     Test.loadDefaultModule();
 
     win.Test = Test;

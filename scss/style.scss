@@ -62,6 +62,7 @@ a {
     justify-content: flex-end;
     align-items: center;
     width: 25%;
+    position: relative;
 
     .button {
         margin-left: .5rem;
@@ -103,6 +104,23 @@ a {
     border-radius: 0 !important;
     border-top-right-radius: theme-setting("round-radius") !important;
     border-bottom-right-radius: theme-setting("round-radius") !important;
+}
+
+.test-settings {
+    color: theme-setting("fg-light");
+    background: theme-setting("bg-darker");
+    border-bottom-left-radius: theme-setting("round-radius");
+    border-bottom-right-radius: theme-setting("round-radius");
+    margin-top: 1rem;
+
+    li {
+        margin: 1rem;
+    }
+
+    input {
+        position: relative;
+        bottom: -2px;
+    }
 }
 
 //-------------------- Footer --------------------//

@@ -104,13 +104,18 @@
                 Destroy
             </button>
 
-            <button id="rtl" class="button is-success" role="button" tabindex="15">
-                RTL
+            <button id="settings" class="button is-debug" role="button" tabindex="15" data-drop="#settings-menu">
+                Settings
             </button>
 
-            <button id="ltr" class="button is-success" role="button" style="display: none" tabindex="15">
-                LTR
-            </button>
+            <ul class="drop drop--down test-settings reverse-align hide" id="settings-menu" data-drop-menu>
+                <li>
+                    <input type="checkbox" id="theme" value="1" name="theme" checked> Theme
+                </li>
+                <li>
+                    <input type="checkbox" id="rtl" value="1" name="rtl"> Right-to-Left
+                </li>
+            </ul>
         </div>
     </header>
 
