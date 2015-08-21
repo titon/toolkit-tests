@@ -76,6 +76,7 @@ a {
     height: 40px;
     position: relative;
     margin: auto;
+    transform: translateX(-25px);
 
     span {
         visibility: hidden;
@@ -349,6 +350,7 @@ a {
 
     .test-head-logo {
         margin: 0;
+        transform: translateX(0);
     }
 }
 

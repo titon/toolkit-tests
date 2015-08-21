@@ -469,7 +469,10 @@ a {
   width: 184px;
   height: 40px;
   position: relative;
-  margin: auto; }
+  margin: auto;
+  -webkit-transform: translateX(-25px);
+      -ms-transform: translateX(-25px);
+          transform: translateX(-25px); }
   .test-head-logo span {
     visibility: hidden; }
   .test-head-logo::after {
@@ -663,7 +666,10 @@ a {
     margin: 0;
     text-align: left; }
   .test-head-logo {
-    margin: 0; } }
+    margin: 0;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0); } }
 
 @media only screen and (min-width: 961px) {
   html {
