@@ -23,7 +23,9 @@
     $(function() {
         var body = $('body');
 
-        Test.instances.push( body.toast().toolkit('toast') );
+        Test.instances.push( body.toast({
+            position: 'bottom-' + (Toolkit.isRTL ? 'right' : 'left')
+        }).toolkit('toast') );
 
         $('.js-toast').on('click', function() {
             var animation = $(this).data('toast-animation');

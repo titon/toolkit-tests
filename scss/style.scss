@@ -140,10 +140,6 @@ a {
         background: theme-setting("bg-lighter");
     }
 
-    > p:first-child {
-        margin-top: 0;
-    }
-
     // Fix align center issues
     textarea {
         width: 100%;
@@ -265,12 +261,7 @@ a {
 }
 
 .test-mask-wrapper {
-    > p {
-        margin: 0;
-    }
-
     .js-mask {
-        margin-top: 1rem;
         border-radius: .5rem;
     }
 }
@@ -384,3 +375,57 @@ a {
 }
 
 //-------------------- RTL --------------------//
+
+.rtl {
+    .test-head-center {
+        .caret-left {
+            transform: rotate(180deg);
+            margin: 0 0 0 .5rem;
+        }
+
+        .caret-right {
+            transform: rotate(180deg);
+            margin: 0 .5rem 0 0;
+        }
+    }
+
+    .test-head-right .button {
+        margin: 0 .5rem 0 0;
+    }
+
+    .test-head-logo::after {
+        left: auto;
+        right: 105%;
+    }
+
+    .test-head-prev {
+        border-radius: 0 !important;
+        border-top-right-radius: theme-setting("round-radius") !important;
+        border-bottom-right-radius: theme-setting("round-radius") !important;
+    }
+
+    .test-head-next {
+        border-radius: 0 !important;
+        border-top-left-radius: theme-setting("round-radius") !important;
+        border-bottom-left-radius: theme-setting("round-radius") !important;
+    }
+
+    .test-settings {
+        text-align: right;
+    }
+
+    .test-demo-body {
+        left: auto;
+        right: 50%;
+        transform: translateX(50%);
+
+        &.full,
+        &.align-left {
+            text-align: right !important; // Yup, lol
+        }
+
+        &.align-center {
+            text-align: center !important; // Fix specificity
+        }
+    }
+}

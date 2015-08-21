@@ -1195,7 +1195,7 @@ kbd {
   visibility: hidden;
   transition: all 0.3s;
   background: #fff;
-  text-align: left; }
+  text-align: right; }
   .drop .drop {
     display: block;
     top: 0;
@@ -3040,9 +3040,9 @@ textarea.input {
     position: absolute;
     z-index: 2;
     content: "";
-    -webkit-transform: rotate(315deg);
-        -ms-transform: rotate(315deg);
-            transform: rotate(315deg);
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
     background: inherit;
     border-left: 1px solid #d7dee5;
     border-bottom: 1px solid #d7dee5; }
@@ -3082,7 +3082,7 @@ textarea.input {
   position: relative;
   font-size: 1rem;
   transition: background 0.3s;
-  text-align: left;
+  text-align: right;
   background: #d7dee5; }
   .switch-bar::before,
   .switch-bar::after {
@@ -3093,12 +3093,12 @@ textarea.input {
     z-index: 1;
     transition: opacity 0.3s; }
   .switch-bar::before {
-    left: 0;
-    opacity: 0;
-    content: attr(data-switch-on); }
-  .switch-bar::after {
     right: 0;
+    opacity: 0;
     content: attr(data-switch-off); }
+  .switch-bar::after {
+    left: 0;
+    content: attr(data-switch-on); }
   .switch-bar.round {
     border-radius: 0.2rem; }
     .switch-bar.round .switch-toggle {
@@ -3112,12 +3112,12 @@ textarea.input {
   padding: 0.75rem;
   width: 50%;
   z-index: 2;
-  left: 0;
+  right: 0;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  transition: left 0.3s;
+  transition: right 0.3s;
   background: #fff; }
   .switch-toggle::before {
     content: "\00A0"; }
@@ -3143,7 +3143,7 @@ textarea.input {
     padding: 1rem; }
 
 .switch input:checked + .switch-bar .switch-toggle {
-  left: 50%; }
+  right: 50%; }
 
 .switch input:checked + .switch-bar::before {
   opacity: 1; }

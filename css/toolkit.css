@@ -3094,10 +3094,10 @@ textarea.input {
   .switch-bar::before {
     left: 0;
     opacity: 0;
-    content: attr(data-switch-on); }
+    content: attr(data-switch-off); }
   .switch-bar::after {
     right: 0;
-    content: attr(data-switch-off); }
+    content: attr(data-switch-on); }
   .switch-bar.round {
     border-radius: 0.2rem; }
     .switch-bar.round .switch-toggle {
