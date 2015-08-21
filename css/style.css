@@ -478,7 +478,7 @@ a {
     position: absolute;
     left: 105%;
     top: 50%;
-    color: #00acac;
+    color: #aeb3d3;
     font-size: 1.5rem;
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
@@ -509,10 +509,6 @@ a {
 
 .test-footer {
   padding: 2rem;
-  text-align: center; }
-
-.test-body > .notice {
-  margin: 0;
   text-align: center; }
 
 .test-demo {
@@ -563,6 +559,22 @@ a {
   .test-button.is-active,
   .is-active > .test-button {
     background: #aeb3d3; }
+
+.test-notice {
+  margin: 0;
+  text-align: center;
+  color: #fff; }
+  .test-notice.is-warning {
+    background: #fcd04b;
+    color: #623e00; }
+  .test-notice.is-success {
+    background: #00acac; }
+  .test-notice.is-debug {
+    background: #49b6d6; }
+  .test-notice.is-error {
+    background: #ff5b57; }
+  .test-notice.is-info {
+    background: #348fe2; }
 
 .test-note {
   margin: 1.5rem 0;
@@ -637,7 +649,8 @@ a {
   border-collapse: separate; }
   .test-responsive-table td {
     padding: 1rem;
-    max-width: 50%; }
+    max-width: 50%;
+    text-align: center; }
     .test-responsive-table td[class*="show-"] {
       background: #7cdda7;
       color: #003434; }

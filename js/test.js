@@ -144,7 +144,7 @@
             new Toolkit.Drop('#settings');
         },
 
-        bindEvents: function() {
+        setupEvents: function() {
             switcher.addEventListener('change', Test.onSwitch);
             destroy.addEventListener('click', Test.destroyModules);
             theme.addEventListener('change', Test.onChangeSetting);
@@ -179,7 +179,7 @@
     };
 
     Test.setupUI();
-    Test.bindEvents();
+    Test.setupEvents();
     Test.loadStyles();
     Test.loadDefaultModule();
 

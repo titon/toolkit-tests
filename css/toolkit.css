@@ -684,9 +684,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p, ul, ol {
   margin: 1.25rem 0; }
-
-ul ul, ul ol, ol ul, ol ol {
-  margin: 0; }
+  p:first-child, ul:first-child, ol:first-child {
+    margin-top: 0; }
+  p:last-child, ul:last-child, ol:last-child {
+    margin-bottom: 0; }
 
 hr {
   margin: 1.25rem 0; }
@@ -2683,7 +2684,8 @@ textarea.input {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  background: #fff; }
 
 .on-canvas {
   position: relative;
@@ -3164,8 +3166,10 @@ textarea.input {
   display: -ms-flexbox;
   display: flex; }
 
-.tab-section.hide {
-  display: none; }
+.tab-section {
+  padding: 0.75rem; }
+  .tab-section.hide {
+    display: none; }
 
 /**
  * @copyright   2010-2015, The Titon Project

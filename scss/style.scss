@@ -87,7 +87,7 @@ a {
         position: absolute;
         left: 105%;
         top: 50%;
-        color: theme-setting("success");
+        color: theme-setting("primary-light");
         font-size: 1.5rem;
         transform: translateY(-50%);
         white-space: nowrap;
@@ -131,13 +131,6 @@ a {
 }
 
 //-------------------- Body --------------------//
-
-.test-body {
-    > .notice {
-        margin: 0;
-        text-align: center;
-    }
-}
 
 .test-demo {
     padding: 2rem;
@@ -205,6 +198,33 @@ a {
     &.is-active,
     .is-active > & {
         background: theme-setting("primary-light");
+    }
+}
+
+.test-notice {
+    margin: 0;
+    text-align: center;
+    color: #fff;
+
+    &.is-warning {
+        background: theme-setting("warning");
+        color: darken(theme-setting("warning-dark"), 20%);
+    }
+
+    &.is-success {
+        background: theme-setting("success");
+    }
+
+    &.is-debug {
+        background: theme-setting("debug");
+    }
+
+    &.is-error {
+        background: theme-setting("error");
+    }
+
+    &.is-info {
+        background: theme-setting("info");
     }
 }
 
@@ -306,6 +326,7 @@ a {
     td {
         padding: 1rem;
         max-width: 50%;
+        text-align: center;
 
         &[class*="show-"] {
             background: theme-setting("success-light");
