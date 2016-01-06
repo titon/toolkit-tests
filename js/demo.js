@@ -111,7 +111,9 @@ var Demo = {
                 base = base.split('?')[0];
             }
 
-            options.url = base + options.url.substr(1);
+            if (options.url.indexOf('://') == -1) {
+				options.url = base + options.url.substr(1);
+			}
         });
     },
 
